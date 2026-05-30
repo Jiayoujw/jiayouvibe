@@ -1,52 +1,40 @@
-name: Build and push to deploy branch
+name: Auto Deploy
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
 
 permissions:
   contents: write
 
 jobs:
-  build-and-push:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'npm'
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
+      - run: npm run build
 
-      - name: Build project
-        run: npm run build
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          server-dir: public_html/
 
-      - name: Verify build
+      - name: Update deploy branch (backup)
         run: |
-          echo "=== index.html ==="
-          cat dist/index.html
-          echo ""
-          grep -c './' dist/index.html && echo "✅ Relative paths" || echo "❌ Absolute!"
-
-      - name: Deploy to deploy branch
-        run: |
-          # Copy dist contents to a temp folder
-          cp -r dist /tmp/dist-deploy
-
-          # Create deploy branch with only dist contents
-          cd /tmp/dist-deploy
-          git init
-          git checkout -b deploy
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "Deploy $(date +%Y-%m-%d-%H%M)"
-
-          # Force push to deploy branch
+          cp -r dist /tmp/d
+          cd /tmp/d
+          git init && git checkout -b deploy
+          git config user.name "bot" && git config user.email "bot@jv.com"
+          git add . && git commit -m "deploy"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Jiayoujw/jiayouvibe.git" deploy
