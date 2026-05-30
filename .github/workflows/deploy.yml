@@ -39,11 +39,22 @@ jobs:
             set ssl:verify-certificate no;
             open ${{ secrets.FTP_SERVER }};
             user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }};
+
+            # Upload to BOTH possible web roots
             mirror -R -v --delete ./dist/ ./;
-            echo '=== Uploaded ===';
+            mkdir -p ./public_html;
+            mirror -R -v --delete ./dist/ ./public_html/;
+
+            # Also try common subdirectory patterns
+            mkdir -p ./public_html/jiayouvibe.com;
+            mirror -R -v --delete ./dist/ ./public_html/jiayouvibe.com/;
+
+            echo '=== Root listing ===';
             ls;
-            echo '=== index.html ===';
-            cat index.html;
+            echo '=== public_html listing ===';
+            ls public_html/;
+            echo '=== Root index.html ===';
+            head -2 index.html;
             bye;
           "
 
