@@ -22,6 +22,10 @@ export default defineConfig({
           if (id.includes('node_modules/fuse.js')) {
             return 'search'
           }
+          // Static data files — models, agents, terminology, etc.
+          if (id.includes('/src/data/')) {
+            return 'data'
+          }
         },
       },
     },
