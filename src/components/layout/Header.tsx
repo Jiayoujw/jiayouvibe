@@ -1,15 +1,18 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Sun, Moon, Search, Menu } from 'lucide-react'
+import { Sun, Moon, Search, Menu, Globe } from 'lucide-react'
 import { useTheme } from '@/contexts/ThemeContext'
 import { NAV_ITEMS, SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
+import { getLang, setLang } from '@/i18n'
+import type { Lang } from '@/i18n'
 import MobileMenu from '@/components/layout/MobileMenu'
 import type { NavItem } from '@/types'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
+  const [lang, setLangState] = useState<Lang>(getLang)
   const location = useLocation()
   const { isDark, toggle } = useTheme()
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -151,6 +154,23 @@ export default function Header() {
                 aria-label="搜索"
               >
                 <Search className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
+              </button>
+
+              {/* Language toggle */}
+              <button
+                onClick={() => {
+                  const next: Lang = lang === 'zh' ? 'en' : 'zh'
+                  setLang(next)
+                  setLangState(next)
+                }}
+                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[36px] min-h-[36px] items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60"
+                aria-label="切换语言"
+                title={lang === 'zh' ? 'Switch to English' : '切换到中文'}
+              >
+                <Globe className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
+                <span className="ml-1 text-[10px] font-medium uppercase leading-none">
+                  {lang === 'zh' ? 'EN' : '中'}
+                </span>
               </button>
 
               {/* Theme toggle */}

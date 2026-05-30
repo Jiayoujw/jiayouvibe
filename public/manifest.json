@@ -1,0 +1,35 @@
+{
+  "name": "jiayouvibe - AI知识导航",
+  "short_name": "jiayouvibe",
+  "description": "探索AI的无限可能 - 汇聚大模型、智能体、开发教程、专业术语与开源项目的一站式AI知识平台",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#11131d",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512x512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
