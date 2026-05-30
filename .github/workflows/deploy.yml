@@ -24,6 +24,17 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Verify build output
+        run: |
+          echo "=== index.html content ==="
+          cat dist/index.html
+          echo ""
+          echo "=== Assets ==="
+          ls dist/assets/ | head -10
+          echo "..."
+          echo "=== Check paths are relative ==="
+          grep -c './' dist/index.html && echo "Relative paths confirmed" || echo "STILL ABSOLUTE PATHS!"
+
       - name: Install lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
@@ -35,6 +46,7 @@ jobs:
             open ${{ secrets.FTP_SERVER }};
             user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }};
             mirror -R -v --delete ./dist/ ./public_html/;
+            echo '=== Server public_html listing ===';
             ls public_html/;
             ls public_html/assets/;
             bye;
@@ -42,11 +54,17 @@ jobs:
 
       - name: Purge Cloudflare cache
         run: |
+          # Try with API Token first, then Global Key
           ZONE_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=jiayouvibe.com" \
             -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
             -H "Content-Type: application/json" | jq -r '.result[0].id')
+
           echo "Zone ID: $ZONE_ID"
-          curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
-            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
-            -H "Content-Type: application/json" \
-            --data '{"purge_everything":true}'
+
+          if [ -n "$ZONE_ID" ] && [ "$ZONE_ID" != "null" ]; then
+            RESULT=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
+              -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              --data '{"purge_everything":true}')
+            echo "$RESULT"
+          fi
