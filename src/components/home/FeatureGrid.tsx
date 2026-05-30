@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { Cpu, Bot, Code2, BookOpen, Globe, StickyNote } from 'lucide-react'
 import { cn } from '@/utils/cn'
 
+// ── Types ────────────────────────────────────────────────────────────
+
 interface FeatureItem {
   title: string
   description: string
@@ -10,6 +12,8 @@ interface FeatureItem {
   gradientFrom: string
   gradientTo: string
 }
+
+// ── Feature data ─────────────────────────────────────────────────────
 
 const features: FeatureItem[] = [
   {
@@ -62,6 +66,8 @@ const features: FeatureItem[] = [
   },
 ]
 
+// ── Component ────────────────────────────────────────────────────────
+
 export default function FeatureGrid() {
   return (
     <section className="relative bg-[#0f172a] py-24 sm:py-32">
@@ -69,7 +75,7 @@ export default function FeatureGrid() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
+        {/* ── Section header ─────────────────────────────────────────── */}
         <div className="text-center mb-14">
           <h2 className="text-3xl sm:text-4xl font-bold text-white font-sora mb-4">
             AI知识体系
@@ -79,7 +85,7 @@ export default function FeatureGrid() {
           </p>
         </div>
 
-        {/* Feature cards grid */}
+        {/* ── Feature cards grid ─────────────────────────────────────── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {features.map((feature) => {
             const Icon = feature.icon
@@ -88,49 +94,76 @@ export default function FeatureGrid() {
                 key={feature.path}
                 to={feature.path}
                 className={cn(
-                  'group relative p-6 rounded-2xl',
-                  'bg-white/[0.03] backdrop-blur-sm border border-white/[0.06]',
-                  'transition-all duration-300',
-                  'hover:-translate-y-1.5',
-                  'hover:bg-white/[0.06] hover:border-white/[0.12]',
-                  'hover:shadow-xl hover:shadow-purple-500/[0.08]',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]',
+                  'group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]',
                 )}
               >
-                {/* Hover glow effect */}
+                {/* ── Shimmer-border wrapper ─────────────────────────── */}
                 <div
                   className={cn(
-                    'absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none',
-                    'bg-gradient-to-br from-cyan-500/[0.04] to-purple-500/[0.04]',
+                    'relative rounded-2xl p-[1px]',
+                    'bg-gradient-to-r from-cyan-400/20 via-purple-400/20 to-cyan-400/20',
+                    'bg-[length:200%_100%]',
+                    'group-hover:from-cyan-400/50 group-hover:via-purple-400/50 group-hover:to-cyan-400/50',
+                    'transition-all duration-500',
                   )}
-                />
-
-                <div className="relative z-10">
-                  {/* Icon in gradient circle */}
+                  style={{
+                    animation: 'shimmer-border 4s linear infinite',
+                  }}
+                >
+                  {/* ── Inner glass card ─────────────────────────────── */}
                   <div
                     className={cn(
-                      'w-12 h-12 rounded-xl flex items-center justify-center mb-4',
-                      'bg-gradient-to-br',
-                      feature.gradientFrom,
-                      feature.gradientTo,
-                      'shadow-lg group-hover:shadow-xl transition-shadow duration-300',
+                      'relative p-6 rounded-2xl',
+                      'bg-white/[0.03] backdrop-blur-sm',
+                      'group-hover:bg-white/[0.06]',
+                      'transition-all duration-300',
                     )}
-                    style={{
-                      boxShadow: `0 0 20px -4px var(--tw-shadow-color)`,
-                    }}
                   >
-                    <Icon className="w-6 h-6 text-white" />
+                    {/* Hover ambient glow */}
+                    <div
+                      className={cn(
+                        'absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none',
+                        'bg-gradient-to-br from-cyan-500/[0.06] to-purple-500/[0.06]',
+                      )}
+                    />
+
+                    <div className="relative z-10">
+                      {/* ── Gradient icon circle ─────────────────────── */}
+                      <div
+                        className={cn(
+                          'w-12 h-12 rounded-xl flex items-center justify-center mb-4',
+                          'bg-gradient-to-br',
+                          feature.gradientFrom,
+                          feature.gradientTo,
+                          'shadow-lg group-hover:shadow-xl transition-shadow duration-300',
+                        )}
+                        style={{
+                          boxShadow: `0 0 24px -6px currentColor`,
+                        }}
+                      >
+                        <Icon className="w-6 h-6 text-white group-hover:scale-110 transition-transform duration-300" />
+                      </div>
+
+                      {/* ── Title ────────────────────────────────────── */}
+                      <h3 className="text-lg font-semibold text-white font-sora mb-2 group-hover:text-cyan-300 transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+
+                      {/* ── Description ──────────────────────────────── */}
+                      <p className="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
+                        {feature.description}
+                      </p>
+                    </div>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-lg font-semibold text-white font-sora mb-2 group-hover:text-cyan-300 transition-colors duration-300">
-                    {feature.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
-                    {feature.description}
-                  </p>
+                  {/* ── Card lift on hover ───────────────────────────── */}
+                  <div
+                    className={cn(
+                      'absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none',
+                      'shadow-xl shadow-purple-500/[0.08]',
+                      '-z-10',
+                    )}
+                  />
                 </div>
               </Link>
             )

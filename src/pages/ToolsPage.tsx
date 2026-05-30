@@ -1,11 +1,25 @@
 import { useState, useMemo, useEffect } from 'react'
-import { Search, ExternalLink, Sparkles, SlidersHorizontal, GitFork, Globe } from 'lucide-react'
+import {
+  Search,
+  ExternalLink,
+  Star,
+  SortAsc,
+  Filter,
+  MessageSquare,
+  Code2,
+  Image,
+  Video,
+  Music,
+  Bot,
+  Braces,
+  Database,
+  Send,
+  Sparkles,
+} from 'lucide-react'
 import { SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
-import Input from '@/components/ui/Input'
-import EmptyState from '@/components/ui/EmptyState'
 
-// ── Types ──────────────────────────────────────────────────────────
+// ── Types ────────────────────────────────────────────────────────────────
 
 type ToolCategory =
   | 'LLM Playground'
@@ -18,6 +32,7 @@ type ToolCategory =
   | 'Vector DBs'
 
 type PricingTier = 'Free' | 'Paid' | 'Freemium'
+type SortOption = 'default' | 'name-asc' | 'name-desc' | 'stars-desc'
 
 interface ToolEntry {
   name: string
@@ -28,73 +43,68 @@ interface ToolEntry {
   tags: string[]
   website: string
   github?: string
+  stars?: number
 }
 
-// ── Category config ────────────────────────────────────────────────
+// ── Filter & Sort configs ────────────────────────────────────────────────
 
-const CATEGORY_COLORS: Record<ToolCategory, { bg: string; text: string; border: string }> = {
-  'LLM Playground': {
-    bg: 'bg-cyan-400/15',
-    text: 'text-cyan-300',
-    border: 'border-cyan-400/30',
-  },
-  'Code Assistants': {
-    bg: 'bg-purple-500/15',
-    text: 'text-purple-300',
-    border: 'border-purple-500/30',
-  },
-  'Image Generation': {
-    bg: 'bg-pink-500/15',
-    text: 'text-pink-300',
-    border: 'border-pink-500/30',
-  },
-  'Video Generation': {
-    bg: 'bg-amber-500/15',
-    text: 'text-amber-300',
-    border: 'border-amber-500/30',
-  },
-  Audio: {
-    bg: 'bg-emerald-400/15',
-    text: 'text-emerald-300',
-    border: 'border-emerald-400/30',
-  },
-  Agents: {
-    bg: 'bg-blue-400/15',
-    text: 'text-blue-300',
-    border: 'border-blue-400/30',
-  },
-  Embeddings: {
-    bg: 'bg-indigo-400/15',
-    text: 'text-indigo-300',
-    border: 'border-indigo-400/30',
-  },
-  'Vector DBs': {
-    bg: 'bg-orange-400/15',
-    text: 'text-orange-300',
-    border: 'border-orange-400/30',
-  },
-}
-
-const PRICING_COLORS: Record<PricingTier, { bg: string; text: string }> = {
-  Free: { bg: 'bg-emerald-400/10', text: 'text-emerald-300' },
-  Paid: { bg: 'bg-amber-500/10', text: 'text-amber-300' },
-  Freemium: { bg: 'bg-blue-400/10', text: 'text-blue-300' },
-}
-
-const CATEGORIES: ToolCategory[] = [
-  'LLM Playground',
-  'Code Assistants',
-  'Image Generation',
-  'Video Generation',
-  'Audio',
-  'Agents',
-  'Embeddings',
-  'Vector DBs',
+const CATEGORY_PILLS: { key: ToolCategory | ''; label: string }[] = [
+  { key: '', label: '全部' },
+  { key: 'LLM Playground', label: 'LLM Playground' },
+  { key: 'Code Assistants', label: '代码助手' },
+  { key: 'Image Generation', label: '图像生成' },
+  { key: 'Video Generation', label: '视频生成' },
+  { key: 'Audio', label: '音频工具' },
+  { key: 'Agents', label: 'Agent框架' },
+  { key: 'Embeddings', label: '嵌入模型' },
+  { key: 'Vector DBs', label: '向量数据库' },
 ]
 
-const PRICING_OPTIONS: PricingTier[] = ['Free', 'Paid', 'Freemium']
+const PRICING_PILLS: { key: PricingTier | ''; label: string }[] = [
+  { key: '', label: 'All' },
+  { key: 'Free', label: 'Free' },
+  { key: 'Freemium', label: 'Freemium' },
+  { key: 'Paid', label: 'Paid' },
+]
 
-// ── Tools data ─────────────────────────────────────────────────────
+const SORT_OPTIONS: { key: SortOption; label: string }[] = [
+  { key: 'default', label: '默认排序' },
+  { key: 'name-asc', label: '名称 A-Z' },
+  { key: 'name-desc', label: '名称 Z-A' },
+  { key: 'stars-desc', label: 'Stars 最多' },
+]
+
+// ── Visual configs ───────────────────────────────────────────────────────
+
+const CATEGORY_GRADIENTS: Record<ToolCategory, string> = {
+  'LLM Playground': 'from-blue-500 to-cyan-400',
+  'Code Assistants': 'from-purple-500 to-pink-500',
+  'Image Generation': 'from-pink-500 to-rose-400',
+  'Video Generation': 'from-amber-500 to-orange-400',
+  Audio: 'from-emerald-500 to-teal-400',
+  Agents: 'from-indigo-500 to-blue-400',
+  Embeddings: 'from-violet-500 to-purple-400',
+  'Vector DBs': 'from-orange-500 to-red-400',
+}
+
+const CATEGORY_ICONS: Record<ToolCategory, React.ElementType> = {
+  'LLM Playground': MessageSquare,
+  'Code Assistants': Code2,
+  'Image Generation': Image,
+  'Video Generation': Video,
+  Audio: Music,
+  Agents: Bot,
+  Embeddings: Braces,
+  'Vector DBs': Database,
+}
+
+const PRICING_BADGE_STYLES: Record<PricingTier, { bg: string; text: string; border: string }> = {
+  Free: { bg: 'bg-emerald-400/10', text: 'text-emerald-300', border: 'border-emerald-400/20' },
+  Freemium: { bg: 'bg-amber-400/10', text: 'text-amber-300', border: 'border-amber-400/20' },
+  Paid: { bg: 'bg-blue-400/10', text: 'text-blue-300', border: 'border-blue-400/20' },
+}
+
+// ── Tools data ───────────────────────────────────────────────────────────
 
 const tools: ToolEntry[] = [
   // ── LLM Playground ──
@@ -152,6 +162,7 @@ const tools: ToolEntry[] = [
     tags: ['HuggingFace', '开源', 'Chat', '多模型'],
     website: 'https://huggingface.co/chat',
     github: 'https://github.com/huggingface/chat-ui',
+    stars: 7000,
   },
   {
     name: 'Perplexity AI',
@@ -170,6 +181,7 @@ const tools: ToolEntry[] = [
     openSource: true,
     tags: ['DeepSeek', 'Chat', '推理', '中文'],
     website: 'https://chat.deepseek.com',
+    stars: 75000,
   },
   {
     name: 'Qwen Chat',
@@ -179,6 +191,7 @@ const tools: ToolEntry[] = [
     openSource: true,
     tags: ['阿里', 'Chat', '多模态', '中文'],
     website: 'https://tongyi.aliyun.com',
+    stars: 15000,
   },
   {
     name: 'Kimi Chat',
@@ -218,6 +231,7 @@ const tools: ToolEntry[] = [
     tags: ['IDE', 'Cascade', '多文件', '多模型'],
     website: 'https://codeium.com/windsurf',
     github: 'https://github.com/Exafunction/codeium',
+    stars: 15000,
   },
   {
     name: 'Cody',
@@ -228,6 +242,7 @@ const tools: ToolEntry[] = [
     tags: ['Sourcegraph', '上下文', '全代码库', 'VS Code'],
     website: 'https://sourcegraph.com/cody',
     github: 'https://github.com/sourcegraph/cody',
+    stars: 2000,
   },
   {
     name: 'Tabnine',
@@ -294,6 +309,7 @@ const tools: ToolEntry[] = [
     tags: ['Stability AI', '开源', 'LoRA', '本地部署'],
     website: 'https://stability.ai',
     github: 'https://github.com/Stability-AI/stablediffusion',
+    stars: 65000,
   },
   {
     name: 'Leonardo AI',
@@ -322,6 +338,7 @@ const tools: ToolEntry[] = [
     tags: ['工作流', '节点编辑', 'Stable Diffusion', '开源'],
     website: 'https://www.comfy.org',
     github: 'https://github.com/comfyanonymous/ComfyUI',
+    stars: 55000,
   },
 
   // ── Video Generation ──
@@ -435,6 +452,7 @@ const tools: ToolEntry[] = [
     tags: ['OpenAI', 'ASR', '开源', '多语言'],
     website: 'https://openai.com/research/whisper',
     github: 'https://github.com/openai/whisper',
+    stars: 68000,
   },
 
   // ── Agents ──
@@ -447,6 +465,7 @@ const tools: ToolEntry[] = [
     tags: ['自主Agent', '自动化', 'GPT', '里程碑'],
     website: 'https://agpt.co',
     github: 'https://github.com/Significant-Gravitas/AutoGPT',
+    stars: 168000,
   },
   {
     name: 'CrewAI',
@@ -457,6 +476,7 @@ const tools: ToolEntry[] = [
     tags: ['多Agent', '协作', 'Python', '企业'],
     website: 'https://www.crewai.com',
     github: 'https://github.com/crewAIInc/crewAI',
+    stars: 22000,
   },
   {
     name: 'LangGraph',
@@ -467,6 +487,7 @@ const tools: ToolEntry[] = [
     tags: ['LangChain', '状态图', '编排', '多步'],
     website: 'https://www.langchain.com/langgraph',
     github: 'https://github.com/langchain-ai/langgraph',
+    stars: 8000,
   },
   {
     name: 'AutoGen',
@@ -477,6 +498,7 @@ const tools: ToolEntry[] = [
     tags: ['微软', '多Agent', '对话', '.NET'],
     website: 'https://microsoft.github.io/autogen',
     github: 'https://github.com/microsoft/autogen',
+    stars: 34000,
   },
   {
     name: 'Devin',
@@ -496,6 +518,7 @@ const tools: ToolEntry[] = [
     tags: ['多Agent', 'SOP', '软件开发', '文档生成'],
     website: 'https://www.deepwisdom.ai',
     github: 'https://github.com/geekan/MetaGPT',
+    stars: 45000,
   },
   {
     name: 'Coze (扣子)',
@@ -515,6 +538,7 @@ const tools: ToolEntry[] = [
     tags: ['LLMOps', '可视化', 'RAG', '自托管'],
     website: 'https://dify.ai',
     github: 'https://github.com/langgenius/dify',
+    stars: 50000,
   },
 
   // ── Embeddings ──
@@ -554,6 +578,7 @@ const tools: ToolEntry[] = [
     tags: ['多语言', '多模态', '搜索', 'Reader API'],
     website: 'https://jina.ai',
     github: 'https://github.com/jina-ai/jina',
+    stars: 22000,
   },
   {
     name: 'BGE (BAAI)',
@@ -564,6 +589,7 @@ const tools: ToolEntry[] = [
     tags: ['智源', '开源', 'BGE-M3', '多语言'],
     website: 'https://huggingface.co/BAAI',
     github: 'https://github.com/FlagOpen/FlagEmbedding',
+    stars: 9500,
   },
   {
     name: 'Nomic Embed',
@@ -574,6 +600,7 @@ const tools: ToolEntry[] = [
     tags: ['Nomic AI', '开源', '多模态', '本地部署'],
     website: 'https://atlas.nomic.ai',
     github: 'https://github.com/nomic-ai/nomic',
+    stars: 3500,
   },
 
   // ── Vector DBs ──
@@ -595,6 +622,7 @@ const tools: ToolEntry[] = [
     tags: ['开源', 'GraphQL', '混合搜索', '多模态'],
     website: 'https://weaviate.io',
     github: 'https://github.com/weaviate/weaviate',
+    stars: 11000,
   },
   {
     name: 'Chroma',
@@ -605,6 +633,7 @@ const tools: ToolEntry[] = [
     tags: ['开源', '轻量', 'Pythonic', '嵌入'],
     website: 'https://www.trychroma.com',
     github: 'https://github.com/chroma-core/chroma',
+    stars: 15500,
   },
   {
     name: 'Qdrant',
@@ -615,6 +644,7 @@ const tools: ToolEntry[] = [
     tags: ['Rust', '高性能', '量化', '过滤'],
     website: 'https://qdrant.tech',
     github: 'https://github.com/qdrant/qdrant',
+    stars: 20000,
   },
   {
     name: 'Milvus',
@@ -625,6 +655,7 @@ const tools: ToolEntry[] = [
     tags: ['云原生', '分布式', 'GPU加速', '大规模'],
     website: 'https://milvus.io',
     github: 'https://github.com/milvus-io/milvus',
+    stars: 30000,
   },
   {
     name: 'LanceDB',
@@ -635,6 +666,7 @@ const tools: ToolEntry[] = [
     tags: ['无服务器', '列式存储', '零配置', '轻量'],
     website: 'https://lancedb.com',
     github: 'https://github.com/lancedb/lancedb',
+    stars: 4000,
   },
   {
     name: 'Elasticsearch',
@@ -645,38 +677,48 @@ const tools: ToolEntry[] = [
     tags: ['搜索', '混合检索', '生态', '企业'],
     website: 'https://www.elastic.co',
     github: 'https://github.com/elastic/elasticsearch',
+    stars: 70000,
   },
 ]
 
-// ── Components ─────────────────────────────────────────────────────
+// ── Helpers ──────────────────────────────────────────────────────────────
 
-function CategoryBadge({ category }: { category: ToolCategory }) {
-  const c = CATEGORY_COLORS[category]
+function formatStars(n: number): string {
+  if (n >= 1000) {
+    return (n / 1000).toFixed(n >= 10000 ? 0 : 1) + 'k'
+  }
+  return n.toString()
+}
+
+// ── Sub-components ───────────────────────────────────────────────────────
+
+function CategoryGradientIcon({ category }: { category: ToolCategory }) {
+  const Icon = CATEGORY_ICONS[category]
   return (
-    <span
+    <div
       className={cn(
-        'inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-jetbrains font-medium tracking-wide border',
-        c.bg,
-        c.text,
-        c.border,
+        'w-11 h-11 rounded-xl bg-gradient-to-br flex items-center justify-center shrink-0',
+        CATEGORY_GRADIENTS[category],
+        'shadow-lg',
       )}
     >
-      {category}
-    </span>
+      <Icon className="h-5 w-5 text-white" strokeWidth={1.8} />
+    </div>
   )
 }
 
 function PricingBadge({ pricing }: { pricing: PricingTier }) {
-  const c = PRICING_COLORS[pricing]
+  const s = PRICING_BADGE_STYLES[pricing]
   return (
     <span
       className={cn(
-        'inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-jetbrains font-medium tracking-wide',
-        c.bg,
-        c.text,
+        'inline-flex items-center px-2.5 py-0.5 rounded-md text-[10px] font-jetbrains font-medium tracking-wide border',
+        s.bg,
+        s.text,
+        s.border,
       )}
     >
-      {pricing}
+      {pricing === 'Free' ? 'Free' : pricing === 'Paid' ? 'Paid' : 'Freemium'}
     </span>
   )
 }
@@ -685,99 +727,118 @@ function ToolCard({ tool }: { tool: ToolEntry }) {
   return (
     <div
       className={cn(
-        'group relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5',
-        'transition-all duration-300',
-        'hover:-translate-y-1 hover:shadow-xl hover:border-cyan-400/30 hover:bg-white/[0.07]',
+        'group relative bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-5',
+        'transition-all duration-500 ease-out',
+        'hover:scale-[1.02] hover:bg-white/[0.05] hover:border-white/[0.15]',
+        'hover:shadow-[0_0_30px_rgba(6,182,212,0.12),0_0_30px_rgba(168,85,247,0.12)]',
       )}
     >
-      {/* Hover glow */}
-      <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-cyan-500/[0.04] to-purple-500/[0.04]" />
+      {/* Hover ambient glow overlay */}
+      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-cyan-500/[0.06] via-transparent to-purple-500/[0.06]" />
 
-      <div className="relative z-10">
-        {/* Header: Name + Badges */}
-        <div className="flex items-start justify-between gap-2 mb-2.5">
-          <h3 className="text-base font-sora font-semibold text-white group-hover:text-cyan-200 transition-colors truncate">
+      <div className="relative z-10 flex flex-col h-full">
+        {/* Top row: gradient icon + pricing badge */}
+        <div className="flex items-start justify-between mb-3">
+          <CategoryGradientIcon category={tool.category} />
+          <PricingBadge pricing={tool.pricing} />
+        </div>
+
+        {/* Name + Stars */}
+        <div className="flex items-center gap-2 mb-2">
+          <h3 className="text-base font-sora font-semibold text-white group-hover:text-cyan-100 transition-colors truncate">
             {tool.name}
           </h3>
-          <div className="flex items-center gap-1.5 shrink-0">
-            <CategoryBadge category={tool.category} />
-          </div>
+          {tool.stars && (
+            <span className="inline-flex items-center gap-1 shrink-0 text-[11px] text-slate-400 font-jetbrains">
+              <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+              {formatStars(tool.stars)}
+            </span>
+          )}
         </div>
 
         {/* Description */}
-        <p className="text-sm text-slate-400 leading-relaxed line-clamp-2 mb-3.5">
+        <p className="text-sm text-slate-400/80 leading-relaxed line-clamp-2 mb-4 flex-1">
           {tool.description}
         </p>
 
-        {/* Bottom row: badges + actions */}
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 flex-wrap">
-            <PricingBadge pricing={tool.pricing} />
-            {tool.openSource && (
-              <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md text-[10px] font-jetbrains text-emerald-300 bg-emerald-400/10 border border-emerald-400/20">
-                <GitFork className="h-2.5 w-2.5" />
-                开源
-              </span>
-            )}
-            {tool.pricing === 'Free' && !tool.openSource && (
-              <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-jetbrains text-slate-400 bg-white/[0.03] border border-white/[0.06]">
-                闭源
-              </span>
-            )}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-jetbrains text-slate-500 bg-white/[0.02]">
-              {tool.tags[0]}
+        {/* Tag chips */}
+        <div className="flex items-center gap-1.5 flex-wrap mb-4">
+          {tool.tags.slice(0, 3).map((tag) => (
+            <span
+              key={tag}
+              className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-jetbrains text-slate-400 bg-white/[0.04] border border-white/[0.06]"
+            >
+              {tag}
             </span>
-          </div>
+          ))}
+          {tool.tags.length > 3 && (
+            <span className="text-[10px] text-slate-600 font-jetbrains">
+              +{tool.tags.length - 3}
+            </span>
+          )}
+        </div>
 
-          <div className="flex items-center gap-1.5 shrink-0">
+        {/* Bottom actions */}
+        <div className="flex items-center justify-between gap-2 pt-3 border-t border-white/[0.06]">
+          <div className="flex items-center gap-1.5">
             {tool.github && (
               <a
                 href={tool.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-7 h-7 rounded-lg bg-white/[0.04] border border-white/[0.08] text-slate-400 hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-colors"
+                className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] text-slate-400 hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all duration-200"
                 onClick={(e) => e.stopPropagation()}
                 title="GitHub"
               >
-                <GitFork className="h-3.5 w-3.5" />
+                <svg className="h-4 w-4" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                </svg>
               </a>
             )}
-            <a
-              href={tool.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                'inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-jetbrains font-medium',
-                'bg-cyan-400/10 border border-cyan-400/20 text-cyan-300',
-                'hover:bg-cyan-400/20 hover:border-cyan-400/40 hover:text-cyan-200',
-                'transition-colors',
-              )}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ExternalLink className="h-3 w-3" />
-              访问
-            </a>
           </div>
+          <a
+            href={tool.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-jetbrains font-medium',
+              'bg-cyan-400/10 border border-cyan-400/20 text-cyan-300',
+              'hover:bg-cyan-400/20 hover:border-cyan-400/40 hover:text-cyan-200',
+              'transition-all duration-200',
+            )}
+            onClick={(e) => e.stopPropagation()}
+          >
+            Visit
+            <ExternalLink className="h-3 w-3" />
+          </a>
         </div>
       </div>
     </div>
   )
 }
 
-// ── Page ───────────────────────────────────────────────────────────
+// ── Page ─────────────────────────────────────────────────────────────────
 
 const ToolsPage = () => {
   useEffect(() => {
     document.title = `AI 工具箱 | ${SITE_NAME}`
   }, [])
 
+  // ── Filter & Sort state ──
   const [searchQuery, setSearchQuery] = useState('')
   const [categoryFilter, setCategoryFilter] = useState<ToolCategory | ''>('')
   const [pricingFilter, setPricingFilter] = useState<PricingTier | ''>('')
-  const [openSourceOnly, setOpenSourceOnly] = useState(false)
+  const [sortOption, setSortOption] = useState<SortOption>('default')
 
+  // ── Suggest form state ──
+  const [suggestName, setSuggestName] = useState('')
+  const [suggestUrl, setSuggestUrl] = useState('')
+  const [suggestDescription, setSuggestDescription] = useState('')
+  const [suggestSubmitted, setSuggestSubmitted] = useState(false)
+
+  // ── Filtered & sorted tools ──
   const filteredTools = useMemo(() => {
-    let result = tools
+    let result = [...tools]
 
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase()
@@ -798,176 +859,360 @@ const ToolsPage = () => {
       result = result.filter((t) => t.pricing === pricingFilter)
     }
 
-    if (openSourceOnly) {
-      result = result.filter((t) => t.openSource)
+    // Sort
+    switch (sortOption) {
+      case 'name-asc':
+        result.sort((a, b) => a.name.localeCompare(b.name))
+        break
+      case 'name-desc':
+        result.sort((a, b) => b.name.localeCompare(a.name))
+        break
+      case 'stars-desc':
+        result.sort((a, b) => (b.stars ?? 0) - (a.stars ?? 0))
+        break
+      default:
+        break
     }
 
     return result
-  }, [searchQuery, categoryFilter, pricingFilter, openSourceOnly])
+  }, [searchQuery, categoryFilter, pricingFilter, sortOption])
+
+  const hasActiveFilters = searchQuery || categoryFilter || pricingFilter
+
+  // ── Suggest form handler ──
+  const handleSuggest = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!suggestName.trim() || !suggestUrl.trim()) return
+    // In a real app this would POST to an API
+    setSuggestSubmitted(true)
+    setTimeout(() => {
+      setSuggestSubmitted(false)
+      setSuggestName('')
+      setSuggestUrl('')
+      setSuggestDescription('')
+    }, 3000)
+  }
 
   return (
-    <div className="space-y-8">
-      {/* Page Header */}
+    <div className="space-y-8 pb-12">
+      {/* ═══ Page Header ═══ */}
       <div>
         <h1 className="text-3xl font-sora font-bold text-white mb-2">
-          <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
             AI 工具箱
           </span>
         </h1>
-        <p className="text-slate-400 max-w-2xl">
+        <p className="text-slate-400 max-w-2xl leading-relaxed">
           精心筛选的 AI 工具目录，覆盖 LLM 对话、代码助手、图像/视频/音频生成、智能体、嵌入模型和向量数据库，助你快速找到最适合的 AI 工具。
         </p>
       </div>
 
-      {/* Filter Bar */}
+      {/* ═══ Search Bar ═══ */}
       <div
         className={cn(
-          'bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-4',
-          'flex flex-col sm:flex-row flex-wrap gap-3',
+          'relative bg-white/[0.04] backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-1',
+          'focus-within:border-cyan-400/30 focus-within:shadow-[0_0_30px_rgba(6,182,212,0.08)]',
+          'transition-all duration-500',
         )}
       >
-        {/* Search */}
-        <div className="flex-1 min-w-[200px] relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500 pointer-events-none" />
-          <Input
+        <div className="flex items-center gap-3 px-4 py-1">
+          <Search className="h-4.5 w-4.5 text-slate-500 shrink-0" strokeWidth={1.8} />
+          <input
             type="text"
             placeholder="搜索工具名称、描述、标签..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 w-full"
+            className="flex-1 bg-transparent border-none outline-none text-sm text-slate-200 placeholder:text-slate-500 py-2.5 font-jetbrains"
           />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="text-slate-500 hover:text-slate-300 transition-colors shrink-0"
+            >
+              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* ═══ Category Filter Pills ═══ */}
+      <div className="flex items-center gap-2 flex-wrap">
+        <Filter className="h-4 w-4 text-slate-500 shrink-0 mr-1" strokeWidth={1.8} />
+        {CATEGORY_PILLS.map((pill) => {
+          const isActive = categoryFilter === pill.key
+          return (
+            <button
+              key={pill.key}
+              onClick={() => setCategoryFilter(pill.key)}
+              className={cn(
+                'inline-flex items-center px-4 py-2 rounded-xl text-xs font-jetbrains font-medium tracking-wide transition-all duration-300',
+                'border backdrop-blur-sm',
+                isActive
+                  ? 'bg-cyan-400/15 border-cyan-400/40 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.1)]'
+                  : 'bg-white/[0.03] border-white/[0.06] text-slate-400 hover:text-slate-200 hover:border-white/[0.15] hover:bg-white/[0.05]',
+              )}
+            >
+              {pill.label}
+            </button>
+          )
+        })}
+      </div>
+
+      {/* ═══ Secondary Filter Bar: Pricing + Sort ═══ */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        {/* Pricing pills */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[11px] font-jetbrains text-slate-600 uppercase tracking-wider mr-1">
+            Pricing
+          </span>
+          {PRICING_PILLS.map((pill) => {
+            const isActive = pricingFilter === pill.key
+            return (
+              <button
+                key={pill.key}
+                onClick={() => setPricingFilter(pill.key)}
+                className={cn(
+                  'inline-flex items-center px-3 py-1.5 rounded-lg text-[10px] font-jetbrains font-medium tracking-wide transition-all duration-200',
+                  'border',
+                  isActive
+                    ? 'bg-cyan-400/10 border-cyan-400/30 text-cyan-300'
+                    : 'bg-white/[0.02] border-white/[0.05] text-slate-500 hover:text-slate-300 hover:border-white/[0.1]',
+                )}
+              >
+                {pill.label}
+              </button>
+            )
+          })}
         </div>
 
-        {/* Category Filter */}
-        <select
-          value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value as ToolCategory | '')}
-          className={cn(
-            'flex rounded-xl px-4 py-2.5 text-sm text-slate-100',
-            'bg-white/5 backdrop-blur-sm border border-white/10',
-            'appearance-none cursor-pointer',
-            'focus-visible:outline-none focus-visible:border-cyan-400/50 focus-visible:ring-2 focus-visible:ring-cyan-400/20',
-            'min-w-[160px]',
-          )}
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-            backgroundPosition: 'right 0.75rem center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '1.25rem 1.25rem',
-            paddingRight: '2.5rem',
-          }}
-          aria-label="按分类筛选"
-        >
-          <option value="">全部类别</option>
-          {CATEGORIES.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-
-        {/* Pricing Filter */}
-        <select
-          value={pricingFilter}
-          onChange={(e) => setPricingFilter(e.target.value as PricingTier | '')}
-          className={cn(
-            'flex rounded-xl px-4 py-2.5 text-sm text-slate-100',
-            'bg-white/5 backdrop-blur-sm border border-white/10',
-            'appearance-none cursor-pointer',
-            'focus-visible:outline-none focus-visible:border-cyan-400/50 focus-visible:ring-2 focus-visible:ring-cyan-400/20',
-            'min-w-[140px]',
-          )}
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-            backgroundPosition: 'right 0.75rem center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '1.25rem 1.25rem',
-            paddingRight: '2.5rem',
-          }}
-          aria-label="按价格筛选"
-        >
-          <option value="">全部价格</option>
-          {PRICING_OPTIONS.map((p) => (
-            <option key={p} value={p}>
-              {p === 'Free' ? '免费' : p === 'Paid' ? '付费' : 'Freemium'}
-            </option>
-          ))}
-        </select>
-
-        {/* Open Source Toggle */}
-        <label
-          className={cn(
-            'inline-flex items-center gap-2 px-4 py-2.5 rounded-xl cursor-pointer select-none min-w-[120px]',
-            'bg-white/5 backdrop-blur-sm border transition-colors duration-200',
-            openSourceOnly ? 'border-cyan-400/50 bg-cyan-400/10' : 'border-white/10 hover:border-white/20',
-          )}
-        >
-          <div
+        {/* Sort dropdown */}
+        <div className="flex items-center gap-2">
+          <SortAsc className="h-3.5 w-3.5 text-slate-500" strokeWidth={1.8} />
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value as SortOption)}
             className={cn(
-              'w-4 h-4 rounded border flex items-center justify-center transition-colors',
-              openSourceOnly
-                ? 'bg-cyan-400 border-cyan-400'
-                : 'border-slate-500 bg-transparent',
+              'rounded-lg px-3 py-1.5 text-[10px] font-jetbrains font-medium text-slate-300',
+              'bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]',
+              'appearance-none cursor-pointer outline-none',
+              'focus-visible:border-cyan-400/40',
+              'pr-8',
             )}
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2394a3b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+              backgroundPosition: 'right 0.5rem center',
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: '1rem 1rem',
+            }}
           >
-            {openSourceOnly && (
-              <svg className="w-3 h-3 text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-            )}
-          </div>
-          <span className="text-xs font-jetbrains text-slate-300">开源</span>
-        </label>
+            {SORT_OPTIONS.map((opt) => (
+              <option key={opt.key} value={opt.key} className="bg-slate-900 text-slate-200">
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {/* Clear filters */}
-        {(searchQuery || categoryFilter || pricingFilter || openSourceOnly) && (
+        {hasActiveFilters && (
           <button
             onClick={() => {
               setSearchQuery('')
               setCategoryFilter('')
               setPricingFilter('')
-              setOpenSourceOnly(false)
+              setSortOption('default')
             }}
-            className="inline-flex items-center gap-1 px-3 py-2 rounded-lg text-xs font-jetbrains text-slate-400 hover:text-slate-200 hover:bg-white/[0.04] transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-jetbrains text-slate-400 hover:text-slate-200 hover:bg-white/[0.04] transition-colors border border-white/[0.05]"
           >
-            <SlidersHorizontal className="h-3 w-3" />
-            清除
+            <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            清除筛选
           </button>
         )}
       </div>
 
-      {/* Results count */}
+      {/* ═══ Results count ═══ */}
       <div className="flex items-center gap-2 text-sm text-slate-500 font-jetbrains">
         <Sparkles className="h-4 w-4 text-cyan-400" />
         <span>
           共 {filteredTools.length} 个工具
-          {(searchQuery || categoryFilter || pricingFilter || openSourceOnly) && '（已筛选）'}
+          {hasActiveFilters && '（已筛选）'}
         </span>
       </div>
 
-      {/* Tool Grid or Empty */}
+      {/* ═══ Tool Cards Grid ═══ */}
       {filteredTools.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
           {filteredTools.map((tool, i) => (
             <ToolCard key={`${tool.name}-${i}`} tool={tool} />
           ))}
         </div>
       ) : (
-        <EmptyState
-          icon={<Search className="h-6 w-6 text-slate-400" />}
-          title="未找到匹配的工具"
-          description="尝试调整搜索词或筛选条件"
-          action={{
-            label: '清除所有筛选',
-            onClick: () => {
+        <div
+          className={cn(
+            'flex flex-col items-center justify-center py-20 px-6',
+            'bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] rounded-2xl',
+          )}
+        >
+          <Search className="h-8 w-8 text-slate-600 mb-4" />
+          <h3 className="text-lg font-sora font-semibold text-slate-300 mb-1">
+            未找到匹配的工具
+          </h3>
+          <p className="text-sm text-slate-500 mb-6">
+            尝试调整搜索词或筛选条件
+          </p>
+          <button
+            onClick={() => {
               setSearchQuery('')
               setCategoryFilter('')
               setPricingFilter('')
-              setOpenSourceOnly(false)
-            },
-          }}
-        />
+              setSortOption('default')
+            }}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-jetbrains font-medium text-cyan-300 bg-cyan-400/10 border border-cyan-400/20 hover:bg-cyan-400/20 transition-colors"
+          >
+            <Filter className="h-4 w-4" />
+            清除所有筛选
+          </button>
+        </div>
       )}
+
+      {/* ═══ Suggest a Tool CTA ═══ */}
+      <div
+        className={cn(
+          'relative overflow-hidden rounded-2xl',
+          'bg-white/[0.03] backdrop-blur-2xl border border-white/[0.08]',
+          'p-8 md:p-10',
+        )}
+      >
+        {/* Decorative gradient blobs */}
+        <div className="pointer-events-none absolute -top-32 -right-20 w-64 h-64 rounded-full bg-cyan-500/[0.06] blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 -left-16 w-56 h-56 rounded-full bg-purple-500/[0.06] blur-3xl" />
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+          {/* Left: heading */}
+          <div className="lg:col-span-2">
+            <h2 className="text-2xl font-sora font-bold text-white mb-3">
+              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+                Suggest a Tool
+              </span>
+            </h2>
+            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+              发现了好用的 AI 工具没在列表中？提交你的推荐，通过审核后将收录到工具箱，帮助更多开发者。
+            </p>
+          </div>
+
+          {/* Right: form */}
+          <div className="lg:col-span-3">
+            {suggestSubmitted ? (
+              <div className="flex items-center gap-3 py-6 px-5 rounded-xl bg-emerald-400/10 border border-emerald-400/20">
+                <div className="w-8 h-8 rounded-full bg-emerald-400/20 flex items-center justify-center shrink-0">
+                  <svg className="w-4 h-4 text-emerald-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-sm font-sora font-semibold text-emerald-300">提交成功！</p>
+                  <p className="text-xs text-emerald-400/70">感谢你的推荐，我们会尽快审核收录。</p>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleSuggest} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[11px] font-jetbrains text-slate-500 mb-1.5 ml-1 uppercase tracking-wider">
+                      Tool Name
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="例如: Midjourney"
+                      value={suggestName}
+                      onChange={(e) => setSuggestName(e.target.value)}
+                      className={cn(
+                        'w-full rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder:text-slate-500',
+                        'bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]',
+                        'outline-none transition-all duration-200',
+                        'focus:border-cyan-400/40 focus:bg-white/[0.06]',
+                        'font-jetbrains',
+                      )}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-jetbrains text-slate-500 mb-1.5 ml-1 uppercase tracking-wider">
+                      URL
+                    </label>
+                    <input
+                      type="url"
+                      required
+                      placeholder="https://..."
+                      value={suggestUrl}
+                      onChange={(e) => setSuggestUrl(e.target.value)}
+                      className={cn(
+                        'w-full rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder:text-slate-500',
+                        'bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]',
+                        'outline-none transition-all duration-200',
+                        'focus:border-cyan-400/40 focus:bg-white/[0.06]',
+                        'font-jetbrains',
+                      )}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-[11px] font-jetbrains text-slate-500 mb-1.5 ml-1 uppercase tracking-wider">
+                    Description
+                  </label>
+                  <textarea
+                    placeholder="简单描述一下这个工具..."
+                    rows={3}
+                    value={suggestDescription}
+                    onChange={(e) => setSuggestDescription(e.target.value)}
+                    className={cn(
+                      'w-full rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder:text-slate-500',
+                      'bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]',
+                      'outline-none transition-all duration-200 resize-none',
+                      'focus:border-cyan-400/40 focus:bg-white/[0.06]',
+                      'font-jetbrains',
+                    )}
+                  />
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    type="submit"
+                    className={cn(
+                      'relative inline-flex items-center gap-2 px-6 py-2.5 rounded-xl',
+                      'text-sm font-jetbrains font-semibold text-white',
+                      'bg-gradient-to-r from-cyan-500 to-blue-500',
+                      'hover:from-cyan-400 hover:to-blue-400',
+                      'transition-all duration-300',
+                      'shadow-[0_4px_20px_rgba(6,182,212,0.25)]',
+                      'hover:shadow-[0_6px_30px_rgba(6,182,212,0.35)]',
+                      'animate-[pulse-glow_2s_ease-in-out_infinite]',
+                    )}
+                  >
+                    <Send className="h-4 w-4" />
+                    提交推荐
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Inject keyframes for pulse-glow */}
+      <style>{`
+        @keyframes pulse-glow {
+          0%, 100% {
+            box-shadow: 0 4px 20px rgba(6, 182, 212, 0.25);
+          }
+          50% {
+            box-shadow: 0 4px 35px rgba(6, 182, 212, 0.45), 0 0 60px rgba(6, 182, 212, 0.1);
+          }
+        }
+      `}</style>
     </div>
   )
 }

@@ -43,10 +43,16 @@ export default {
         'float': 'float 6s ease-in-out infinite',
         'gradient-shift': 'gradient-shift 8s ease infinite',
         'particle': 'particle 12s ease-in-out infinite',
+        'particle-rise': 'particle-rise 12s ease-in-out infinite',
         'shimmer': 'shimmer 2s linear infinite',
+        'shimmer-border': 'shimmer-border 3s linear infinite',
         'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
         'slide-up': 'slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
         'gradient-flow': 'gradient-flow 6s ease infinite',
+        'shine': 'shine 4s linear infinite',
+        'grid-drift': 'grid-drift 20s linear infinite',
+        'blob-float-cyan': 'blob-float-cyan 10s ease-in-out infinite',
+        'blob-float-purple': 'blob-float-purple 11s ease-in-out infinite',
       },
       keyframes: {
         glow: {
@@ -91,6 +97,36 @@ export default {
           '50%': { backgroundPosition: '100% 100%' },
           '75%': { backgroundPosition: '0% 100%' },
           '100%': { backgroundPosition: '0% 50%' },
+        },
+        'particle-rise': {
+          '0%': { transform: 'translateY(0px) translateX(0px) scale(1)', opacity: '0' },
+          '10%': { opacity: '1' },
+          '90%': { opacity: '1' },
+          '100%': { transform: 'translateY(-160px) translateX(var(--drift, 30px)) scale(0)', opacity: '0' },
+        },
+        'shimmer-border': {
+          '0%': { backgroundPosition: '0% 0%' },
+          '100%': { backgroundPosition: '300% 0%' },
+        },
+        shine: {
+          '0%': { backgroundPosition: '0% center' },
+          '100%': { backgroundPosition: '200% center' },
+        },
+        'grid-drift': {
+          '0%': { backgroundPosition: '0px 0px' },
+          '100%': { backgroundPosition: '64px 64px' },
+        },
+        'blob-float-cyan': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '25%': { transform: 'translate(40px, -30px) scale(1.08)' },
+          '50%': { transform: 'translate(-20px, -60px) scale(0.95)' },
+          '75%': { transform: 'translate(-40px, -10px) scale(1.04)' },
+        },
+        'blob-float-purple': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+          '25%': { transform: 'translate(-30px, 40px) scale(1.06)' },
+          '50%': { transform: 'translate(20px, 60px) scale(0.94)' },
+          '75%': { transform: 'translate(40px, 10px) scale(1.05)' },
         },
       },
       backgroundSize: {
