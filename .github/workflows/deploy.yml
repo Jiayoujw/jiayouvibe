@@ -33,3 +33,25 @@ jobs:
           local-dir: ./dist/
           server-dir: public_html/
           dangerous-clean-slate: true
+
+      - name: Purge Cloudflare cache
+        run: |
+          # Get Zone ID
+          ZONE_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=jiayouvibe.com" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" | jq -r '.result[0].id')
+
+          echo "Zone ID: $ZONE_ID"
+
+          # Purge cache
+          RESULT=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}')
+
+          SUCCESS=$(echo "$RESULT" | jq -r '.success')
+          if [ "$SUCCESS" = "true" ]; then
+            echo "✅ Cloudflare cache purged successfully!"
+          else
+            echo "⚠️ Cache purge failed: $RESULT"
+          fi
