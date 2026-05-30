@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { ChevronUp } from 'lucide-react'
 import { cn } from '@/utils/cn'
 
 export default function ScrollToTop() {
   const [visible, setVisible] = useState(false)
+  const { pathname } = useLocation()
 
+  // Auto scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [pathname])
+
+  // Show/hide floating button based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       setVisible(window.scrollY > 300)
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    /* check initial state */
     handleScroll()
 
     return () => window.removeEventListener('scroll', handleScroll)
