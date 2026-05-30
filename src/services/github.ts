@@ -96,10 +96,16 @@ async function fetchFromGitHub(
   params: URLSearchParams,
 ): Promise<GitHubRepo[]> {
   const url = `${GITHUB_API_URL}?${params.toString()}`
+  const token = import.meta.env.VITE_GITHUB_TOKEN as string | undefined
 
-  const res = await fetch(url, {
-    headers: { Accept: 'application/vnd.github.v3+json' },
-  })
+  const headers: Record<string, string> = {
+    Accept: 'application/vnd.github.v3+json',
+  }
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`
+  }
+
+  const res = await fetch(url, { headers })
 
   // 403 — Rate limited
   if (res.status === 403) {
