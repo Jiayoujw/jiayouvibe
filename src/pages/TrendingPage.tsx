@@ -36,7 +36,7 @@ const TrendingPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
-  const { repos, loading, error, refetch } = useGitHubTrending({ language, since })
+  const { repos, loading, error } = useGitHubTrending({ language, since })
 
   const filteredRepos = useMemo(
     () => filterRepos(repos, searchQuery),
