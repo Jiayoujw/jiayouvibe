@@ -53,7 +53,7 @@ export default function AgentsPage() {
             AI智能体
           </h1>
         </div>
-        <p className="text-slate-400 text-sm sm:text-base max-w-2xl">
+        <p className="text-[var(--color-text-secondary)] text-sm sm:text-base max-w-2xl">
           探索最前沿的AI Agent框架、平台、工具和独立智能体，了解它们的特性、应用场景和开发资源
         </p>
       </div>
@@ -67,7 +67,7 @@ export default function AgentsPage() {
       />
 
       {/* Results count */}
-      <p className="text-sm text-slate-500 mb-6 font-jetbrains">
+      <p className="text-sm text-[var(--color-text-muted)] mb-6 font-jetbrains">
         共 {filteredAgents.length} 个智能体
       </p>
 
@@ -80,9 +80,9 @@ export default function AgentsPage() {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-20 text-center">
-          <Bot className="w-12 h-12 text-slate-600 mb-4" />
-          <p className="text-slate-500 text-lg font-medium mb-1">没有找到匹配的智能体</p>
-          <p className="text-slate-600 text-sm">尝试调整筛选条件或搜索关键词</p>
+          <Bot className="w-12 h-12 text-[var(--color-text-muted)] mb-4" />
+          <p className="text-[var(--color-text-muted)] text-lg font-medium mb-1">没有找到匹配的智能体</p>
+          <p className="text-[var(--color-text-muted)] text-sm">尝试调整筛选条件或搜索关键词</p>
         </div>
       )}
     </div>

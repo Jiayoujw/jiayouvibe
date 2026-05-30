@@ -194,7 +194,7 @@ function IconCircle({ domain, accent }: { domain: Domain; accent: Accent }) {
       className="relative w-16 h-16 rounded-full p-[2px] flex-shrink-0"
       style={{ background: `linear-gradient(135deg, ${accent.from}, ${accent.to})` }}
     >
-      <div className="w-full h-full rounded-full bg-slate-950 dark:bg-slate-900 flex items-center justify-center">
+      <div className="w-full h-full rounded-full bg-[var(--color-bg-primary)] dark:bg-slate-900 flex items-center justify-center">
         <IconComponent size={28} className={accent.text} strokeWidth={1.5} />
       </div>
     </div>
@@ -237,7 +237,7 @@ function DomainCard({ domain, accent }: { domain: Domain; accent: Accent }) {
       </div>
 
       {/* Description */}
-      <p className="mt-5 text-sm leading-relaxed text-slate-400 line-clamp-3">
+      <p className="mt-5 text-sm leading-relaxed text-[var(--color-text-secondary)] line-clamp-3">
         {domain.description}
       </p>
 
@@ -252,7 +252,7 @@ function DomainCard({ domain, accent }: { domain: Domain; accent: Accent }) {
           </span>
         ))}
         {domain.tags.length > 5 && (
-          <span className="inline-block px-2.5 py-0.5 text-xs rounded-full border border-slate-700 bg-slate-800 text-slate-500">
+          <span className="inline-block px-2.5 py-0.5 text-xs rounded-full border border-[var(--color-border)] bg-slate-800 text-[var(--color-text-muted)]">
             +{domain.tags.length - 5}
           </span>
         )}
@@ -301,7 +301,7 @@ export default function DomainsPage() {
           <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
             <span className="gradient-text">探索更多AI领域</span>
           </h1>
-          <p className="mt-5 text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-5 text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
             从绘画到音乐，从编程到机器人 —— 全方位追踪AI在各行各业的前沿突破与应用落地。
           </p>
         </div>

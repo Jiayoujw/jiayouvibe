@@ -353,13 +353,13 @@ function TrackTabs({
                 <h3
                   className={cn(
                     'text-sm font-sora font-semibold truncate',
-                    isActive ? 'text-cyan-200' : 'text-slate-200 group-hover:text-white',
+                    isActive ? 'text-cyan-200' : 'text-[var(--color-text-primary)] group-hover:text-white',
                   )}
                 >
                   {track.title}
                 </h3>
               </div>
-              <p className="text-xs text-slate-500 mb-3">{track.subtitle}</p>
+              <p className="text-xs text-[var(--color-text-muted)] mb-3">{track.subtitle}</p>
 
               {/* Mini progress bar */}
               <div className="flex items-center gap-2">
@@ -374,7 +374,7 @@ function TrackTabs({
                     style={{ width: `${progressPct}%` }}
                   />
                 </div>
-                <span className="text-[10px] font-jetbrains text-slate-500 tabular-nums">
+                <span className="text-[10px] font-jetbrains text-[var(--color-text-muted)] tabular-nums">
                   {completedCount}/{totalCount}
                 </span>
               </div>
@@ -474,14 +474,14 @@ function TimelineStep({
           <h4
             className={cn(
               'text-base font-sora font-semibold',
-              step.completed ? 'text-slate-300' : 'text-white',
+              step.completed ? 'text-[var(--color-text-primary)]' : 'text-white',
             )}
           >
             {step.title}
           </h4>
           <div className="flex items-center gap-3">
             {/* Duration */}
-            <span className="inline-flex items-center gap-1 text-[11px] font-jetbrains text-slate-500">
+            <span className="inline-flex items-center gap-1 text-[11px] font-jetbrains text-[var(--color-text-muted)]">
               <Clock className="h-3 w-3" />
               {step.duration}
             </span>
@@ -500,14 +500,14 @@ function TimelineStep({
           </div>
         </div>
 
-        <p className="text-sm text-slate-400 leading-relaxed mb-3">
+        <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-3">
           {step.description}
         </p>
 
         {/* Resources */}
         {step.resources && step.resources.length > 0 && (
           <div className="space-y-1.5">
-            <p className="text-[10px] uppercase tracking-wider text-slate-600 font-jetbrains">
+            <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-jetbrains">
               推荐资源
             </p>
             <div className="flex flex-wrap gap-1.5">
@@ -559,7 +559,7 @@ const LearningPathPage = () => {
             AI 学习路径
           </span>
         </h1>
-        <p className="text-slate-400 max-w-2xl">
+        <p className="text-[var(--color-text-secondary)] max-w-2xl">
           从入门到精通的结构化 AI 学习路线图，每个阶段都包含关键知识点、实践项目和精选资源，帮助你系统地建立 AI 技术能力。
         </p>
       </div>
@@ -590,7 +590,7 @@ const LearningPathPage = () => {
               </div>
               <div>
                 <h2 className="text-xl font-sora font-bold text-white">{activeTrack.title}</h2>
-                <p className="text-sm text-slate-400 mt-1 max-w-lg">{activeTrack.description}</p>
+                <p className="text-sm text-[var(--color-text-secondary)] mt-1 max-w-lg">{activeTrack.description}</p>
               </div>
             </div>
 
@@ -625,7 +625,7 @@ const LearningPathPage = () => {
                   <span className="text-base font-sora font-bold text-white leading-none">
                     {progressPct}%
                   </span>
-                  <span className="text-[9px] text-slate-500 font-jetbrains leading-tight mt-0.5">
+                  <span className="text-[9px] text-[var(--color-text-muted)] font-jetbrains leading-tight mt-0.5">
                     完成
                   </span>
                 </div>
@@ -633,9 +633,9 @@ const LearningPathPage = () => {
 
               <div className="text-right">
                 <p className="text-2xl font-sora font-bold text-white tabular-nums">
-                  {completedCount}<span className="text-slate-500 text-base">/{totalCount}</span>
+                  {completedCount}<span className="text-[var(--color-text-muted)] text-base">/{totalCount}</span>
                 </p>
-                <p className="text-[10px] uppercase tracking-wider text-slate-500 font-jetbrains">steps completed</p>
+                <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-jetbrains">steps completed</p>
               </div>
             </div>
           </div>
@@ -645,14 +645,14 @@ const LearningPathPage = () => {
             <div className="flex items-center gap-2 p-3 rounded-xl bg-white/[0.04] border border-white/[0.06]">
               <Target className="h-4 w-4 text-cyan-400" />
               <div>
-                <p className="text-[10px] uppercase tracking-wider text-slate-500 font-jetbrains">总步骤</p>
+                <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-jetbrains">总步骤</p>
                 <p className="text-sm font-sora font-semibold text-white">{totalCount} 步</p>
               </div>
             </div>
             <div className="flex items-center gap-2 p-3 rounded-xl bg-white/[0.04] border border-white/[0.06]">
               <Clock className="h-4 w-4 text-amber-400" />
               <div>
-                <p className="text-[10px] uppercase tracking-wider text-slate-500 font-jetbrains">预计总时长</p>
+                <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-jetbrains">预计总时长</p>
                 <p className="text-sm font-sora font-semibold text-white">
                   ~{activeTrack.steps.reduce(
                     (acc, s) => {
@@ -668,7 +668,7 @@ const LearningPathPage = () => {
             <div className="flex items-center gap-2 p-3 rounded-xl bg-white/[0.04] border border-white/[0.06]">
               <GraduationCap className="h-4 w-4 text-purple-400" />
               <div>
-                <p className="text-[10px] uppercase tracking-wider text-slate-500 font-jetbrains">难度等级</p>
+                <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-jetbrains">难度等级</p>
                 <p className="text-sm font-sora font-semibold text-white">
                   {activeTrack.id === 'beginner' ? '入门' : activeTrack.id === 'intermediate' ? '进阶' : '高级'}
                 </p>
@@ -704,7 +704,7 @@ const LearningPathPage = () => {
           'bg-white/[0.02] backdrop-blur-sm border-white/[0.08]',
         )}
       >
-        <p className="text-slate-300 mb-3">
+        <p className="text-[var(--color-text-primary)] mb-3">
           准备好了吗？选择一条路径开始你的 AI 学习之旅。
         </p>
         <div className="flex flex-wrap justify-center gap-3">
@@ -716,7 +716,7 @@ const LearningPathPage = () => {
                 'inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200',
                 track.id === activeTrackId
                   ? `bg-gradient-to-r ${track.gradient} text-white shadow-lg`
-                  : 'bg-white/[0.04] border border-white/[0.08] text-slate-400 hover:text-white hover:border-white/20',
+                  : 'bg-white/[0.04] border border-white/[0.08] text-[var(--color-text-secondary)] hover:text-white hover:border-white/20',
               )}
             >
               <span>{track.icon}</span>

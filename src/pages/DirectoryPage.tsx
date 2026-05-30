@@ -39,7 +39,7 @@ const DirectoryPage = () => {
           <h1 className="text-3xl md:text-4xl font-bold mb-3">
             <span className="gradient-text">AI 网站导航</span>
           </h1>
-          <p className="text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
+          <p className="text-[var(--color-text-secondary)] max-w-xl mx-auto text-sm leading-relaxed">
             精选 AI 模型平台、开发工具、学习资源和社区论坛，一站式发现优质 AI 网站。
           </p>
         </div>
@@ -63,7 +63,7 @@ const DirectoryPage = () => {
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',
                   activeCategory === 'all'
                     ? 'bg-white/10 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]',
+                    : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-white/[0.03]',
                 )}
               >
                 全部
@@ -79,7 +79,7 @@ const DirectoryPage = () => {
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',
                     activeCategory === key
                       ? 'bg-white/10 text-white shadow-sm'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]',
+                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-white/[0.03]',
                   )}
                 >
                   {DIRECTORY_CATEGORIES[key]}
@@ -90,7 +90,7 @@ const DirectoryPage = () => {
             {/* Featured toggle */}
             <label className="inline-flex items-center gap-2.5 cursor-pointer select-none flex-shrink-0">
               <Sparkles className="w-4 h-4 text-purple-400" />
-              <span className="text-sm text-slate-400">仅显示精选</span>
+              <span className="text-sm text-[var(--color-text-secondary)]">仅显示精选</span>
               <div className="relative">
                 <input
                   type="checkbox"
@@ -117,14 +117,14 @@ const DirectoryPage = () => {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-20 text-center">
-              <Globe className="w-12 h-12 text-slate-600 mb-4" />
-              <p className="text-slate-500 text-sm">暂无符合条件的网站</p>
-              <p className="text-slate-600 text-xs mt-1">尝试切换分类或关闭精选筛选</p>
+              <Globe className="w-12 h-12 text-[var(--color-text-muted)] mb-4" />
+              <p className="text-[var(--color-text-muted)] text-sm">暂无符合条件的网站</p>
+              <p className="text-[var(--color-text-muted)] text-xs mt-1">尝试切换分类或关闭精选筛选</p>
             </div>
           )}
 
           {/* Count */}
-          <p className="text-center text-xs text-slate-600 mt-8">
+          <p className="text-center text-xs text-[var(--color-text-muted)] mt-8">
             共 {filteredEntries.length} 个网站
             {showFeaturedOnly && ' · 仅精选'}
             {activeCategory !== 'all' && ` · ${DIRECTORY_CATEGORIES[activeCategory as keyof typeof DIRECTORY_CATEGORIES]}`}
@@ -142,7 +142,7 @@ const DirectoryPage = () => {
                 <span className="text-xs font-medium text-purple-300 tracking-wide">推荐网站</span>
               </div>
               <h2 className="text-xl font-bold text-slate-100 mb-1">发现了好网站？</h2>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-[var(--color-text-secondary)]">
                 填写下方表单推荐给我们，审核通过后将收录到导航中。
               </p>
             </div>
@@ -156,17 +156,17 @@ const DirectoryPage = () => {
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1.5">网站名称</label>
+                  <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">网站名称</label>
                   <Input placeholder="例如：OpenAI Platform" required />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-slate-400 mb-1.5">网站地址</label>
+                  <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">网站地址</label>
                   <Input type="url" placeholder="https://" required />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1.5">所属分类</label>
+                <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">所属分类</label>
                 <Select required defaultValue="">
                   <option value="" disabled>请选择分类</option>
                   {categoryKeys.map((key) => (
@@ -178,7 +178,7 @@ const DirectoryPage = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1.5">网站简介</label>
+                <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">网站简介</label>
                 <Textarea placeholder="简单介绍一下这个网站（200字以内）" rows={3} maxLength={200} />
               </div>
 
@@ -190,7 +190,7 @@ const DirectoryPage = () => {
                 提交推荐
               </button>
 
-              <p className="text-center text-[11px] text-slate-500 mt-2">
+              <p className="text-center text-[11px] text-[var(--color-text-muted)] mt-2">
                 提交后经审核收录
               </p>
             </form>

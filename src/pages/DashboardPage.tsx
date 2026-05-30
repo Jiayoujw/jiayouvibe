@@ -179,7 +179,7 @@ function SideNavBar() {
           <div className="text-sm font-semibold tracking-wide text-white leading-tight">
             System Core
           </div>
-          <div className="text-[10px] font-mono uppercase tracking-widest text-slate-500">
+          <div className="text-[10px] font-mono uppercase tracking-widest text-[var(--color-text-muted)]">
             jiayouvibe v2.0
           </div>
         </div>
@@ -187,7 +187,7 @@ function SideNavBar() {
 
       {/* Nav links */}
       <nav className="flex-1 px-3 py-4 space-y-0.5">
-        <p className="px-3 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500">
+        <p className="px-3 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-muted)]">
           Main Menu
         </p>
         {navLinks.map(({ icon: Icon, label, active }) => (
@@ -198,13 +198,13 @@ function SideNavBar() {
               'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group',
               active
                 ? 'bg-gradient-to-r from-cyan-500/15 to-purple-500/10 text-cyan-400 border border-cyan-500/20 shadow-[0_0_20px_rgba(6,182,212,0.08)]'
-                : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]',
+                : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-white/[0.04]',
             )}
           >
             <Icon
               className={cn(
                 'h-4.5 w-4.5 transition-colors',
-                active ? 'text-cyan-400' : 'text-slate-500 group-hover:text-slate-300',
+                active ? 'text-cyan-400' : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-text-primary)]',
               )}
             />
             {label}
@@ -226,12 +226,12 @@ function SideNavBar() {
 
       {/* Bottom actions */}
       <div className="px-3 py-4 border-t border-white/[0.05] space-y-1">
-        <button className="flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-slate-200 hover:bg-white/[0.04] transition-colors">
-          <HelpCircle className="h-4 w-4 text-slate-500" />
+        <button className="flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-white/[0.04] transition-colors">
+          <HelpCircle className="h-4 w-4 text-[var(--color-text-muted)]" />
           Help
         </button>
-        <button className="flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-slate-400 hover:text-red-400 hover:bg-red-500/5 transition-colors">
-          <LogOut className="h-4 w-4 text-slate-500" />
+        <button className="flex w-full items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-[var(--color-text-secondary)] hover:text-red-400 hover:bg-red-500/5 transition-colors">
+          <LogOut className="h-4 w-4 text-[var(--color-text-muted)]" />
           Sign Out
         </button>
       </div>
@@ -241,7 +241,7 @@ function SideNavBar() {
 
 function TopNavBar() {
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between md:justify-end h-16 px-4 md:pl-72 md:pr-6 bg-slate-950/80 backdrop-blur-xl border-b border-white/[0.05]">
+    <header className="sticky top-0 z-30 flex items-center justify-between md:justify-end h-16 px-4 md:pl-72 md:pr-6 bg-[var(--color-bg-primary)]/80 backdrop-blur-xl border-b border-white/[0.05]">
       {/* Mobile: show compact brand */}
       <div className="flex md:hidden items-center gap-2">
         <Sparkles className="h-5 w-5 text-cyan-400" />
@@ -253,7 +253,7 @@ function TopNavBar() {
       <div className="flex items-center gap-1">
         {/* Notifications */}
         <button
-          className="relative flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 hover:text-cyan-400 hover:bg-white/[0.05] transition-colors"
+          className="relative flex h-9 w-9 items-center justify-center rounded-xl text-[var(--color-text-secondary)] hover:text-cyan-400 hover:bg-white/[0.05] transition-colors"
           aria-label="通知"
         >
           <Bell className="h-[18px] w-[18px]" />
@@ -265,7 +265,7 @@ function TopNavBar() {
 
         {/* Settings */}
         <button
-          className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 hover:text-cyan-400 hover:bg-white/[0.05] transition-colors"
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-[var(--color-text-secondary)] hover:text-cyan-400 hover:bg-white/[0.05] transition-colors"
           aria-label="设置"
         >
           <Settings className="h-[18px] w-[18px]" />
@@ -280,7 +280,7 @@ function TopNavBar() {
             J
             <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-slate-950 bg-emerald-400" />
           </div>
-          <ChevronDown className="hidden sm:block h-3.5 w-3.5 text-slate-500" />
+          <ChevronDown className="hidden sm:block h-3.5 w-3.5 text-[var(--color-text-muted)]" />
         </button>
       </div>
     </header>
@@ -314,7 +314,7 @@ function StatCard({
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_50%_0%,rgba(6,182,212,0.06),transparent_70%)]" />
 
       <div className="relative flex items-start justify-between mb-3">
-        <span className="text-xs font-medium uppercase tracking-wider text-slate-500">
+        <span className="text-xs font-medium uppercase tracking-wider text-[var(--color-text-muted)]">
           {label}
         </span>
         <div className={cn('flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br', gradient, 'shadow-lg')}>
@@ -344,10 +344,10 @@ function TrendingBars() {
         return (
           <div key={repo.name} className="group">
             <div className="flex items-center justify-between mb-1.5 text-xs">
-              <span className="font-mono text-slate-300 font-medium tracking-wide">
+              <span className="font-mono text-[var(--color-text-primary)] font-medium tracking-wide">
                 {repo.name}
               </span>
-              <span className="font-mono tabular-nums text-slate-500">
+              <span className="font-mono tabular-nums text-[var(--color-text-muted)]">
                 ⭐ {formatStars(repo.stars)}
               </span>
             </div>
@@ -386,17 +386,17 @@ function FeedList() {
           </span>
 
           <div className="flex-1 min-w-0">
-            <p className="text-sm text-slate-200 group-hover:text-white transition-colors leading-snug line-clamp-2">
+            <p className="text-sm text-[var(--color-text-primary)] group-hover:text-white transition-colors leading-snug line-clamp-2">
               {item.title}
             </p>
             <div className="flex items-center gap-2 mt-1.5">
-              <span className="text-[11px] font-medium text-slate-500 bg-white/[0.03] px-2 py-0.5 rounded-md">
+              <span className="text-[11px] font-medium text-[var(--color-text-muted)] bg-white/[0.03] px-2 py-0.5 rounded-md">
                 {item.category}
               </span>
             </div>
           </div>
 
-          <span className="shrink-0 text-[11px] text-slate-600 font-mono mt-0.5">
+          <span className="shrink-0 text-[11px] text-[var(--color-text-muted)] font-mono mt-0.5">
             {item.time}
           </span>
         </Link>
@@ -418,7 +418,7 @@ function QuickActions() {
         <Link
           key={label}
           to={to}
-          className="flex items-center gap-3 rounded-xl border border-white/[0.05] bg-white/[0.02] px-4 py-3 text-sm font-medium text-slate-300 hover:border-white/[0.1] hover:bg-white/[0.04] hover:text-white transition-all duration-200 group"
+          className="flex items-center gap-3 rounded-xl border border-white/[0.05] bg-white/[0.02] px-4 py-3 text-sm font-medium text-[var(--color-text-primary)] hover:border-white/[0.1] hover:bg-white/[0.04] hover:text-white transition-all duration-200 group"
         >
           <div className={cn('flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br shadow-md', gradient)}>
             <Icon className="h-4 w-4 text-white" />
@@ -446,7 +446,7 @@ function TagCloud() {
           to="#"
           className={cn(
             sizeClasses[tag.size],
-            'rounded-full border border-white/[0.06] bg-white/[0.02] text-slate-300',
+            'rounded-full border border-white/[0.06] bg-white/[0.02] text-[var(--color-text-primary)]',
             'hover:border-cyan-500/30 hover:bg-cyan-500/5 hover:text-cyan-300',
             'transition-all duration-300 hover:-translate-y-0.5',
             'opacity-0 animate-[slide-up_0.5s_cubic-bezier(0.16,1,0.3,1)_forwards]',
@@ -516,7 +516,7 @@ function ProgressRing({ percent = 75 }: { percent?: number }) {
           <span className="text-3xl font-bold font-mono bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
             75%
           </span>
-          <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-slate-500 mt-0.5">
+          <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--color-text-muted)] mt-0.5">
             Complete
           </span>
         </div>
@@ -539,7 +539,7 @@ export default function DashboardPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen bg-[var(--color-bg-primary)] text-slate-100">
       <SideNavBar />
       <TopNavBar />
 
@@ -551,7 +551,7 @@ export default function DashboardPage() {
             <Terminal className="h-5 w-5 text-cyan-400" />
             <h1 className="text-base font-semibold tracking-wide text-white">
               仪表盘
-              <span className="ml-2 text-[10px] font-mono uppercase tracking-[0.2em] text-slate-600 bg-white/[0.03] px-2 py-0.5 rounded-md">
+              <span className="ml-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--color-text-muted)] bg-white/[0.03] px-2 py-0.5 rounded-md">
                 Overview
               </span>
             </h1>
@@ -576,7 +576,7 @@ export default function DashboardPage() {
                   </div>
                   <div>
                     <h2 className="text-sm font-semibold text-white">GitHub 趋势</h2>
-                    <p className="text-[11px] text-slate-500 font-mono">Top AI repositories</p>
+                    <p className="text-[11px] text-[var(--color-text-muted)] font-mono">Top AI repositories</p>
                   </div>
                 </div>
                 <TrendingBars />
@@ -590,7 +590,7 @@ export default function DashboardPage() {
                   </div>
                   <div>
                     <h2 className="text-sm font-semibold text-white">最近更新</h2>
-                    <p className="text-[11px] text-slate-500 font-mono">Latest AI news & tutorials</p>
+                    <p className="text-[11px] text-[var(--color-text-muted)] font-mono">Latest AI news & tutorials</p>
                   </div>
                 </div>
                 <FeedList />
@@ -632,7 +632,7 @@ export default function DashboardPage() {
         {/* Footer */}
         <footer className="md:pl-0 border-t border-white/[0.04] mt-10">
           <div className="px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 max-w-[1400px] mx-auto">
-            <p className="text-xs text-slate-600">
+            <p className="text-xs text-[var(--color-text-muted)]">
               &copy; {new Date().getFullYear()} jiayouvibe — System Core Dashboard. All rights reserved.
             </p>
             <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-slate-700">

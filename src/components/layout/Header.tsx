@@ -173,18 +173,26 @@ export default function Header() {
                 </span>
               </button>
 
-              {/* Theme toggle */}
-              <button
-                onClick={toggle}
-                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[36px] min-h-[36px] items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60"
-                aria-label={isDark ? '切换到亮色模式' : '切换到暗色模式'}
-              >
-                {isDark ? (
-                  <Sun className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
-                ) : (
-                  <Moon className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
-                )}
-              </button>
+              {/* Premium theme toggle */}
+              <div className="relative group flex items-center justify-center">
+                <button
+                  onClick={toggle}
+                  className="relative w-9 h-9 rounded-full flex items-center justify-center border border-white/[0.08] dark:border-white/10 backdrop-blur-3xl bg-white/[0.04] dark:bg-white/[0.04] transition-all duration-300 hover:shadow-[0_0_15px_rgba(251,191,36,0.3)] dark:hover:shadow-[0_0_15px_rgba(251,191,36,0.4)] hover:border-amber-400/40"
+                  aria-label={isDark ? '切换到亮色模式' : '切换到暗色模式'}
+                >
+                  <span className="transition-transform duration-500 ease-out hover:rotate-180">
+                    {isDark ? (
+                      <Sun className="h-4 w-4 text-amber-400" />
+                    ) : (
+                      <Moon className="h-4 w-4 text-indigo-500" />
+                    )}
+                  </span>
+                </button>
+                {/* Tooltip */}
+                <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap px-2 py-1 text-[11px] rounded bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-[var(--color-text-primary)] font-mono pointer-events-none z-50">
+                  {isDark ? '切换到亮色模式' : '切换到暗色模式'}
+                </div>
+              </div>
 
               {/* Mobile hamburger */}
               <button

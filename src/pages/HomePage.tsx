@@ -12,7 +12,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="bg-[#0f172a]">
+    <div className="bg-[var(--color-bg-primary)]">
       <HeroSection />
       <StatsBar />
       <FeatureGrid />

@@ -749,7 +749,7 @@ function ToolCard({ tool }: { tool: ToolEntry }) {
             {tool.name}
           </h3>
           {tool.stars && (
-            <span className="inline-flex items-center gap-1 shrink-0 text-[11px] text-slate-400 font-jetbrains">
+            <span className="inline-flex items-center gap-1 shrink-0 text-[11px] text-[var(--color-text-secondary)] font-jetbrains">
               <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
               {formatStars(tool.stars)}
             </span>
@@ -757,7 +757,7 @@ function ToolCard({ tool }: { tool: ToolEntry }) {
         </div>
 
         {/* Description */}
-        <p className="text-sm text-slate-400/80 leading-relaxed line-clamp-2 mb-4 flex-1">
+        <p className="text-sm text-[var(--color-text-secondary)]/80 leading-relaxed line-clamp-2 mb-4 flex-1">
           {tool.description}
         </p>
 
@@ -766,13 +766,13 @@ function ToolCard({ tool }: { tool: ToolEntry }) {
           {tool.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-jetbrains text-slate-400 bg-white/[0.04] border border-white/[0.06]"
+              className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-jetbrains text-[var(--color-text-secondary)] bg-white/[0.04] border border-white/[0.06]"
             >
               {tag}
             </span>
           ))}
           {tool.tags.length > 3 && (
-            <span className="text-[10px] text-slate-600 font-jetbrains">
+            <span className="text-[10px] text-[var(--color-text-muted)] font-jetbrains">
               +{tool.tags.length - 3}
             </span>
           )}
@@ -786,7 +786,7 @@ function ToolCard({ tool }: { tool: ToolEntry }) {
                 href={tool.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] text-slate-400 hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all duration-200"
+                className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] text-[var(--color-text-secondary)] hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all duration-200"
                 onClick={(e) => e.stopPropagation()}
                 title="GitHub"
               >
@@ -902,7 +902,7 @@ const ToolsPage = () => {
             AI 工具箱
           </span>
         </h1>
-        <p className="text-slate-400 max-w-2xl leading-relaxed">
+        <p className="text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
           精心筛选的 AI 工具目录，覆盖 LLM 对话、代码助手、图像/视频/音频生成、智能体、嵌入模型和向量数据库，助你快速找到最适合的 AI 工具。
         </p>
       </div>
@@ -916,18 +916,18 @@ const ToolsPage = () => {
         )}
       >
         <div className="flex items-center gap-3 px-4 py-1">
-          <Search className="h-4.5 w-4.5 text-slate-500 shrink-0" strokeWidth={1.8} />
+          <Search className="h-4.5 w-4.5 text-[var(--color-text-muted)] shrink-0" strokeWidth={1.8} />
           <input
             type="text"
             placeholder="搜索工具名称、描述、标签..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="flex-1 bg-transparent border-none outline-none text-sm text-slate-200 placeholder:text-slate-500 py-2.5 font-jetbrains"
+            className="flex-1 bg-transparent border-none outline-none text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] py-2.5 font-jetbrains"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="text-slate-500 hover:text-slate-300 transition-colors shrink-0"
+              className="text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors shrink-0"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -939,7 +939,7 @@ const ToolsPage = () => {
 
       {/* ═══ Category Filter Pills ═══ */}
       <div className="flex items-center gap-2 flex-wrap">
-        <Filter className="h-4 w-4 text-slate-500 shrink-0 mr-1" strokeWidth={1.8} />
+        <Filter className="h-4 w-4 text-[var(--color-text-muted)] shrink-0 mr-1" strokeWidth={1.8} />
         {CATEGORY_PILLS.map((pill) => {
           const isActive = categoryFilter === pill.key
           return (
@@ -951,7 +951,7 @@ const ToolsPage = () => {
                 'border backdrop-blur-sm',
                 isActive
                   ? 'bg-cyan-400/15 border-cyan-400/40 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.1)]'
-                  : 'bg-white/[0.03] border-white/[0.06] text-slate-400 hover:text-slate-200 hover:border-white/[0.15] hover:bg-white/[0.05]',
+                  : 'bg-white/[0.03] border-white/[0.06] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-white/[0.15] hover:bg-white/[0.05]',
               )}
             >
               {pill.label}
@@ -964,7 +964,7 @@ const ToolsPage = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         {/* Pricing pills */}
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[11px] font-jetbrains text-slate-600 uppercase tracking-wider mr-1">
+          <span className="text-[11px] font-jetbrains text-[var(--color-text-muted)] uppercase tracking-wider mr-1">
             Pricing
           </span>
           {PRICING_PILLS.map((pill) => {
@@ -978,7 +978,7 @@ const ToolsPage = () => {
                   'border',
                   isActive
                     ? 'bg-cyan-400/10 border-cyan-400/30 text-cyan-300'
-                    : 'bg-white/[0.02] border-white/[0.05] text-slate-500 hover:text-slate-300 hover:border-white/[0.1]',
+                    : 'bg-white/[0.02] border-white/[0.05] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:border-white/[0.1]',
                 )}
               >
                 {pill.label}
@@ -989,12 +989,12 @@ const ToolsPage = () => {
 
         {/* Sort dropdown */}
         <div className="flex items-center gap-2">
-          <SortAsc className="h-3.5 w-3.5 text-slate-500" strokeWidth={1.8} />
+          <SortAsc className="h-3.5 w-3.5 text-[var(--color-text-muted)]" strokeWidth={1.8} />
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value as SortOption)}
             className={cn(
-              'rounded-lg px-3 py-1.5 text-[10px] font-jetbrains font-medium text-slate-300',
+              'rounded-lg px-3 py-1.5 text-[10px] font-jetbrains font-medium text-[var(--color-text-primary)]',
               'bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]',
               'appearance-none cursor-pointer outline-none',
               'focus-visible:border-cyan-400/40',
@@ -1008,7 +1008,7 @@ const ToolsPage = () => {
             }}
           >
             {SORT_OPTIONS.map((opt) => (
-              <option key={opt.key} value={opt.key} className="bg-slate-900 text-slate-200">
+              <option key={opt.key} value={opt.key} className="bg-slate-900 text-[var(--color-text-primary)]">
                 {opt.label}
               </option>
             ))}
@@ -1024,7 +1024,7 @@ const ToolsPage = () => {
               setPricingFilter('')
               setSortOption('default')
             }}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-jetbrains text-slate-400 hover:text-slate-200 hover:bg-white/[0.04] transition-colors border border-white/[0.05]"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-jetbrains text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-white/[0.04] transition-colors border border-white/[0.05]"
           >
             <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -1035,7 +1035,7 @@ const ToolsPage = () => {
       </div>
 
       {/* ═══ Results count ═══ */}
-      <div className="flex items-center gap-2 text-sm text-slate-500 font-jetbrains">
+      <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] font-jetbrains">
         <Sparkles className="h-4 w-4 text-cyan-400" />
         <span>
           共 {filteredTools.length} 个工具
@@ -1057,11 +1057,11 @@ const ToolsPage = () => {
             'bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] rounded-2xl',
           )}
         >
-          <Search className="h-8 w-8 text-slate-600 mb-4" />
-          <h3 className="text-lg font-sora font-semibold text-slate-300 mb-1">
+          <Search className="h-8 w-8 text-[var(--color-text-muted)] mb-4" />
+          <h3 className="text-lg font-sora font-semibold text-[var(--color-text-primary)] mb-1">
             未找到匹配的工具
           </h3>
-          <p className="text-sm text-slate-500 mb-6">
+          <p className="text-sm text-[var(--color-text-muted)] mb-6">
             尝试调整搜索词或筛选条件
           </p>
           <button
@@ -1099,7 +1099,7 @@ const ToolsPage = () => {
                 Suggest a Tool
               </span>
             </h2>
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed max-w-sm">
               发现了好用的 AI 工具没在列表中？提交你的推荐，通过审核后将收录到工具箱，帮助更多开发者。
             </p>
           </div>
@@ -1122,7 +1122,7 @@ const ToolsPage = () => {
               <form onSubmit={handleSuggest} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-jetbrains text-slate-500 mb-1.5 ml-1 uppercase tracking-wider">
+                    <label className="block text-[11px] font-jetbrains text-[var(--color-text-muted)] mb-1.5 ml-1 uppercase tracking-wider">
                       Tool Name
                     </label>
                     <input
@@ -1132,7 +1132,7 @@ const ToolsPage = () => {
                       value={suggestName}
                       onChange={(e) => setSuggestName(e.target.value)}
                       className={cn(
-                        'w-full rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder:text-slate-500',
+                        'w-full rounded-xl px-4 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)]',
                         'bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]',
                         'outline-none transition-all duration-200',
                         'focus:border-cyan-400/40 focus:bg-white/[0.06]',
@@ -1141,7 +1141,7 @@ const ToolsPage = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-jetbrains text-slate-500 mb-1.5 ml-1 uppercase tracking-wider">
+                    <label className="block text-[11px] font-jetbrains text-[var(--color-text-muted)] mb-1.5 ml-1 uppercase tracking-wider">
                       URL
                     </label>
                     <input
@@ -1151,7 +1151,7 @@ const ToolsPage = () => {
                       value={suggestUrl}
                       onChange={(e) => setSuggestUrl(e.target.value)}
                       className={cn(
-                        'w-full rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder:text-slate-500',
+                        'w-full rounded-xl px-4 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)]',
                         'bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]',
                         'outline-none transition-all duration-200',
                         'focus:border-cyan-400/40 focus:bg-white/[0.06]',
@@ -1161,7 +1161,7 @@ const ToolsPage = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[11px] font-jetbrains text-slate-500 mb-1.5 ml-1 uppercase tracking-wider">
+                  <label className="block text-[11px] font-jetbrains text-[var(--color-text-muted)] mb-1.5 ml-1 uppercase tracking-wider">
                     Description
                   </label>
                   <textarea
@@ -1170,7 +1170,7 @@ const ToolsPage = () => {
                     value={suggestDescription}
                     onChange={(e) => setSuggestDescription(e.target.value)}
                     className={cn(
-                      'w-full rounded-xl px-4 py-2.5 text-sm text-slate-200 placeholder:text-slate-500',
+                      'w-full rounded-xl px-4 py-2.5 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)]',
                       'bg-white/[0.04] backdrop-blur-sm border border-white/[0.08]',
                       'outline-none transition-all duration-200 resize-none',
                       'focus:border-cyan-400/40 focus:bg-white/[0.06]',

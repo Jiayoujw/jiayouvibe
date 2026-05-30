@@ -182,7 +182,7 @@ export default function DevelopmentArticlePage() {
       {/* Back link */}
       <Link
         to="/development"
-        className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-cyan-300 transition-colors duration-200 mb-6 group"
+        className="inline-flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-cyan-300 transition-colors duration-200 mb-6 group"
       >
         <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
         返回教程列表
@@ -216,10 +216,10 @@ export default function DevelopmentArticlePage() {
         <h1 className="text-3xl sm:text-4xl font-bold text-slate-100 mb-5 leading-tight">{tutorial.title}</h1>
 
         {/* Description blurb */}
-        <p className="text-slate-400 text-base leading-relaxed mb-6">{tutorial.description}</p>
+        <p className="text-[var(--color-text-secondary)] text-base leading-relaxed mb-6">{tutorial.description}</p>
 
         {/* Metadata row */}
-        <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-[var(--color-text-muted)]">
           <span className="inline-flex items-center gap-1.5">
             <User className="w-4 h-4" />
             {tutorial.author}
@@ -243,7 +243,7 @@ export default function DevelopmentArticlePage() {
           {tutorial.tags.map((tag) => (
             <span
               key={tag}
-              className="text-[11px] px-2.5 py-1 rounded-full bg-slate-800 text-slate-400 border border-slate-700/60 font-mono"
+              className="text-[11px] px-2.5 py-1 rounded-full bg-slate-800 text-[var(--color-text-secondary)] border border-[var(--color-border)]/60 font-mono"
             >
               #{tag}
             </span>
@@ -263,32 +263,32 @@ export default function DevelopmentArticlePage() {
               )
             case 'h3':
               return (
-                <h3 key={i} className="text-xl font-semibold text-slate-200 mt-8 mb-3">
+                <h3 key={i} className="text-xl font-semibold text-[var(--color-text-primary)] mt-8 mb-3">
                   {renderInline(block.text)}
                 </h3>
               )
             case 'h4':
               return (
-                <h4 key={i} className="text-lg font-semibold text-slate-300 mt-6 mb-2">
+                <h4 key={i} className="text-lg font-semibold text-[var(--color-text-primary)] mt-6 mb-2">
                   {renderInline(block.text)}
                 </h4>
               )
             case 'paragraph':
               return (
-                <p key={i} className="text-slate-300 leading-relaxed mb-4">
+                <p key={i} className="text-[var(--color-text-primary)] leading-relaxed mb-4">
                   {renderInline(block.text)}
                 </p>
               )
             case 'code': {
               return (
-                <div key={i} className="my-6 rounded-xl border border-slate-700/60 overflow-hidden bg-slate-900/80">
+                <div key={i} className="my-6 rounded-xl border border-[var(--color-border)]/60 overflow-hidden bg-slate-900/80">
                   {block.language && (
-                    <div className="flex items-center justify-between px-4 py-2 bg-slate-800/80 border-b border-slate-700/40">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500">{block.language}</span>
+                    <div className="flex items-center justify-between px-4 py-2 bg-slate-800/80 border-b border-[var(--color-border)]/40">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--color-text-muted)]">{block.language}</span>
                     </div>
                   )}
                   <pre className="p-4 overflow-x-auto text-sm leading-relaxed">
-                    <code className="text-slate-300 font-mono">{block.code}</code>
+                    <code className="text-[var(--color-text-primary)] font-mono">{block.code}</code>
                   </pre>
                 </div>
               )
@@ -297,7 +297,7 @@ export default function DevelopmentArticlePage() {
               return (
                 <ul key={i} className="list-disc list-outside space-y-1.5 mb-4 ml-6">
                   {block.items.map((item, j) => (
-                    <li key={j} className="text-slate-300 leading-relaxed pl-1">
+                    <li key={j} className="text-[var(--color-text-primary)] leading-relaxed pl-1">
                       {renderInline(item)}
                     </li>
                   ))}
@@ -307,7 +307,7 @@ export default function DevelopmentArticlePage() {
               return (
                 <ol key={i} className="list-decimal list-outside space-y-1.5 mb-4 ml-6">
                   {block.items.map((item, j) => (
-                    <li key={j} className="text-slate-300 leading-relaxed pl-1">
+                    <li key={j} className="text-[var(--color-text-primary)] leading-relaxed pl-1">
                       {renderInline(item)}
                     </li>
                   ))}
@@ -315,12 +315,12 @@ export default function DevelopmentArticlePage() {
               )
             case 'table':
               return (
-                <div key={i} className="overflow-x-auto my-6 rounded-lg border border-slate-700/60">
+                <div key={i} className="overflow-x-auto my-6 rounded-lg border border-[var(--color-border)]/60">
                   <table className="min-w-full text-sm">
                     <thead className="bg-slate-800/80">
                       <tr>
                         {block.headers.map((h, j) => (
-                          <th key={j} className="px-4 py-2.5 text-left text-slate-300 font-semibold border-b border-slate-700/60">
+                          <th key={j} className="px-4 py-2.5 text-left text-[var(--color-text-primary)] font-semibold border-b border-[var(--color-border)]/60">
                             {renderInline(h)}
                           </th>
                         ))}
@@ -328,9 +328,9 @@ export default function DevelopmentArticlePage() {
                     </thead>
                     <tbody>
                       {block.rows.map((row, ri) => (
-                        <tr key={ri} className="border-b border-slate-800 last:border-b-0">
+                        <tr key={ri} className="border-b border-[var(--color-border)] last:border-b-0">
                           {row.map((cell, ci) => (
-                            <td key={ci} className="px-4 py-2.5 text-slate-400">
+                            <td key={ci} className="px-4 py-2.5 text-[var(--color-text-secondary)]">
                               {renderInline(cell)}
                             </td>
                           ))}
@@ -356,7 +356,7 @@ export default function DevelopmentArticlePage() {
           />
           <Link
             to="/development"
-            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-cyan-300 transition-colors duration-200 group"
+            className="inline-flex items-center gap-2 text-sm text-[var(--color-text-secondary)] hover:text-cyan-300 transition-colors duration-200 group"
           >
             <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
             返回教程列表

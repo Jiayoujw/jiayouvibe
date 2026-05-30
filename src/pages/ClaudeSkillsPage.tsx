@@ -240,7 +240,7 @@ function HorizontalSkillCard({ skill }: { skill: SkillEntry }) {
         </p>
 
         {/* Description */}
-        <p className="text-sm text-slate-400/80 leading-relaxed line-clamp-3 mb-4 flex-1">
+        <p className="text-sm text-[var(--color-text-secondary)]/80 leading-relaxed line-clamp-3 mb-4 flex-1">
           {skill.description}
         </p>
 
@@ -297,7 +297,7 @@ function GridSkillCard({ skill }: { skill: SkillEntry }) {
               </span>
             )}
             {skill.downloads && (
-              <span className="inline-flex items-center gap-1 text-xs text-slate-400 font-jetbrains">
+              <span className="inline-flex items-center gap-1 text-xs text-[var(--color-text-secondary)] font-jetbrains">
                 <Download className="h-3.5 w-3.5" />
                 {skill.downloads}
               </span>
@@ -319,14 +319,14 @@ function GridSkillCard({ skill }: { skill: SkillEntry }) {
             href={skill.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-slate-500 hover:text-amber-400 transition-colors"
+            className="text-[var(--color-text-muted)] hover:text-amber-400 transition-colors"
           >
             <Globe className="h-3.5 w-3.5" />
           </a>
         </div>
 
         {/* Description */}
-        <p className="text-sm text-slate-400/80 leading-relaxed mb-5 flex-1">
+        <p className="text-sm text-[var(--color-text-secondary)]/80 leading-relaxed mb-5 flex-1">
           {skill.description}
         </p>
 
@@ -438,7 +438,7 @@ const ClaudeSkillsPage = () => {
             </h1>
 
             {/* Description */}
-            <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-2xl mb-8">
+            <p className="text-base sm:text-lg text-[var(--color-text-secondary)] leading-relaxed max-w-2xl mb-8">
               Claude Skills 是 Anthropic 推出的可复用 AI 能力模块。通过精心设计的系统提示词和工具链，
               Claude 能够胜任从代码审查、文档写作到数据分析的各种专业任务。
               每个 Skill 都是一个独立的能力单元，可组合使用，也可自定义扩展。
@@ -452,7 +452,7 @@ const ClaudeSkillsPage = () => {
                 </div>
                 <div>
                   <div className="text-lg font-sora font-bold text-white">50+</div>
-                  <div className="text-[11px] text-slate-500 font-jetbrains">官方 Skills</div>
+                  <div className="text-[11px] text-[var(--color-text-muted)] font-jetbrains">官方 Skills</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -461,7 +461,7 @@ const ClaudeSkillsPage = () => {
                 </div>
                 <div>
                   <div className="text-lg font-sora font-bold text-white">200+</div>
-                  <div className="text-[11px] text-slate-500 font-jetbrains">社区 Skills</div>
+                  <div className="text-[11px] text-[var(--color-text-muted)] font-jetbrains">社区 Skills</div>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -470,7 +470,7 @@ const ClaudeSkillsPage = () => {
                 </div>
                 <div>
                   <div className="text-lg font-sora font-bold text-white">15k+</div>
-                  <div className="text-[11px] text-slate-500 font-jetbrains">GitHub Stars</div>
+                  <div className="text-[11px] text-[var(--color-text-muted)] font-jetbrains">GitHub Stars</div>
                 </div>
               </div>
             </div>
@@ -490,7 +490,7 @@ const ClaudeSkillsPage = () => {
                 官方推荐 Skills
               </span>
             </h2>
-            <p className="text-sm text-slate-500 font-jetbrains">
+            <p className="text-sm text-[var(--color-text-muted)] font-jetbrains">
               由 Anthropic 官方维护和推荐的 Claude Skills，开箱即用
             </p>
           </div>
@@ -565,7 +565,7 @@ const ClaudeSkillsPage = () => {
               社区热门 Skills
             </span>
           </h2>
-          <p className="text-sm text-slate-500 font-jetbrains">
+          <p className="text-sm text-[var(--color-text-muted)] font-jetbrains">
             社区开发者贡献的优质 Skills 项目，已在 GitHub 上获得广泛认可
           </p>
         </div>
@@ -594,7 +594,7 @@ const ClaudeSkillsPage = () => {
               <h3 className="text-sm font-sora font-semibold text-white">
                 探索更多社区 Skills
               </h3>
-              <p className="text-xs text-slate-500 font-jetbrains">
+              <p className="text-xs text-[var(--color-text-muted)] font-jetbrains">
                 在 GitHub 上发现 Claude Skills 的完整生态，参与贡献或提交你的 Skill
               </p>
             </div>
@@ -630,7 +630,7 @@ const ClaudeSkillsPage = () => {
               创建你的 Skill
             </span>
           </h2>
-          <p className="text-sm text-slate-500 font-jetbrains">
+          <p className="text-sm text-[var(--color-text-muted)] font-jetbrains">
             按照以下步骤创建属于你自己的 Claude Skill，或查看 Anthropic 完整文档
           </p>
         </div>
@@ -680,7 +680,7 @@ const ClaudeSkillsPage = () => {
                   <h3 className="text-base font-sora font-semibold text-white mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-slate-400/80 leading-relaxed">
+                  <p className="text-sm text-[var(--color-text-secondary)]/80 leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -693,7 +693,7 @@ const ClaudeSkillsPage = () => {
                 <h3 className="text-base font-sora font-semibold text-white mb-1">
                   准备开始了吗？
                 </h3>
-                <p className="text-sm text-slate-500 font-jetbrains">
+                <p className="text-sm text-[var(--color-text-muted)] font-jetbrains">
                   查看 Anthropic 官方文档，获取完整的 Skill 开发指南和最佳实践
                 </p>
               </div>
@@ -725,7 +725,7 @@ const ClaudeSkillsPage = () => {
       {/* ═══════════════════════════════════════════════════════════════ */}
       <div className="flex items-center justify-center gap-4 pt-4">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-amber-400/20 to-transparent" />
-        <div className="flex items-center gap-2 text-xs text-slate-600 font-jetbrains">
+        <div className="flex items-center gap-2 text-xs text-[var(--color-text-muted)] font-jetbrains">
           <Wand2 className="h-3.5 w-3.5 text-amber-400/40" />
           数据来源: Anthropic 官方文档 & GitHub 社区
         </div>

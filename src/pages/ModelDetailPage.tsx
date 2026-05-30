@@ -33,7 +33,7 @@ const providerStyles: Record<string, { bg: string; text: string; border: string 
   'DeepSeek（深度求索）': { bg: 'bg-indigo-400/15', text: 'text-indigo-300', border: 'border-indigo-400/30' },
   'Meta': { bg: 'bg-blue-400/15', text: 'text-blue-300', border: 'border-blue-400/30' },
   'Mistral AI': { bg: 'bg-teal-400/15', text: 'text-teal-300', border: 'border-teal-400/30' },
-  'xAI (Elon Musk)': { bg: 'bg-slate-400/15', text: 'text-slate-300', border: 'border-slate-400/30' },
+  'xAI (Elon Musk)': { bg: 'bg-slate-400/15', text: 'text-[var(--color-text-primary)]', border: 'border-slate-400/30' },
   'Alibaba Cloud（阿里云）': { bg: 'bg-amber-500/15', text: 'text-amber-300', border: 'border-amber-500/30' },
   'Stability AI': { bg: 'bg-purple-500/15', text: 'text-purple-300', border: 'border-purple-500/30' },
   'Midjourney Inc.': { bg: 'bg-pink-500/15', text: 'text-pink-300', border: 'border-pink-500/30' },
@@ -68,10 +68,10 @@ function StatCard({
         <Icon className="h-5 w-5" />
       </div>
       <div className="min-w-0">
-        <p className="text-[10px] uppercase tracking-wider text-slate-500 font-jetbrains mb-0.5">
+        <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-jetbrains mb-0.5">
           {label}
         </p>
-        <p className="text-sm text-slate-200 font-medium leading-snug">{value}</p>
+        <p className="text-sm text-[var(--color-text-primary)] font-medium leading-snug">{value}</p>
       </div>
     </div>
   )
@@ -100,7 +100,7 @@ const ModelDetailPage = () => {
   if (!model) {
     return (
       <EmptyState
-        icon={<Bot className="h-6 w-6 text-slate-400" />}
+        icon={<Bot className="h-6 w-6 text-[var(--color-text-secondary)]" />}
         title="模型未找到"
         description="没有找到对应的AI模型信息，请检查链接是否正确。"
         action={{ label: '返回模型列表', onClick: () => window.history.back() }}
@@ -147,7 +147,7 @@ const ModelDetailPage = () => {
             </div>
 
             {/* Description */}
-            <p className="text-slate-300 leading-relaxed max-w-3xl">
+            <p className="text-[var(--color-text-primary)] leading-relaxed max-w-3xl">
               {model.longDescription}
             </p>
           </div>
@@ -184,12 +184,12 @@ const ModelDetailPage = () => {
         {/* Meta line: release date, open source, category */}
         <div className="flex flex-wrap items-center gap-4 mt-6 pt-5 border-t border-white/[0.06]">
           {model.releaseDate && (
-            <span className="inline-flex items-center gap-1.5 text-xs text-slate-500 font-jetbrains">
+            <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-text-muted)] font-jetbrains">
               <Calendar className="h-3.5 w-3.5" />
               {model.releaseDate}
             </span>
           )}
-          <span className="inline-flex items-center gap-1.5 text-xs text-slate-500 font-jetbrains">
+          <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-text-muted)] font-jetbrains">
             <Layers className="h-3.5 w-3.5" />
             {MODEL_CATEGORIES[model.category] ?? model.category}
           </span>
@@ -224,7 +224,7 @@ const ModelDetailPage = () => {
             </h2>
             <ul className="space-y-3">
               {model.strengths.map((s, i) => (
-                <li key={i} className="flex items-start gap-3 text-slate-300 text-sm leading-relaxed">
+                <li key={i} className="flex items-start gap-3 text-[var(--color-text-primary)] text-sm leading-relaxed">
                   <CheckCircle className="h-4 w-4 text-emerald-400/70 mt-0.5 shrink-0" />
                   {s}
                 </li>
@@ -244,7 +244,7 @@ const ModelDetailPage = () => {
                   key={i}
                   className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-4 hover:border-cyan-400/30 hover:bg-white/[0.07] transition-colors"
                 >
-                  <p className="text-sm text-slate-200 font-medium">{uc}</p>
+                  <p className="text-sm text-[var(--color-text-primary)] font-medium">{uc}</p>
                 </div>
               ))}
             </div>
@@ -259,7 +259,7 @@ const ModelDetailPage = () => {
               </h2>
               <ul className="space-y-3">
                 {model.weaknesses.map((w, i) => (
-                  <li key={i} className="flex items-start gap-3 text-slate-300 text-sm leading-relaxed">
+                  <li key={i} className="flex items-start gap-3 text-[var(--color-text-primary)] text-sm leading-relaxed">
                     <AlertTriangle className="h-4 w-4 text-amber-400/70 mt-0.5 shrink-0" />
                     {w}
                   </li>
@@ -294,23 +294,23 @@ const ModelDetailPage = () => {
                 to={model.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-sm text-slate-300 hover:text-cyan-300 hover:border-cyan-400/30 transition-colors"
+                className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-sm text-[var(--color-text-primary)] hover:text-cyan-300 hover:border-cyan-400/30 transition-colors"
               >
                 <span className="flex items-center gap-2">
                   <Globe className="h-4 w-4" />
                   官方网站
                 </span>
-                <ArrowRight className="h-3.5 w-3.5 text-slate-500" />
+                <ArrowRight className="h-3.5 w-3.5 text-[var(--color-text-muted)]" />
               </Link>
               <Link
                 to="/models"
-                className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-sm text-slate-300 hover:text-cyan-300 hover:border-cyan-400/30 transition-colors"
+                className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-white/[0.04] border border-white/[0.06] text-sm text-[var(--color-text-primary)] hover:text-cyan-300 hover:border-cyan-400/30 transition-colors"
               >
                 <span className="flex items-center gap-2">
                   <Layers className="h-4 w-4" />
                   浏览所有模型
                 </span>
-                <ArrowRight className="h-3.5 w-3.5 text-slate-500" />
+                <ArrowRight className="h-3.5 w-3.5 text-[var(--color-text-muted)]" />
               </Link>
             </div>
           </section>
@@ -325,7 +325,7 @@ const ModelDetailPage = () => {
               {model.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-jetbrains text-slate-400 bg-white/[0.05] border border-white/[0.08] hover:border-cyan-400/30 hover:text-cyan-300 transition-colors"
+                  className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-jetbrains text-[var(--color-text-secondary)] bg-white/[0.05] border border-white/[0.08] hover:border-cyan-400/30 hover:text-cyan-300 transition-colors"
                 >
                   {tag}
                 </span>
@@ -348,10 +348,10 @@ const ModelDetailPage = () => {
                     className="block p-3 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:border-cyan-400/30 hover:bg-white/[0.06] transition-colors"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-medium text-slate-200">{rm.name}</span>
-                      <ArrowRight className="h-3 w-3 text-slate-600" />
+                      <span className="text-sm font-medium text-[var(--color-text-primary)]">{rm.name}</span>
+                      <ArrowRight className="h-3 w-3 text-[var(--color-text-muted)]" />
                     </div>
-                    <p className="text-xs text-slate-500 line-clamp-1">{rm.provider}</p>
+                    <p className="text-xs text-[var(--color-text-muted)] line-clamp-1">{rm.provider}</p>
                   </Link>
                 ))}
               </div>

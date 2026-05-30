@@ -121,7 +121,7 @@ export default function PromptsPage() {
             提示词模板库
           </span>
         </h1>
-        <p className="text-slate-400 max-w-2xl">
+        <p className="text-[var(--color-text-secondary)] max-w-2xl">
           收录{ prompts.length }+个精心设计的实用提示词模板，覆盖编程开发、内容创作、数据分析、翻译润色、角色扮演等场景。点击复制即可使用，也可展开查看完整Prompt。
         </p>
       </div>
@@ -130,7 +130,7 @@ export default function PromptsPage() {
       <div className="flex flex-col gap-4">
         {/* Search input */}
         <div className="relative max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--color-text-muted)]" />
           <input
             type="text"
             value={searchQuery}
@@ -138,8 +138,8 @@ export default function PromptsPage() {
             placeholder="搜索提示词模板..."
             className={cn(
               'w-full pl-10 pr-4 py-2.5 rounded-xl text-sm',
-              'bg-slate-800/60 border border-slate-700/60',
-              'text-slate-200 placeholder:text-slate-500',
+              'bg-slate-800/60 border border-[var(--color-border)]/60',
+              'text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)]',
               'focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20',
               'transition-colors duration-200',
             )}
@@ -147,7 +147,7 @@ export default function PromptsPage() {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
             >
               <X className="h-3.5 w-3.5" />
             </button>
@@ -172,7 +172,7 @@ export default function PromptsPage() {
                       )
                     : cn(
                         config?.color,
-                        'border-slate-700/60 text-slate-400 hover:text-slate-200 hover:border-slate-600',
+                        'border-[var(--color-border)]/60 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-slate-600',
                       ),
                 )}
               >
@@ -184,7 +184,7 @@ export default function PromptsPage() {
         </div>
 
         {/* Results count */}
-        <div className="flex items-center gap-2 text-sm text-slate-500 font-jetbrains">
+        <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] font-jetbrains">
           <Filter className="h-3.5 w-3.5 text-cyan-400" />
           <span>
             共 {filteredPrompts.length} 个模板
@@ -196,15 +196,15 @@ export default function PromptsPage() {
       {/* ── Empty State ── */}
       {filteredPrompts.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 text-center">
-          <Code2 className="h-12 w-12 text-slate-600 mb-4" />
-          <h3 className="text-lg font-medium text-slate-400 mb-1">未找到匹配的模板</h3>
-          <p className="text-sm text-slate-500 mb-4">尝试调整筛选条件或搜索关键词</p>
+          <Code2 className="h-12 w-12 text-[var(--color-text-muted)] mb-4" />
+          <h3 className="text-lg font-medium text-[var(--color-text-secondary)] mb-1">未找到匹配的模板</h3>
+          <p className="text-sm text-[var(--color-text-muted)] mb-4">尝试调整筛选条件或搜索关键词</p>
           <button
             onClick={() => {
               setActiveCategory('全部')
               setSearchQuery('')
             }}
-            className="px-4 py-2 rounded-lg text-sm font-medium bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 transition-colors"
+            className="px-4 py-2 rounded-lg text-sm font-medium bg-slate-800 border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-slate-700 transition-colors"
           >
             清除所有筛选
           </button>
@@ -227,7 +227,7 @@ export default function PromptsPage() {
                 'bg-slate-900/60 hover:bg-slate-900/80',
                 isExpanded
                   ? 'border-cyan-400/30 shadow-lg shadow-cyan-400/5'
-                  : 'border-slate-800/80 hover:border-slate-700/80',
+                  : 'border-[var(--color-border)]/80 hover:border-[var(--color-border)]/80',
               )}
             >
               {/* ── Card Header ── */}
@@ -269,7 +269,7 @@ export default function PromptsPage() {
                       'flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200',
                       isCopied
                         ? 'bg-emerald-400/15 text-emerald-300 border border-emerald-400/25'
-                        : 'bg-slate-800/60 text-slate-400 hover:text-slate-200 hover:bg-slate-700/60 border border-slate-700/40',
+                        : 'bg-slate-800/60 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-slate-700/60 border border-[var(--color-border)]/40',
                     )}
                   >
                     {isCopied ? (
@@ -292,7 +292,7 @@ export default function PromptsPage() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm text-slate-400 mb-3 leading-relaxed">
+                <p className="text-sm text-[var(--color-text-secondary)] mb-3 leading-relaxed">
                   {prompt.description}
                 </p>
               </button>
@@ -302,20 +302,20 @@ export default function PromptsPage() {
                 <div
                   className={cn(
                     'rounded-xl overflow-hidden transition-all duration-300',
-                    'bg-slate-950/80 border border-slate-800/80',
+                    'bg-[var(--color-bg-primary)]/80 border border-[var(--color-border)]/80',
                   )}
                 >
                   {/* Code header bar */}
-                  <div className="flex items-center gap-1.5 px-3 py-2 border-b border-slate-800/80">
+                  <div className="flex items-center gap-1.5 px-3 py-2 border-b border-[var(--color-border)]/80">
                     <span className="w-2.5 h-2.5 rounded-full bg-rose-400/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
-                    <span className="ml-2 text-[10px] font-jetbrains text-slate-600">prompt</span>
+                    <span className="ml-2 text-[10px] font-jetbrains text-[var(--color-text-muted)]">prompt</span>
                   </div>
                   {/* Code content */}
                   <pre
                     className={cn(
-                      'px-3 py-3 text-xs font-jetbrains text-slate-400 leading-relaxed whitespace-pre-wrap',
+                      'px-3 py-3 text-xs font-jetbrains text-[var(--color-text-secondary)] leading-relaxed whitespace-pre-wrap',
                       'max-h-[90px] overflow-hidden',
                       isExpanded && 'max-h-none',
                     )}
@@ -324,7 +324,7 @@ export default function PromptsPage() {
                   </pre>
                   {!isExpanded && (
                     <div className="px-3 pb-2">
-                      <span className="text-[10px] font-jetbrains text-slate-600 hover:text-slate-400 cursor-pointer transition-colors">
+                      <span className="text-[10px] font-jetbrains text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] cursor-pointer transition-colors">
                         点击展开完整提示词...
                       </span>
                     </div>
@@ -337,7 +337,7 @@ export default function PromptsPage() {
                 {prompt.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-0.5 rounded-md text-[11px] font-jetbrains text-slate-500 bg-slate-800/50 border border-slate-800/80"
+                    className="px-2 py-0.5 rounded-md text-[11px] font-jetbrains text-[var(--color-text-muted)] bg-slate-800/50 border border-[var(--color-border)]/80"
                   >
                     {tag}
                   </span>
@@ -346,17 +346,17 @@ export default function PromptsPage() {
 
               {/* ── Expanded Section ── */}
               {isExpanded && (
-                <div className="px-5 pb-5 border-t border-slate-800/80 pt-4 space-y-4 animate-in fade-in slide-in-from-top-1 duration-200">
+                <div className="px-5 pb-5 border-t border-[var(--color-border)]/80 pt-4 space-y-4 animate-in fade-in slide-in-from-top-1 duration-200">
                   {/* Model info */}
-                  <div className="flex items-center gap-2 text-sm text-slate-400">
+                  <div className="flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
                     <Code2 className="h-3.5 w-3.5 text-cyan-400" />
                     <span className="font-jetbrains">推荐模型：</span>
-                    <span className="text-slate-300">{prompt.model}</span>
+                    <span className="text-[var(--color-text-primary)]">{prompt.model}</span>
                   </div>
 
                   {/* External links */}
                   <div className="flex items-center gap-3">
-                    <span className="text-sm text-slate-400">在AI平台中试用：</span>
+                    <span className="text-sm text-[var(--color-text-secondary)]">在AI平台中试用：</span>
                     <button
                       type="button"
                       onClick={() => openInChat(prompt, 'chatgpt')}

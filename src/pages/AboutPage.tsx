@@ -57,7 +57,7 @@ function StatCard({
       <span className="text-3xl font-extrabold text-slate-100 tracking-tight">
         {value}
       </span>
-      <span className="text-sm text-slate-400">{label}</span>
+      <span className="text-sm text-[var(--color-text-secondary)]">{label}</span>
     </div>
   )
 }
@@ -80,7 +80,7 @@ function TechCard({
       <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800/60 ring-1 ring-white/10`}>
         <Icon size={20} className={color} strokeWidth={1.5} />
       </div>
-      <span className="text-sm font-medium text-slate-300">{name}</span>
+      <span className="text-sm font-medium text-[var(--color-text-primary)]">{name}</span>
     </div>
   )
 }
@@ -118,7 +118,7 @@ export default function AboutPage() {
           </h1>
 
           {/* Subtitle / site description */}
-          <p className="mt-5 text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-5 text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto leading-relaxed">
             {SITE_DESCRIPTION}
           </p>
 
@@ -157,19 +157,19 @@ export default function AboutPage() {
             </h2>
           </div>
 
-          <div className="space-y-4 text-sm md:text-base leading-relaxed text-slate-400">
+          <div className="space-y-4 text-sm md:text-base leading-relaxed text-[var(--color-text-secondary)]">
             <p>
               在人工智能飞速发展的时代，信息过载与知识壁垒成为了普通人接触AI的第一道门槛。
-              <span className="font-semibold text-slate-200">jiayouvibe</span>
+              <span className="font-semibold text-[var(--color-text-primary)]">jiayouvibe</span>
               的诞生，正是为了让AI知识不再高不可攀。
             </p>
             <p>
-              我们致力于打造一个<strong className="text-slate-200 font-semibold">开放、免费、持续更新</strong>的中文AI知识平台，
+              我们致力于打造一个<strong className="text-[var(--color-text-primary)] font-semibold">开放、免费、持续更新</strong>的中文AI知识平台，
               从大语言模型到智能体开发，从基础概念到前沿技术，从精选工具到实战教程
               —— 无论你是AI初学者、开发者还是研究者，都能在这里找到你需要的内容。
             </p>
             <p>
-              我们相信，<span className="text-slate-200">AI的未来属于每一个人</span>。
+              我们相信，<span className="text-[var(--color-text-primary)]">AI的未来属于每一个人</span>。
               让知识触手可及，让探索没有边界，这就是我们的使命。
             </p>
           </div>
@@ -190,7 +190,7 @@ export default function AboutPage() {
             </h2>
           </div>
 
-          <p className="text-sm text-slate-500 mb-8 leading-relaxed">
+          <p className="text-sm text-[var(--color-text-muted)] mb-8 leading-relaxed">
             本站使用以下现代Web技术构建，追求极致的性能与开发体验。
           </p>
 
@@ -216,14 +216,14 @@ export default function AboutPage() {
             </h2>
           </div>
 
-          <p className="text-sm text-slate-400 mb-6 leading-relaxed">
+          <p className="text-sm text-[var(--color-text-secondary)] mb-6 leading-relaxed">
             如果你有任何问题、建议或合作意向，欢迎通过以下方式与我们取得联系。
           </p>
 
           {/* Email */}
           <a
             href="mailto:contact@jiayouvibe.com"
-            className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-slate-800/60 border border-slate-700/60 text-sm font-medium text-slate-200 transition-all duration-300 hover:border-cyan-500/50 hover:bg-slate-800 hover:text-cyan-400"
+            className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-slate-800/60 border border-[var(--color-border)]/60 text-sm font-medium text-[var(--color-text-primary)] transition-all duration-300 hover:border-cyan-500/50 hover:bg-slate-800 hover:text-cyan-400"
           >
             <Mail size={17} strokeWidth={1.5} />
             contact@jiayouvibe.com
@@ -237,7 +237,7 @@ export default function AboutPage() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800/40 border border-slate-700/40 text-sm text-slate-400 transition-all duration-300 hover:border-slate-600 hover:text-slate-200 hover:bg-slate-800/70 group"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800/40 border border-[var(--color-border)]/40 text-sm text-[var(--color-text-secondary)] transition-all duration-300 hover:border-slate-600 hover:text-[var(--color-text-primary)] hover:bg-slate-800/70 group"
               >
                 <span>{link.label}</span>
                 <ExternalLink
@@ -255,7 +255,7 @@ export default function AboutPage() {
       {/* ================================================================= */}
       <section className="max-w-3xl mx-auto px-4 pb-24">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 text-xs text-slate-600">
+          <div className="inline-flex items-center gap-2 text-xs text-[var(--color-text-muted)]">
             <Heart size={12} className="text-pink-500/60" fill="rgba(244,114,182,0.15)" />
             <span>
               {SITE_NAME} &middot; 2025年3月正式上线 &middot; 持续更新中

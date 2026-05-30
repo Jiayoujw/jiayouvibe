@@ -87,7 +87,7 @@ const TrendingPage = () => {
         <h1 className="text-3xl sm:text-4xl font-sora font-bold text-white mb-2">
           GitHub热门项目
         </h1>
-        <p className="text-slate-400 text-sm font-jetbrains">
+        <p className="text-[var(--color-text-secondary)] text-sm font-jetbrains">
           发现 GitHub 上最受关注的优质开源项目
         </p>
       </div>
@@ -152,7 +152,7 @@ const TrendingPage = () => {
           )}
 
           {/* Footer note */}
-          <p className="text-center text-xs text-slate-600 font-jetbrains">
+          <p className="text-center text-xs text-[var(--color-text-muted)] font-jetbrains">
             数据每1小时自动更新
           </p>
         </>

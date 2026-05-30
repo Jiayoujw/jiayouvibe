@@ -256,7 +256,7 @@ export default function DomainDetailPage() {
           ]}
         />
         <EmptyState
-          icon={<Wrench className="w-8 h-8 text-slate-400" />}
+          icon={<Wrench className="w-8 h-8 text-[var(--color-text-secondary)]" />}
           title="该领域页面建设中"
           description={slug ? `slug: ${slug}` : '未指定领域'}
         />
@@ -306,7 +306,7 @@ export default function DomainDetailPage() {
                     background: `linear-gradient(135deg, ${accent.from}, ${accent.to})`,
                   }}
                 >
-                  <div className="w-full h-full rounded-full bg-slate-950 flex items-center justify-center">
+                  <div className="w-full h-full rounded-full bg-[var(--color-bg-primary)] flex items-center justify-center">
                     <IconComponent size={42} className={accent.text} strokeWidth={1.5} />
                   </div>
                 </div>
@@ -316,7 +316,7 @@ export default function DomainDetailPage() {
                 <h1 className="text-2xl sm:text-3xl font-sora font-bold text-slate-100 mb-3">
                   {domain.name}
                 </h1>
-                <p className="text-slate-400 leading-relaxed text-base">
+                <p className="text-[var(--color-text-secondary)] leading-relaxed text-base">
                   {domain.description}
                 </p>
 
@@ -370,8 +370,8 @@ export default function DomainDetailPage() {
                       {idx + 1}
                     </span>
                     <div>
-                      <h3 className="text-base font-semibold text-slate-200">{tool.name}</h3>
-                      <p className="text-sm text-slate-500 mt-1 leading-relaxed">{tool.description}</p>
+                      <h3 className="text-base font-semibold text-[var(--color-text-primary)]">{tool.name}</h3>
+                      <p className="text-sm text-[var(--color-text-muted)] mt-1 leading-relaxed">{tool.description}</p>
                     </div>
                   </div>
                 ))}
@@ -394,7 +394,7 @@ export default function DomainDetailPage() {
                       hover:bg-white/[0.06] hover:border-white/10 transition-colors duration-200"
                   >
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-slate-200 truncate">
+                      <span className="text-sm font-semibold text-[var(--color-text-primary)] truncate">
                         {term.term}
                       </span>
                       {term.abbreviation && (
@@ -403,7 +403,7 @@ export default function DomainDetailPage() {
                         </span>
                       )}
                     </div>
-                    <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-[var(--color-text-muted)] line-clamp-2 leading-relaxed">
                       {term.definition}
                     </p>
                   </div>
@@ -420,21 +420,21 @@ export default function DomainDetailPage() {
           <div className="sticky top-24 space-y-4">
             {/* Quick info card */}
             <Card className="p-5">
-              <h3 className="text-sm font-sora font-semibold text-slate-400 uppercase tracking-wider mb-4">
+              <h3 className="text-sm font-sora font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider mb-4">
                 领域信息
               </h3>
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-500">标签数量</span>
-                  <span className="text-slate-300 font-jetbrains">{domain.tags.length}</span>
+                  <span className="text-[var(--color-text-muted)]">标签数量</span>
+                  <span className="text-[var(--color-text-primary)] font-jetbrains">{domain.tags.length}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-500">相关术语</span>
-                  <span className="text-slate-300 font-jetbrains">{relevantTerms.length}</span>
+                  <span className="text-[var(--color-text-muted)]">相关术语</span>
+                  <span className="text-[var(--color-text-primary)] font-jetbrains">{relevantTerms.length}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-slate-500">核心工具</span>
-                  <span className="text-slate-300 font-jetbrains">
+                  <span className="text-[var(--color-text-muted)]">核心工具</span>
+                  <span className="text-[var(--color-text-primary)] font-jetbrains">
                     {showTagAsTools ? domain.tags.length : coreTools.length}
                   </span>
                 </div>
@@ -445,8 +445,8 @@ export default function DomainDetailPage() {
             <Link
               to="/domains"
               className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl
-                bg-white/5 border border-white/10 text-slate-400 text-sm
-                hover:bg-white/10 hover:text-slate-200 hover:border-white/20
+                bg-white/5 border border-white/10 text-[var(--color-text-secondary)] text-sm
+                hover:bg-white/10 hover:text-[var(--color-text-primary)] hover:border-white/20
                 transition-all duration-200"
             >
               <ArrowRight className="w-4 h-4 rotate-180" />

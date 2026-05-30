@@ -45,9 +45,9 @@ function getMedalStyle(rank: number) {
         border: 'border-slate-300/35',
         shadow: 'shadow-[0_0_24px_rgba(192,192,192,0.15)]',
         bg: 'bg-slate-300/[0.03]',
-        text: 'text-slate-200',
-        badge: 'bg-slate-300/8 text-slate-300 border-slate-300/15',
-        rankBg: 'bg-slate-300/8 text-slate-300',
+        text: 'text-[var(--color-text-primary)]',
+        badge: 'bg-slate-300/8 text-[var(--color-text-primary)] border-slate-300/15',
+        rankBg: 'bg-slate-300/8 text-[var(--color-text-primary)]',
       }
     case 3:
       return {
@@ -60,19 +60,19 @@ function getMedalStyle(rank: number) {
       }
     default:
       return {
-        border: 'border-slate-700/40',
+        border: 'border-[var(--color-border)]/40',
         shadow: '',
         bg: 'hover:bg-slate-800/30',
-        text: 'text-slate-400',
-        badge: 'bg-slate-700/30 text-slate-400 border-slate-600/30',
-        rankBg: 'bg-slate-800/50 text-slate-400',
+        text: 'text-[var(--color-text-secondary)]',
+        badge: 'bg-slate-700/30 text-[var(--color-text-secondary)] border-slate-600/30',
+        rankBg: 'bg-slate-800/50 text-[var(--color-text-secondary)]',
       }
   }
 }
 
 function RankIcon({ rank }: { rank: number }) {
   if (rank === 1) return <Trophy className="w-5 h-5 text-amber-400" fill="currentColor" />
-  if (rank === 2) return <Medal className="w-5 h-5 text-slate-300" />
+  if (rank === 2) return <Medal className="w-5 h-5 text-[var(--color-text-primary)]" />
   if (rank === 3) return <Medal className="w-5 h-5 text-orange-400" />
   return null
 }
@@ -138,7 +138,7 @@ function RankingRow({
             </span>
           )}
         </div>
-        <p className="text-sm text-slate-400 mt-1 line-clamp-1 leading-relaxed">
+        <p className="text-sm text-[var(--color-text-secondary)] mt-1 line-clamp-1 leading-relaxed">
           {agent.description}
         </p>
 
@@ -147,7 +147,7 @@ function RankingRow({
           {agent.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="px-1.5 py-0.5 text-[11px] rounded-md bg-slate-800/60 text-slate-500 border border-slate-700/40"
+              className="px-1.5 py-0.5 text-[11px] rounded-md bg-slate-800/60 text-[var(--color-text-muted)] border border-[var(--color-border)]/40"
             >
               {tag}
             </span>
@@ -160,20 +160,20 @@ function RankingRow({
         {/* Stars */}
         <div className="flex items-center gap-1.5 text-sm">
           <Star className="w-4 h-4 text-amber-400" fill="currentColor" />
-          <span className="font-jetbrains font-semibold text-slate-200 tabular-nums">
+          <span className="font-jetbrains font-semibold text-[var(--color-text-primary)] tabular-nums">
             {agent.githubStars ? formatStars(agent.githubStars) : '--'}
           </span>
         </div>
 
         {/* Forks — placeholder since AIAgent type has no forks field */}
-        <div className="flex items-center gap-1.5 text-xs text-slate-500">
+        <div className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
           <GitFork className="w-3.5 h-3.5" />
           <span className="font-jetbrains tabular-nums">--</span>
         </div>
 
         {/* Language */}
         {agent.language && (
-          <div className="flex items-center gap-1.5 text-xs text-slate-500 max-w-[120px]">
+          <div className="flex items-center gap-1.5 text-xs text-[var(--color-text-muted)] max-w-[120px]">
             <span className="w-2 h-2 rounded-full bg-cyan-400/60 shrink-0" />
             <span className="truncate">{agent.language.split(',')[0]}</span>
           </div>
@@ -187,7 +187,7 @@ function RankingRow({
           'shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200',
           isTop3
             ? 'bg-cyan-400/10 text-cyan-400 border border-cyan-400/25 hover:bg-cyan-400/20 hover:border-cyan-400/40'
-            : 'bg-slate-800/60 text-slate-400 border border-slate-700/40 hover:bg-slate-700/60 hover:text-slate-200 hover:border-slate-600/40',
+            : 'bg-slate-800/60 text-[var(--color-text-secondary)] border border-[var(--color-border)]/40 hover:bg-slate-700/60 hover:text-[var(--color-text-primary)] hover:border-slate-600/40',
         )}
       >
         详情
@@ -212,14 +212,14 @@ function RisingAgentItem({
       to={`/agents/${agent.slug}`}
       className="flex items-center gap-3 p-3 rounded-xl transition-colors hover:bg-slate-800/40 group"
     >
-      <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-slate-800/70 text-xs font-bold font-jetbrains text-slate-400 group-hover:text-cyan-400 transition-colors">
+      <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-slate-800/70 text-xs font-bold font-jetbrains text-[var(--color-text-secondary)] group-hover:text-cyan-400 transition-colors">
         {rank}
       </span>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-slate-200 truncate group-hover:text-cyan-400 transition-colors">
+        <p className="text-sm font-medium text-[var(--color-text-primary)] truncate group-hover:text-cyan-400 transition-colors">
           {agent.name}
         </p>
-        <p className="text-xs text-slate-500 mt-0.5 line-clamp-1">
+        <p className="text-xs text-[var(--color-text-muted)] mt-0.5 line-clamp-1">
           {agent.type === 'framework'
             ? '开发框架'
             : agent.type === 'platform'
@@ -295,12 +295,12 @@ export default function AgentRankingsPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* ── Breadcrumb ─────────────────────────────── */}
-      <nav className="flex items-center gap-1.5 text-xs sm:text-sm text-slate-500 mb-6 font-jetbrains">
+      <nav className="flex items-center gap-1.5 text-xs sm:text-sm text-[var(--color-text-muted)] mb-6 font-jetbrains">
         <Link to="/" className="hover:text-cyan-400 transition-colors">
           首页
         </Link>
         <span>/</span>
-        <span className="text-slate-300">AI Agent排行榜</span>
+        <span className="text-[var(--color-text-primary)]">AI Agent排行榜</span>
       </nav>
 
       {/* ── Title ──────────────────────────────────── */}
@@ -315,7 +315,7 @@ export default function AgentRankingsPage() {
             </span>
           </h1>
         </div>
-        <p className="text-slate-400 text-sm sm:text-base max-w-2xl ml-[52px]">
+        <p className="text-[var(--color-text-secondary)] text-sm sm:text-base max-w-2xl ml-[52px]">
           基于GitHub开源影响力、社区活跃度和技术生态的综合排名，帮你发现最值得关注的AI Agent项目
         </p>
       </div>
@@ -323,7 +323,7 @@ export default function AgentRankingsPage() {
       {/* ── Filter bar ─────────────────────────────── */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         {/* Category tabs */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-800/50 border border-slate-700/40 overflow-x-auto scrollbar-none">
+        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-800/50 border border-[var(--color-border)]/40 overflow-x-auto scrollbar-none">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.key}
@@ -332,7 +332,7 @@ export default function AgentRankingsPage() {
                 'shrink-0 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all duration-200',
                 category === cat.key
                   ? 'bg-cyan-400/15 text-cyan-400 border border-cyan-400/25 shadow-[0_0_10px_rgba(0,219,231,0.15)]'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-700/40 border border-transparent',
+                  : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-slate-700/40 border border-transparent',
               )}
             >
               {cat.label}
@@ -342,13 +342,13 @@ export default function AgentRankingsPage() {
 
         {/* Search */}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-muted)] pointer-events-none" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="搜索Agent名称或关键词..."
-            className="w-full sm:w-64 pl-9 pr-4 py-2 rounded-xl bg-slate-800/50 border border-slate-700/40 text-sm text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-cyan-400/40 focus:ring-1 focus:ring-cyan-400/20 transition-colors"
+            className="w-full sm:w-64 pl-9 pr-4 py-2 rounded-xl bg-slate-800/50 border border-[var(--color-border)]/40 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-cyan-400/40 focus:ring-1 focus:ring-cyan-400/20 transition-colors"
           />
         </div>
       </div>
@@ -358,7 +358,7 @@ export default function AgentRankingsPage() {
         {/* ── Leaderboard ───────────────────────── */}
         <div className="flex-1 min-w-0">
           {/* Count */}
-          <p className="text-xs text-slate-500 mb-4 font-jetbrains">
+          <p className="text-xs text-[var(--color-text-muted)] mb-4 font-jetbrains">
             共 {filteredAgents.length} 个Agent
             {category && ` · ${CATEGORIES.find((c) => c.key === category)?.label}`}
           </p>
@@ -376,9 +376,9 @@ export default function AgentRankingsPage() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-20 text-center">
-              <Search className="w-12 h-12 text-slate-600 mb-4" />
-              <p className="text-slate-400 text-lg font-medium mb-1">没有找到匹配的Agent</p>
-              <p className="text-slate-600 text-sm">尝试调整筛选条件或搜索关键词</p>
+              <Search className="w-12 h-12 text-[var(--color-text-muted)] mb-4" />
+              <p className="text-[var(--color-text-secondary)] text-lg font-medium mb-1">没有找到匹配的Agent</p>
+              <p className="text-[var(--color-text-muted)] text-sm">尝试调整筛选条件或搜索关键词</p>
             </div>
           )}
         </div>
@@ -386,12 +386,12 @@ export default function AgentRankingsPage() {
         {/* ── Sidebar ────────────────────────────── */}
         <div className="mt-8 lg:mt-0 lg:w-80 xl:w-88 shrink-0 space-y-5">
           {/* Criteria card */}
-          <div className="rounded-2xl border border-slate-700/40 bg-slate-900/50 backdrop-blur-sm p-5">
+          <div className="rounded-2xl border border-[var(--color-border)]/40 bg-slate-900/50 backdrop-blur-sm p-5">
             <div className="flex items-center gap-2 mb-3">
               <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20">
                 <Info className="w-4 h-4 text-cyan-400" />
               </div>
-              <h3 className="text-sm font-bold text-slate-200">收录标准</h3>
+              <h3 className="text-sm font-bold text-[var(--color-text-primary)]">收录标准</h3>
             </div>
             <ul className="space-y-2.5">
               {[
@@ -404,8 +404,8 @@ export default function AgentRankingsPage() {
                 <li key={item.label} className="flex items-start gap-2.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-cyan-400/60 mt-2 shrink-0" />
                   <div>
-                    <p className="text-xs font-medium text-slate-300">{item.label}</p>
-                    <p className="text-[11px] text-slate-500 leading-relaxed">{item.desc}</p>
+                    <p className="text-xs font-medium text-[var(--color-text-primary)]">{item.label}</p>
+                    <p className="text-[11px] text-[var(--color-text-muted)] leading-relaxed">{item.desc}</p>
                   </div>
                 </li>
               ))}
@@ -413,14 +413,14 @@ export default function AgentRankingsPage() {
           </div>
 
           {/* Rising fastest card */}
-          <div className="rounded-2xl border border-slate-700/40 bg-slate-900/50 backdrop-blur-sm p-5">
+          <div className="rounded-2xl border border-[var(--color-border)]/40 bg-slate-900/50 backdrop-blur-sm p-5">
             <div className="flex items-center gap-2 mb-3">
               <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-400/10 border border-emerald-400/20">
                 <TrendingUp className="w-4 h-4 text-emerald-400" />
               </div>
-              <h3 className="text-sm font-bold text-slate-200">本月上升最快</h3>
+              <h3 className="text-sm font-bold text-[var(--color-text-primary)]">本月上升最快</h3>
             </div>
-            <p className="text-[11px] text-slate-500 mb-3 leading-relaxed">
+            <p className="text-[11px] text-[var(--color-text-muted)] mb-3 leading-relaxed">
               基于GitHub Stars总量的热门Agent项目
             </p>
             <div className="space-y-0.5">
@@ -438,12 +438,12 @@ export default function AgentRankingsPage() {
           {/* Quick link to agents page */}
           <Link
             to="/agents"
-            className="flex items-center justify-between p-4 rounded-2xl border border-slate-700/40 bg-slate-900/50 backdrop-blur-sm hover:border-cyan-400/30 hover:bg-slate-800/40 transition-all duration-200 group"
+            className="flex items-center justify-between p-4 rounded-2xl border border-[var(--color-border)]/40 bg-slate-900/50 backdrop-blur-sm hover:border-cyan-400/30 hover:bg-slate-800/40 transition-all duration-200 group"
           >
-            <span className="text-sm text-slate-300 group-hover:text-cyan-400 transition-colors">
+            <span className="text-sm text-[var(--color-text-primary)] group-hover:text-cyan-400 transition-colors">
               浏览全部AI Agent →
             </span>
-            <ArrowDown className="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition-colors -rotate-90" />
+            <ArrowDown className="w-4 h-4 text-[var(--color-text-muted)] group-hover:text-cyan-400 transition-colors -rotate-90" />
           </Link>
         </div>
       </div>

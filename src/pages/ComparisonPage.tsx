@@ -408,8 +408,8 @@ function StatCards({ models }: { models: AIModel[] }) {
           >
             {/* Header */}
             <div className="flex items-center gap-1.5 mb-2.5">
-              <Icon className="h-3.5 w-3.5 text-slate-400 shrink-0" />
-              <span className="text-xs font-sora font-medium text-slate-300">{dim.label}</span>
+              <Icon className="h-3.5 w-3.5 text-[var(--color-text-secondary)] shrink-0" />
+              <span className="text-xs font-sora font-medium text-[var(--color-text-primary)]">{dim.label}</span>
             </div>
 
             {/* Rankings */}
@@ -434,7 +434,7 @@ function StatCards({ models }: { models: AIModel[] }) {
                         >
                           {idx + 1}
                         </span>
-                        <span className="text-[11px] text-slate-400 truncate font-jetbrains">
+                        <span className="text-[11px] text-[var(--color-text-secondary)] truncate font-jetbrains">
                           {entry.model.name}
                         </span>
                       </div>
@@ -482,9 +482,9 @@ function AccordionSections({ models }: { models: AIModel[] }) {
           )}
         >
           <Trophy className="h-5 w-5 text-amber-400 shrink-0" />
-          <span className="text-base font-sora font-semibold text-slate-200 flex-1">核心优势</span>
+          <span className="text-base font-sora font-semibold text-[var(--color-text-primary)] flex-1">核心优势</span>
           <svg
-            className="h-4 w-4 text-slate-500 shrink-0 transition-transform duration-300 group-open:rotate-180"
+            className="h-4 w-4 text-[var(--color-text-muted)] shrink-0 transition-transform duration-300 group-open:rotate-180"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -500,7 +500,7 @@ function AccordionSections({ models }: { models: AIModel[] }) {
               <h4 className="text-sm font-sora font-semibold text-cyan-300 mb-2.5">{model.name}</h4>
               <ul className="space-y-1.5">
                 {model.strengths.map((s, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-slate-300">
+                  <li key={i} className="flex items-start gap-2 text-sm text-[var(--color-text-primary)]">
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400/70" />
                     <span className="leading-relaxed">{s}</span>
                   </li>
@@ -526,9 +526,9 @@ function AccordionSections({ models }: { models: AIModel[] }) {
           )}
         >
           <AlertTriangle className="h-5 w-5 text-amber-400 shrink-0" />
-          <span className="text-base font-sora font-semibold text-slate-200 flex-1">局限性</span>
+          <span className="text-base font-sora font-semibold text-[var(--color-text-primary)] flex-1">局限性</span>
           <svg
-            className="h-4 w-4 text-slate-500 shrink-0 transition-transform duration-300 group-open:rotate-180"
+            className="h-4 w-4 text-[var(--color-text-muted)] shrink-0 transition-transform duration-300 group-open:rotate-180"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -578,9 +578,9 @@ function AccordionSections({ models }: { models: AIModel[] }) {
           )}
         >
           <Receipt className="h-5 w-5 text-purple-400 shrink-0" />
-          <span className="text-base font-sora font-semibold text-slate-200 flex-1">定价</span>
+          <span className="text-base font-sora font-semibold text-[var(--color-text-primary)] flex-1">定价</span>
           <svg
-            className="h-4 w-4 text-slate-500 shrink-0 transition-transform duration-300 group-open:rotate-180"
+            className="h-4 w-4 text-[var(--color-text-muted)] shrink-0 transition-transform duration-300 group-open:rotate-180"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -594,19 +594,19 @@ function AccordionSections({ models }: { models: AIModel[] }) {
           <table className="w-full min-w-[500px] border-collapse text-sm">
             <thead>
               <tr className="border-b border-white/[0.06]">
-                <th className="text-left py-2.5 pr-3 text-xs font-sora font-semibold text-slate-400 uppercase tracking-wider">
+                <th className="text-left py-2.5 pr-3 text-xs font-sora font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider">
                   模型
                 </th>
-                <th className="text-left py-2.5 pr-3 text-xs font-sora font-semibold text-slate-400 uppercase tracking-wider">
+                <th className="text-left py-2.5 pr-3 text-xs font-sora font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider">
                   提供商
                 </th>
-                <th className="text-left py-2.5 pr-3 text-xs font-sora font-semibold text-slate-400 uppercase tracking-wider">
+                <th className="text-left py-2.5 pr-3 text-xs font-sora font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider">
                   定价
                 </th>
-                <th className="text-center py-2.5 pr-3 text-xs font-sora font-semibold text-slate-400 uppercase tracking-wider">
+                <th className="text-center py-2.5 pr-3 text-xs font-sora font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider">
                   API
                 </th>
-                <th className="text-center py-2.5 text-xs font-sora font-semibold text-slate-400 uppercase tracking-wider">
+                <th className="text-center py-2.5 text-xs font-sora font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider">
                   开源
                 </th>
               </tr>
@@ -618,13 +618,13 @@ function AccordionSections({ models }: { models: AIModel[] }) {
                   className="border-b border-white/[0.03] hover:bg-white/[0.02] transition-colors"
                 >
                   <td className="py-3 pr-3">
-                    <span className="font-sora font-semibold text-slate-200 text-sm">{model.name}</span>
+                    <span className="font-sora font-semibold text-[var(--color-text-primary)] text-sm">{model.name}</span>
                   </td>
                   <td className="py-3 pr-3">
-                    <span className="text-slate-400 font-jetbrains text-xs">{model.provider}</span>
+                    <span className="text-[var(--color-text-secondary)] font-jetbrains text-xs">{model.provider}</span>
                   </td>
                   <td className="py-3 pr-3">
-                    <span className="text-slate-300 font-jetbrains text-xs leading-relaxed">
+                    <span className="text-[var(--color-text-primary)] font-jetbrains text-xs leading-relaxed">
                       {model.pricing || '未公开'}
                     </span>
                   </td>
@@ -635,7 +635,7 @@ function AccordionSections({ models }: { models: AIModel[] }) {
                         可用
                       </span>
                     ) : (
-                      <span className="text-xs text-slate-500 font-jetbrains">不可用</span>
+                      <span className="text-xs text-[var(--color-text-muted)] font-jetbrains">不可用</span>
                     )}
                   </td>
                   <td className="py-3 text-center">
@@ -645,7 +645,7 @@ function AccordionSections({ models }: { models: AIModel[] }) {
                         开源
                       </span>
                     ) : (
-                      <span className="text-xs text-slate-500 font-jetbrains">闭源</span>
+                      <span className="text-xs text-[var(--color-text-muted)] font-jetbrains">闭源</span>
                     )}
                   </td>
                 </tr>
@@ -708,7 +708,7 @@ export default function ComparisonPage() {
         <h1 className="text-4xl font-sora font-bold bg-gradient-to-r from-cyan-300 via-purple-400 to-cyan-200 bg-clip-text text-transparent mb-2">
           AI模型对比
         </h1>
-        <p className="text-slate-400 max-w-2xl text-sm leading-relaxed">
+        <p className="text-[var(--color-text-secondary)] max-w-2xl text-sm leading-relaxed">
           选择最多4个AI模型，通过雷达图、排行榜和详细对比，全面评估推理、代码、创造力、性价比、速度和多模态能力。
         </p>
       </div>
@@ -719,13 +719,13 @@ export default function ComparisonPage() {
       <div className="bg-white/[0.03] backdrop-blur-xl border border-white/[0.08] rounded-xl p-5 space-y-4">
         {/* Header row with search */}
         <div className="flex items-center justify-between flex-wrap gap-3">
-          <p className="text-xs text-slate-500 font-jetbrains uppercase tracking-wider">
+          <p className="text-xs text-[var(--color-text-muted)] font-jetbrains uppercase tracking-wider">
             选择模型{' '}
             <span className="text-cyan-400 font-bold">{selectedSlugs.length}</span>
-            <span className="text-slate-600">/4</span>
+            <span className="text-[var(--color-text-muted)]">/4</span>
           </p>
           <div className="relative w-full sm:w-56">
-            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-slate-500 pointer-events-none" />
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-[var(--color-text-muted)] pointer-events-none" />
             <input
               type="text"
               placeholder="搜索模型..."
@@ -734,7 +734,7 @@ export default function ComparisonPage() {
               className={cn(
                 'w-full pl-8 pr-3 py-1.5 text-xs rounded-lg',
                 'bg-white/[0.04] border border-white/[0.08]',
-                'text-slate-200 placeholder:text-slate-500',
+                'text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)]',
                 'focus:outline-none focus:border-cyan-400/40 focus:ring-1 focus:ring-cyan-400/20',
                 'font-jetbrains transition-colors',
               )}
@@ -759,8 +759,8 @@ export default function ComparisonPage() {
                   isSelected
                     ? 'bg-cyan-400/15 text-cyan-300 border border-cyan-400/50 shadow-[0_0_14px_rgba(6,182,212,0.25)]'
                     : disabled
-                      ? 'bg-white/[0.02] text-slate-600 border border-white/[0.04] cursor-not-allowed'
-                      : 'bg-white/[0.04] text-slate-400 border border-white/[0.08] hover:bg-white/[0.08] hover:text-slate-200 hover:border-white/20',
+                      ? 'bg-white/[0.02] text-[var(--color-text-muted)] border border-white/[0.04] cursor-not-allowed'
+                      : 'bg-white/[0.04] text-[var(--color-text-secondary)] border border-white/[0.08] hover:bg-white/[0.08] hover:text-[var(--color-text-primary)] hover:border-white/20',
                 )}
               >
                 {/* Colored dot */}
@@ -777,7 +777,7 @@ export default function ComparisonPage() {
             )
           })}
           {filteredModels.length === 0 && (
-            <p className="text-xs text-slate-500 py-2 font-jetbrains">无匹配模型</p>
+            <p className="text-xs text-[var(--color-text-muted)] py-2 font-jetbrains">无匹配模型</p>
           )}
         </div>
       </div>
@@ -791,7 +791,7 @@ export default function ComparisonPage() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
             {/* Left: Radar Chart */}
             <div className="lg:col-span-3">
-              <div className="rounded-xl border border-white/[0.08] bg-slate-950/50 backdrop-blur-xl p-4 sm:p-6">
+              <div className="rounded-xl border border-white/[0.08] bg-[var(--color-bg-primary)]/50 backdrop-blur-xl p-4 sm:p-6">
                 <div className="flex items-center gap-4 mb-5">
                   <div className="flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.5)]" />
@@ -802,7 +802,7 @@ export default function ComparisonPage() {
                     <span className="text-xs font-jetbrains text-purple-300">{radarModels[1].name}</span>
                   </div>
                   {selectedModels.length > 2 && (
-                    <span className="text-[10px] text-slate-500 font-jetbrains ml-auto">
+                    <span className="text-[10px] text-[var(--color-text-muted)] font-jetbrains ml-auto">
                       雷达图仅展示前2个模型
                     </span>
                   )}
@@ -813,8 +813,8 @@ export default function ComparisonPage() {
 
             {/* Right: Stat Cards */}
             <div className="lg:col-span-2">
-              <div className="rounded-xl border border-white/[0.08] bg-slate-950/50 backdrop-blur-xl p-4 sm:p-5 h-full">
-                <p className="text-xs text-slate-500 font-jetbrains uppercase tracking-wider mb-4">
+              <div className="rounded-xl border border-white/[0.08] bg-[var(--color-bg-primary)]/50 backdrop-blur-xl p-4 sm:p-5 h-full">
+                <p className="text-xs text-[var(--color-text-muted)] font-jetbrains uppercase tracking-wider mb-4">
                   各维度排行榜
                 </p>
                 <StatCards models={selectedModels} />
@@ -833,10 +833,10 @@ export default function ComparisonPage() {
               <Plus className="h-8 w-8 text-cyan-400/60" />
             </div>
           </div>
-          <h3 className="text-xl font-sora font-semibold text-slate-300 mb-2">
+          <h3 className="text-xl font-sora font-semibold text-[var(--color-text-primary)] mb-2">
             再选一个模型开始对比
           </h3>
-          <p className="text-sm text-slate-500 max-w-md">
+          <p className="text-sm text-[var(--color-text-muted)] max-w-md">
             你已选择了 <span className="text-cyan-400 font-jetbrains">{selectedModels[0].name}</span>
             ，请再选择至少一个模型以查看雷达图和详细对比
           </p>
@@ -846,13 +846,13 @@ export default function ComparisonPage() {
         <div className="flex flex-col items-center justify-center py-16 px-6 text-center">
           <div className="mb-5">
             <div className="flex items-center justify-center w-20 h-20 rounded-2xl bg-white/[0.04] border border-white/[0.06]">
-              <Cpu className="h-8 w-8 text-slate-500" />
+              <Cpu className="h-8 w-8 text-[var(--color-text-muted)]" />
             </div>
           </div>
-          <h3 className="text-xl font-sora font-semibold text-slate-300 mb-2">
+          <h3 className="text-xl font-sora font-semibold text-[var(--color-text-primary)] mb-2">
             请选择要对比的AI模型
           </h3>
-          <p className="text-sm text-slate-500 max-w-md">
+          <p className="text-sm text-[var(--color-text-muted)] max-w-md">
             在上方点击模型标签，选择最多4个AI模型，即可查看雷达图、排行榜和深度对比
           </p>
         </div>
@@ -866,7 +866,7 @@ export default function ComparisonPage() {
           <p
             className={cn(
               'inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-sora font-medium',
-              'bg-white/[0.02] border border-white/[0.04] text-slate-500',
+              'bg-white/[0.02] border border-white/[0.04] text-[var(--color-text-muted)]',
             )}
           >
             <span className="h-1.5 w-1.5 rounded-full bg-cyan-400/50" />

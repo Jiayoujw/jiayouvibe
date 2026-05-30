@@ -56,7 +56,7 @@ const ModelsPage = () => {
       {/* Page Header */}
       <div>
         <h1 className="text-3xl font-sora font-bold text-white mb-2">AI大模型</h1>
-        <p className="text-slate-400 max-w-2xl">
+        <p className="text-[var(--color-text-secondary)] max-w-2xl">
           收录全球主流AI大模型，涵盖大语言模型、多模态、图像生成、视频生成、音频处理等类别，帮助你全面了解AI模型生态。
         </p>
       </div>
@@ -72,7 +72,7 @@ const ModelsPage = () => {
       />
 
       {/* Results count */}
-      <div className="flex items-center gap-2 text-sm text-slate-500 font-jetbrains">
+      <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] font-jetbrains">
         <Cpu className="h-4 w-4 text-cyan-400" />
         <span>
           共 {filteredModels.length} 个模型
@@ -85,7 +85,7 @@ const ModelsPage = () => {
         <ModelGrid models={filteredModels} />
       ) : (
         <EmptyState
-          icon={<Cpu className="h-6 w-6 text-slate-400" />}
+          icon={<Cpu className="h-6 w-6 text-[var(--color-text-secondary)]" />}
           title="未找到匹配的模型"
           description="尝试调整筛选条件或搜索关键词"
           action={{

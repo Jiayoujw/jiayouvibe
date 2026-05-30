@@ -54,14 +54,14 @@ export default function DevelopmentPage() {
           </div>
           <h1 className="text-3xl font-bold text-slate-100">AI应用开发</h1>
         </div>
-        <p className="text-slate-400 text-base max-w-2xl">
+        <p className="text-[var(--color-text-secondary)] text-base max-w-2xl">
           从零开始学习AI应用开发，涵盖提示工程、RAG、微调、Agent开发和生产部署的完整教程体系。
         </p>
       </div>
 
       {/* Category pills */}
       <div className="mb-6">
-        <p className="text-xs font-mono text-slate-500 uppercase tracking-wider mb-3">分类筛选</p>
+        <p className="text-xs font-mono text-[var(--color-text-muted)] uppercase tracking-wider mb-3">分类筛选</p>
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setActiveCategory('all')}
@@ -69,7 +69,7 @@ export default function DevelopmentPage() {
               'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border',
               activeCategory === 'all'
                 ? 'bg-cyan-400/15 text-cyan-300 border-cyan-400/40 shadow-sm shadow-cyan-400/10'
-                : 'bg-slate-800/60 text-slate-400 border-slate-700/50 hover:border-slate-600 hover:text-slate-300',
+                : 'bg-slate-800/60 text-[var(--color-text-secondary)] border-[var(--color-border)]/50 hover:border-slate-600 hover:text-[var(--color-text-primary)]',
             )}
           >
             全部
@@ -84,7 +84,7 @@ export default function DevelopmentPage() {
                 'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border',
                 activeCategory === key
                   ? 'bg-cyan-400/15 text-cyan-300 border-cyan-400/40 shadow-sm shadow-cyan-400/10'
-                  : 'bg-slate-800/60 text-slate-400 border-slate-700/50 hover:border-slate-600 hover:text-slate-300',
+                  : 'bg-slate-800/60 text-[var(--color-text-secondary)] border-[var(--color-border)]/50 hover:border-slate-600 hover:text-[var(--color-text-primary)]',
               )}
             >
               {label}
@@ -98,7 +98,7 @@ export default function DevelopmentPage() {
 
       {/* Difficulty filter chips */}
       <div className="mb-8">
-        <p className="text-xs font-mono text-slate-500 uppercase tracking-wider mb-3">难度</p>
+        <p className="text-xs font-mono text-[var(--color-text-muted)] uppercase tracking-wider mb-3">难度</p>
         <div className="flex flex-wrap gap-2">
           {DIFFICULTY_FILTERS.map(({ key, label }) => {
             const diffStyle = key !== 'all' ? TUTORIAL_DIFFICULTIES[key] : null
@@ -112,8 +112,8 @@ export default function DevelopmentPage() {
                   activeDifficulty === key
                     ? diffStyle
                       ? cn(diffStyle.color, 'border-current/30')
-                      : 'bg-slate-700 text-slate-200 border-slate-600'
-                    : 'bg-transparent text-slate-500 border-slate-700/60 hover:border-slate-600 hover:text-slate-400',
+                      : 'bg-slate-700 text-[var(--color-text-primary)] border-slate-600'
+                    : 'bg-transparent text-[var(--color-text-muted)] border-[var(--color-border)]/60 hover:border-slate-600 hover:text-[var(--color-text-secondary)]',
                 )}
               >
                 {label}
@@ -125,8 +125,8 @@ export default function DevelopmentPage() {
 
       {/* Results count */}
       <div className="mb-6">
-        <p className="text-sm text-slate-500 font-mono">
-          共 <span className="text-slate-300">{filteredTutorials.length}</span> 篇教程
+        <p className="text-sm text-[var(--color-text-muted)] font-mono">
+          共 <span className="text-[var(--color-text-primary)]">{filteredTutorials.length}</span> 篇教程
         </p>
       </div>
 

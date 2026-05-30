@@ -53,8 +53,8 @@ export default function AgentDetailPage() {
           <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-red-400/10 border border-red-400/20 mb-6">
             <Layers className="w-8 h-8 text-red-400" />
           </div>
-          <h2 className="text-xl font-sora font-semibold text-slate-200 mb-2">未找到该智能体</h2>
-          <p className="text-slate-500 mb-8">slug: {slug}</p>
+          <h2 className="text-xl font-sora font-semibold text-[var(--color-text-primary)] mb-2">未找到该智能体</h2>
+          <p className="text-[var(--color-text-muted)] mb-8">slug: {slug}</p>
           <Link to="/agents">
             <Button variant="secondary">返回智能体列表</Button>
           </Link>
@@ -108,18 +108,18 @@ export default function AgentDetailPage() {
               </div>
 
               {/* Stats row */}
-              <div className="flex flex-wrap items-center gap-5 text-sm text-slate-500 font-jetbrains mb-6">
+              <div className="flex flex-wrap items-center gap-5 text-sm text-[var(--color-text-muted)] font-jetbrains mb-6">
                 {agent.githubStars !== undefined && (
                   <span className="flex items-center gap-1.5">
                     <Star className="w-4 h-4 text-amber-400" />
-                    <span className="text-slate-300 font-semibold">{formatStars(agent.githubStars)}</span>
-                    <span className="text-slate-500">Stars</span>
+                    <span className="text-[var(--color-text-primary)] font-semibold">{formatStars(agent.githubStars)}</span>
+                    <span className="text-[var(--color-text-muted)]">Stars</span>
                   </span>
                 )}
                 {agent.language && (
                   <span className="flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
-                    <span className="text-slate-300">{agent.language}</span>
+                    <span className="text-[var(--color-text-primary)]">{agent.language}</span>
                   </span>
                 )}
               </div>
@@ -131,7 +131,7 @@ export default function AgentDetailPage() {
                     <span
                       key={tag}
                       className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs
-                        bg-white/5 border border-white/10 text-slate-400 font-jetbrains"
+                        bg-white/5 border border-white/10 text-[var(--color-text-secondary)] font-jetbrains"
                     >
                       {tag}
                     </span>
@@ -140,7 +140,7 @@ export default function AgentDetailPage() {
               )}
 
               {/* Description */}
-              <p className="text-slate-300 leading-relaxed text-base">
+              <p className="text-[var(--color-text-primary)] leading-relaxed text-base">
                 {agent.longDescription}
               </p>
             </div>
@@ -160,7 +160,7 @@ export default function AgentDetailPage() {
                     hover:bg-white/[0.06] hover:border-white/10 transition-colors duration-200"
                 >
                   <Check className="w-4 h-4 text-cyan-400 mt-0.5 shrink-0" />
-                  <span className="text-sm text-slate-300">{feature}</span>
+                  <span className="text-sm text-[var(--color-text-primary)]">{feature}</span>
                 </div>
               ))}
             </div>
@@ -181,7 +181,7 @@ export default function AgentDetailPage() {
                   <span className="flex items-center justify-center w-6 h-6 rounded-full bg-amber-400/10 text-amber-400 text-xs font-bold shrink-0">
                     {idx + 1}
                   </span>
-                  <span className="text-sm text-slate-300">{uc}</span>
+                  <span className="text-sm text-[var(--color-text-primary)]">{uc}</span>
                 </div>
               ))}
             </div>
@@ -193,7 +193,7 @@ export default function AgentDetailPage() {
           <div className="sticky top-24 space-y-4">
             {/* Share */}
             <Card className="p-5">
-              <h3 className="text-sm font-sora font-semibold text-slate-400 uppercase tracking-wider mb-3">
+              <h3 className="text-sm font-sora font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider mb-3">
                 分享
               </h3>
               <ShareButtons
@@ -206,16 +206,16 @@ export default function AgentDetailPage() {
             {/* Pricing */}
             {agent.pricing && (
               <Card className="p-5">
-                <h3 className="text-sm font-sora font-semibold text-slate-400 uppercase tracking-wider mb-3">
+                <h3 className="text-sm font-sora font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider mb-3">
                   定价信息
                 </h3>
-                <p className="text-sm text-slate-300 leading-relaxed">{agent.pricing}</p>
+                <p className="text-sm text-[var(--color-text-primary)] leading-relaxed">{agent.pricing}</p>
               </Card>
             )}
 
             {/* Links */}
             <Card className="p-5">
-              <h3 className="text-sm font-sora font-semibold text-slate-400 uppercase tracking-wider mb-4">
+              <h3 className="text-sm font-sora font-semibold text-[var(--color-text-secondary)] uppercase tracking-wider mb-4">
                 相关链接
               </h3>
               <div className="space-y-3">
@@ -243,10 +243,10 @@ export default function AgentDetailPage() {
                       hover:bg-white/[0.08] hover:border-white/20
                       transition-colors duration-200 group"
                   >
-                    <Globe className="w-4 h-4 text-slate-400 group-hover:text-slate-200" />
-                    <span className="text-sm text-slate-400 group-hover:text-slate-200">GitHub</span>
+                    <Globe className="w-4 h-4 text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)]" />
+                    <span className="text-sm text-[var(--color-text-secondary)] group-hover:text-[var(--color-text-primary)]">GitHub</span>
                     {agent.githubStars !== undefined && (
-                      <span className="ml-auto text-xs text-slate-500 flex items-center gap-1">
+                      <span className="ml-auto text-xs text-[var(--color-text-muted)] flex items-center gap-1">
                         <Star className="w-3 h-3 text-amber-400" />
                         {formatStars(agent.githubStars)}
                       </span>
@@ -260,8 +260,8 @@ export default function AgentDetailPage() {
             <Link
               to="/agents"
               className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl
-                bg-white/5 border border-white/10 text-slate-400 text-sm
-                hover:bg-white/10 hover:text-slate-200 hover:border-white/20
+                bg-white/5 border border-white/10 text-[var(--color-text-secondary)] text-sm
+                hover:bg-white/10 hover:text-[var(--color-text-primary)] hover:border-white/20
                 transition-all duration-200"
             >
               返回智能体列表
