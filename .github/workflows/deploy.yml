@@ -1,11 +1,14 @@
-name: Deploy to Namecheap
+name: Build and push to deploy branch
 
 on:
   push:
     branches: [main, master]
 
+permissions:
+  contents: write
+
 jobs:
-  build-and-deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,15 +32,21 @@ jobs:
           echo "=== index.html ==="
           cat dist/index.html
           echo ""
-          echo "=== Check paths ==="
-          grep -c './' dist/index.html && echo "✅ Relative paths" || echo "❌ Absolute paths!"
+          grep -c './' dist/index.html && echo "✅ Relative paths" || echo "❌ Absolute!"
 
-      - name: Deploy to Namecheap via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: public_html/
-          dangerous-clean-slate: true
+      - name: Deploy to deploy branch
+        run: |
+          # Copy dist contents to a temp folder
+          cp -r dist /tmp/dist-deploy
+
+          # Create deploy branch with only dist contents
+          cd /tmp/dist-deploy
+          git init
+          git checkout -b deploy
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Deploy $(date +%Y-%m-%d-%H%M)"
+
+          # Force push to deploy branch
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Jiayoujw/jiayouvibe.git" deploy
