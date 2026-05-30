@@ -133,6 +133,19 @@ export interface SearchResult {
   tags: string[]
 }
 
+// ============ News ============
+export interface NewsItem {
+  id: string
+  title: string
+  summary: string
+  source: string
+  sourceUrl: string
+  date: string
+  category: 'model' | 'opensource' | 'business' | 'research' | 'policy'
+  tags: string[]
+  readingTime: number
+}
+
 // ============ Theme ============
 export type ThemeMode = 'light' | 'dark' | 'system'
 

@@ -70,8 +70,8 @@ export default function Header() {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-20 items-center justify-between">
+        <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+          <div className="flex h-16 sm:h-20 items-center justify-between">
             {/* --- Logo --- */}
             <Link
               to="/"
@@ -144,32 +144,32 @@ export default function Header() {
             </nav>
 
             {/* --- Right actions --- */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-0.5 sm:gap-1">
               {/* Search */}
               <button
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60"
+                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[36px] min-h-[36px] items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60"
                 aria-label="搜索"
               >
-                <Search className="h-4.5 w-4.5" />
+                <Search className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
               </button>
 
               {/* Theme toggle */}
               <button
                 onClick={toggle}
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60"
+                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[36px] min-h-[36px] items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60"
                 aria-label={isDark ? '切换到亮色模式' : '切换到暗色模式'}
               >
                 {isDark ? (
-                  <Sun className="h-4.5 w-4.5" />
+                  <Sun className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
                 ) : (
-                  <Moon className="h-4.5 w-4.5" />
+                  <Moon className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
                 )}
               </button>
 
               {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="flex md:hidden h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60"
+                className="flex md:hidden h-10 w-10 min-w-[44px] min-h-[44px] items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60 active:bg-slate-700/60 active:text-cyan-300"
                 aria-label="打开菜单"
               >
                 <Menu className="h-5 w-5" />

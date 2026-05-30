@@ -19,9 +19,12 @@ export const NAV_ITEMS: NavItem[] = [
     label: '更多',
     path: '#',
     children: [
+      { label: 'AI资讯', path: '/news' },
+      { label: '模型对比', path: '/compare' },
       { label: '笔记系统', path: '/notes' },
       { label: 'GitHub热门', path: '/trending' },
       { label: '其他AI领域', path: '/domains' },
+      { label: '关于我们', path: '/about' },
     ],
   },
 ]

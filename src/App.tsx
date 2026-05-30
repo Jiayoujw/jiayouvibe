@@ -17,6 +17,10 @@ const DirectoryPage = lazy(() => import('@/pages/DirectoryPage'))
 const NotesPage = lazy(() => import('@/pages/NotesPage'))
 const TrendingPage = lazy(() => import('@/pages/TrendingPage'))
 const DomainsPage = lazy(() => import('@/pages/DomainsPage'))
+const DomainDetailPage = lazy(() => import('@/pages/DomainDetailPage'))
+const NewsPage = lazy(() => import('@/pages/NewsPage'))
+const AboutPage = lazy(() => import('@/pages/AboutPage'))
+const ComparisonPage = lazy(() => import('@/pages/ComparisonPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 function PageFallback() {
@@ -46,6 +50,10 @@ export default function App() {
             <Route path="/notes" element={<NotesPage />} />
             <Route path="/trending" element={<TrendingPage />} />
             <Route path="/domains" element={<DomainsPage />} />
+            <Route path="/domains/:slug" element={<DomainDetailPage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/compare" element={<ComparisonPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
