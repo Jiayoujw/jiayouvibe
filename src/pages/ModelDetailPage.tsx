@@ -21,6 +21,9 @@ import { cn } from '@/utils/cn'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import Badge from '@/components/ui/Badge'
 import EmptyState from '@/components/ui/EmptyState'
+import ReadingProgress from '@/components/ui/ReadingProgress'
+import ShareButtons from '@/components/community/ShareButtons'
+import CommentSection from '@/components/community/CommentSection'
 
 /** Provider badge colors matching ModelCard */
 const providerStyles: Record<string, { bg: string; text: string; border: string }> = {
@@ -106,8 +109,11 @@ const ModelDetailPage = () => {
   }
 
   const providerStyle = providerStyles[model.provider] ?? defaultProviderStyle
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/#/models/${model.slug}`
 
   return (
+    <>
+      <ReadingProgress />
     <div className="space-y-8">
       {/* Breadcrumb */}
       <Breadcrumb
@@ -265,6 +271,18 @@ const ModelDetailPage = () => {
 
         {/* Right Column: 4 cols */}
         <div className="lg:col-span-4 space-y-6">
+          {/* Share */}
+          <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
+            <h3 className="text-sm font-sora font-semibold text-white mb-4 flex items-center gap-2">
+              分享
+            </h3>
+            <ShareButtons
+              url={shareUrl}
+              title={`${model.name} - AI大模型 | jiayouvibe`}
+              description={model.description}
+            />
+          </section>
+
           {/* Quick Links */}
           <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
             <h3 className="text-sm font-sora font-semibold text-white mb-4 flex items-center gap-2">
@@ -341,7 +359,16 @@ const ModelDetailPage = () => {
           )}
         </div>
       </div>
+
+      {/* Comments */}
+      <CommentSection
+        repo="Jiayoujw/jiayouvibe"
+        repoId="R_kgDO_REPLACE_ME"
+        category="General"
+        categoryId="DIC_kwDO_REPLACE_ME"
+      />
     </div>
+    </>
   )
 }
 

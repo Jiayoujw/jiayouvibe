@@ -6,6 +6,10 @@ import { tutorials } from '@/data/tutorials'
 import { TUTORIAL_CATEGORIES, TUTORIAL_DIFFICULTIES, SITE_NAME } from '@/utils/constants'
 import { formatReadingTime } from '@/utils/formatDate'
 import Breadcrumb from '@/components/ui/Breadcrumb'
+import ReadingProgress from '@/components/ui/ReadingProgress'
+import ShareButtons from '@/components/community/ShareButtons'
+import CommentSection from '@/components/community/CommentSection'
+import SubscribeCard from '@/components/community/SubscribeCard'
 
 // ---- content parser -------------------------------------------------------
 
@@ -169,8 +173,12 @@ export default function DevelopmentArticlePage() {
   const categoryLabel = TUTORIAL_CATEGORIES[tutorial.category] ?? tutorial.category
   const diff = TUTORIAL_DIFFICULTIES[tutorial.difficulty]
 
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/#/development/${tutorial.slug}`
+
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <>
+      <ReadingProgress />
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Back link */}
       <Link
         to="/development"
@@ -338,16 +346,38 @@ export default function DevelopmentArticlePage() {
         })}
       </div>
 
-      {/* Footer back link */}
-      <div className="mt-16 pt-8 border-t border-white/10">
-        <Link
-          to="/development"
-          className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-cyan-300 transition-colors duration-200 group"
-        >
-          <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
-          返回教程列表
-        </Link>
+      {/* Share + Engage */}
+      <div className="mt-12 pt-8 border-t border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+          <ShareButtons
+            url={shareUrl}
+            title={tutorial.title}
+            description={tutorial.description}
+          />
+          <Link
+            to="/development"
+            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-cyan-300 transition-colors duration-200 group"
+          >
+            <ArrowLeft className="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+            返回教程列表
+          </Link>
+        </div>
+
+        {/* Subscribe CTA */}
+        <SubscribeCard
+          actionUrl="https://jiayouvibe.us21.list-manage.com/subscribe/post?u=REPLACE_ME&amp;id=REPLACE_ME"
+          className="mb-8"
+        />
       </div>
+
+      {/* Comments */}
+      <CommentSection
+        repo="Jiayoujw/jiayouvibe"
+        repoId="R_kgDO_REPLACE_ME"
+        category="General"
+        categoryId="DIC_kwDO_REPLACE_ME"
+      />
     </div>
+    </>
   )
 }

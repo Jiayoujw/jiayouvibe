@@ -8,6 +8,9 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
+import ReadingProgress from '@/components/ui/ReadingProgress'
+import ShareButtons from '@/components/community/ShareButtons'
+import CommentSection from '@/components/community/CommentSection'
 
 const typeColorMap: Record<string, 'purple' | 'cyan' | 'pink' | 'amber'> = {
   framework: 'purple',
@@ -61,8 +64,11 @@ export default function AgentDetailPage() {
   }
 
   const badgeColor = typeColorMap[agent.type] || 'cyan'
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/#/agents/${agent.slug}`
 
   return (
+    <>
+      <ReadingProgress />
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Breadcrumb */}
       <Breadcrumb
@@ -185,6 +191,18 @@ export default function AgentDetailPage() {
         {/* Sidebar */}
         <div className="lg:col-span-1">
           <div className="sticky top-24 space-y-4">
+            {/* Share */}
+            <Card className="p-5">
+              <h3 className="text-sm font-sora font-semibold text-slate-400 uppercase tracking-wider mb-3">
+                分享
+              </h3>
+              <ShareButtons
+                url={shareUrl}
+                title={`${agent.name} - AI智能体 | jiayouvibe`}
+                description={agent.longDescription}
+              />
+            </Card>
+
             {/* Pricing */}
             {agent.pricing && (
               <Card className="p-5">
@@ -251,6 +269,15 @@ export default function AgentDetailPage() {
           </div>
         </div>
       </div>
+
+      {/* Comments */}
+      <CommentSection
+        repo="Jiayoujw/jiayouvibe"
+        repoId="R_kgDO_REPLACE_ME"
+        category="General"
+        categoryId="DIC_kwDO_REPLACE_ME"
+      />
     </div>
+    </>
   )
 }
