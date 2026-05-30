@@ -321,7 +321,7 @@ function GridSkillCard({ skill }: { skill: SkillEntry }) {
             rel="noopener noreferrer"
             className="text-slate-500 hover:text-amber-400 transition-colors"
           >
-            <Github className="h-3.5 w-3.5" />
+            <Globe className="h-3.5 w-3.5" />
           </a>
         </div>
 
@@ -588,7 +588,7 @@ const ClaudeSkillsPage = () => {
         >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/20 flex items-center justify-center shrink-0">
-              <Github className="h-5 w-5 text-amber-400" />
+              <Globe className="h-5 w-5 text-amber-400" />
             </div>
             <div>
               <h3 className="text-sm font-sora font-semibold text-white">

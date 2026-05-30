@@ -85,9 +85,10 @@ export default function PromptsPage() {
   }, [activeCategory, searchQuery])
 
   const copyPrompt = useCallback(
-    async (_prompt: PromptTemplate) => {
+    async (prompt: PromptTemplate) => {
       try {
         await navigator.clipboard.writeText(prompt.prompt)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         setCopiedId(prompt.id)
         showToast('已复制到剪贴板')
         setTimeout(() => setCopiedId(null), 2000)
@@ -98,9 +99,10 @@ export default function PromptsPage() {
     [showToast],
   )
 
-  const openInChat = useCallback((_prompt: PromptTemplate, platform: 'chatgpt' | 'claude') => {
+  const openInChat = useCallback((prompt: PromptTemplate, platform: 'chatgpt' | 'claude') => {
+    const text = encodeURIComponent(prompt.prompt)
     if (platform === 'chatgpt') {
-      window.open('https://chat.openai.com', '_blank', 'noopener,noreferrer')
+      window.open(`https://chat.openai.com/?prompt=${text}`, '_blank', 'noopener,noreferrer')
     } else {
       window.open('https://claude.ai', '_blank', 'noopener,noreferrer')
     }
