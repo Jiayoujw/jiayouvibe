@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react'
 import { Globe } from 'lucide-react'
 import { SITE_NAME } from '@/utils/constants'
 import useGitHubTrending from '@/hooks/useGitHubTrending'
+import { getFallbackRepos } from '@/services/github'
 import RepoCard from '@/components/trending/RepoCard'
 import RepoFilter from '@/components/trending/RepoFilter'
 import Spinner from '@/components/ui/Spinner'
@@ -103,14 +104,18 @@ const TrendingPage = () => {
         />
       </div>
 
-      {/* Error state */}
-      {error && (
-        <EmptyState
-          icon={<Globe className="w-8 h-8" />}
-          title="加载失败"
-          description={error}
-          action={{ label: '重新加载', onClick: refetch }}
-        />
+      {/* Error state — show fallback data */}
+      {error && repos.length === 0 && (
+        <div>
+          <div className="mb-4 p-3 rounded-lg bg-amber-400/10 border border-amber-400/20 text-amber-400 text-sm">
+            GitHub API 暂时不可用，显示本地缓存数据
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {getFallbackRepos().map((repo) => (
+              <RepoCard key={repo.id} repo={repo} />
+            ))}
+          </div>
+        </div>
       )}
 
       {/* Empty state (no error, loaded, but no results) */}
