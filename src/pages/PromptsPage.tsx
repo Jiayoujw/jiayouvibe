@@ -85,7 +85,7 @@ export default function PromptsPage() {
   }, [activeCategory, searchQuery])
 
   const copyPrompt = useCallback(
-    async (prompt: PromptTemplate) => {
+    async (_prompt: PromptTemplate) => {
       try {
         await navigator.clipboard.writeText(prompt.prompt)
         setCopiedId(prompt.id)
@@ -98,7 +98,7 @@ export default function PromptsPage() {
     [showToast],
   )
 
-  const openInChat = useCallback((prompt: PromptTemplate, platform: 'chatgpt' | 'claude') => {
+  const openInChat = useCallback((_prompt: PromptTemplate, platform: 'chatgpt' | 'claude') => {
     if (platform === 'chatgpt') {
       window.open('https://chat.openai.com', '_blank', 'noopener,noreferrer')
     } else {

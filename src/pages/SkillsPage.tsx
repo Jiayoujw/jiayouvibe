@@ -10,7 +10,7 @@ import {
   Code2,
   Terminal,
   Server,
-  Globe,
+
   Puzzle,
   Workflow,
   Zap,
