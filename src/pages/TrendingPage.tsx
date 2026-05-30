@@ -104,22 +104,17 @@ const TrendingPage = () => {
         />
       </div>
 
-      {/* Error state — show fallback data */}
+      {/* Fallback data when API fails and no cache */}
       {error && repos.length === 0 && (
-        <div>
-          <div className="mb-4 p-3 rounded-lg bg-amber-400/10 border border-amber-400/20 text-amber-400 text-sm">
-            GitHub API 暂时不可用，显示本地缓存数据
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {getFallbackRepos().map((repo) => (
-              <RepoCard key={repo.id} repo={repo} />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {getFallbackRepos().map((repo) => (
+            <RepoCard key={repo.id} repo={repo} />
+          ))}
         </div>
       )}
 
-      {/* Empty state (no error, loaded, but no results) */}
-      {!error && !loading && filteredRepos.length === 0 && (
+      {/* Empty state (loaded, but no results matching filter) */}
+      {!loading && filteredRepos.length === 0 && repos.length > 0 && (
         <EmptyState
           icon={<Globe className="w-8 h-8" />}
           title={searchQuery ? '未找到匹配项目' : '暂无热门项目'}
