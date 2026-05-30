@@ -1,105 +1,50 @@
 import { Link } from 'react-router-dom'
-import { Globe, ExternalLink } from 'lucide-react'
-import { SITE_NAME, SITE_DESCRIPTION, NAV_ITEMS } from '@/utils/constants'
-import type { NavItem } from '@/types'
+import { SITE_NAME } from '@/utils/constants'
 
-const RESOURCE_LINKS = [
-  { label: 'OpenAI', url: 'https://openai.com' },
-  { label: 'Anthropic', url: 'https://anthropic.com' },
-  { label: 'Google DeepMind', url: 'https://deepmind.google' },
-  { label: 'Hugging Face', url: 'https://huggingface.co' },
-  { label: 'Papers With Code', url: 'https://paperswithcode.com' },
-  { label: 'arXiv AI', url: 'https://arxiv.org/list/cs.AI/recent' },
+const FOOTER_LINKS = [
+  { label: '开发者指南', href: '#' },
+  { label: 'API 参考', href: '#' },
+  { label: '服务条款', href: '#' },
+  { label: '隐私政策', href: '#' },
+  { label: '联系我们', href: '#' },
 ]
-
-function flattenNavLinks(items: NavItem[]): NavItem[] {
-  const flat: NavItem[] = []
-  for (const item of items) {
-    if (item.children) {
-      flat.push(...item.children)
-    } else if (item.path !== '#') {
-      flat.push(item)
-    }
-  }
-  return flat
-}
-
-const quickLinks = flattenNavLinks(NAV_ITEMS)
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-primary)] pb-24 md:pb-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Top columns */}
-        <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-3">
-          {/* About */}
-          <div>
-            <Link
-              to="/"
-              className="inline-block text-xl font-bold bg-gradient-to-r from-[#06b6d4] to-[#a855f7] bg-clip-text text-transparent"
-            >
-              {SITE_NAME}
-            </Link>
-            <p className="mt-4 text-sm leading-relaxed text-[var(--color-text-secondary)] max-w-xs">
-              {SITE_DESCRIPTION}
-            </p>
-            <div className="mt-5 flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
-              <Globe className="h-3.5 w-3.5" />
-              <span>中文 AI 知识导航</span>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-primary)]">
-              快速链接
-            </h3>
-            <ul className="mt-5 space-y-2.5">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.path}
-                    className="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-cyan-500 dark:hover:text-cyan-400"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-primary)]">
-              AI 资源
-            </h3>
-            <ul className="mt-5 space-y-2.5">
-              {RESOURCE_LINKS.map((res) => (
-                <li key={res.label}>
-                  <a
-                    href={res.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] transition-colors hover:text-cyan-500 dark:hover:text-cyan-400 group"
-                  >
-                    {res.label}
-                    <ExternalLink className="h-3 w-3 opacity-0 -translate-x-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0" />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+    <footer className="w-full py-12 mt-auto border-t border-[var(--color-border)] bg-[var(--color-bg-primary)]">
+      <div className="flex flex-col lg:flex-row justify-between items-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto gap-8 lg:gap-4">
+        {/* Brand */}
+        <div className="flex-shrink-0">
+          <Link
+            to="/"
+            className="font-sora text-xl font-bold tracking-tight bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent"
+          >
+            {SITE_NAME}
+          </Link>
         </div>
 
-        {/* Copyright bar */}
-        <div className="border-t border-[var(--color-border)] py-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
-          <p className="text-xs text-[var(--color-text-muted)]">
-            &copy; 2026 {SITE_NAME}. All rights reserved.
-          </p>
-          <p className="text-xs text-[var(--color-text-muted)]">
-            探索AI的无限可能 &middot; 汇聚全球AI知识
-          </p>
+        {/* Copyright */}
+        <div className="text-center lg:flex-1 px-4">
+          <span className="font-mono text-xs text-[var(--color-text-muted)] opacity-80">
+            &copy; 2026 {SITE_NAME} AI platform. Built for the future of knowledge.
+          </span>
         </div>
+
+        {/* Links */}
+        <nav className="flex-shrink-0">
+          <ul className="flex flex-wrap justify-center lg:justify-end gap-x-8 gap-y-4">
+            {FOOTER_LINKS.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  className="font-mono text-xs text-[var(--color-text-secondary)] hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors duration-300"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
     </footer>
   )
