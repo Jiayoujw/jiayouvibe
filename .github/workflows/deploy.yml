@@ -34,27 +34,26 @@ jobs:
 
       - name: Deploy to Namecheap
         run: |
+          # Create test marker file
+          echo "TEST_MARKER_NEW" > dist/test_marker.html
+
           lftp -e "
             set ftp:ssl-allow no;
             set ssl:verify-certificate no;
             open ${{ secrets.FTP_SERVER }};
             user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }};
 
-            # Upload to BOTH possible web roots
+            # Upload to root
             mirror -R -v --delete ./dist/ ./;
+            echo '=== Root ===';
+            ls index.html test_marker.html 2>/dev/null;
+
+            # Upload to public_html
             mkdir -p ./public_html;
             mirror -R -v --delete ./dist/ ./public_html/;
+            echo '=== public_html ===';
+            ls public_html/index.html public_html/test_marker.html 2>/dev/null;
 
-            # Also try common subdirectory patterns
-            mkdir -p ./public_html/jiayouvibe.com;
-            mirror -R -v --delete ./dist/ ./public_html/jiayouvibe.com/;
-
-            echo '=== Root listing ===';
-            ls;
-            echo '=== public_html listing ===';
-            ls public_html/;
-            echo '=== Root index.html ===';
-            head -2 index.html;
             bye;
           "
 
