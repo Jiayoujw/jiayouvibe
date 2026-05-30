@@ -1,5 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Cpu } from 'lucide-react'
+import { SITE_NAME } from '@/utils/constants'
 import { models } from '@/data/models'
 import { MODEL_CATEGORIES } from '@/utils/constants'
 import ModelFilter from '@/components/models/ModelFilter'
@@ -7,6 +8,10 @@ import ModelGrid from '@/components/models/ModelGrid'
 import EmptyState from '@/components/ui/EmptyState'
 
 const ModelsPage = () => {
+  useEffect(() => {
+    document.title = `AI大模型 | ${SITE_NAME}`
+  }, [])
+
   const [searchQuery, setSearchQuery] = useState('')
   const [providerFilter, setProviderFilter] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('')

@@ -1,5 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Send, Sparkles, Globe } from 'lucide-react'
+import { SITE_NAME } from '@/utils/constants'
 import { directoryEntries } from '@/data/directory'
 import { DIRECTORY_CATEGORIES } from '@/utils/constants'
 import { cn } from '@/utils/cn'
@@ -11,6 +12,10 @@ import DirectoryCard from '@/components/directory/DirectoryCard'
 const categoryKeys = Object.keys(DIRECTORY_CATEGORIES) as Array<keyof typeof DIRECTORY_CATEGORIES>
 
 const DirectoryPage = () => {
+  useEffect(() => {
+    document.title = `AI网站导航 | ${SITE_NAME}`
+  }, [])
+
   const [activeCategory, setActiveCategory] = useState('all')
   const [showFeaturedOnly, setShowFeaturedOnly] = useState(false)
 

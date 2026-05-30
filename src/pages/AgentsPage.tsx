@@ -1,11 +1,16 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Bot } from 'lucide-react'
 import { agents } from '@/data/agents'
+import { SITE_NAME } from '@/utils/constants'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import AgentCard from '@/components/agents/AgentCard'
 import AgentFilter from '@/components/agents/AgentFilter'
 
 export default function AgentsPage() {
+  useEffect(() => {
+    document.title = `AI智能体 | ${SITE_NAME}`
+  }, [])
+
   const [search, setSearch] = useState('')
   const [typeFilter, setTypeFilter] = useState('')
 

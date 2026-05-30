@@ -264,7 +264,7 @@ export const agents: AIAgent[] = [
     description: 'Codeium推出的AI IDE，以多文件上下文感知、Cascade流式编辑和多模型自由切换为核心竞争力。',
     longDescription: 'Windsurf（原Codeium）于2024年正式推出，是Cursor在AI IDE赛道上的主要竞争对手。其核心创新"Cascade"实现了跨多文件的流式AI编辑——AI理解整个项目上下文后，能同时在多个文件中进行协调修改。Windsurf的另一个特色是开放的模型选择策略，用户可以自由切换Claude、GPT-4o、Gemini等模型。免费版慷慨的配额也是其快速增长的重要原因。',
     language: 'TypeScript（编辑器本身）',
-    githubStars: undefined,
+    githubStars: 16000,
     website: 'https://codeium.com/windsurf',
     github: 'https://github.com/Exafunction/codeium',
     openSource: false,

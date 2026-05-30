@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import {
   Database,
@@ -16,7 +16,7 @@ import {
   Layers,
 } from 'lucide-react'
 import { models } from '@/data/models'
-import { MODEL_CATEGORIES } from '@/utils/constants'
+import { MODEL_CATEGORIES, SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import Badge from '@/components/ui/Badge'
@@ -78,6 +78,14 @@ const ModelDetailPage = () => {
   const { slug } = useParams<{ slug: string }>()
 
   const model = useMemo(() => models.find((m) => m.slug === slug), [slug])
+
+  useEffect(() => {
+    if (model) {
+      document.title = `${model.name} - AI大模型 | ${SITE_NAME}`
+    } else {
+      document.title = `模型未找到 | ${SITE_NAME}`
+    }
+  }, [model])
 
   // 3 related models: same category, different slug
   const relatedModels = useMemo(() => {

@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Star, Globe, Check, Lightbulb, Layers } from 'lucide-react'
+import { SITE_NAME } from '@/utils/constants'
 import { agents } from '@/data/agents'
 import { formatStars } from '@/utils/formatDate'
 import Breadcrumb from '@/components/ui/Breadcrumb'
@@ -24,6 +26,14 @@ const typeLabelMap: Record<string, string> = {
 export default function AgentDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const agent = agents.find((a) => a.slug === slug)
+
+  useEffect(() => {
+    if (agent) {
+      document.title = `${agent.name} - AI智能体 | ${SITE_NAME}`
+    } else {
+      document.title = `智能体未找到 | ${SITE_NAME}`
+    }
+  }, [agent])
 
   if (!agent) {
     return (

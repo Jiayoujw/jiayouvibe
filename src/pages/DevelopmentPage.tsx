@@ -1,5 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Code2 } from 'lucide-react'
+import { SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
 import { tutorials } from '@/data/tutorials'
 import { TUTORIAL_CATEGORIES, TUTORIAL_DIFFICULTIES } from '@/utils/constants'
@@ -17,6 +18,10 @@ const DIFFICULTY_FILTERS: { key: DifficultyFilter; label: string }[] = [
 ]
 
 export default function DevelopmentPage() {
+  useEffect(() => {
+    document.title = `AI应用开发 | ${SITE_NAME}`
+  }, [])
+
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>('all')
   const [activeDifficulty, setActiveDifficulty] = useState<DifficultyFilter>('all')
 

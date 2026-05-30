@@ -1,5 +1,6 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { Search } from 'lucide-react'
+import { SITE_NAME } from '@/utils/constants'
 import Input from '@/components/ui/Input'
 import AlphabetIndex from '@/components/terminology/AlphabetIndex'
 import TermItem from '@/components/terminology/TermItem'
@@ -34,6 +35,10 @@ function groupByLetter(list: Term[]): Record<string, Term[]> {
 }
 
 export default function TerminologyPage() {
+  useEffect(() => {
+    document.title = `AI专业术语 | ${SITE_NAME}`
+  }, [])
+
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedId, setExpandedId] = useState<string | null>(null)
   const [activeLetter, setActiveLetter] = useState('')

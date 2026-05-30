@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { StickyNote, ArrowLeft } from 'lucide-react'
+import { SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
 import { useNotes } from '@/contexts/NotesContext'
 import NotesList from '@/components/notes/NotesList'
@@ -7,6 +8,10 @@ import NoteEditor from '@/components/notes/NoteEditor'
 import NoteToolbar from '@/components/notes/NoteToolbar'
 
 export default function NotesPage() {
+  useEffect(() => {
+    document.title = `笔记系统 | ${SITE_NAME}`
+  }, [])
+
   const { dispatch, selectedNote } = useNotes()
 
   // On mobile: true = show list, false = show editor

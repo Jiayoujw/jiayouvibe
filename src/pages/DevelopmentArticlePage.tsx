@@ -1,9 +1,9 @@
-import { useMemo, type JSX } from 'react'
+import { useMemo, useEffect, type JSX } from 'react'
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { ArrowLeft, Clock, Calendar, User, BookOpen } from 'lucide-react'
 import { cn } from '@/utils/cn'
 import { tutorials } from '@/data/tutorials'
-import { TUTORIAL_CATEGORIES, TUTORIAL_DIFFICULTIES } from '@/utils/constants'
+import { TUTORIAL_CATEGORIES, TUTORIAL_DIFFICULTIES, SITE_NAME } from '@/utils/constants'
 import { formatReadingTime } from '@/utils/formatDate'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 
@@ -153,6 +153,14 @@ export default function DevelopmentArticlePage() {
 
   const tutorial = useMemo(() => tutorials.find((t) => t.slug === slug), [slug])
   const parsedBlocks = useMemo(() => (tutorial ? parseContent(tutorial.content) : []), [tutorial])
+
+  useEffect(() => {
+    if (tutorial) {
+      document.title = `${tutorial.title} - AI应用开发 | ${SITE_NAME}`
+    } else {
+      document.title = `教程未找到 | ${SITE_NAME}`
+    }
+  }, [tutorial])
 
   if (!slug || !tutorial) {
     return <Navigate to="/development" replace />

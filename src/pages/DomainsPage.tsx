@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
   Palette,
@@ -16,6 +17,7 @@ import {
   ExternalLink,
   type LucideIcon,
 } from 'lucide-react'
+import { SITE_NAME } from '@/utils/constants'
 import { domains } from '@/data/domains'
 import type { Domain } from '@/types'
 
@@ -281,6 +283,10 @@ function DomainCard({ domain, accent }: { domain: Domain; accent: Accent }) {
 // Page
 // ---------------------------------------------------------------------------
 export default function DomainsPage() {
+  useEffect(() => {
+    document.title = `更多AI领域 | ${SITE_NAME}`
+  }, [])
+
   return (
     <div className="min-h-screen">
       {/* Hero */}

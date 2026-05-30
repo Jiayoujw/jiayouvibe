@@ -1,5 +1,6 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { Globe } from 'lucide-react'
+import { SITE_NAME } from '@/utils/constants'
 import useGitHubTrending from '@/hooks/useGitHubTrending'
 import RepoCard from '@/components/trending/RepoCard'
 import RepoFilter from '@/components/trending/RepoFilter'
@@ -25,6 +26,10 @@ function filterRepos(repos: GitHubRepo[], query: string): GitHubRepo[] {
 }
 
 const TrendingPage = () => {
+  useEffect(() => {
+    document.title = `GitHub热门项目 | ${SITE_NAME}`
+  }, [])
+
   const [language, setLanguage] = useState('')
   const [since, setSince] = useState('daily')
   const [searchQuery, setSearchQuery] = useState('')

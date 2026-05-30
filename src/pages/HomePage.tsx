@@ -6,7 +6,7 @@ import LatestUpdates from '@/components/home/LatestUpdates'
 
 export default function HomePage() {
   useEffect(() => {
-    document.title = `${SITE_NAME} - 探索AI的无限可能`
+    document.title = `AI知识导航 | ${SITE_NAME}`
   }, [])
 
   return (
