@@ -35,6 +35,7 @@ export default {
         },
       },
       fontFamily: {
+        sora: ['"Sora"', 'sans-serif'],
         sans: ['"Inter"', '"Noto Sans SC"', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
       },
