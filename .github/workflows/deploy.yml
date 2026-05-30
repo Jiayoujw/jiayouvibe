@@ -24,68 +24,38 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Verify build output
+      - name: Verify build
         run: |
-          echo "=== index.html content ==="
-          cat dist/index.html
-          echo ""
-          echo "=== Assets ==="
-          ls dist/assets/ | head -10
-          echo "..."
-          echo "=== Check paths are relative ==="
-          grep -c './' dist/index.html && echo "Relative paths confirmed" || echo "STILL ABSOLUTE PATHS!"
+          grep -c './' dist/index.html && echo "✅ Relative paths" || echo "❌ Absolute paths"
+          head -2 dist/index.html
 
       - name: Install lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
-      - name: Explore server directory structure
+      - name: Deploy to Namecheap
         run: |
           lftp -e "
             set ftp:ssl-allow no;
             set ssl:verify-certificate no;
             open ${{ secrets.FTP_SERVER }};
             user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }};
-            echo '=== Home directory ===';
-            pwd;
+            mirror -R -v --delete ./dist/ ./;
+            echo '=== Uploaded ===';
             ls;
-            echo '=== Check for different web roots ===';
-            ls public_html/ 2>/dev/null || echo 'no public_html';
-            ls www/ 2>/dev/null || echo 'no www';
-            ls htdocs/ 2>/dev/null || echo 'no htdocs';
-            echo '=== Download current index.html ===';
-            cat public_html/index.html 2>/dev/null || echo 'no index.html in public_html';
-            bye;
-          "
-
-      - name: Deploy via lftp
-        run: |
-          lftp -e "
-            set ftp:ssl-allow no;
-            set ssl:verify-certificate no;
-            open ${{ secrets.FTP_SERVER }};
-            user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }};
-            mirror -R -v --delete ./dist/ ./public_html/;
-            echo '=== Server public_html listing after upload ===';
-            ls public_html/;
-            ls public_html/assets/;
-            echo '=== Verify uploaded index.html ===';
-            cat public_html/index.html;
+            echo '=== index.html ===';
+            cat index.html;
             bye;
           "
 
       - name: Purge Cloudflare cache
         run: |
-          # Try with API Token first, then Global Key
           ZONE_ID=$(curl -s -X GET "https://api.cloudflare.com/client/v4/zones?name=jiayouvibe.com" \
             -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
             -H "Content-Type: application/json" | jq -r '.result[0].id')
-
           echo "Zone ID: $ZONE_ID"
-
           if [ -n "$ZONE_ID" ] && [ "$ZONE_ID" != "null" ]; then
-            RESULT=$(curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
+            curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
               -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
               -H "Content-Type: application/json" \
-              --data '{"purge_everything":true}')
-            echo "$RESULT"
+              --data '{"purge_everything":true}'
           fi
