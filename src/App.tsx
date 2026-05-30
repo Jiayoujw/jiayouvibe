@@ -23,6 +23,10 @@ const AboutPage = lazy(() => import('@/pages/AboutPage'))
 const ComparisonPage = lazy(() => import('@/pages/ComparisonPage'))
 const ToolsPage = lazy(() => import('@/pages/ToolsPage'))
 const LearningPathPage = lazy(() => import('@/pages/LearningPathPage'))
+const ClaudeSkillsPage = lazy(() => import('@/pages/ClaudeSkillsPage'))
+const AgentRankingsPage = lazy(() => import('@/pages/AgentRankingsPage'))
+const SkillsPage = lazy(() => import('@/pages/SkillsPage'))
+const PromptsPage = lazy(() => import('@/pages/PromptsPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 function PageFallback() {
@@ -45,6 +49,7 @@ export default function App() {
             <Route path="/models/:slug" element={<ModelDetailPage />} />
             <Route path="/agents" element={<AgentsPage />} />
             <Route path="/agents/:slug" element={<AgentDetailPage />} />
+            <Route path="/agent-rankings" element={<AgentRankingsPage />} />
             <Route path="/development" element={<DevelopmentPage />} />
             <Route path="/development/:slug" element={<DevelopmentArticlePage />} />
             <Route path="/terminology" element={<TerminologyPage />} />
@@ -58,6 +63,9 @@ export default function App() {
             <Route path="/compare" element={<ComparisonPage />} />
             <Route path="/tools" element={<ToolsPage />} />
             <Route path="/learn" element={<LearningPathPage />} />
+            <Route path="/claude-skills" element={<ClaudeSkillsPage />} />
+            <Route path="/skills" element={<SkillsPage />} />
+            <Route path="/prompts" element={<PromptsPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

@@ -133,6 +133,21 @@ export interface SearchResult {
   tags: string[]
 }
 
+// ============ Skills ============
+export interface SkillTool {
+  slug: string
+  name: string
+  category: 'ai-coding' | 'mcp-tools' | 'browser-extensions' | 'automation-workflows'
+  description: string
+  website: string
+  github?: string
+  stars?: number
+  users?: string
+  tags: string[]
+  featured?: boolean
+  addedDate?: string
+}
+
 // ============ News ============
 export interface NewsItem {
   id: string
@@ -148,6 +163,21 @@ export interface NewsItem {
 
 // ============ Theme ============
 export type ThemeMode = 'light' | 'dark' | 'system'
+
+// ============ Prompt Templates ==========
+export type PromptCategory = '编程开发' | '内容创作' | '数据分析' | '翻译润色' | '角色扮演' | '教育学习' | '商业办公'
+export type PromptDifficulty = '入门' | '进阶' | '高级'
+
+export interface PromptTemplate {
+  id: string
+  title: string
+  category: PromptCategory
+  prompt: string
+  description: string
+  tags: string[]
+  difficulty: PromptDifficulty
+  model: string
+}
 
 // ============ Navigation ============
 export interface NavItem {
