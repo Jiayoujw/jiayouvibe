@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { BookOpen, CheckCircle2, Circle, ExternalLink, ArrowRight, Clock, BarChart3, Target, GraduationCap } from 'lucide-react'
+import { BookOpen, CheckCircle2, Circle, ExternalLink, ArrowRight, Clock, Target, GraduationCap } from 'lucide-react'
 import { SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
 import Card from '@/components/ui/Card'

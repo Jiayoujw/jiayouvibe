@@ -354,7 +354,7 @@ function RadarChart({ model1, model2 }: { model1: AIModel; model2: AIModel }) {
               x={pt.x}
               y={pt.y}
               dy={dy}
-              textAnchor={anchor}
+              textAnchor={anchor as 'start' | 'middle' | 'end'}
               className="fill-slate-400 text-[11px] font-jetbrains"
               style={{ fontFamily: 'JetBrains Mono, monospace' }}
             >
