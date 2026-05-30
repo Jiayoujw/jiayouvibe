@@ -19,6 +19,8 @@ export const NAV_ITEMS: NavItem[] = [
     label: '更多',
     path: '#',
     children: [
+      { label: 'AI工具箱', path: '/tools' },
+      { label: '学习路径', path: '/learn' },
       { label: 'AI资讯', path: '/news' },
       { label: '模型对比', path: '/compare' },
       { label: '笔记系统', path: '/notes' },

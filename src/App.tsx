@@ -21,6 +21,8 @@ const DomainDetailPage = lazy(() => import('@/pages/DomainDetailPage'))
 const NewsPage = lazy(() => import('@/pages/NewsPage'))
 const AboutPage = lazy(() => import('@/pages/AboutPage'))
 const ComparisonPage = lazy(() => import('@/pages/ComparisonPage'))
+const ToolsPage = lazy(() => import('@/pages/ToolsPage'))
+const LearningPathPage = lazy(() => import('@/pages/LearningPathPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 function PageFallback() {
@@ -54,6 +56,8 @@ export default function App() {
             <Route path="/news" element={<NewsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/compare" element={<ComparisonPage />} />
+            <Route path="/tools" element={<ToolsPage />} />
+            <Route path="/learn" element={<LearningPathPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

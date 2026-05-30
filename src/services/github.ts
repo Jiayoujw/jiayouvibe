@@ -48,6 +48,48 @@ function mapRepo(raw: Record<string, unknown>): GitHubRepo {
   }
 }
 
+// ── Retry wrapper ────────────────────────────────────────────────
+
+/**
+ * Retry a fetch-based operation with configurable attempts and delay.
+ * Only retries on network errors and 5xx server errors.
+ * Rate limits (403, 429) are NOT retried here — they are handled by the caller.
+ */
+async function withRetry<T>(
+  fn: () => Promise<T>,
+  maxRetries = 2,
+  baseDelayMs = 1000,
+): Promise<T> {
+  let lastError: Error | null = null
+
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn()
+    } catch (e) {
+      lastError = e instanceof Error ? e : new Error(String(e))
+
+      // Do not retry on 4xx client errors (except rate limits handled separately)
+      if (
+        lastError.message.includes('403') ||
+        lastError.message.includes('Rate limit')
+      ) {
+        throw lastError
+      }
+
+      if (attempt < maxRetries) {
+        const delay = baseDelayMs * (attempt + 1) // 1s, 2s
+        console.warn(
+          `[GitHub] Attempt ${attempt + 1}/${maxRetries + 1} failed: ` +
+          `${lastError.message}. Retrying in ${delay}ms...`
+        )
+        await new Promise((resolve) => setTimeout(resolve, delay))
+      }
+    }
+  }
+
+  throw lastError ?? new Error('GitHub API request failed after all retries')
+}
+
 // ── Core fetch ───────────────────────────────────────────────────
 
 async function fetchFromGitHub(
@@ -59,19 +101,81 @@ async function fetchFromGitHub(
     headers: { Accept: 'application/vnd.github.v3+json' },
   })
 
+  // 403 — Rate limited
   if (res.status === 403) {
-    console.warn('[GitHub] Rate limited (403). Returning stale cache if available.')
+    const rateLimitRemaining = res.headers.get('X-RateLimit-Remaining')
+    const rateLimitReset = res.headers.get('X-RateLimit-Reset')
+    const resetDate = rateLimitReset
+      ? new Date(parseInt(rateLimitReset, 10) * 1000).toLocaleTimeString()
+      : 'unknown time'
+
+    console.warn(
+      `[GitHub] Rate limited (403). ` +
+      `Remaining: ${rateLimitRemaining ?? 'unknown'}, ` +
+      `Resets at: ${resetDate}. ` +
+      `Falling back to cached data if available.`
+    )
+
     const cache = loadCache()
-    if (cache) return cache.data
-    throw new Error('GitHub rate limit exceeded and no cache available.')
+    if (cache) {
+      console.info('[GitHub] Returning stale cached data due to rate limit.')
+      return cache.data
+    }
+
+    throw new Error(
+      `GitHub API rate limit exceeded and no cached data is available. ` +
+      `The rate limit will reset at approximately ${resetDate}. ` +
+      `Please wait a few minutes before trying again, or reduce the frequency of API calls.`
+    )
   }
 
+  // 422 — Unprocessable Entity (invalid query syntax)
+  if (res.status === 422) {
+    const body = await res.json().catch(() => ({}))
+    const errors = (body as Record<string, unknown>).errors as
+      | Array<{ message: string }>
+      | undefined
+    const errorDetails = errors?.map((e) => e.message).join('; ') ?? 'No details available'
+
+    console.error(
+      `[GitHub] Validation error (422) for query: ${params.get('q')}. ` +
+      `Details: ${errorDetails}`
+    )
+
+    throw new Error(
+      `GitHub search query failed validation (422). ` +
+      `The search query syntax may be invalid: "${params.get('q')}". ` +
+      `Details from GitHub: ${errorDetails}. ` +
+      `Please check the query for unsupported characters or qualifiers.`
+    )
+  }
+
+  // 304 — Not Modified (used with ETag/conditional requests)
+  if (res.status === 304) {
+    console.info('[GitHub] 304 Not Modified — data unchanged since last fetch.')
+    const cache = loadCache()
+    if (cache) return cache.data
+    throw new Error(
+      'GitHub API returned 304 Not Modified but no cache is available. ' +
+      'This should not happen — a conditional request was made without a prior cached response.'
+    )
+  }
+
+  // Other non-ok responses
   if (!res.ok) {
-    throw new Error(`GitHub API error: ${res.status} ${res.statusText}`)
+    throw new Error(
+      `GitHub API returned ${res.status} ${res.statusText} for query "${params.get('q')}". ` +
+      `This may be caused by an invalid search query, authentication issues, ` +
+      `or a temporary GitHub service disruption. Please verify the request and try again.`
+    )
   }
 
   const json = (await res.json()) as { items?: Record<string, unknown>[] }
   const items = json.items ?? []
+
+  console.info(
+    `[GitHub] Fetched ${items.length} repos for query: "${params.get('q')}"`
+  )
   return items.map(mapRepo)
 }
 
@@ -82,9 +186,8 @@ async function cachedFetch(
 ): Promise<GitHubRepo[]> {
   const cache = loadCache()
 
-  // Return cached data immediately if fresh
+  // Return cached data immediately if fresh; refresh in background
   if (cache && isCacheFresh(cache)) {
-    // Refresh in background
     fetchFromGitHub(params)
       .then((data) => saveCache(data))
       .catch(() => {})
@@ -92,15 +195,16 @@ async function cachedFetch(
   }
 
   try {
-    const data = await fetchFromGitHub(params)
+    const data = await withRetry(() => fetchFromGitHub(params))
     saveCache(data)
     return data
   } catch (e) {
-    console.error('[GitHub] Fetch failed:', e)
+    const errorMessage = e instanceof Error ? e.message : String(e)
+    console.error('[GitHub] Fetch failed after retries:', errorMessage)
 
     // Fall back to stale cache when network fails
     if (cache) {
-      console.warn('[GitHub] Returning stale cache due to network error.')
+      console.warn('[GitHub] Returning stale cache due to fetch error.')
       return cache.data
     }
 
@@ -117,11 +221,12 @@ export interface FetchTrendingOptions {
 }
 
 /**
- * Static fallback repos when API is unavailable.
+ * Static fallback repos used when the GitHub API is completely unreachable
+ * and no cached data is available.
  */
 export function getFallbackRepos(): GitHubRepo[] {
   return [
-    { id: 1, name: 'langchain', fullName: 'langchain-ai/langchain', owner: 'langchain-ai', ownerAvatar: '', description: '🦜🔗 Build context-aware reasoning applications', url: 'https://github.com/langchain-ai/langchain', stars: 102000, forks: 16500, language: 'Python', topics: ['llm', 'framework', 'agent'], updatedAt: '2025-05-28' },
+    { id: 1, name: 'langchain', fullName: 'langchain-ai/langchain', owner: 'langchain-ai', ownerAvatar: '', description: 'Build context-aware reasoning applications', url: 'https://github.com/langchain-ai/langchain', stars: 102000, forks: 16500, language: 'Python', topics: ['llm', 'framework', 'agent'], updatedAt: '2025-05-28' },
     { id: 2, name: 'AutoGPT', fullName: 'Significant-Gravitas/AutoGPT', owner: 'Significant-Gravitas', ownerAvatar: '', description: 'Autonomous AI agent for task automation', url: 'https://github.com/Significant-Gravitas/AutoGPT', stars: 172000, forks: 45000, language: 'Python', topics: ['agent', 'llm', 'autonomous'], updatedAt: '2025-05-30' },
     { id: 3, name: 'openai-cookbook', fullName: 'openai/openai-cookbook', owner: 'openai', ownerAvatar: '', description: 'Examples and guides for using the OpenAI API', url: 'https://github.com/openai/openai-cookbook', stars: 65000, forks: 10500, language: 'Jupyter Notebook', topics: ['openai', 'cookbook', 'tutorial'], updatedAt: '2025-05-25' },
     { id: 4, name: 'transformers', fullName: 'huggingface/transformers', owner: 'huggingface', ownerAvatar: '', description: 'State-of-the-art ML for Pytorch, TensorFlow, and JAX', url: 'https://github.com/huggingface/transformers', stars: 138000, forks: 27500, language: 'Python', topics: ['nlp', 'transformers', 'pytorch'], updatedAt: '2025-05-29' },
@@ -131,13 +236,31 @@ export function getFallbackRepos(): GitHubRepo[] {
 }
 
 /**
- * Fetch trending AI repositories.
+ * Fetch trending AI repositories from GitHub.
+ *
+ * The query combines stars:>100 (quality filter) with AI-related topic keywords
+ * to surface high-quality, actively-starred AI repositories.
+ *
+ * Uses valid GitHub search syntax:
+ *   - `stars:>100` — only repos with more than 100 stars
+ *   - `OR` — matches any of the keywords (lowercase for keywords, uppercase for operator)
+ *   - Keywords are space-separated; URLSearchParams handles encoding
+ *
+ * @param options - Optional filters for language, date range, and page size
+ * @returns Promise resolving to an array of GitHubRepo objects
  */
 export async function fetchTrendingRepos(
   options?: FetchTrendingOptions,
 ): Promise<GitHubRepo[]> {
   const { language, since, perPage = 30 } = options ?? {}
-  const parts: string[] = ['ai+OR+artificial-intelligence+OR+machine-learning']
+
+  // Core query: high-quality AI repos using valid GitHub syntax
+  // "stars:>100" filters for repos with more than 100 stars
+  // "OR" between keywords means the repo should match at least one keyword term
+  const parts: string[] = [
+    'stars:>100',
+    'ai OR artificial-intelligence OR machine-learning OR deep-learning OR llm OR rag OR agent OR gpt OR transformer',
+  ]
 
   if (language && language !== '全部') {
     parts.push(`language:${language}`)
@@ -178,7 +301,7 @@ export async function fetchAwesomeList(
  */
 export async function fetchAITutorials(): Promise<GitHubRepo[]> {
   const params = new URLSearchParams({
-    q: 'ai tutorial machine-learning deep-learning',
+    q: 'stars:>50 ai tutorial OR guide machine-learning OR deep-learning',
     sort: 'stars',
     order: 'desc',
     per_page: '30',

@@ -42,6 +42,11 @@ export default {
         'glow': 'glow 4s ease-in-out infinite alternate',
         'float': 'float 6s ease-in-out infinite',
         'gradient-shift': 'gradient-shift 8s ease infinite',
+        'particle': 'particle 12s ease-in-out infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+        'slide-up': 'slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'gradient-flow': 'gradient-flow 6s ease infinite',
       },
       keyframes: {
         glow: {
@@ -55,6 +60,37 @@ export default {
         'gradient-shift': {
           '0%, 100%': { backgroundPosition: '0% 50%' },
           '50%': { backgroundPosition: '100% 50%' },
+        },
+        particle: {
+          '0%': { transform: 'translateY(0px) translateX(0px) scale(1)', opacity: '0' },
+          '10%': { opacity: '1' },
+          '90%': { opacity: '1' },
+          '100%': { transform: 'translateY(-120px) translateX(40px) scale(0)', opacity: '0' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        'pulse-glow': {
+          '0%, 100%': {
+            boxShadow: '0 0 12px rgba(6, 182, 212, 0.3), 0 0 30px rgba(6, 182, 212, 0.1)',
+            borderColor: 'rgba(6, 182, 212, 0.3)',
+          },
+          '50%': {
+            boxShadow: '0 0 28px rgba(6, 182, 212, 0.6), 0 0 60px rgba(139, 92, 246, 0.3), 0 0 90px rgba(6, 182, 212, 0.15)',
+            borderColor: 'rgba(6, 182, 212, 0.7)',
+          },
+        },
+        'slide-up': {
+          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        'gradient-flow': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '25%': { backgroundPosition: '100% 0%' },
+          '50%': { backgroundPosition: '100% 100%' },
+          '75%': { backgroundPosition: '0% 100%' },
+          '100%': { backgroundPosition: '0% 50%' },
         },
       },
       backgroundSize: {

@@ -36,10 +36,16 @@
     @apply bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] transition-colors duration-300;
   }
 
+  /* Selection styling with cyan highlight */
   ::selection {
-    @apply bg-primary-500/30 text-primary-900;
+    @apply bg-cyan-400/30 text-cyan-900;
   }
 
+  ::-moz-selection {
+    @apply bg-cyan-400/30 text-cyan-900;
+  }
+
+  /* Smooth scrollbar styling for WebKit browsers */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -56,45 +62,150 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-slate-400/60;
   }
+
+  ::-webkit-scrollbar-thumb:active {
+    @apply bg-cyan-400/50;
+  }
+
+  /* Firefox scrollbar styling */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+  }
 }
 
 @layer components {
+  /* Base glass card */
   .glass-card {
     @apply bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl shadow-xl;
   }
 
+  /* Glass variant: darker tint for overlays */
+  .glass-card-dark {
+    @apply bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl;
+  }
+
+  /* Glass variant: lighter, more translucent */
+  .glass-card-light {
+    @apply bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-lg;
+  }
+
+  /* Glass variant: with subtle inner glow */
+  .glass-card-glow {
+    @apply bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-2xl;
+    box-shadow:
+      0 0 20px rgba(6, 182, 212, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 4px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Glass variant: frosted panel for nav / sidebar */
+  .glass-panel {
+    @apply bg-slate-900/70 backdrop-blur-2xl border-b border-slate-700/30;
+  }
+
+  /* Gradient text utility */
   .gradient-text {
     @apply bg-gradient-to-r from-primary-400 via-accent-purple to-accent-pink bg-clip-text text-transparent;
   }
 
+  /* Alternative gradient text: cyan to purple */
+  .gradient-text-cyan {
+    @apply bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent;
+  }
+
+  /* Hero background gradient with animation */
   .gradient-hero {
     background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 30%, #312e81 60%, #1e293b 100%);
     background-size: 300% 300%;
     animation: gradient-shift 12s ease infinite;
   }
 
+  /* Glow border utility */
   .glow-border {
     box-shadow: 0 0 20px var(--color-accent-glow), inset 0 0 20px var(--color-accent-glow);
   }
 
+  /* Card hover lift effect */
   .card-hover {
     @apply transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-primary-500/10;
   }
 
+  /* Primary button */
   .btn-primary {
     @apply inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/30 active:scale-95;
   }
 
+  /* Glass button */
   .btn-glass {
     @apply inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg active:scale-95;
+  }
+
+  /* Shimmer skeleton loader */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.05) 70%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
   }
 }
 
 @layer utilities {
+  /* Grid pattern background */
   .bg-grid-pattern {
     background-image:
       linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
+  }
+
+  .bg-grid-pattern-cyan {
+    background-image:
+      linear-gradient(rgba(6, 182, 212, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(6, 182, 212, 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Text shadow glow utilities */
+  .text-glow-cyan {
+    text-shadow:
+      0 0 10px rgba(6, 182, 212, 0.5),
+      0 0 30px rgba(6, 182, 212, 0.25),
+      0 0 60px rgba(6, 182, 212, 0.1);
+  }
+
+  .text-glow-purple {
+    text-shadow:
+      0 0 10px rgba(168, 85, 247, 0.5),
+      0 0 30px rgba(168, 85, 247, 0.25),
+      0 0 60px rgba(168, 85, 247, 0.1);
+  }
+
+  .text-glow-pink {
+    text-shadow:
+      0 0 10px rgba(236, 72, 153, 0.5),
+      0 0 30px rgba(236, 72, 153, 0.25),
+      0 0 60px rgba(236, 72, 153, 0.1);
+  }
+
+  .text-glow-white {
+    text-shadow:
+      0 0 10px rgba(255, 255, 255, 0.4),
+      0 0 30px rgba(255, 255, 255, 0.15);
+  }
+
+  /* Backdrop blur extensions */
+  .backdrop-blur-2xl {
+    backdrop-filter: blur(40px);
+  }
+
+  .backdrop-blur-3xl {
+    backdrop-filter: blur(64px);
   }
 }
