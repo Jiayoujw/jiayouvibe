@@ -38,6 +38,25 @@ jobs:
       - name: Install lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
+      - name: Explore server directory structure
+        run: |
+          lftp -e "
+            set ftp:ssl-allow no;
+            set ssl:verify-certificate no;
+            open ${{ secrets.FTP_SERVER }};
+            user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }};
+            echo '=== Home directory ===';
+            pwd;
+            ls;
+            echo '=== Check for different web roots ===';
+            ls public_html/ 2>/dev/null || echo 'no public_html';
+            ls www/ 2>/dev/null || echo 'no www';
+            ls htdocs/ 2>/dev/null || echo 'no htdocs';
+            echo '=== Download current index.html ===';
+            cat public_html/index.html 2>/dev/null || echo 'no index.html in public_html';
+            bye;
+          "
+
       - name: Deploy via lftp
         run: |
           lftp -e "
@@ -46,9 +65,11 @@ jobs:
             open ${{ secrets.FTP_SERVER }};
             user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }};
             mirror -R -v --delete ./dist/ ./public_html/;
-            echo '=== Server public_html listing ===';
+            echo '=== Server public_html listing after upload ===';
             ls public_html/;
             ls public_html/assets/;
+            echo '=== Verify uploaded index.html ===';
+            cat public_html/index.html;
             bye;
           "
 
