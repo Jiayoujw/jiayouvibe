@@ -1,3 +1,1 @@
-# Google AdSense
-# 申请通过后，将下方 YOUR_PUB_ID 替换为你的发布商 ID（格式：pub-xxxxxxxxxxxxxxxx）
-# google.com, YOUR_PUB_ID, DIRECT, f08c47fec0942fa0
+google.com, pub-5383848679722774, DIRECT, f08c47fec0942fa0
