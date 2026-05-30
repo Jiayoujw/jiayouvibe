@@ -273,7 +273,13 @@ export async function fetchTrendingRepos(
   }
 
   if (since) {
-    parts.push(`created:>${since}`)
+    // Convert 'daily'/'weekly'/'monthly' to actual dates
+    const now = new Date()
+    const daysMap: Record<string, number> = { daily: 1, weekly: 7, monthly: 30 }
+    const days = daysMap[since] || 30
+    const date = new Date(now.getTime() - days * 86400000)
+    const dateStr = date.toISOString().split('T')[0] // YYYY-MM-DD
+    parts.push(`created:>=${dateStr}`)
   }
 
   const params = new URLSearchParams({
