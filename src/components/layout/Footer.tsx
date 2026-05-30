@@ -12,7 +12,6 @@ const RESOURCE_LINKS = [
   { label: 'arXiv AI', url: 'https://arxiv.org/list/cs.AI/recent' },
 ]
 
-/* flatten nav items and skip "更多" parent; include its children */
 function flattenNavLinks(items: NavItem[]): NavItem[] {
   const flat: NavItem[] = []
   for (const item of items) {
@@ -29,7 +28,7 @@ const quickLinks = flattenNavLinks(NAV_ITEMS)
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-800/60 bg-slate-950 pb-24 md:pb-12">
+    <footer className="border-t border-[var(--color-border)] bg-[var(--color-bg-primary)] pb-24 md:pb-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Top columns */}
         <div className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-3">
@@ -37,14 +36,14 @@ export default function Footer() {
           <div>
             <Link
               to="/"
-              className="inline-block text-xl font-bold bg-gradient-to-r from-[#00dbe7] to-[#d1bcff] bg-clip-text text-transparent"
+              className="inline-block text-xl font-bold bg-gradient-to-r from-[#06b6d4] to-[#a855f7] bg-clip-text text-transparent"
             >
               {SITE_NAME}
             </Link>
-            <p className="mt-4 text-sm leading-relaxed text-slate-400 max-w-xs">
+            <p className="mt-4 text-sm leading-relaxed text-[var(--color-text-secondary)] max-w-xs">
               {SITE_DESCRIPTION}
             </p>
-            <div className="mt-5 flex items-center gap-1.5 text-xs text-slate-500">
+            <div className="mt-5 flex items-center gap-1.5 text-xs text-[var(--color-text-muted)]">
               <Globe className="h-3.5 w-3.5" />
               <span>中文 AI 知识导航</span>
             </div>
@@ -52,7 +51,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-primary)]">
               快速链接
             </h3>
             <ul className="mt-5 space-y-2.5">
@@ -60,7 +59,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     to={link.path}
-                    className="text-sm text-slate-400 transition-colors hover:text-cyan-400"
+                    className="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-cyan-500 dark:hover:text-cyan-400"
                   >
                     {link.label}
                   </Link>
@@ -71,7 +70,7 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-300">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-[var(--color-text-primary)]">
               AI 资源
             </h3>
             <ul className="mt-5 space-y-2.5">
@@ -81,7 +80,7 @@ export default function Footer() {
                     href={res.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-cyan-400 group"
+                    className="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] transition-colors hover:text-cyan-500 dark:hover:text-cyan-400 group"
                   >
                     {res.label}
                     <ExternalLink className="h-3 w-3 opacity-0 -translate-x-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0" />
@@ -93,11 +92,11 @@ export default function Footer() {
         </div>
 
         {/* Copyright bar */}
-        <div className="border-t border-slate-800/40 py-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
-          <p className="text-xs text-slate-500">
+        <div className="border-t border-[var(--color-border)] py-6 flex flex-col items-center justify-between gap-3 sm:flex-row">
+          <p className="text-xs text-[var(--color-text-muted)]">
             &copy; 2026 {SITE_NAME}. All rights reserved.
           </p>
-          <p className="text-xs text-slate-600">
+          <p className="text-xs text-[var(--color-text-muted)]">
             探索AI的无限可能 &middot; 汇聚全球AI知识
           </p>
         </div>

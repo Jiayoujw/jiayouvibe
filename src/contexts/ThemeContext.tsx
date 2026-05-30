@@ -15,49 +15,91 @@ function getSystemDark(): boolean {
   return window.matchMedia('(prefers-color-scheme: dark)').matches
 }
 
-function applyTheme(mode: ThemeMode) {
+function resolveIsDark(mode: ThemeMode): boolean {
+  if (mode === 'dark') return true
+  if (mode === 'light') return false
+  return getSystemDark()
+}
+
+function applyTheme(mode: ThemeMode, animate = true) {
   const root = document.documentElement
-  const isDark = mode === 'dark' || (mode === 'system' && getSystemDark())
+  const isDark = resolveIsDark(mode)
+
+  if (!animate) {
+    root.classList.toggle('dark', isDark)
+    return
+  }
+
+  // Smooth transition via a temporary attribute
+  // CSS uses [data-theme-transitioning] to enable transitions
+  root.setAttribute('data-theme-transitioning', 'true')
   root.classList.toggle('dark', isDark)
+
+  // Remove transition flag after animation completes
+  const onTransitionEnd = () => {
+    root.removeAttribute('data-theme-transitioning')
+    root.removeEventListener('transitionend', onTransitionEnd)
+  }
+  root.addEventListener('transitionend', onTransitionEnd, { once: true })
+
+  // Safety fallback: remove flag after 800ms
+  setTimeout(() => root.removeAttribute('data-theme-transitioning'), 800)
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mode, setModeState] = useState<ThemeMode>(() => {
-    const saved = localStorage.getItem(THEME_STORAGE_KEY)
-    return (saved as ThemeMode) || 'system'
+    try {
+      const saved = localStorage.getItem(THEME_STORAGE_KEY)
+      if (saved === 'light' || saved === 'dark' || saved === 'system') return saved
+    } catch { /* ignore */ }
+    return 'system'
   })
 
-  const [isDark, setIsDark] = useState(() => {
-    if (mode === 'dark') return true
-    if (mode === 'light') return false
-    return getSystemDark()
-  })
+  const [isDark, setIsDark] = useState(() => resolveIsDark(mode))
 
+  // Apply theme on mount (no animation for initial load)
+  useEffect(() => {
+    applyTheme(mode, false)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  // Persist + apply on mode change
   useEffect(() => {
     localStorage.setItem(THEME_STORAGE_KEY, mode)
-    applyTheme(mode)
-
-    const dark = mode === 'dark' || (mode === 'system' && getSystemDark())
+    const dark = resolveIsDark(mode)
     setIsDark(dark)
-
-    if (mode === 'system') {
-      const mq = window.matchMedia('(prefers-color-scheme: dark)')
-      const handler = (e: MediaQueryListEvent) => {
-        setIsDark(e.matches)
-        document.documentElement.classList.toggle('dark', e.matches)
-      }
-      mq.addEventListener('change', handler)
-      return () => mq.removeEventListener('change', handler)
-    }
+    applyTheme(mode, true)
   }, [mode])
+
+  // Listen for system preference changes when in 'system' mode
+  useEffect(() => {
+    if (mode !== 'system') return
+    const mq = window.matchMedia('(prefers-color-scheme: dark)')
+    const handler = (e: MediaQueryListEvent) => {
+      setIsDark(e.matches)
+      document.documentElement.classList.toggle('dark', e.matches)
+    }
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [mode])
+
+  // Respect reduced motion preference
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mq.matches) {
+      document.documentElement.style.setProperty('--theme-transition-duration', '0ms')
+    }
+  }, [])
 
   const setMode = (newMode: ThemeMode) => setModeState(newMode)
 
   const toggle = () => {
     setModeState((prev) => {
+      // Simple toggle: light ↔ dark, preserve system in the cycle
       if (prev === 'light') return 'dark'
-      if (prev === 'dark') return 'system'
-      return 'light'
+      if (prev === 'dark') return 'light'
+      // If system, switch to the opposite of current system preference
+      return getSystemDark() ? 'light' : 'dark'
     })
   }
 
