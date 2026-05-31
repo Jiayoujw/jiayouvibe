@@ -1,8 +1,12 @@
 import { Suspense, lazy } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Layout from '@/components/layout/Layout'
-import Spinner from '@/components/ui/Spinner'
 import ScrollToTop from '@/components/layout/ScrollToTop'
+import { ListSkeleton } from '@/components/ui/Skeleton'
+import SearchModal from '@/components/search/SearchModal'
+import ShortcutHelp from '@/components/ui/ShortcutHelp'
+import { SearchProvider } from '@/contexts/SearchContext'
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 // Lazy-loaded pages
 const HomePage = lazy(() => import('@/pages/HomePage'))
@@ -32,16 +36,18 @@ const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 function PageFallback() {
   return (
-    <div className="flex items-center justify-center min-h-[60vh]">
-      <Spinner size="lg" />
+    <div className="min-h-[60vh] pt-8">
+      <ListSkeleton count={3} />
     </div>
   )
 }
 
-export default function App() {
+/** Host component that wires up keyboard shortcuts and renders overlay modals. */
+function AppKeyboardHost() {
+  const { showShortcutHelp, closeShortcutHelp } = useKeyboardShortcuts()
+
   return (
     <>
-      <ScrollToTop />
       <Layout>
         <Suspense fallback={<PageFallback />}>
           <Routes>
@@ -72,6 +78,19 @@ export default function App() {
           </Routes>
         </Suspense>
       </Layout>
+
+      {/* Global overlay modals */}
+      <SearchModal />
+      <ShortcutHelp isOpen={showShortcutHelp} onClose={closeShortcutHelp} />
     </>
+  )
+}
+
+export default function App() {
+  return (
+    <SearchProvider>
+      <ScrollToTop />
+      <AppKeyboardHost />
+    </SearchProvider>
   )
 }

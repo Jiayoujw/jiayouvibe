@@ -4,34 +4,30 @@ import { Search, X, ArrowUp, ArrowDown, CornerDownLeft } from 'lucide-react'
 import { search, buildSearchIndex } from '@/services/searchIndex'
 import type { SearchResult } from '@/types'
 import SearchResults from '@/components/search/SearchResults'
+import { useSearchContext } from '@/contexts/SearchContext'
 
 const CATEGORY_ORDER = ['model', 'agent', 'term', 'tutorial', 'directory'] as const
 
-export default function SearchModal() {
-  const [isOpen, setIsOpen] = useState(false)
+interface SearchModalProps {
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
+}
+
+export default function SearchModal({ open, onOpenChange }: SearchModalProps = {}) {
+  const searchCtx = useSearchContext()
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<SearchResult[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
 
+  // Use context in controlled mode when no explicit props given
+  const isControlled = open !== undefined
+  const isOpen = isControlled ? open : searchCtx.isOpen
+
   // Pre-build the Fuse index on first mount so the first keystroke is instant
   useEffect(() => {
     buildSearchIndex()
-  }, [])
-
-  // Open on "/" keypress — skip when focus is inside an input, textarea, select, or contenteditable
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== '/') return
-      const tag = (e.target as HTMLElement)?.tagName
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
-      if ((e.target as HTMLElement)?.isContentEditable) return
-      e.preventDefault()
-      setIsOpen(true)
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
   // Auto-focus the search input when the modal appears
@@ -44,11 +40,15 @@ export default function SearchModal() {
 
   // Full close: dismiss modal and reset all state
   const closeModal = useCallback(() => {
-    setIsOpen(false)
+    if (isControlled) {
+      onOpenChange?.(false)
+    } else {
+      searchCtx.closeSearch()
+    }
     setQuery('')
     setResults([])
     setActiveIndex(0)
-  }, [])
+  }, [isControlled, onOpenChange, searchCtx])
 
   // Debounced search — fires 150 ms after the user stops typing
   useEffect(() => {

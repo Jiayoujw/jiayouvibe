@@ -10,6 +10,7 @@ import ReadingProgress from '@/components/ui/ReadingProgress'
 import ShareButtons from '@/components/community/ShareButtons'
 import CommentSection from '@/components/community/CommentSection'
 import SubscribeCard from '@/components/community/SubscribeCard'
+import AdBanner from '@/components/ads/AdBanner'
 
 // ---- content parser -------------------------------------------------------
 
@@ -253,8 +254,13 @@ export default function DevelopmentArticlePage() {
 
       {/* Article content */}
       <div className="prose prose-invert max-w-none">
-        {parsedBlocks.map((block, i) => {
-          switch (block.type) {
+        {(() => {
+          const midIndex = Math.floor(parsedBlocks.length / 2)
+          const firstHalf = parsedBlocks.slice(0, midIndex)
+          const secondHalf = parsedBlocks.slice(midIndex)
+
+          const renderBlock = (block: ContentBlock, i: number) => {
+            switch (block.type) {
             case 'h2':
               return (
                 <h2 key={i} className="text-2xl font-bold text-[var(--color-text-primary)] mt-10 mb-4 first:mt-0">
@@ -343,7 +349,16 @@ export default function DevelopmentArticlePage() {
             default:
               return null
           }
-        })}
+          }
+
+          return (
+            <>
+              {firstHalf.map((block, i) => renderBlock(block, i))}
+              {parsedBlocks.length > 2 && <AdBanner key="ad-mid" />}
+              {secondHalf.map((block, i) => renderBlock(block, midIndex + i))}
+            </>
+          )
+        })()}
       </div>
 
       {/* Share + Engage */}
@@ -370,7 +385,11 @@ export default function DevelopmentArticlePage() {
         />
       </div>
 
-      {/* Comments */}
+      {/*
+        Giscus comments — powered by GitHub Discussions.
+        SETUP: Visit https://giscus.app → enter "Jiayoujw/jiayouvibe" →
+        copy your repoId and categoryId → replace the REPLACE_ME values below.
+      */}
       <CommentSection
         repo="Jiayoujw/jiayouvibe"
         repoId="R_kgDO_REPLACE_ME"

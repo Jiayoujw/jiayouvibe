@@ -5,6 +5,7 @@ import { SITE_NAME } from '@/utils/constants'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import AgentCard from '@/components/agents/AgentCard'
 import AgentFilter from '@/components/agents/AgentFilter'
+import AdBanner from '@/components/ads/AdBanner'
 
 export default function AgentsPage() {
   useEffect(() => {
@@ -73,11 +74,14 @@ export default function AgentsPage() {
 
       {/* Grid */}
       {filteredAgents.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredAgents.map((agent) => (
-            <AgentCard key={agent.slug} agent={agent} />
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredAgents.map((agent) => (
+              <AgentCard key={agent.slug} agent={agent} />
+            ))}
+          </div>
+          <AdBanner />
+        </>
       ) : (
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <Bot className="w-12 h-12 text-[var(--color-text-muted)] mb-4" />

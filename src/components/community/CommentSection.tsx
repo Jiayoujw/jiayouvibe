@@ -14,13 +14,17 @@ interface CommentSectionProps {
 /**
  * Giscus comment section — GitHub Discussions-powered comments.
  *
- * Setup steps:
- * 1. Go to https://giscus.app
- * 2. Enter your repo "Jiayoujw/jiayouvibe"
- * 3. Choose "Discussion title contains page pathname" mapping
- * 4. Select the discussion category you want comments filed under
- * 5. Copy the repo-id and category-id values shown on the page
- * 6. Replace the default values below
+ * @setup
+ * Visit https://giscus.app, enter the repo "Jiayoujw/jiayouvibe",
+ * choose "Discussion title contains page pathname" as the mapping,
+ * select the discussion category, then copy the generated **repoId**
+ * and **categoryId**. Paste those values into the props of every
+ * page that renders <CommentSection> (search the codebase for
+ * "R_kgDO_REPLACE_ME" and "DIC_kwDO_REPLACE_ME").
+ *
+ * Current placeholder values (replace these at each call site):
+ *   repoId    = "R_kgDO_REPLACE_ME"
+ *   categoryId = "DIC_kwDO_REPLACE_ME"
  */
 export default function CommentSection({
   repo,

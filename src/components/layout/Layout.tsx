@@ -1,6 +1,7 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Sidebar from '@/components/layout/Sidebar'
+import MobileTabBar from '@/components/layout/MobileTabBar'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -19,12 +20,15 @@ export default function Layout({ children }: LayoutProps) {
         <Header />
       </div>
 
-      {/* Main content — offset by sidebar on desktop */}
+      {/* Main content — offset by sidebar on desktop, space for bottom tab bar on mobile */}
       <main className="min-h-screen pt-16 md:pt-8 md:ml-[260px]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 sm:pb-24">
           {children}
         </div>
       </main>
+
+      {/* Mobile bottom tab bar — visible only on small screens */}
+      <MobileTabBar />
 
       {/* Footer — offset by sidebar on desktop */}
       <div className="md:ml-[260px]">

@@ -360,7 +360,11 @@ const ModelDetailPage = () => {
         </div>
       </div>
 
-      {/* Comments */}
+      {/*
+        Giscus comments — powered by GitHub Discussions.
+        SETUP: Visit https://giscus.app → enter "Jiayoujw/jiayouvibe" →
+        copy your repoId and categoryId → replace the REPLACE_ME values below.
+      */}
       <CommentSection
         repo="Jiayoujw/jiayouvibe"
         repoId="R_kgDO_REPLACE_ME"

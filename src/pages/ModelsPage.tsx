@@ -6,6 +6,7 @@ import { MODEL_CATEGORIES } from '@/utils/constants'
 import ModelFilter from '@/components/models/ModelFilter'
 import ModelGrid from '@/components/models/ModelGrid'
 import EmptyState from '@/components/ui/EmptyState'
+import AdBanner from '@/components/ads/AdBanner'
 
 const ModelsPage = () => {
   useEffect(() => {
@@ -82,7 +83,10 @@ const ModelsPage = () => {
 
       {/* Model Grid or Empty */}
       {filteredModels.length > 0 ? (
-        <ModelGrid models={filteredModels} />
+        <>
+          <ModelGrid models={filteredModels} />
+          <AdBanner />
+        </>
       ) : (
         <EmptyState
           icon={<Cpu className="h-6 w-6 text-[var(--color-text-secondary)]" />}
