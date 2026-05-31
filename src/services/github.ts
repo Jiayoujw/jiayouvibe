@@ -300,9 +300,10 @@ export async function fetchTrendingRepos(
   // Core query: high-quality AI repos using valid GitHub syntax
   // "stars:>100" filters for repos with more than 100 stars
   // "OR" between keywords means the repo should match at least one keyword term
+  // GitHub limits to 5 AND/OR/NOT operators — keep within limit
   const parts: string[] = [
-    'stars:>100',
-    'ai OR artificial-intelligence OR machine-learning OR deep-learning OR llm OR rag OR agent OR gpt OR transformer',
+    'stars:>50',
+    'ai OR llm OR agent OR rag',
   ]
 
   if (language && language !== '全部') {
