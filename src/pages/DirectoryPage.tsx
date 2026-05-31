@@ -8,6 +8,7 @@ import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import Textarea from '@/components/ui/Textarea'
 import DirectoryCard from '@/components/directory/DirectoryCard'
+import AdBanner from '@/components/ads/AdBanner'
 
 const categoryKeys = Object.keys(DIRECTORY_CATEGORIES) as Array<keyof typeof DIRECTORY_CATEGORIES>
 
@@ -105,6 +106,11 @@ const DirectoryPage = () => {
           </div>
         </div>
       </section>
+
+      {/* ========== Ad Banner ========== */}
+      <div className="my-8 flex justify-center">
+        <AdBanner />
+      </div>
 
       {/* ========== Card Grid ========== */}
       <section className="pb-16">

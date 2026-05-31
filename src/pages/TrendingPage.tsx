@@ -8,6 +8,7 @@ import RepoFilter from '@/components/trending/RepoFilter'
 import Spinner from '@/components/ui/Spinner'
 import EmptyState from '@/components/ui/EmptyState'
 import Button from '@/components/ui/Button'
+import AdBanner from '@/components/ads/AdBanner'
 import type { GitHubRepo } from '@/types'
 
 const PAGE_SIZE = 10
@@ -102,6 +103,11 @@ const TrendingPage = () => {
           onSinceChange={handleSinceChange}
           onSearchChange={handleSearchChange}
         />
+      </div>
+
+      {/* Ad Banner */}
+      <div className="my-8 flex justify-center">
+        <AdBanner />
       </div>
 
       {/* Fallback data when API fails and no cache */}

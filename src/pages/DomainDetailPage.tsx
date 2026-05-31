@@ -25,6 +25,7 @@ import type { Term } from '@/types'
 import Breadcrumb from '@/components/ui/Breadcrumb'
 import Card from '@/components/ui/Card'
 import EmptyState from '@/components/ui/EmptyState'
+import ShareButtons from '@/components/community/ShareButtons'
 
 // ---------------------------------------------------------------------------
 // Icon lookup – resolved dynamically from each domain's `.icon` string
@@ -243,6 +244,8 @@ export default function DomainDetailPage() {
     }
   }, [domain])
 
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/#/domains/${slug}`
+
   // ── Not found ───────────────────────────────────────────────────────────
   if (!domain) {
     return (
@@ -411,6 +414,15 @@ export default function DomainDetailPage() {
               </div>
             </Card>
           )}
+
+          {/* Share */}
+          <div className="mt-6 pt-6 border-t border-white/10">
+            <ShareButtons
+              url={shareUrl}
+              title={domain.name + ' - AI领域'}
+              description={domain.description}
+            />
+          </div>
         </div>
 
         {/* ================================================================= */}

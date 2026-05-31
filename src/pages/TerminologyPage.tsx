@@ -5,6 +5,7 @@ import Input from '@/components/ui/Input'
 import AlphabetIndex from '@/components/terminology/AlphabetIndex'
 import TermItem from '@/components/terminology/TermItem'
 import { terms } from '@/data/terminology'
+import AdBanner from '@/components/ads/AdBanner'
 import type { Term } from '@/types'
 
 /** Extract the sort/group key from a term: first letter of englishName, uppercased. */
@@ -123,6 +124,11 @@ export default function TerminologyPage() {
           />
         </div>
       )}
+
+      {/* ======== Ad Banner ======== */}
+      <div className="my-8 flex justify-center">
+        <AdBanner />
+      </div>
 
       {/* ======== Term Groups ======== */}
       <div className="space-y-12 mt-1">

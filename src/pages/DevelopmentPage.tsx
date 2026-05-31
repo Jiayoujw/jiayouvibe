@@ -5,6 +5,7 @@ import { cn } from '@/utils/cn'
 import { tutorials } from '@/data/tutorials'
 import { TUTORIAL_CATEGORIES, TUTORIAL_DIFFICULTIES } from '@/utils/constants'
 import TutorialGrid from '@/components/development/TutorialGrid'
+import AdBanner from '@/components/ads/AdBanner'
 import type { Tutorial } from '@/types'
 
 type CategoryFilter = 'all' | Tutorial['category']
@@ -131,6 +132,11 @@ export default function DevelopmentPage() {
         <p className="text-sm text-[var(--color-text-muted)] font-mono">
           共 <span className="text-[var(--color-text-primary)]">{filteredTutorials.length}</span> 篇教程
         </p>
+      </div>
+
+      {/* Ad Banner */}
+      <div className="my-8 flex justify-center">
+        <AdBanner />
       </div>
 
       {/* Tutorial grid */}

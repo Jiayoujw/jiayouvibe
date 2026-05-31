@@ -17,6 +17,7 @@ import { models } from '@/data/models'
 import { SITE_NAME } from '@/utils/constants'
 import type { AIModel } from '@/types'
 import { cn } from '@/utils/cn'
+import ShareButtons from '@/components/community/ShareButtons'
 
 // ─── Types ───────────────────────────────────────────────────────────
 
@@ -665,6 +666,8 @@ export default function ComparisonPage() {
     document.title = `AI模型对比 | ${SITE_NAME}`
   }, [])
 
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : 'https://jiayouvibe.com/#/compare'
+
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>([])
   const [chipSearch, setChipSearch] = useState('')
 
@@ -711,6 +714,14 @@ export default function ComparisonPage() {
         <p className="text-[var(--color-text-secondary)] max-w-2xl text-sm leading-relaxed">
           选择最多4个AI模型，通过雷达图、排行榜和详细对比，全面评估推理、代码、创造力、性价比、速度和多模态能力。
         </p>
+
+        <div className="mt-5 pt-5 border-t border-white/10">
+          <ShareButtons
+            url={shareUrl}
+            title="AI模型对比"
+            description="选择最多4个AI模型，通过雷达图、排行榜和详细对比，全面评估推理、代码、创造力、性价比、速度和多模态能力。"
+          />
+        </div>
       </div>
 
       {/* ═══════════════════════════════════════════════════════════

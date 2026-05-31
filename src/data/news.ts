@@ -181,4 +181,40 @@ export const newsItems: NewsItem[] = [
     tags: ['Apple', '端侧AI', '隐私', 'Siri', '移动AI'],
     readingTime: 3,
   },
+  {
+    id: 'deepseek-r2-rumors',
+    title: 'DeepSeek R2 即将发布？下一代推理模型引发全球期待',
+    summary:
+      '据多方消息透露，深度求索正在加紧研发 DeepSeek R2 推理模型，预计将在 R1 基础上大幅提升多模态推理能力和代码生成水平。社区传言 R2 将采用全新的混合推理架构，支持图像和代码的多模态链式思考，并可能继续沿用开源策略。全球 AI 社区对此高度关注。',
+    source: 'The Information',
+    sourceUrl: 'https://www.theinformation.com/articles/deepseek-r2-rumors',
+    date: '2026-05-20',
+    category: 'research',
+    tags: ['DeepSeek', 'R2', '推理', '开源', '多模态'],
+    readingTime: 4,
+  },
+  {
+    id: 'openai-gpt5-api-ga',
+    title: 'OpenAI GPT-5 API 全面开放，开发者生态迎来重大升级',
+    summary:
+      'OpenAI 宣布 GPT-5 API 正式全面可用（General Availability），面向所有开发者开放。新 API 支持 200 万 token 上下文窗口、原生工具调用、结构化输出和深度思考模式。同时推出 Assistants API v2、实时语音 API 和 Batch API 大幅降价，开发者社区反响热烈。',
+    source: 'OpenAI Blog',
+    sourceUrl: 'https://openai.com/blog/gpt-5-api-ga',
+    date: '2026-02-15',
+    category: 'model',
+    tags: ['GPT-5', 'OpenAI', 'API', '开发者', '工具调用'],
+    readingTime: 4,
+  },
+  {
+    id: 'anthropic-claude-4',
+    title: 'Anthropic 正式发布 Claude 4，下一代 AI 安全与能力的新范式',
+    summary:
+      'Anthropic 发布 Claude 4 系列模型，包括 Claude 4 Opus、Sonnet 和 Haiku。新系列基于全新的 Constitutional AI 2.0 训练框架，在推理深度、安全对齐和工具使用能力上实现质的突破。Claude 4 支持 500K token 上下文、原生代码执行环境和增强的多模态理解，Opus 版本在 SWE-bench 和 GPQA 等硬核基准上创造新纪录。',
+    source: 'Anthropic Blog',
+    sourceUrl: 'https://anthropic.com/blog/claude-4',
+    date: '2026-05-15',
+    category: 'model',
+    tags: ['Claude 4', 'Anthropic', 'AI安全', '推理', '多模态'],
+    readingTime: 5,
+  },
 ]

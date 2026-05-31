@@ -288,5 +288,35 @@ export const agents: AIAgent[] = [
     features: ['任务自动创建', '优先级动态排序', '持续执行循环', '极简代码（易于理解）', '向量数据库记忆', '与多LLM兼容'],
     useCases: ['Agent概念学习', '研究实验', '轻量自动化任务', '教育演示', 'Agent原型验证'],
     pricing: '开源免费；运行需自行承担LLM API费用'
+  },
+  {
+    slug: 'manus',
+    name: 'Manus',
+    type: 'agent',
+    description: '2025年爆火的通用AI Agent平台，能够自主完成从信息检索到任务执行的完整闭环，被誉为"中国的AutoGPT杀手"。',
+    longDescription: 'Manus 由 Monica.im 团队于 2025 年 3 月推出，是全球首个真正意义上实现"手脑并用"的通用 AI Agent 平台。用户只需输入目标，Manus 即可自主完成信息检索、数据分析、代码编写、报告生成等全流程任务，并在云端异步执行，完成后通知用户。其在 GAIA 基准测试中取得 SOTA 成绩，远超 OpenAI 等竞品方案，内测邀请码一度被炒至数万元，引发全球 AI 社区轰动。Manus 采用多智能体协作架构，将复杂任务自动拆解为规划、执行、验证等子步骤。',
+    language: '多语言（云端服务）',
+    website: 'https://manus.im',
+    openSource: false,
+    tags: ['AI Agent', '自主执行', '中国', 'GAIA', '多智能体', '任务自动化'],
+    features: ['自主任务拆解与规划', '云端异步执行', '多智能体协作', '浏览器自动化', '代码编写与执行', '数据分析与可视化', '报告自动生成'],
+    useCases: ['自动化市场调研', '旅行规划与比价', '数据分析报告', '竞品信息收集', '个人AI助理'],
+    pricing: '内测阶段邀请制；预计付费订阅制'
+  },
+  {
+    slug: 'openai-codex-cli',
+    name: 'OpenAI Codex CLI',
+    type: 'tool',
+    description: 'OpenAI 推出的开源轻量级命令行 AI 编程助手，直接在终端中提供代码理解和生成能力。',
+    longDescription: 'OpenAI Codex CLI 于 2025 年 4 月开源发布，是 OpenAI 在 AI 编程工具领域的新尝试。与 Cursor 和 Copilot 等 IDE 集成方案不同，Codex CLI 专注于命令行环境——开发者可以在终端中直接调用 AI 进行代码分析、重构、调试和脚本生成。它是完全开源的轻量级工具，支持本地模型和 OpenAI API 双模式，特别适合 DevOps、SRE 和偏好命令行的开发者。发布后在 GitHub 上迅速获得上万星标，被视为 AI 编程"去 IDE 化"的重要探索。',
+    language: 'Rust, TypeScript',
+    githubStars: 18000,
+    website: 'https://github.com/openai/codex-cli',
+    github: 'https://github.com/openai/codex-cli',
+    openSource: true,
+    tags: ['CLI', '编程助手', 'OpenAI', '开源', '命令行', 'Rust'],
+    features: ['终端原生AI交互', '代码分析与解释', '自动重构建议', '脚本生成与执行', '支持本地模型', '管道友好（stdin/stdout）', '多模型后端切换'],
+    useCases: ['Shell脚本自动生成', '代码库快速分析', 'DevOps自动化', '日志分析调试', 'CI/CD流水线集成'],
+    pricing: '开源免费；使用 OpenAI API 需自行付费'
   }
 ]

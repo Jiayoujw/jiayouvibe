@@ -361,5 +361,43 @@ export const models: AIModel[] = [
     strengths: ['极高的性价比', '低延迟', '支持多模态输入', '128K上下文'],
     weaknesses: ['复杂推理有限', '创意写作不及大模型'],
     useCases: ['轻量聊天机器人', '文本分类', '简单问答', '大规模数据处理', '移动端应用']
+  },
+  {
+    slug: 'gemini-3-flash',
+    name: 'Gemini 3 Flash',
+    provider: 'Google DeepMind',
+    category: 'llm',
+    description: 'Google 推出的极速轻量多模态模型，在保持 Gemini 3 系列核心能力的同时大幅降低延迟和成本，适合高并发实时场景。',
+    longDescription: 'Gemini 3 Flash 于 2026 年 4 月发布，是 Google DeepMind 在 Gemini 3 Pro 之后推出的轻量极速模型。继承了 Gemini 3 系列的原生多模态能力（文本、图像、音频、视频），但在延迟和成本上做出了显著优化——响应速度比 Pro 版快 4 倍，API 价格仅为 1/10。在轻量级推理、分类、摘要和实时交互等场景中表现出色，同时支持 100 万 token 上下文窗口，是大规模部署和高并发场景的理想选择。',
+    parameters: '未公开（轻量级 MoE 架构）',
+    contextWindow: '100万 tokens',
+    pricing: '输入$0.15/1M tokens, 输出$0.6/1M tokens',
+    releaseDate: '2026-04',
+    website: 'https://deepmind.google/technologies/gemini/',
+    apiAvailable: true,
+    openSource: false,
+    tags: ['LLM', '轻量', '快速', '多模态', 'Google', '高并发'],
+    strengths: ['极低延迟（比Pro快4倍）', '成本低廉', '原生多模态', '百万token上下文', '适合大规模部署'],
+    weaknesses: ['复杂推理能力有限', '创意性任务不如Pro/Ultra版', '中文支持待加强'],
+    useCases: ['实时聊天机器人', '内容审核与分类', '轻量级代码补全', '批量数据处理', '移动端AI应用']
+  },
+  {
+    slug: 'qwen-3-max',
+    name: 'Qwen 3 Max',
+    provider: 'Alibaba Cloud（阿里云）',
+    category: 'llm',
+    description: '阿里通义千问旗舰级闭源模型，在 Qwen3 开源系列之上进一步强化推理和指令遵循能力，面向企业级高要求场景。',
+    longDescription: 'Qwen 3 Max 于 2026 年 3 月发布，是阿里云在 Qwen3 开源系列基础上推出的旗舰闭源模型。相比开源版本，Max 在推理深度、指令遵循精准度、长文本理解和安全性方面有显著提升。模型在 MMLU-Pro、HumanEval、LiveCodeBench 等多个国际权威基准测试中与 GPT-5 和 Claude Opus 4.5 正面对标，在中文任务上更是全面领先。Qwen 3 Max 支持 256K 上下文窗口、工具调用和多模态输入，通过阿里云百炼平台提供服务。',
+    parameters: '未公开（MoE 架构，推测激活参数超百亿）',
+    contextWindow: '256K tokens',
+    pricing: '输入¥4/1M tokens, 输出¥12/1M tokens（阿里云百炼平台）',
+    releaseDate: '2026-03',
+    website: 'https://tongyi.aliyun.com',
+    apiAvailable: true,
+    openSource: false,
+    tags: ['LLM', '中文', '旗舰', '推理', '阿里', '企业级'],
+    strengths: ['中文能力业界第一', '指令遵循精准', '推理能力比肩国际顶级', '阿里云生态深度整合', '企业级安全保障'],
+    weaknesses: ['闭源限制', '海外访问需通过阿里云国际版', '英文创意写作略逊于GPT-5'],
+    useCases: ['企业级智能客服', '中文长文档处理', '金融分析', '政务AI应用', '电商内容生成']
   }
 ]

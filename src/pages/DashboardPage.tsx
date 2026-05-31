@@ -21,6 +21,7 @@ import {
   Sparkles,
   Terminal,
 } from 'lucide-react'
+import { SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
 import { formatStars } from '@/utils/formatDate'
 import { useNotes } from '@/contexts/NotesContext'
@@ -530,6 +531,10 @@ function ProgressRing({ percent = 75 }: { percent?: number }) {
 export default function DashboardPage() {
   const { state } = useNotes()
   const noteCount = state.notes.length
+
+  useEffect(() => {
+    document.title = `仪表盘 | ${SITE_NAME}`
+  }, [])
 
   const stats = [
     { icon: Eye, label: '今日访问', value: 12847, gradient: 'from-cyan-400 to-blue-500', suffix: '' },
