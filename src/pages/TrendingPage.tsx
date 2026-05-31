@@ -109,10 +109,10 @@ const TrendingPage = () => {
         <AdBanner />
       </div>
 
-      {/* Fallback data when API fails and no cache */}
+      {/* Fallback data when API fails and no cache — respects current filters */}
       {error && repos.length === 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {getFallbackRepos().map((repo) => (
+          {getFallbackRepos(language, since).map((repo) => (
             <RepoCard key={repo.id} repo={repo} />
           ))}
         </div>

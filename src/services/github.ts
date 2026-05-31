@@ -229,16 +229,53 @@ export interface FetchTrendingOptions {
 /**
  * Static fallback repos used when the GitHub API is completely unreachable
  * and no cached data is available.
+ *
+ * Accepts optional filters to return different repos for different UI states.
  */
-export function getFallbackRepos(): GitHubRepo[] {
-  return [
-    { id: 1, name: 'langchain', fullName: 'langchain-ai/langchain', owner: 'langchain-ai', ownerAvatar: '', description: 'Build context-aware reasoning applications', url: 'https://github.com/langchain-ai/langchain', stars: 102000, forks: 16500, language: 'Python', topics: ['llm', 'framework', 'agent'], updatedAt: '2025-05-28' },
+export function getFallbackRepos(language?: string, since?: string): GitHubRepo[] {
+  const all: GitHubRepo[] = [
+    { id: 1, name: 'langchain', fullName: 'langchain-ai/langchain', owner: 'langchain-ai', ownerAvatar: '', description: 'Build context-aware reasoning applications with LLMs', url: 'https://github.com/langchain-ai/langchain', stars: 102000, forks: 16500, language: 'Python', topics: ['llm', 'framework', 'agent'], updatedAt: '2025-05-30' },
     { id: 2, name: 'AutoGPT', fullName: 'Significant-Gravitas/AutoGPT', owner: 'Significant-Gravitas', ownerAvatar: '', description: 'Autonomous AI agent for task automation', url: 'https://github.com/Significant-Gravitas/AutoGPT', stars: 172000, forks: 45000, language: 'Python', topics: ['agent', 'llm', 'autonomous'], updatedAt: '2025-05-30' },
-    { id: 3, name: 'openai-cookbook', fullName: 'openai/openai-cookbook', owner: 'openai', ownerAvatar: '', description: 'Examples and guides for using the OpenAI API', url: 'https://github.com/openai/openai-cookbook', stars: 65000, forks: 10500, language: 'Jupyter Notebook', topics: ['openai', 'cookbook', 'tutorial'], updatedAt: '2025-05-25' },
-    { id: 4, name: 'transformers', fullName: 'huggingface/transformers', owner: 'huggingface', ownerAvatar: '', description: 'State-of-the-art ML for Pytorch, TensorFlow, and JAX', url: 'https://github.com/huggingface/transformers', stars: 138000, forks: 27500, language: 'Python', topics: ['nlp', 'transformers', 'pytorch'], updatedAt: '2025-05-29' },
-    { id: 5, name: 'ollama', fullName: 'ollama/ollama', owner: 'ollama', ownerAvatar: '', description: 'Get up and running with Llama 3, Mistral, Gemma, and other LLMs locally', url: 'https://github.com/ollama/ollama', stars: 105000, forks: 8300, language: 'Go', topics: ['llm', 'local-ai', 'inference'], updatedAt: '2025-05-30' },
-    { id: 6, name: 'dify', fullName: 'langgenius/dify', owner: 'langgenius', ownerAvatar: '', description: 'An open-source LLM app development platform', url: 'https://github.com/langgenius/dify', stars: 63000, forks: 9200, language: 'TypeScript', topics: ['llm', 'platform', 'rag'], updatedAt: '2025-05-28' },
+    { id: 3, name: 'openai-cookbook', fullName: 'openai/openai-cookbook', owner: 'openai', ownerAvatar: '', description: 'Examples and guides for using the OpenAI API', url: 'https://github.com/openai/openai-cookbook', stars: 65000, forks: 10500, language: 'Jupyter Notebook', topics: ['openai', 'cookbook', 'tutorial'], updatedAt: '2025-05-29' },
+    { id: 4, name: 'transformers', fullName: 'huggingface/transformers', owner: 'huggingface', ownerAvatar: '', description: 'State-of-the-art ML for PyTorch, TensorFlow, and JAX', url: 'https://github.com/huggingface/transformers', stars: 138000, forks: 27500, language: 'Python', topics: ['nlp', 'transformers', 'pytorch'], updatedAt: '2025-05-29' },
+    { id: 5, name: 'ollama', fullName: 'ollama/ollama', owner: 'ollama', ownerAvatar: '', description: 'Run Llama, Mistral, Gemma locally with ease', url: 'https://github.com/ollama/ollama', stars: 105000, forks: 8300, language: 'Go', topics: ['llm', 'local-ai', 'inference'], updatedAt: '2025-05-30' },
+    { id: 6, name: 'dify', fullName: 'langgenius/dify', owner: 'langgenius', ownerAvatar: '', description: 'Open-source LLM app development platform with visual workflow', url: 'https://github.com/langgenius/dify', stars: 63000, forks: 9200, language: 'TypeScript', topics: ['llm', 'platform', 'rag'], updatedAt: '2025-05-28' },
+    { id: 7, name: 'crewAI', fullName: 'crewAIInc/crewAI', owner: 'crewAIInc', ownerAvatar: '', description: 'Framework for orchestrating role-playing AI agents', url: 'https://github.com/crewAIInc/crewAI', stars: 28000, forks: 3800, language: 'Python', topics: ['agent', 'multi-agent', 'orchestration'], updatedAt: '2025-05-29' },
+    { id: 8, name: 'vllm', fullName: 'vllm-project/vllm', owner: 'vllm-project', ownerAvatar: '', description: 'High-throughput and memory-efficient LLM serving engine', url: 'https://github.com/vllm-project/vllm', stars: 45000, forks: 7200, language: 'Python', topics: ['llm', 'inference', 'serving'], updatedAt: '2025-05-30' },
+    { id: 9, name: 'llama.cpp', fullName: 'ggerganov/llama.cpp', owner: 'ggerganov', ownerAvatar: '', description: 'LLM inference in C/C++ for maximum performance', url: 'https://github.com/ggerganov/llama.cpp', stars: 76000, forks: 10800, language: 'C++', topics: ['llm', 'inference', 'local'], updatedAt: '2025-05-30' },
+    { id: 10, name: 'whisper', fullName: 'openai/whisper', owner: 'openai', ownerAvatar: '', description: 'Robust Speech Recognition via Large-Scale Weak Supervision', url: 'https://github.com/openai/whisper', stars: 75000, forks: 8900, language: 'Python', topics: ['speech', 'audio', 'transcription'], updatedAt: '2025-05-27' },
+    { id: 11, name: 'langgraph', fullName: 'langchain-ai/langgraph', owner: 'langchain-ai', ownerAvatar: '', description: 'Build resilient language agents as graphs', url: 'https://github.com/langchain-ai/langgraph', stars: 12000, forks: 1800, language: 'Python', topics: ['agent', 'graph', 'workflow'], updatedAt: '2025-05-30' },
+    { id: 12, name: 'cursor', fullName: 'getcursor/cursor', owner: 'getcursor', ownerAvatar: '', description: 'The AI-first Code Editor', url: 'https://github.com/getcursor/cursor', stars: 25000, forks: 2100, language: 'TypeScript', topics: ['code', 'editor', 'ai-assistant'], updatedAt: '2025-05-28' },
+    { id: 13, name: 'deepseek-coder', fullName: 'deepseek-ai/deepseek-coder', owner: 'deepseek-ai', ownerAvatar: '', description: 'DeepSeek Coder: Let the Code Write Itself', url: 'https://github.com/deepseek-ai/deepseek-coder', stars: 18000, forks: 1600, language: 'Python', topics: ['code', 'llm', 'deepseek'], updatedAt: '2025-05-25' },
+    { id: 14, name: 'excalidraw', fullName: 'excalidraw/excalidraw', owner: 'excalidraw', ownerAvatar: '', description: 'Virtual whiteboard for sketching hand-drawn like diagrams', url: 'https://github.com/excalidraw/excalidraw', stars: 92000, forks: 8500, language: 'TypeScript', topics: ['canvas', 'drawing', 'collaboration'], updatedAt: '2025-05-27' },
+    { id: 15, name: 'sglang', fullName: 'sgl-project/sglang', owner: 'sgl-project', ownerAvatar: '', description: 'Structured Generation Language for LLM Inference', url: 'https://github.com/sgl-project/sglang', stars: 8500, forks: 700, language: 'Python', topics: ['llm', 'inference', 'structured-output'], updatedAt: '2025-05-30' },
+    { id: 16, name: 'fastgpt', fullName: 'labring/FastGPT', owner: 'labring', ownerAvatar: '', description: 'FastGPT is a knowledge-based platform built on LLM', url: 'https://github.com/labring/FastGPT', stars: 21000, forks: 5200, language: 'TypeScript', topics: ['llm', 'rag', 'knowledge-base'], updatedAt: '2025-05-29' },
+    { id: 17, name: 'chatgpt-on-wechat', fullName: 'zhayujie/chatgpt-on-wechat', owner: 'zhayujie', ownerAvatar: '', description: 'WeChat chatbot based on ChatGPT', url: 'https://github.com/zhayujie/chatgpt-on-wechat', stars: 32000, forks: 8700, language: 'Python', topics: ['chatbot', 'wechat', 'gpt'], updatedAt: '2025-05-28' },
+    { id: 18, name: 'ChatGPT-Next-Web', fullName: 'ChatGPTNextWeb/NextChat', owner: 'ChatGPTNextWeb', ownerAvatar: '', description: 'A cross-platform ChatGPT/Gemini UI', url: 'https://github.com/ChatGPTNextWeb/NextChat', stars: 82000, forks: 63000, language: 'TypeScript', topics: ['chatgpt', 'ui', 'cross-platform'], updatedAt: '2025-05-30' },
+    { id: 19, name: 'mindsdb', fullName: 'mindsdb/mindsdb', owner: 'mindsdb', ownerAvatar: '', description: 'AI Database - build AI with SQL', url: 'https://github.com/mindsdb/mindsdb', stars: 28000, forks: 3700, language: 'Python', topics: ['ai', 'sql', 'database'], updatedAt: '2025-05-28' },
+    { id: 20, name: 'coze-studio', fullName: 'coze-dev/coze-studio', owner: 'coze-dev', ownerAvatar: '', description: 'AI Agent development platform by ByteDance', url: 'https://github.com/coze-dev/coze-studio', stars: 8500, forks: 1100, language: 'TypeScript', topics: ['agent', 'platform', 'workflow'], updatedAt: '2025-05-30' },
   ]
+
+  // Filter by language if specified
+  let filtered = all
+  if (language && language !== '全部') {
+    const langLower = language.toLowerCase()
+    filtered = filtered.filter((r) => r.language.toLowerCase() === langLower)
+    // If filter yields less than 3, return all (too few results)
+    if (filtered.length < 3) filtered = all
+  }
+
+  // Filter by time if specified
+  if (since) {
+    const now = new Date()
+    const daysMap: Record<string, number> = { daily: 1, weekly: 7, monthly: 30 }
+    const days = daysMap[since] || 30
+    const cutoff = new Date(now.getTime() - days * 86400000)
+    const timeFiltered = filtered.filter((r) => new Date(r.updatedAt) >= cutoff)
+    if (timeFiltered.length >= 3) filtered = timeFiltered
+  }
+
+  return filtered.slice(0, 30)
 }
 
 /**
