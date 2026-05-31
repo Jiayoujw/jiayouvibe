@@ -9,8 +9,10 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]">
       <Header />
-      <main className="min-h-screen pt-20">
-        {children}
+      <main className="min-h-screen pt-16 sm:pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+          {children}
+        </div>
       </main>
       <Footer />
     </div>

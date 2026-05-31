@@ -290,7 +290,7 @@ export default function DomainsPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative py-20 px-4">
+      <section className="relative py-20">
         {/* Background gradient blobs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-40 left-1/4 w-[500px] h-[500px] bg-primary-600/10 rounded-full blur-[120px]" />
@@ -308,7 +308,7 @@ export default function DomainsPage() {
       </section>
 
       {/* Grid */}
-      <section className="max-w-6xl mx-auto px-4 pb-24">
+      <section className="pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {domains.map((domain) => (
             <DomainCard

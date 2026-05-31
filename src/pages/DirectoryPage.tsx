@@ -30,8 +30,8 @@ const DirectoryPage = () => {
   return (
     <div className="min-h-screen">
       {/* ========== Hero / Header ========== */}
-      <section className="relative pt-12 pb-8 px-4">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="relative pt-12 pb-8">
+        <div className="text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-400/10 border border-cyan-400/20 mb-4">
             <Globe className="w-4 h-4 text-cyan-400" />
             <span className="text-xs font-medium text-cyan-300 tracking-wide">AI 网站收录</span>
@@ -46,8 +46,8 @@ const DirectoryPage = () => {
       </section>
 
       {/* ========== Filters: Category Tabs + Featured Toggle ========== */}
-      <section className="px-4 pb-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="pb-8">
+        <div>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             {/* Category tab bar */}
             <div
@@ -107,8 +107,8 @@ const DirectoryPage = () => {
       </section>
 
       {/* ========== Card Grid ========== */}
-      <section className="px-4 pb-16">
-        <div className="max-w-7xl mx-auto">
+      <section className="pb-16">
+        <div>
           {filteredEntries.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {filteredEntries.map((entry) => (
@@ -133,7 +133,7 @@ const DirectoryPage = () => {
       </section>
 
       {/* ========== Recommendation Form ========== */}
-      <section className="px-4 pb-20">
+      <section className="pb-20">
         <div className="max-w-2xl mx-auto">
           <div className="glass-card p-6 md:p-8">
             <div className="text-center mb-6">

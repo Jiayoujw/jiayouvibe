@@ -293,7 +293,7 @@ export default function AgentRankingsPage() {
   }, [])
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="py-8">
       {/* ── Breadcrumb ─────────────────────────────── */}
       <nav className="flex items-center gap-1.5 text-xs sm:text-sm text-[var(--color-text-muted)] mb-6 font-jetbrains">
         <Link to="/" className="hover:text-cyan-400 transition-colors">

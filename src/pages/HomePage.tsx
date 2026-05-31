@@ -20,7 +20,7 @@ export default function HomePage() {
 
       {/* Newsletter CTA */}
       <section className="pb-24 sm:pb-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div>
           <SubscribeCard
             actionUrl="https://jiayouvibe.us21.list-manage.com/subscribe/post?u=REPLACE_ME&amp;id=REPLACE_ME"
           />

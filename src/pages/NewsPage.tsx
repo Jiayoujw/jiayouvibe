@@ -93,7 +93,7 @@ const NewsPage = () => {
   }, [])
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12">
+    <div className="py-8 sm:py-12">
       {/* Page Header */}
       <div className="mb-8">
         <h1 className="text-3xl sm:text-4xl font-sora font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">

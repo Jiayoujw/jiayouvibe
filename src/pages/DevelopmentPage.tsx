@@ -45,7 +45,7 @@ export default function DevelopmentPage() {
   }, [])
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="py-10">
       {/* Page header */}
       <div className="mb-10">
         <div className="flex items-center gap-3 mb-3">
