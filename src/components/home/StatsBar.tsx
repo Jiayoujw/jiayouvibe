@@ -56,7 +56,7 @@ const stats: StatItem[] = [
 
 export default function StatsBar() {
   return (
-    <section className="relative bg-[#0f172a] py-16 sm:py-20">
+    <section className="relative bg-[var(--color-bg-primary)] py-16 sm:py-20">
       {/* Subtle top border */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent" />
 

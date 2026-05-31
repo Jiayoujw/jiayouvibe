@@ -753,6 +753,7 @@ export default function ComparisonPage() {
                 key={model.slug}
                 onClick={() => toggleModel(model.slug)}
                 disabled={disabled}
+                aria-pressed={isSelected}
                 className={cn(
                   'inline-flex items-center gap-2 px-3.5 py-2 rounded-full text-xs font-jetbrains font-medium tracking-wide transition-all duration-200',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',

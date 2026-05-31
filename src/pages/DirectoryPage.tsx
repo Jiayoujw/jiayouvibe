@@ -152,22 +152,23 @@ const DirectoryPage = () => {
                 e.preventDefault()
                 alert('感谢推荐！我们将在审核后收录该网站。')
               }}
+              aria-describedby="rec-form-hint"
               className="space-y-4"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">网站名称</label>
-                  <Input placeholder="例如：OpenAI Platform" required />
+                  <label htmlFor="rec-site-name" className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">网站名称</label>
+                  <Input id="rec-site-name" placeholder="例如：OpenAI Platform" required />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">网站地址</label>
-                  <Input type="url" placeholder="https://" required />
+                  <label htmlFor="rec-site-url" className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">网站地址</label>
+                  <Input id="rec-site-url" type="url" placeholder="https://" required />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">所属分类</label>
-                <Select required defaultValue="">
+                <label htmlFor="rec-site-category" className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">所属分类</label>
+                <Select id="rec-site-category" required defaultValue="">
                   <option value="" disabled>请选择分类</option>
                   {categoryKeys.map((key) => (
                     <option key={key} value={key}>
@@ -178,8 +179,8 @@ const DirectoryPage = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">网站简介</label>
-                <Textarea placeholder="简单介绍一下这个网站（200字以内）" rows={3} maxLength={200} />
+                <label htmlFor="rec-site-desc" className="block text-xs font-medium text-[var(--color-text-secondary)] mb-1.5">网站简介</label>
+                <Textarea id="rec-site-desc" placeholder="简单介绍一下这个网站（200字以内）" rows={3} maxLength={200} />
               </div>
 
               <button
@@ -190,7 +191,7 @@ const DirectoryPage = () => {
                 提交推荐
               </button>
 
-              <p className="text-center text-[11px] text-[var(--color-text-muted)] mt-2">
+              <p id="rec-form-hint" className="text-center text-[11px] text-[var(--color-text-muted)] mt-2">
                 提交后经审核收录
               </p>
             </form>

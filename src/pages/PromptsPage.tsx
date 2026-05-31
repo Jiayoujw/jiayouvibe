@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from 'react'
-import { Copy, Check, Code2, ExternalLink, Search, Filter, X } from 'lucide-react'
+import { Copy, Check, Code2, ExternalLink, Search, Filter, X, Monitor, PenTool, BarChart3, Globe, Theater, BookOpen, Briefcase } from 'lucide-react'
 import { SITE_NAME } from '@/utils/constants'
 import { prompts } from '@/data/prompts'
 import { cn } from '@/utils/cn'
@@ -24,14 +24,14 @@ const DIFFICULTY_CONFIG: Record<PromptDifficulty, { label: string; className: st
   '高级': { label: '高级', className: 'bg-rose-400/15 text-rose-300 border-rose-400/25' },
 }
 
-const CATEGORY_CONFIG: Record<PromptCategory, { color: string; icon: string }> = {
-  '编程开发': { color: 'bg-cyan-400/15 text-cyan-300 border-cyan-400/25', icon: '💻' },
-  '内容创作': { color: 'bg-purple-400/15 text-purple-300 border-purple-400/25', icon: '✍️' },
-  '数据分析': { color: 'bg-blue-400/15 text-blue-300 border-blue-400/25', icon: '📊' },
-  '翻译润色': { color: 'bg-teal-400/15 text-teal-300 border-teal-400/25', icon: '🌐' },
-  '角色扮演': { color: 'bg-pink-400/15 text-pink-300 border-pink-400/25', icon: '🎭' },
-  '教育学习': { color: 'bg-green-400/15 text-green-300 border-green-400/25', icon: '📚' },
-  '商业办公': { color: 'bg-amber-400/15 text-amber-300 border-amber-400/25', icon: '💼' },
+const CATEGORY_CONFIG: Record<PromptCategory, { color: string; icon: React.ElementType }> = {
+  '编程开发': { color: 'bg-cyan-400/15 text-cyan-300 border-cyan-400/25', icon: Monitor },
+  '内容创作': { color: 'bg-purple-400/15 text-purple-300 border-purple-400/25', icon: PenTool },
+  '数据分析': { color: 'bg-blue-400/15 text-blue-300 border-blue-400/25', icon: BarChart3 },
+  '翻译润色': { color: 'bg-teal-400/15 text-teal-300 border-teal-400/25', icon: Globe },
+  '角色扮演': { color: 'bg-pink-400/15 text-pink-300 border-pink-400/25', icon: Theater },
+  '教育学习': { color: 'bg-green-400/15 text-green-300 border-green-400/25', icon: BookOpen },
+  '商业办公': { color: 'bg-amber-400/15 text-amber-300 border-amber-400/25', icon: Briefcase },
 }
 
 /* ── Toast ── */
@@ -147,6 +147,7 @@ export default function PromptsPage() {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
+              aria-label="清除搜索"
               className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
             >
               <X className="h-3.5 w-3.5" />
@@ -163,6 +164,7 @@ export default function PromptsPage() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
+                aria-pressed={isActive}
                 className={cn(
                   'inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-medium',
                   'border transition-all duration-200',
@@ -176,7 +178,7 @@ export default function PromptsPage() {
                       ),
                 )}
               >
-                {config && <span className="text-xs">{config.icon}</span>}
+                {config && <config.icon className="h-3.5 w-3.5" />}
                 {cat}
               </button>
             )
@@ -245,7 +247,7 @@ export default function PromptsPage() {
                         catConfig.color,
                       )}
                     >
-                      <span>{catConfig.icon}</span>
+                      <catConfig.icon className="h-3 w-3" />
                       {prompt.category}
                     </span>
                     {/* Difficulty badge */}

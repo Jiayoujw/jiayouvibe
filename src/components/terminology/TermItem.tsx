@@ -37,7 +37,8 @@ export default function TermItem({ term, isExpanded, onToggle }: TermItemProps) 
       {/* Header — always visible */}
       <button
         onClick={onToggle}
-        className="w-full flex items-center gap-3 px-5 py-4 text-left group"
+        aria-expanded={isExpanded}
+        className="w-full flex items-center gap-3 px-5 py-4 text-left group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-xl"
       >
         <div className="flex-1 min-w-0 flex flex-wrap items-center gap-x-3 gap-y-1.5">
           {/* Chinese term name */}

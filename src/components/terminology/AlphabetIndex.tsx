@@ -60,10 +60,11 @@ export default function AlphabetIndex({ letters, activeLetter, onLetterClick }: 
             <button
               key={letter}
               onClick={() => onLetterClick(letter)}
+              aria-pressed={isActive}
               className={cn(
                 'flex h-10 w-10 shrink-0 items-center justify-center rounded-lg',
                 'text-sm font-jetbrains font-semibold',
-                'transition-all duration-200',
+                'transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',
                 isActive
                   ? 'bg-cyan-400/15 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)] ring-1 ring-cyan-400/30 scale-110'
                   : 'text-slate-400 bg-white/[0.04] hover:bg-cyan-400/10 hover:text-cyan-300 hover:scale-105',

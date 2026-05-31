@@ -10,7 +10,8 @@ import {
   Code2,
   Terminal,
   Server,
-
+  Monitor,
+  Plug,
   Puzzle,
   Workflow,
   Zap,
@@ -44,12 +45,12 @@ interface SkillTool {
 
 // ── Category Filter Config ───────────────────────────────────────────────
 
-const CATEGORY_PILLS: { key: SkillCategory | ''; label: string; emoji: string }[] = [
-  { key: '', label: '全部', emoji: '' },
-  { key: 'ai-coding', label: 'AI编程助手', emoji: '💻' },
-  { key: 'mcp-tools', label: 'MCP工具', emoji: '🔌' },
-  { key: 'browser-extensions', label: '浏览器扩展', emoji: '🧩' },
-  { key: 'automation-workflows', label: '自动化工作流', emoji: '⚡' },
+const CATEGORY_PILLS: { key: SkillCategory | ''; label: string; icon: React.ElementType | null }[] = [
+  { key: '', label: '全部', icon: null },
+  { key: 'ai-coding', label: 'AI编程助手', icon: Monitor },
+  { key: 'mcp-tools', label: 'MCP工具', icon: Plug },
+  { key: 'browser-extensions', label: '浏览器扩展', icon: Puzzle },
+  { key: 'automation-workflows', label: '自动化工作流', icon: Zap },
 ]
 
 const SORT_OPTIONS: { key: SortOption; label: string; icon: React.ElementType }[] = [
@@ -563,6 +564,7 @@ const SkillsPage = () => {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
+              aria-label="清除搜索"
               className="text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors shrink-0"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -582,6 +584,7 @@ const SkillsPage = () => {
             <button
               key={pill.key}
               onClick={() => setCategoryFilter(pill.key)}
+              aria-pressed={isActive}
               className={cn(
                 'inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-jetbrains font-medium tracking-wide transition-all duration-300',
                 'border backdrop-blur-sm',
@@ -590,7 +593,7 @@ const SkillsPage = () => {
                   : 'bg-white/[0.03] border-white/[0.06] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-white/[0.15] hover:bg-white/[0.05]',
               )}
             >
-              {pill.emoji && <span className="text-sm leading-none">{pill.emoji}</span>}
+              {pill.icon && <pill.icon className="h-3.5 w-3.5" />}
               {pill.label}
             </button>
           )

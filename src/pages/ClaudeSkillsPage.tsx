@@ -319,6 +319,7 @@ function GridSkillCard({ skill }: { skill: SkillEntry }) {
             href={skill.link}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${skill.name} 外部链接`}
             className="text-[var(--color-text-muted)] hover:text-amber-400 transition-colors"
           >
             <Globe className="h-3.5 w-3.5" />

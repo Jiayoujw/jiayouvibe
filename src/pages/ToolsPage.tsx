@@ -786,6 +786,7 @@ function ToolCard({ tool }: { tool: ToolEntry }) {
                 href={tool.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`GitHub: ${tool.name}`}
                 className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] text-[var(--color-text-secondary)] hover:text-white hover:bg-white/[0.08] hover:border-white/20 transition-all duration-200"
                 onClick={(e) => e.stopPropagation()}
                 title="GitHub"
@@ -927,6 +928,7 @@ const ToolsPage = () => {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
+              aria-label="清除搜索"
               className="text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors shrink-0"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -946,6 +948,7 @@ const ToolsPage = () => {
             <button
               key={pill.key}
               onClick={() => setCategoryFilter(pill.key)}
+              aria-pressed={isActive}
               className={cn(
                 'inline-flex items-center px-4 py-2 rounded-xl text-xs font-jetbrains font-medium tracking-wide transition-all duration-300',
                 'border backdrop-blur-sm',
@@ -973,6 +976,7 @@ const ToolsPage = () => {
               <button
                 key={pill.key}
                 onClick={() => setPricingFilter(pill.key)}
+                aria-pressed={isActive}
                 className={cn(
                   'inline-flex items-center px-3 py-1.5 rounded-lg text-[10px] font-jetbrains font-medium tracking-wide transition-all duration-200',
                   'border',
@@ -1099,7 +1103,7 @@ const ToolsPage = () => {
                 Suggest a Tool
               </span>
             </h2>
-            <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed max-w-sm">
+            <p id="suggest-tool-hint" className="text-sm text-[var(--color-text-secondary)] leading-relaxed max-w-sm">
               发现了好用的 AI 工具没在列表中？提交你的推荐，通过审核后将收录到工具箱，帮助更多开发者。
             </p>
           </div>
@@ -1119,13 +1123,14 @@ const ToolsPage = () => {
                 </div>
               </div>
             ) : (
-              <form onSubmit={handleSuggest} className="space-y-4">
+              <form onSubmit={handleSuggest} className="space-y-4" aria-describedby="suggest-tool-hint">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-jetbrains text-[var(--color-text-muted)] mb-1.5 ml-1 uppercase tracking-wider">
+                    <label htmlFor="suggest-tool-name" className="block text-[11px] font-jetbrains text-[var(--color-text-muted)] mb-1.5 ml-1 uppercase tracking-wider">
                       Tool Name
                     </label>
                     <input
+                      id="suggest-tool-name"
                       type="text"
                       required
                       placeholder="例如: Midjourney"
@@ -1141,10 +1146,11 @@ const ToolsPage = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-jetbrains text-[var(--color-text-muted)] mb-1.5 ml-1 uppercase tracking-wider">
+                    <label htmlFor="suggest-tool-url" className="block text-[11px] font-jetbrains text-[var(--color-text-muted)] mb-1.5 ml-1 uppercase tracking-wider">
                       URL
                     </label>
                     <input
+                      id="suggest-tool-url"
                       type="url"
                       required
                       placeholder="https://..."
@@ -1161,10 +1167,11 @@ const ToolsPage = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-[11px] font-jetbrains text-[var(--color-text-muted)] mb-1.5 ml-1 uppercase tracking-wider">
+                  <label htmlFor="suggest-tool-desc" className="block text-[11px] font-jetbrains text-[var(--color-text-muted)] mb-1.5 ml-1 uppercase tracking-wider">
                     Description
                   </label>
                   <textarea
+                    id="suggest-tool-desc"
                     placeholder="简单描述一下这个工具..."
                     rows={3}
                     value={suggestDescription}

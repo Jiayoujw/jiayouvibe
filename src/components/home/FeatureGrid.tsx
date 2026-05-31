@@ -70,7 +70,7 @@ const features: FeatureItem[] = [
 
 export default function FeatureGrid() {
   return (
-    <section className="relative bg-[#0f172a] py-24 sm:py-32">
+    <section className="relative bg-[var(--color-bg-primary)] py-24 sm:py-32">
       {/* Subtle top border gradient */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent" />
 
@@ -80,7 +80,7 @@ export default function FeatureGrid() {
           <h2 className="text-3xl sm:text-4xl font-bold text-white font-sora mb-4">
             AI知识体系
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
+          <p className="text-[var(--color-text-secondary)] text-base sm:text-lg max-w-xl mx-auto">
             六大核心板块，构建完整的AI学习与实践路径
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function FeatureGrid() {
                 key={feature.path}
                 to={feature.path}
                 className={cn(
-                  'group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]',
+                  'group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]',
                 )}
               >
                 {/* ── Shimmer-border wrapper ─────────────────────────── */}
@@ -150,7 +150,7 @@ export default function FeatureGrid() {
                       </h3>
 
                       {/* ── Description ──────────────────────────────── */}
-                      <p className="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors duration-300">
+                      <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed group-hover:text-[var(--color-text-primary)] transition-colors duration-300">
                         {feature.description}
                       </p>
                     </div>

@@ -125,7 +125,7 @@ function renderInline(text: string): (string | JSX.Element)[] {
   for (const seg of segments) {
     if (seg.isCode) {
       parts.push(
-        <code key={key++} className="px-1.5 py-0.5 rounded bg-slate-800 text-cyan-300 text-[0.875em] font-mono">
+        <code key={key++} className="px-1.5 py-0.5 rounded bg-[var(--color-bg-tertiary)] text-cyan-300 text-[0.875em] font-mono">
           {seg.text}
         </code>,
       )
@@ -137,7 +137,7 @@ function renderInline(text: string): (string | JSX.Element)[] {
     for (const b of boldSplit) {
       if (b.startsWith('**') && b.endsWith('**')) {
         parts.push(
-          <strong key={key++} className="text-slate-100 font-semibold">
+          <strong key={key++} className="text-[var(--color-text-primary)] font-semibold">
             {b.slice(2, -2)}
           </strong>,
         )
@@ -213,7 +213,7 @@ export default function DevelopmentArticlePage() {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-100 mb-5 leading-tight">{tutorial.title}</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] mb-5 leading-tight">{tutorial.title}</h1>
 
         {/* Description blurb */}
         <p className="text-[var(--color-text-secondary)] text-base leading-relaxed mb-6">{tutorial.description}</p>
@@ -243,7 +243,7 @@ export default function DevelopmentArticlePage() {
           {tutorial.tags.map((tag) => (
             <span
               key={tag}
-              className="text-[11px] px-2.5 py-1 rounded-full bg-slate-800 text-[var(--color-text-secondary)] border border-[var(--color-border)]/60 font-mono"
+              className="text-[11px] px-2.5 py-1 rounded-full bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] border border-[var(--color-border)]/60 font-mono"
             >
               #{tag}
             </span>
@@ -257,7 +257,7 @@ export default function DevelopmentArticlePage() {
           switch (block.type) {
             case 'h2':
               return (
-                <h2 key={i} className="text-2xl font-bold text-slate-100 mt-10 mb-4 first:mt-0">
+                <h2 key={i} className="text-2xl font-bold text-[var(--color-text-primary)] mt-10 mb-4 first:mt-0">
                   {renderInline(block.text)}
                 </h2>
               )
@@ -281,9 +281,9 @@ export default function DevelopmentArticlePage() {
               )
             case 'code': {
               return (
-                <div key={i} className="my-6 rounded-xl border border-[var(--color-border)]/60 overflow-hidden bg-slate-900/80">
+                <div key={i} className="my-6 rounded-xl border border-[var(--color-border)]/60 overflow-hidden bg-[var(--color-bg-secondary)]/80">
                   {block.language && (
-                    <div className="flex items-center justify-between px-4 py-2 bg-slate-800/80 border-b border-[var(--color-border)]/40">
+                    <div className="flex items-center justify-between px-4 py-2 bg-[var(--color-bg-tertiary)]/80 border-b border-[var(--color-border)]/40">
                       <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--color-text-muted)]">{block.language}</span>
                     </div>
                   )}
@@ -317,7 +317,7 @@ export default function DevelopmentArticlePage() {
               return (
                 <div key={i} className="overflow-x-auto my-6 rounded-lg border border-[var(--color-border)]/60">
                   <table className="min-w-full text-sm">
-                    <thead className="bg-slate-800/80">
+                    <thead className="bg-[var(--color-bg-tertiary)]/80">
                       <tr>
                         {block.headers.map((h, j) => (
                           <th key={j} className="px-4 py-2.5 text-left text-[var(--color-text-primary)] font-semibold border-b border-[var(--color-border)]/60">

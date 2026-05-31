@@ -52,7 +52,7 @@ export default function DevelopmentPage() {
           <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-cyan-400/10 border border-cyan-400/20">
             <Code2 className="w-5 h-5 text-cyan-400" />
           </div>
-          <h1 className="text-3xl font-bold text-slate-100">AI应用开发</h1>
+          <h1 className="text-3xl font-bold text-[var(--color-text-primary)]">AI应用开发</h1>
         </div>
         <p className="text-[var(--color-text-secondary)] text-base max-w-2xl">
           从零开始学习AI应用开发，涵盖提示工程、RAG、微调、Agent开发和生产部署的完整教程体系。
@@ -65,11 +65,12 @@ export default function DevelopmentPage() {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setActiveCategory('all')}
+            aria-pressed={activeCategory === 'all'}
             className={cn(
               'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border',
               activeCategory === 'all'
                 ? 'bg-cyan-400/15 text-cyan-300 border-cyan-400/40 shadow-sm shadow-cyan-400/10'
-                : 'bg-slate-800/60 text-[var(--color-text-secondary)] border-[var(--color-border)]/50 hover:border-slate-600 hover:text-[var(--color-text-primary)]',
+                : 'bg-[var(--color-bg-tertiary)]/60 text-[var(--color-text-secondary)] border-[var(--color-border)]/50 hover:border-[var(--color-border)] hover:text-[var(--color-text-primary)]',
             )}
           >
             全部
@@ -80,11 +81,12 @@ export default function DevelopmentPage() {
             <button
               key={key}
               onClick={() => setActiveCategory(key)}
+              aria-pressed={activeCategory === key}
               className={cn(
                 'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 border',
                 activeCategory === key
                   ? 'bg-cyan-400/15 text-cyan-300 border-cyan-400/40 shadow-sm shadow-cyan-400/10'
-                  : 'bg-slate-800/60 text-[var(--color-text-secondary)] border-[var(--color-border)]/50 hover:border-slate-600 hover:text-[var(--color-text-primary)]',
+                  : 'bg-[var(--color-bg-tertiary)]/60 text-[var(--color-text-secondary)] border-[var(--color-border)]/50 hover:border-[var(--color-border)] hover:text-[var(--color-text-primary)]',
               )}
             >
               {label}
@@ -107,13 +109,14 @@ export default function DevelopmentPage() {
               <button
                 key={key}
                 onClick={() => setActiveDifficulty(key)}
+                aria-pressed={activeDifficulty === key}
                 className={cn(
                   'px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 border',
                   activeDifficulty === key
                     ? diffStyle
                       ? cn(diffStyle.color, 'border-current/30')
-                      : 'bg-slate-700 text-[var(--color-text-primary)] border-slate-600'
-                    : 'bg-transparent text-[var(--color-text-muted)] border-[var(--color-border)]/60 hover:border-slate-600 hover:text-[var(--color-text-secondary)]',
+                      : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] border-[var(--color-border)]'
+                    : 'bg-transparent text-[var(--color-text-muted)] border-[var(--color-border)]/60 hover:border-[var(--color-border)] hover:text-[var(--color-text-secondary)]',
                 )}
               >
                 {label}

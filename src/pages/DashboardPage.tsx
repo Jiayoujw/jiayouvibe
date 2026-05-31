@@ -165,7 +165,7 @@ function SideNavBar() {
   ]
 
   return (
-    <aside className="hidden md:flex md:flex-col fixed left-0 top-0 bottom-0 w-64 bg-slate-900/90 backdrop-blur-xl border-r border-white/[0.06] z-40">
+    <aside className="hidden md:flex md:flex-col fixed left-0 top-0 bottom-0 w-64 bg-[var(--color-bg-secondary)]/90 backdrop-blur-xl border-r border-white/[0.06] z-40">
       {/* Brand */}
       <div className="flex items-center gap-3 px-6 py-6 border-b border-white/[0.05]">
         <div className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 shadow-lg shadow-purple-500/30">
@@ -186,7 +186,7 @@ function SideNavBar() {
       </div>
 
       {/* Nav links */}
-      <nav className="flex-1 px-3 py-4 space-y-0.5">
+      <nav className="flex-1 px-3 py-4 space-y-0.5" role="navigation" aria-label="主导航">
         <p className="px-3 pt-2 pb-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--color-text-muted)]">
           Main Menu
         </p>
@@ -275,10 +275,10 @@ function TopNavBar() {
         <div className="mx-2 h-6 w-px bg-white/[0.06]" />
 
         {/* User avatar */}
-        <button className="flex items-center gap-2 rounded-xl px-1.5 py-1 hover:bg-white/[0.04] transition-colors">
+        <button className="flex items-center gap-2 rounded-xl px-1.5 py-1 hover:bg-white/[0.04] transition-colors" aria-label="用户菜单" aria-expanded={false}>
           <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-purple-500 text-white text-xs font-bold shadow-md shadow-purple-500/20">
             J
-            <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-slate-950 bg-emerald-400" />
+            <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full border-2 border-[var(--color-bg-primary)] bg-emerald-400" />
           </div>
           <ChevronDown className="hidden sm:block h-3.5 w-3.5 text-[var(--color-text-muted)]" />
         </button>
@@ -309,7 +309,7 @@ function StatCard({
   }, [count, value])
 
   return (
-    <div className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-slate-900/60 backdrop-blur-xl p-5 transition-all duration-300 hover:border-cyan-500/30 hover:bg-slate-900/80 hover:shadow-[0_0_30px_rgba(6,182,212,0.08)]">
+    <div className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 transition-all duration-300 hover:border-cyan-500/30 hover:bg-[var(--color-bg-secondary)]/80 hover:shadow-[0_0_30px_rgba(6,182,212,0.08)]">
       {/* hover glow */}
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(circle_at_50%_0%,rgba(6,182,212,0.06),transparent_70%)]" />
 
@@ -348,7 +348,7 @@ function TrendingBars() {
                 {repo.name}
               </span>
               <span className="font-mono tabular-nums text-[var(--color-text-muted)]">
-                ⭐ {formatStars(repo.stars)}
+                <Star className="h-3 w-3 inline fill-amber-400 text-amber-400" /> {formatStars(repo.stars)}
               </span>
             </div>
             <div className="relative h-3 w-full rounded-full bg-white/[0.03] overflow-hidden">
@@ -539,7 +539,7 @@ export default function DashboardPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-[var(--color-bg-primary)] text-slate-100">
+    <div className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]">
       <SideNavBar />
       <TopNavBar />
 
@@ -569,7 +569,7 @@ export default function DashboardPage() {
             {/* Left 70% */}
             <div className="lg:col-span-8 space-y-5">
               {/* GitHub 趋势 */}
-              <section className="rounded-2xl border border-white/[0.06] bg-slate-900/60 backdrop-blur-xl p-5 sm:p-6">
+              <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
                 <div className="flex items-center gap-2.5 mb-5">
                   <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-slate-700 to-slate-800">
                     <BarChart3 className="h-4 w-4 text-cyan-400" />
@@ -583,7 +583,7 @@ export default function DashboardPage() {
               </section>
 
               {/* 最近更新 */}
-              <section className="rounded-2xl border border-white/[0.06] bg-slate-900/60 backdrop-blur-xl p-5 sm:p-6">
+              <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
                 <div className="flex items-center gap-2.5 mb-4">
                   <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-slate-700 to-slate-800">
                     <ScrollText className="h-4 w-4 text-purple-400" />
@@ -600,7 +600,7 @@ export default function DashboardPage() {
             {/* Right 30% */}
             <div className="lg:col-span-4 space-y-5">
               {/* 快速操作 */}
-              <section className="rounded-2xl border border-white/[0.06] bg-slate-900/60 backdrop-blur-xl p-5 sm:p-6">
+              <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
                 <h2 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
                   <Zap className="h-4 w-4 text-amber-400" />
                   快速操作
@@ -609,7 +609,7 @@ export default function DashboardPage() {
               </section>
 
               {/* 热门标签 */}
-              <section className="rounded-2xl border border-white/[0.06] bg-slate-900/60 backdrop-blur-xl p-5 sm:p-6">
+              <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
                 <h2 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-purple-400" />
                   热门标签
@@ -618,7 +618,7 @@ export default function DashboardPage() {
               </section>
 
               {/* 学习进度 */}
-              <section className="rounded-2xl border border-white/[0.06] bg-slate-900/60 backdrop-blur-xl p-5 sm:p-6">
+              <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
                 <h2 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
                   <TrendingUp className="h-4 w-4 text-emerald-400" />
                   学习进度
@@ -635,7 +635,7 @@ export default function DashboardPage() {
             <p className="text-xs text-[var(--color-text-muted)]">
               &copy; {new Date().getFullYear()} jiayouvibe — System Core Dashboard. All rights reserved.
             </p>
-            <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-slate-700">
+            <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-[var(--color-text-muted)]">
               Powered by AI &middot; v2.0.0
             </p>
           </div>

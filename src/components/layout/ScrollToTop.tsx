@@ -34,8 +34,8 @@ export default function ScrollToTop() {
       aria-label="回到顶部"
       className={cn(
         'fixed bottom-6 right-6 z-40 flex h-10 w-10 items-center justify-center rounded-xl',
-        'border border-slate-700/50 bg-slate-900/70 backdrop-blur-lg',
-        'text-slate-400 shadow-lg shadow-black/20',
+        'border border-[var(--color-border)]/50 bg-[var(--color-bg-secondary)]/70 backdrop-blur-lg',
+        'text-[var(--color-text-secondary)] shadow-lg shadow-black/20',
         'transition-all duration-300 ease-in-out',
         'hover:text-cyan-400 hover:border-cyan-500/40 hover:shadow-[0_0_16px_rgba(0,219,231,0.25)]',
         visible

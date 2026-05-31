@@ -115,10 +115,11 @@ const NewsPage = () => {
                 <button
                   key={tab.key}
                   onClick={() => setActiveCategory(tab.key)}
+                  aria-pressed={activeCategory === tab.key}
                   className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border ${
                     activeCategory === tab.key
                       ? 'bg-cyan-500/15 border-cyan-500/40 text-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.2)]'
-                      : 'border-[var(--color-border)]/60 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-slate-600 hover:bg-slate-800/40'
+                      : 'border-[var(--color-border)]/60 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-border)] hover:bg-[var(--color-bg-tertiary)]/40'
                   }`}
                 >
                   {activeCategory === tab.key && (
@@ -131,13 +132,15 @@ const NewsPage = () => {
 
             {/* Search Input */}
             <div className="relative">
+              <label htmlFor="news-search-input" className="sr-only">搜索新闻</label>
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--color-text-muted)]" />
               <input
+                id="news-search-input"
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="搜索新闻标题、摘要、标签..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[var(--color-border)]/60 bg-slate-900/60 text-[var(--color-text-primary)] text-sm placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[var(--color-border)]/60 bg-[var(--color-bg-secondary)]/60 text-[var(--color-text-primary)] text-sm placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/30 transition-all duration-200"
               />
             </div>
           </div>
@@ -183,7 +186,7 @@ const NewsPage = () => {
         {/* Sidebar */}
         <div className="w-full lg:w-72 shrink-0 space-y-6">
           {/* Hot Tags Cloud */}
-          <div className="rounded-2xl border border-[var(--color-border)]/80 bg-slate-900/60 backdrop-blur-sm p-5">
+          <div className="rounded-2xl border border-[var(--color-border)]/80 bg-[var(--color-bg-secondary)]/60 backdrop-blur-sm p-5">
             <div className="flex items-center gap-2 mb-4">
               <Tag className="h-4 w-4 text-cyan-400" />
               <h3 className="text-sm font-sora font-semibold text-[var(--color-text-primary)]">
@@ -195,7 +198,7 @@ const NewsPage = () => {
                 <button
                   key={tag}
                   onClick={() => setSearchQuery(tag)}
-                  className="px-2.5 py-1 text-xs rounded-lg border border-[var(--color-border)]/50 bg-slate-800/40 text-[var(--color-text-secondary)] hover:text-cyan-300 hover:border-cyan-500/40 hover:bg-cyan-500/10 transition-all duration-200"
+                  className="px-2.5 py-1 text-xs rounded-lg border border-[var(--color-border)]/50 bg-[var(--color-bg-tertiary)]/40 text-[var(--color-text-secondary)] hover:text-cyan-300 hover:border-cyan-500/40 hover:bg-cyan-500/10 transition-all duration-200"
                 >
                   {tag}
                   <span className="ml-1 text-[var(--color-text-muted)]">({count})</span>
@@ -205,7 +208,7 @@ const NewsPage = () => {
           </div>
 
           {/* Weekly Hot (Top 5) */}
-          <div className="rounded-2xl border border-[var(--color-border)]/80 bg-slate-900/60 backdrop-blur-sm p-5">
+          <div className="rounded-2xl border border-[var(--color-border)]/80 bg-[var(--color-bg-secondary)]/60 backdrop-blur-sm p-5">
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="h-4 w-4 text-purple-400" />
               <h3 className="text-sm font-sora font-semibold text-[var(--color-text-primary)]">
@@ -221,7 +224,7 @@ const NewsPage = () => {
                         ? 'bg-cyan-500/20 text-cyan-400'
                         : idx === 1
                           ? 'bg-purple-500/20 text-purple-400'
-                          : 'bg-slate-700/60 text-[var(--color-text-muted)]'
+                          : 'bg-[var(--color-bg-tertiary)]/60 text-[var(--color-text-muted)]'
                     }`}
                   >
                     {idx + 1}
@@ -254,7 +257,7 @@ function NewsCard({ item }: { item: NewsItem }) {
   return (
     <div className="relative pl-8 group">
       {/* Timeline Dot */}
-      <div className="absolute left-[5px] top-6 w-3.5 h-3.5 rounded-full bg-slate-900 border-2 border-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.5)] group-hover:shadow-[0_0_16px_rgba(6,182,212,0.7)] transition-shadow duration-300 z-10" />
+      <div className="absolute left-[5px] top-6 w-3.5 h-3.5 rounded-full bg-[var(--color-bg-primary)] border-2 border-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.5)] group-hover:shadow-[0_0_16px_rgba(6,182,212,0.7)] transition-shadow duration-300 z-10" />
 
       {/* Date Label */}
       <div className="mb-2 text-xs font-jetbrains text-[var(--color-text-muted)]">
@@ -263,7 +266,7 @@ function NewsCard({ item }: { item: NewsItem }) {
 
       {/* Card */}
       <div
-        className="rounded-2xl border border-[var(--color-border)]/80 bg-slate-900/60 backdrop-blur-sm p-5
+        className="rounded-2xl border border-[var(--color-border)]/80 bg-[var(--color-bg-secondary)]/60 backdrop-blur-sm p-5
                     transition-all duration-300
                     hover:border-cyan-500/30 hover:bg-slate-900/80
                     hover:shadow-[0_0_30px_rgba(6,182,212,0.08)]"
@@ -275,7 +278,7 @@ function NewsCard({ item }: { item: NewsItem }) {
               href={item.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-base sm:text-lg font-sora font-semibold text-slate-100 hover:text-cyan-400 transition-colors leading-snug group/link"
+              className="text-base sm:text-lg font-sora font-semibold text-[var(--color-text-primary)] hover:text-cyan-400 transition-colors leading-snug group/link"
             >
               {item.title}
               <ExternalLink className="inline h-3.5 w-3.5 ml-1.5 -mt-0.5 text-[var(--color-text-muted)] group-hover/link:text-cyan-400 transition-colors" />
@@ -290,7 +293,7 @@ function NewsCard({ item }: { item: NewsItem }) {
           {/* Footer: source badge, tags, reading time */}
           <div className="flex flex-wrap items-center gap-3">
             {/* Source Badge */}
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-800 text-[var(--color-text-secondary)] border border-[var(--color-border)]/50">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)] border border-[var(--color-border)]/50">
               {item.source}
             </span>
 
@@ -304,7 +307,7 @@ function NewsCard({ item }: { item: NewsItem }) {
               {item.tags.slice(0, 4).map((tag) => (
                 <span
                   key={tag}
-                  className="px-2 py-0.5 text-[10px] rounded-md bg-slate-800/60 text-[var(--color-text-muted)] border border-[var(--color-border)]/40"
+                  className="px-2 py-0.5 text-[10px] rounded-md bg-[var(--color-bg-tertiary)]/60 text-[var(--color-text-muted)] border border-[var(--color-border)]/40"
                 >
                   #{tag}
                 </span>

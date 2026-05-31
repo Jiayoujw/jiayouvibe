@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
 
         {/* Links */}
-        <nav className="flex-shrink-0">
+        <nav className="flex-shrink-0" aria-label="页脚导航">
           <ul className="flex flex-wrap justify-center lg:justify-end gap-x-8 gap-y-4">
             {FOOTER_LINKS.map((link) => (
               <li key={link.label}>

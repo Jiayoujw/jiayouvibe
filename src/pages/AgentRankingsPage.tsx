@@ -62,10 +62,10 @@ function getMedalStyle(rank: number) {
       return {
         border: 'border-[var(--color-border)]/40',
         shadow: '',
-        bg: 'hover:bg-slate-800/30',
+        bg: 'hover:bg-[var(--color-bg-tertiary)]/30',
         text: 'text-[var(--color-text-secondary)]',
-        badge: 'bg-slate-700/30 text-[var(--color-text-secondary)] border-slate-600/30',
-        rankBg: 'bg-slate-800/50 text-[var(--color-text-secondary)]',
+        badge: 'bg-[var(--color-bg-tertiary)]/30 text-[var(--color-text-secondary)] border-[var(--color-border)]/30',
+        rankBg: 'bg-[var(--color-bg-tertiary)]/50 text-[var(--color-text-secondary)]',
       }
   }
 }
@@ -93,11 +93,11 @@ function RankingRow({
     <div
       className={cn(
         'group relative flex items-center gap-3 sm:gap-5 rounded-2xl border p-4 sm:p-5 transition-all duration-300',
-        'backdrop-blur-sm bg-slate-900/60',
+        'backdrop-blur-sm bg-[var(--color-bg-secondary)]/60',
         m.border,
         m.shadow,
         m.bg,
-        !isTop3 && 'hover:border-slate-600/50 hover:bg-slate-800/40',
+        !isTop3 && 'hover:border-[var(--color-border)]/50 hover:bg-[var(--color-bg-tertiary)]/40',
       )}
     >
       {/* Rank number / icon */}
@@ -124,7 +124,7 @@ function RankingRow({
       {/* Agent info */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
-          <h3 className="text-base sm:text-lg font-bold text-slate-100 truncate">
+          <h3 className="text-base sm:text-lg font-bold text-[var(--color-text-primary)] truncate">
             {agent.name}
           </h3>
           {isTop3 && (
@@ -147,7 +147,7 @@ function RankingRow({
           {agent.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="px-1.5 py-0.5 text-[11px] rounded-md bg-slate-800/60 text-[var(--color-text-muted)] border border-[var(--color-border)]/40"
+              className="px-1.5 py-0.5 text-[11px] rounded-md bg-[var(--color-bg-tertiary)]/60 text-[var(--color-text-muted)] border border-[var(--color-border)]/40"
             >
               {tag}
             </span>
@@ -187,7 +187,7 @@ function RankingRow({
           'shrink-0 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200',
           isTop3
             ? 'bg-cyan-400/10 text-cyan-400 border border-cyan-400/25 hover:bg-cyan-400/20 hover:border-cyan-400/40'
-            : 'bg-slate-800/60 text-[var(--color-text-secondary)] border border-[var(--color-border)]/40 hover:bg-slate-700/60 hover:text-[var(--color-text-primary)] hover:border-slate-600/40',
+            : 'bg-[var(--color-bg-tertiary)]/60 text-[var(--color-text-secondary)] border border-[var(--color-border)]/40 hover:bg-[var(--color-bg-tertiary)]/60 hover:text-[var(--color-text-primary)] hover:border-[var(--color-border)]/40',
         )}
       >
         详情
@@ -210,9 +210,9 @@ function RisingAgentItem({
   return (
     <Link
       to={`/agents/${agent.slug}`}
-      className="flex items-center gap-3 p-3 rounded-xl transition-colors hover:bg-slate-800/40 group"
+      className="flex items-center gap-3 p-3 rounded-xl transition-colors hover:bg-[var(--color-bg-tertiary)]/40 group"
     >
-      <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-slate-800/70 text-xs font-bold font-jetbrains text-[var(--color-text-secondary)] group-hover:text-cyan-400 transition-colors">
+      <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-[var(--color-bg-tertiary)]/70 text-xs font-bold font-jetbrains text-[var(--color-text-secondary)] group-hover:text-cyan-400 transition-colors">
         {rank}
       </span>
       <div className="flex-1 min-w-0">
@@ -323,16 +323,17 @@ export default function AgentRankingsPage() {
       {/* ── Filter bar ─────────────────────────────── */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         {/* Category tabs */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-800/50 border border-[var(--color-border)]/40 overflow-x-auto scrollbar-none">
+        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[var(--color-bg-tertiary)]/50 border border-[var(--color-border)]/40 overflow-x-auto scrollbar-none">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.key}
               onClick={() => setCategory(cat.key)}
+              aria-pressed={category === cat.key}
               className={cn(
                 'shrink-0 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-all duration-200',
                 category === cat.key
                   ? 'bg-cyan-400/15 text-cyan-400 border border-cyan-400/25 shadow-[0_0_10px_rgba(0,219,231,0.15)]'
-                  : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-slate-700/40 border border-transparent',
+                  : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)]/40 border border-transparent',
               )}
             >
               {cat.label}
@@ -348,7 +349,7 @@ export default function AgentRankingsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="搜索Agent名称或关键词..."
-            className="w-full sm:w-64 pl-9 pr-4 py-2 rounded-xl bg-slate-800/50 border border-[var(--color-border)]/40 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-cyan-400/40 focus:ring-1 focus:ring-cyan-400/20 transition-colors"
+            className="w-full sm:w-64 pl-9 pr-4 py-2 rounded-xl bg-[var(--color-bg-tertiary)]/50 border border-[var(--color-border)]/40 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-cyan-400/40 focus:ring-1 focus:ring-cyan-400/20 transition-colors"
           />
         </div>
       </div>
@@ -386,7 +387,7 @@ export default function AgentRankingsPage() {
         {/* ── Sidebar ────────────────────────────── */}
         <div className="mt-8 lg:mt-0 lg:w-80 xl:w-88 shrink-0 space-y-5">
           {/* Criteria card */}
-          <div className="rounded-2xl border border-[var(--color-border)]/40 bg-slate-900/50 backdrop-blur-sm p-5">
+          <div className="rounded-2xl border border-[var(--color-border)]/40 bg-[var(--color-bg-secondary)]/50 backdrop-blur-sm p-5">
             <div className="flex items-center gap-2 mb-3">
               <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-cyan-400/10 border border-cyan-400/20">
                 <Info className="w-4 h-4 text-cyan-400" />
@@ -413,7 +414,7 @@ export default function AgentRankingsPage() {
           </div>
 
           {/* Rising fastest card */}
-          <div className="rounded-2xl border border-[var(--color-border)]/40 bg-slate-900/50 backdrop-blur-sm p-5">
+          <div className="rounded-2xl border border-[var(--color-border)]/40 bg-[var(--color-bg-secondary)]/50 backdrop-blur-sm p-5">
             <div className="flex items-center gap-2 mb-3">
               <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-400/10 border border-emerald-400/20">
                 <TrendingUp className="w-4 h-4 text-emerald-400" />
@@ -438,7 +439,7 @@ export default function AgentRankingsPage() {
           {/* Quick link to agents page */}
           <Link
             to="/agents"
-            className="flex items-center justify-between p-4 rounded-2xl border border-[var(--color-border)]/40 bg-slate-900/50 backdrop-blur-sm hover:border-cyan-400/30 hover:bg-slate-800/40 transition-all duration-200 group"
+            className="flex items-center justify-between p-4 rounded-2xl border border-[var(--color-border)]/40 bg-[var(--color-bg-secondary)]/50 backdrop-blur-sm hover:border-cyan-400/30 hover:bg-[var(--color-bg-tertiary)]/40 transition-all duration-200 group"
           >
             <span className="text-sm text-[var(--color-text-primary)] group-hover:text-cyan-400 transition-colors">
               浏览全部AI Agent →

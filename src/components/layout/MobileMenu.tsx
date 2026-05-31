@@ -48,15 +48,16 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
     if (hasChildren) {
       return (
-        <div key={item.label} className="border-b border-slate-800/50">
+        <div key={item.label} className="border-b border-[var(--color-border)]/50">
           <button
             onClick={() => toggleExpand(index)}
-            className="flex w-full items-center justify-between px-6 py-4 text-left text-slate-300 transition-colors hover:text-cyan-400"
+            aria-expanded={isExpanded}
+            className="flex w-full items-center justify-between px-6 py-4 text-left text-[var(--color-text-primary)] transition-colors hover:text-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-inset"
           >
             <span className="text-base font-medium">{item.label}</span>
             <ChevronDown
               className={cn(
-                'h-5 w-5 text-slate-500 transition-transform duration-300',
+                'h-5 w-5 text-[var(--color-text-muted)] transition-transform duration-300',
                 isExpanded && 'rotate-180'
               )}
             />
@@ -67,7 +68,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               isExpanded ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
             )}
           >
-            <div className="space-y-1 bg-slate-900/40 px-6 pb-4 pt-1">
+            <div className="space-y-1 bg-[var(--color-bg-secondary)]/40 px-6 pb-4 pt-1">
               {item.children!.map((child) => (
                 <Link
                   key={child.label}
@@ -76,8 +77,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   className={cn(
                     'block rounded-lg px-4 py-2.5 text-sm transition-colors',
                     isActive(child.path)
-                      ? 'text-cyan-400 bg-slate-800/50'
-                      : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/30'
+                      ? 'text-cyan-400 bg-[var(--color-bg-tertiary)]/50'
+                      : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)]/30'
                   )}
                 >
                   {child.label}
@@ -95,10 +96,10 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         to={item.path}
         onClick={onClose}
         className={cn(
-          'block border-b border-slate-800/50 px-6 py-4 text-base font-medium transition-colors',
+          'block border-b border-[var(--color-border)]/50 px-6 py-4 text-base font-medium transition-colors',
           active
-            ? 'text-cyan-400 bg-slate-900/30'
-            : 'text-slate-300 hover:text-cyan-400'
+            ? 'text-cyan-400 bg-[var(--color-bg-secondary)]/30'
+            : 'text-[var(--color-text-primary)] hover:text-cyan-400'
         )}
       >
         {item.label}
@@ -121,18 +122,18 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       {/* Slide-in panel */}
       <div
         className={cn(
-          'fixed top-0 right-0 z-50 h-full w-72 max-w-[85vw] bg-slate-950/95 backdrop-blur-2xl border-l border-slate-800 shadow-2xl shadow-black/50 transition-transform duration-300 ease-in-out md:hidden',
+          'fixed top-0 right-0 z-50 h-full w-72 max-w-[85vw] bg-[var(--color-bg-primary)]/95 backdrop-blur-2xl border-l border-[var(--color-border)] shadow-2xl shadow-black/50 transition-transform duration-300 ease-in-out md:hidden',
           isOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 h-20 border-b border-slate-800">
+        <div className="flex items-center justify-between px-6 h-20 border-b border-[var(--color-border)]">
           <span className="bg-gradient-to-r from-[#00dbe7] to-[#d1bcff] bg-clip-text text-transparent text-lg font-bold">
             {SITE_NAME}
           </span>
           <button
             onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60"
+            className="flex h-9 w-9 items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-colors hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60"
             aria-label="关闭菜单"
           >
             <X className="h-5 w-5" />

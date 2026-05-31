@@ -11,7 +11,7 @@ export default function LatestUpdates() {
     .slice(0, 3)
 
   return (
-    <section className="relative bg-[#0f172a] py-24 sm:py-32">
+    <section className="relative bg-[var(--color-bg-primary)] py-24 sm:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="flex items-center justify-between mb-12">
@@ -19,7 +19,7 @@ export default function LatestUpdates() {
             <h2 className="text-3xl sm:text-4xl font-bold text-white font-sora mb-3">
               最新动态
             </h2>
-            <p className="text-slate-400 text-base">
+            <p className="text-[var(--color-text-secondary)] text-base">
               最新发布的AI开发教程与技术文章
             </p>
           </div>
@@ -76,12 +76,12 @@ export default function LatestUpdates() {
                 </h3>
 
                 {/* Description */}
-                <p className="text-sm text-slate-400 leading-relaxed mb-4 line-clamp-2 group-hover:text-slate-300 transition-colors duration-300">
+                <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed mb-4 line-clamp-2 group-hover:text-[var(--color-text-primary)] transition-colors duration-300">
                   {tutorial.description}
                 </p>
 
                 {/* Bottom meta */}
-                <div className="flex items-center justify-between text-xs text-slate-500">
+                <div className="flex items-center justify-between text-xs text-[var(--color-text-muted)]">
                   <span>{tutorial.date}</span>
                   <span className="inline-flex items-center gap-1">
                     <Clock className="w-3 h-3" />

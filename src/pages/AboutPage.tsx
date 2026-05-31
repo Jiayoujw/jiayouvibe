@@ -54,7 +54,7 @@ function StatCard({
       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan-500/10 ring-1 ring-cyan-500/20">
         <Icon size={22} className="text-cyan-400" strokeWidth={1.5} />
       </div>
-      <span className="text-3xl font-extrabold text-slate-100 tracking-tight">
+      <span className="text-3xl font-extrabold text-[var(--color-text-primary)] tracking-tight">
         {value}
       </span>
       <span className="text-sm text-[var(--color-text-secondary)]">{label}</span>
@@ -77,7 +77,7 @@ function TechCard({
     <div
       className={`glass-card flex flex-col items-center justify-center gap-3 p-5 transition-all duration-300 hover:scale-105 hover:shadow-lg ${ring}`}
     >
-      <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800/60 ring-1 ring-white/10`}>
+      <div className={`flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--color-bg-tertiary)]/60 ring-1 ring-white/10`}>
         <Icon size={20} className={color} strokeWidth={1.5} />
       </div>
       <span className="text-sm font-medium text-[var(--color-text-primary)]">{name}</span>
@@ -125,7 +125,7 @@ export default function AboutPage() {
           {/* Mission statement */}
           <div className="mt-8 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/5 border border-white/10">
             <Heart size={18} className="text-pink-400" strokeWidth={1.5} fill="rgba(244,114,182,0.2)" />
-            <span className="text-xl md:text-2xl font-bold text-slate-100 tracking-tight">
+            <span className="text-xl md:text-2xl font-bold text-[var(--color-text-primary)] tracking-tight">
               让每个人都能轻松探索AI世界
             </span>
           </div>
@@ -152,7 +152,7 @@ export default function AboutPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-500/10 ring-1 ring-amber-500/20">
               <Target size={20} className="text-amber-400" strokeWidth={1.5} />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-100 tracking-tight">
+            <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)] tracking-tight">
               我们的愿景
             </h2>
           </div>
@@ -185,7 +185,7 @@ export default function AboutPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-500/10 ring-1 ring-indigo-500/20">
               <Layers size={20} className="text-indigo-400" strokeWidth={1.5} />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-100 tracking-tight">
+            <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)] tracking-tight">
               技术栈
             </h2>
           </div>
@@ -211,7 +211,7 @@ export default function AboutPage() {
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-500/10 ring-1 ring-green-500/20">
               <Mail size={20} className="text-green-400" strokeWidth={1.5} />
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-100 tracking-tight">
+            <h2 className="text-2xl md:text-3xl font-bold text-[var(--color-text-primary)] tracking-tight">
               联系我们
             </h2>
           </div>
@@ -223,7 +223,7 @@ export default function AboutPage() {
           {/* Email */}
           <a
             href="mailto:contact@jiayouvibe.com"
-            className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-slate-800/60 border border-[var(--color-border)]/60 text-sm font-medium text-[var(--color-text-primary)] transition-all duration-300 hover:border-cyan-500/50 hover:bg-slate-800 hover:text-cyan-400"
+            className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[var(--color-bg-tertiary)]/60 border border-[var(--color-border)]/60 text-sm font-medium text-[var(--color-text-primary)] transition-all duration-300 hover:border-cyan-500/50 hover:bg-[var(--color-bg-tertiary)] hover:text-cyan-400"
           >
             <Mail size={17} strokeWidth={1.5} />
             contact@jiayouvibe.com
@@ -237,7 +237,7 @@ export default function AboutPage() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-800/40 border border-[var(--color-border)]/40 text-sm text-[var(--color-text-secondary)] transition-all duration-300 hover:border-slate-600 hover:text-[var(--color-text-primary)] hover:bg-slate-800/70 group"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--color-bg-tertiary)]/40 border border-[var(--color-border)]/40 text-sm text-[var(--color-text-secondary)] transition-all duration-300 hover:border-[var(--color-border)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)]/70 group"
               >
                 <span>{link.label}</span>
                 <ExternalLink

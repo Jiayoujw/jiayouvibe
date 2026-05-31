@@ -81,7 +81,9 @@ export default function NotesList({ onNoteSelect }: NotesListProps) {
 
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+          <label htmlFor="notes-search-input" className="sr-only">搜索笔记</label>
           <input
+            id="notes-search-input"
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}

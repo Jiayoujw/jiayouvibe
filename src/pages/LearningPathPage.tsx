@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { BookOpen, CheckCircle2, Circle, ExternalLink, ArrowRight, Clock, Target, GraduationCap } from 'lucide-react'
+import { BookOpen, CheckCircle2, Circle, ExternalLink, ArrowRight, Clock, Target, GraduationCap, Sprout, Zap, Rocket } from 'lucide-react'
 import { SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
 import Card from '@/components/ui/Card'
@@ -21,7 +21,7 @@ interface Track {
   id: TrackId
   title: string
   subtitle: string
-  icon: string
+  icon: React.ElementType
   description: string
   gradient: string
   glowColor: string
@@ -35,7 +35,7 @@ const tracks: Track[] = [
     id: 'beginner',
     title: 'AI 基础入门',
     subtitle: '适合零基础学习者',
-    icon: '🌱',
+    icon: Sprout,
     description: '从零开始系统学习 AI 基础概念、核心技术和主流工具，建立完整的 AI 知识图谱。',
     gradient: 'from-emerald-400 to-cyan-400',
     glowColor: 'shadow-emerald-400/20',
@@ -123,7 +123,7 @@ const tracks: Track[] = [
     id: 'intermediate',
     title: 'AI 应用开发',
     subtitle: '适合有编程基础的开发者',
-    icon: '⚡',
+    icon: Zap,
     description: '掌握 AI 应用开发的完整技术栈，包括 API 调用、RAG 构建、Agent 开发和模型微调，成为 AI 应用工程师。',
     gradient: 'from-cyan-400 to-blue-500',
     glowColor: 'shadow-cyan-400/20',
@@ -213,7 +213,7 @@ const tracks: Track[] = [
     id: 'advanced',
     title: 'AI 研究前沿',
     subtitle: '适合希望深入研究的开发者',
-    icon: '🚀',
+    icon: Rocket,
     description: '深入 AI 研究前沿，包括模型架构创新、RLHF 对齐、多模态融合、AI 安全和开源 LLM 生态等高级主题。',
     gradient: 'from-purple-500 to-pink-500',
     glowColor: 'shadow-purple-500/20',
@@ -329,8 +329,10 @@ function TrackTabs({
           <button
             key={track.id}
             onClick={() => onSelect(track.id)}
+            role="tab"
+            aria-selected={isActive}
             className={cn(
-              'group relative flex-1 p-4 rounded-2xl text-left transition-all duration-300',
+              'group relative flex-1 p-4 rounded-2xl text-left transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',
               'bg-white/[0.03] backdrop-blur-sm border',
               isActive
                 ? 'border-cyan-400/40 bg-white/[0.06] shadow-lg shadow-cyan-400/10'
@@ -349,7 +351,7 @@ function TrackTabs({
 
             <div className="relative z-10">
               <div className="flex items-center gap-2.5 mb-2">
-                <span className="text-xl">{track.icon}</span>
+                <track.icon className="h-5 w-5" />
                 <h3
                   className={cn(
                     'text-sm font-sora font-semibold truncate',
@@ -586,7 +588,7 @@ const LearningPathPage = () => {
                   activeTrack.glowColor,
                 )}
               >
-                {activeTrack.icon}
+                <activeTrack.icon className="h-7 w-7" />
               </div>
               <div>
                 <h2 className="text-xl font-sora font-bold text-white">{activeTrack.title}</h2>
@@ -719,7 +721,7 @@ const LearningPathPage = () => {
                   : 'bg-white/[0.04] border border-white/[0.08] text-[var(--color-text-secondary)] hover:text-white hover:border-white/20',
               )}
             >
-              <span>{track.icon}</span>
+              <track.icon className="h-4 w-4" />
               {track.title}
               <ArrowRight className="h-3.5 w-3.5" />
             </button>

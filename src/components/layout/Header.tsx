@@ -59,7 +59,7 @@ export default function Header() {
           'hover:text-cyan-400',
           active
             ? 'text-cyan-400'
-            : 'text-slate-400'
+            : 'text-[var(--color-text-secondary)]'
         )}
       >
         {item.label}
@@ -102,8 +102,8 @@ export default function Header() {
                     className={cn(
                       'flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200',
                       dropdownOpen
-                        ? 'text-cyan-400 bg-slate-800/60'
-                        : 'text-slate-400 hover:text-cyan-400'
+                        ? 'text-cyan-400 bg-[var(--color-bg-tertiary)]/60'
+                        : 'text-[var(--color-text-secondary)] hover:text-cyan-400'
                     )}
                     aria-expanded={dropdownOpen}
                     aria-haspopup="true"
@@ -124,7 +124,7 @@ export default function Header() {
                   </button>
 
                   {dropdownOpen && (
-                    <div className="absolute top-full right-0 mt-2 w-40 rounded-xl border border-slate-700/60 bg-slate-900/95 backdrop-blur-xl py-1.5 shadow-xl shadow-black/40">
+                    <div className="absolute top-full right-0 mt-2 w-40 rounded-xl border border-[var(--color-border)]/60 bg-[var(--color-bg-secondary)]/95 backdrop-blur-xl py-1.5 shadow-xl shadow-black/40">
                       {moreItem.children.map((child) => (
                         <Link
                           key={child.label}
@@ -132,8 +132,8 @@ export default function Header() {
                           className={cn(
                             'block px-4 py-2.5 text-sm transition-colors duration-150',
                             isActive(child.path)
-                              ? 'text-cyan-400 bg-slate-800/50'
-                              : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/40'
+                              ? 'text-cyan-400 bg-[var(--color-bg-tertiary)]/50'
+                              : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)]/40'
                           )}
                           onClick={() => setDropdownOpen(false)}
                         >
@@ -150,7 +150,7 @@ export default function Header() {
             <div className="flex items-center gap-0.5 sm:gap-1">
               {/* Search */}
               <button
-                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[36px] min-h-[36px] items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60"
+                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[36px] min-h-[36px] items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-colors hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60"
                 aria-label="搜索"
               >
                 <Search className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
@@ -163,7 +163,7 @@ export default function Header() {
                   setLang(next)
                   setLangState(next)
                 }}
-                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[36px] min-h-[36px] items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60"
+                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[36px] min-h-[36px] items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-colors hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60"
                 aria-label="切换语言"
                 title={lang === 'zh' ? 'Switch to English' : '切换到中文'}
               >
@@ -197,7 +197,7 @@ export default function Header() {
               {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="flex md:hidden h-10 w-10 min-w-[44px] min-h-[44px] items-center justify-center rounded-lg text-slate-400 transition-colors hover:text-cyan-400 hover:bg-slate-800/60 active:bg-slate-700/60 active:text-cyan-300"
+                className="flex md:hidden h-10 w-10 min-w-[44px] min-h-[44px] items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-colors hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60 active:bg-[var(--color-border)]/60 active:text-cyan-300"
                 aria-label="打开菜单"
               >
                 <Menu className="h-5 w-5" />
