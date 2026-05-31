@@ -4,6 +4,7 @@ import { Bookmark, ExternalLink, Star, Trash2, Cpu, Bot, Code2, Wrench } from 'l
 import { SITE_NAME } from '@/utils/constants'
 import { useFavorites, type FavoriteItem } from '@/contexts/FavoritesContext'
 import { cn } from '@/utils/cn'
+import AdBanner from '@/components/ads/AdBanner'
 
 const TYPE_CONFIG: Record<string, { label: string; Icon: React.ComponentType<{ className?: string }> }> = {
   model: { label: 'AI大模型', Icon: Cpu },
@@ -43,24 +44,24 @@ function FavoriteRow({ item }: { item: FavoriteItem }) {
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-slate-200 font-medium hover:text-cyan-300 transition-colors"
+            className="flex items-center gap-1.5 text-[var(--color-text-primary)] font-medium hover:text-cyan-300 transition-colors"
           >
             <span className="truncate">{item.name}</span>
-            <ExternalLink className="w-3 h-3 shrink-0 text-slate-500" />
+            <ExternalLink className="w-3 h-3 shrink-0 text-[var(--color-text-muted)]" />
           </a>
         ) : (
           <Link
             to={item.url}
-            className="text-slate-200 font-medium hover:text-cyan-300 transition-colors truncate block"
+            className="text-[var(--color-text-primary)] font-medium hover:text-cyan-300 transition-colors truncate block"
           >
             {item.name}
           </Link>
         )}
-        <p className="text-xs text-slate-500 truncate mt-0.5">{item.url}</p>
+        <p className="text-xs text-[var(--color-text-muted)] truncate mt-0.5">{item.url}</p>
       </div>
 
       {/* Added date */}
-      <span className="text-xs text-slate-600 shrink-0 hidden sm:block">
+      <span className="text-xs text-[var(--color-text-muted)] shrink-0 hidden sm:block">
         {new Date(item.addedAt).toLocaleDateString('zh-CN')}
       </span>
 
@@ -68,7 +69,7 @@ function FavoriteRow({ item }: { item: FavoriteItem }) {
       <button
         type="button"
         onClick={() => dispatch({ type: 'REMOVE_FAVORITE', payload: item.id })}
-        className="p-2 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-400/10 transition-all duration-200 shrink-0"
+        className="p-2 rounded-lg text-[var(--color-text-muted)] hover:text-red-400 hover:bg-red-400/10 transition-all duration-200 shrink-0"
         title="取消收藏"
       >
         <Trash2 className="w-4 h-4" />
@@ -101,22 +102,24 @@ export default function FavoritesPage() {
     <div className="container mx-auto max-w-4xl px-4 py-8">
       {/* Page header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-slate-100 mb-2">我的收藏</h1>
-        <p className="text-slate-400 text-sm">
+        <h1 className="text-2xl font-bold text-[var(--color-text-primary)] mb-2">我的收藏</h1>
+        <p className="text-[var(--color-text-secondary)] text-sm">
           共收藏了{' '}
           <span className="text-amber-400 font-semibold">{favorites.length}</span>{' '}
           个内容
         </p>
       </div>
 
+      <div className="my-8 flex justify-center"><AdBanner /></div>
+
       {/* Empty state */}
       {favorites.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-24 text-center">
           <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-5">
-            <Bookmark className="w-10 h-10 text-slate-600" />
+            <Bookmark className="w-10 h-10 text-[var(--color-text-muted)]" />
           </div>
-          <p className="text-slate-400 text-lg font-medium mb-1">还没有收藏任何内容</p>
-          <p className="text-slate-600 text-sm">
+          <p className="text-[var(--color-text-secondary)] text-lg font-medium mb-1">还没有收藏任何内容</p>
+          <p className="text-[var(--color-text-muted)] text-sm">
             浏览 AI 大模型、智能体、开发教程等页面时，点击卡片右上角的星标即可收藏
           </p>
           <Link
@@ -141,10 +144,10 @@ export default function FavoritesPage() {
 
             return (
               <section key={type}>
-                <h2 className="flex items-center gap-2 text-lg font-semibold text-slate-200 mb-3">
+                <h2 className="flex items-center gap-2 text-lg font-semibold text-[var(--color-text-primary)] mb-3">
                   <GroupIcon className="w-5 h-5 text-cyan-400" />
                   {config?.label ?? type}
-                  <span className="text-sm text-slate-500 font-normal">
+                  <span className="text-sm text-[var(--color-text-muted)] font-normal">
                     ({items.length})
                   </span>
                 </h2>

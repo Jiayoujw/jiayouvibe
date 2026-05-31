@@ -663,7 +663,7 @@ function AccordionSections({ models }: { models: AIModel[] }) {
 
 export default function ComparisonPage() {
   useEffect(() => {
-    document.title = `AI模型对比 | ${SITE_NAME}`
+    document.title = `模型对比 | ${SITE_NAME}`
   }, [])
 
   const shareUrl = typeof window !== 'undefined' ? window.location.href : 'https://jiayouvibe.com/#/compare'

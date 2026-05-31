@@ -63,7 +63,7 @@ const DirectoryPage = () => {
                   'relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',
                   activeCategory === 'all'
-                    ? 'bg-white/10 text-white shadow-sm'
+                    ? 'bg-white/10 text-[var(--color-text-primary)] shadow-sm'
                     : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-white/[0.03]',
                 )}
               >
@@ -79,7 +79,7 @@ const DirectoryPage = () => {
                     'relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200',
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',
                     activeCategory === key
-                      ? 'bg-white/10 text-white shadow-sm'
+                      ? 'bg-white/10 text-[var(--color-text-primary)] shadow-sm'
                       : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-white/[0.03]',
                   )}
                 >
@@ -147,7 +147,7 @@ const DirectoryPage = () => {
                 <Send className="w-3.5 h-3.5 text-purple-400" />
                 <span className="text-xs font-medium text-purple-300 tracking-wide">推荐网站</span>
               </div>
-              <h2 className="text-xl font-bold text-slate-100 mb-1">发现了好网站？</h2>
+              <h2 className="text-xl font-bold text-[var(--color-text-primary)] mb-1">发现了好网站？</h2>
               <p className="text-sm text-[var(--color-text-secondary)]">
                 填写下方表单推荐给我们，审核通过后将收录到导航中。
               </p>

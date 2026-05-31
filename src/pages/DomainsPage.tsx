@@ -194,7 +194,7 @@ function IconCircle({ domain, accent }: { domain: Domain; accent: Accent }) {
       className="relative w-16 h-16 rounded-full p-[2px] flex-shrink-0"
       style={{ background: `linear-gradient(135deg, ${accent.from}, ${accent.to})` }}
     >
-      <div className="w-full h-full rounded-full bg-[var(--color-bg-primary)] dark:bg-slate-900 flex items-center justify-center">
+      <div className="w-full h-full rounded-full bg-[var(--color-bg-primary)] flex items-center justify-center">
         <IconComponent size={28} className={accent.text} strokeWidth={1.5} />
       </div>
     </div>
@@ -230,7 +230,7 @@ function DomainCard({ domain, accent }: { domain: Domain; accent: Accent }) {
       <div className="flex items-start gap-5">
         <IconCircle domain={domain} accent={accent} />
         <div className="flex-1 min-w-0 pt-1">
-          <h3 className="text-xl font-bold text-slate-100 tracking-tight">
+          <h3 className="text-xl font-bold text-[var(--color-text-primary)] tracking-tight">
             {domain.name}
           </h3>
         </div>
@@ -252,7 +252,7 @@ function DomainCard({ domain, accent }: { domain: Domain; accent: Accent }) {
           </span>
         ))}
         {domain.tags.length > 5 && (
-          <span className="inline-block px-2.5 py-0.5 text-xs rounded-full border border-[var(--color-border)] bg-slate-800 text-[var(--color-text-muted)]">
+          <span className="inline-block px-2.5 py-0.5 text-xs rounded-full border border-[var(--color-border)] bg-[var(--color-bg-tertiary)] text-[var(--color-text-muted)]">
             +{domain.tags.length - 5}
           </span>
         )}

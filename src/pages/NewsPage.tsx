@@ -3,6 +3,7 @@ import { ExternalLink, Clock, Tag, Search, Filter, TrendingUp, Newspaper } from 
 import { SITE_NAME } from '@/utils/constants'
 import { newsItems } from '@/data/news'
 import type { NewsItem } from '@/types'
+import AdBanner from '@/components/ads/AdBanner'
 
 const CATEGORY_TABS: { key: string; label: string }[] = [
   { key: 'all', label: '全部' },
@@ -44,7 +45,7 @@ function getRelativeDate(dateStr: string): string {
 
 const NewsPage = () => {
   useEffect(() => {
-    document.title = `AI资讯动态 | ${SITE_NAME}`
+    document.title = `AI资讯 | ${SITE_NAME}`
   }, [])
 
   const [activeCategory, setActiveCategory] = useState('all')
@@ -154,6 +155,8 @@ const NewsPage = () => {
             </span>
           </div>
 
+          <div className="my-8 flex justify-center"><AdBanner /></div>
+
           {/* News Timeline */}
           {filteredNews.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 text-[var(--color-text-muted)]">
@@ -172,7 +175,7 @@ const NewsPage = () => {
           ) : (
             <div className="relative">
               {/* Vertical timeline line */}
-              <div className="absolute left-[11px] top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/40 via-slate-700/40 to-transparent" />
+              <div className="absolute left-[11px] top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500/40 via-[var(--color-border)] to-transparent" />
 
               <div className="space-y-5">
                 {filteredNews.map((item) => (
@@ -268,7 +271,7 @@ function NewsCard({ item }: { item: NewsItem }) {
       <div
         className="rounded-2xl border border-[var(--color-border)]/80 bg-[var(--color-bg-secondary)]/60 backdrop-blur-sm p-5
                     transition-all duration-300
-                    hover:border-cyan-500/30 hover:bg-slate-900/80
+                    hover:border-cyan-500/30 hover:bg-[var(--color-bg-secondary)]/80
                     hover:shadow-[0_0_30px_rgba(6,182,212,0.08)]"
       >
         <div className="flex flex-col gap-3">

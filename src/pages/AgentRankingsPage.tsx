@@ -15,6 +15,7 @@ import { agents } from '@/data/agents'
 import { SITE_NAME } from '@/utils/constants'
 import { formatStars } from '@/utils/formatDate'
 import { cn } from '@/utils/cn'
+import AdBanner from '@/components/ads/AdBanner'
 import type { AIAgent } from '@/types'
 
 // ─── Category filter types ───────────────────────────────────────────
@@ -353,6 +354,9 @@ export default function AgentRankingsPage() {
           />
         </div>
       </div>
+
+      {/* ── Ad Banner ────────────────────────────── */}
+      <div className="my-8 flex justify-center"><AdBanner /></div>
 
       {/* ── Main content + sidebar ─────────────────── */}
       <div className="lg:flex lg:gap-8">

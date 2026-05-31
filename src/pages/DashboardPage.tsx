@@ -198,7 +198,7 @@ function SideNavBar() {
           </span>
         </div>
         <div>
-          <div className="text-sm font-semibold tracking-wide text-white leading-tight">
+          <div className="text-sm font-semibold tracking-wide text-[var(--color-text-primary)] leading-tight">
             System Core
           </div>
           <div className="text-[10px] font-mono uppercase tracking-widest text-[var(--color-text-muted)]">
@@ -365,7 +365,7 @@ function FeedList() {
           </span>
 
           <div className="flex-1 min-w-0">
-            <p className="text-sm text-[var(--color-text-primary)] group-hover:text-white transition-colors leading-snug line-clamp-2">
+            <p className="text-sm text-[var(--color-text-primary)] group-hover:text-cyan-300 transition-colors leading-snug line-clamp-2">
               {item.title}
             </p>
             <div className="flex items-center gap-2 mt-1.5">
@@ -397,7 +397,7 @@ function QuickActions() {
         <Link
           key={label}
           to={to}
-          className="flex items-center gap-3 rounded-xl border border-white/[0.05] bg-white/[0.02] px-4 py-3 text-sm font-medium text-[var(--color-text-primary)] hover:border-white/[0.1] hover:bg-white/[0.04] hover:text-white transition-all duration-200 group"
+          className="flex items-center gap-3 rounded-xl border border-white/[0.05] bg-white/[0.02] px-4 py-3 text-sm font-medium text-[var(--color-text-primary)] hover:border-white/[0.1] hover:bg-white/[0.04] hover:text-cyan-300 transition-all duration-200 group"
         >
           <div className={cn('flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br shadow-md', gradient)}>
             <Icon className="h-4 w-4 text-white" />
@@ -757,7 +757,7 @@ export default function DashboardPage() {
           {/* Page header */}
           <div className="flex items-center gap-2 mb-6">
             <Terminal className="h-5 w-5 text-cyan-400" />
-            <h1 className="text-base font-semibold tracking-wide text-white">
+            <h1 className="text-base font-semibold tracking-wide text-[var(--color-text-primary)]">
               仪表盘
               <span className="ml-2 text-[10px] font-mono uppercase tracking-[0.2em] text-[var(--color-text-muted)] bg-white/[0.03] px-2 py-0.5 rounded-md">
                 Overview
@@ -783,7 +783,7 @@ export default function DashboardPage() {
                     <BarChart3 className="h-4 w-4 text-cyan-400" />
                   </div>
                   <div>
-                    <h2 className="text-sm font-semibold text-white">
+                    <h2 className="text-sm font-semibold text-[var(--color-text-primary)]">
                       Agent Stars 排行榜
                     </h2>
                     <p className="text-[11px] text-[var(--color-text-muted)] font-mono">
@@ -801,7 +801,7 @@ export default function DashboardPage() {
                     <Activity className="h-4 w-4 text-cyan-400" />
                   </div>
                   <div>
-                    <h2 className="text-sm font-semibold text-white">
+                    <h2 className="text-sm font-semibold text-[var(--color-text-primary)]">
                       月度趋势
                     </h2>
                     <p className="text-[11px] text-[var(--color-text-muted)] font-mono">
@@ -815,11 +815,11 @@ export default function DashboardPage() {
               {/* 最近更新 */}
               <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
                 <div className="flex items-center gap-2.5 mb-4">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-slate-700 to-slate-800">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--color-border)] to-[var(--color-border)]">
                     <ScrollText className="h-4 w-4 text-purple-400" />
                   </div>
                   <div>
-                    <h2 className="text-sm font-semibold text-white">最近更新</h2>
+                    <h2 className="text-sm font-semibold text-[var(--color-text-primary)]">最近更新</h2>
                     <p className="text-[11px] text-[var(--color-text-muted)] font-mono">Latest AI news & tutorials</p>
                   </div>
                 </div>
@@ -836,7 +836,7 @@ export default function DashboardPage() {
                     <PieChart className="h-4 w-4 text-purple-400" />
                   </div>
                   <div>
-                    <h2 className="text-sm font-semibold text-white">
+                    <h2 className="text-sm font-semibold text-[var(--color-text-primary)]">
                       模型类别分布
                     </h2>
                     <p className="text-[11px] text-[var(--color-text-muted)] font-mono">
@@ -849,7 +849,7 @@ export default function DashboardPage() {
 
               {/* 快速操作 */}
               <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
-                <h2 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                <h2 className="text-sm font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
                   <Zap className="h-4 w-4 text-amber-400" />
                   快速操作
                 </h2>
@@ -858,7 +858,7 @@ export default function DashboardPage() {
 
               {/* 热门标签 */}
               <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
-                <h2 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                <h2 className="text-sm font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
                   <Sparkles className="h-4 w-4 text-purple-400" />
                   热门标签
                 </h2>

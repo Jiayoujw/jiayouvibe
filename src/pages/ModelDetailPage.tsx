@@ -131,7 +131,7 @@ const ModelDetailPage = () => {
           <div className="flex-1">
             {/* Name + Provider Badge */}
             <div className="flex flex-wrap items-center gap-3 mb-3">
-              <h1 className="text-2xl md:text-3xl font-sora font-bold text-white">
+              <h1 className="text-2xl md:text-3xl font-sora font-bold text-[var(--color-text-primary)]">
                 {model.name}
               </h1>
               <span
@@ -218,7 +218,7 @@ const ModelDetailPage = () => {
         <div className="lg:col-span-8 space-y-8">
           {/* Strengths */}
           <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-            <h2 className="text-lg font-sora font-semibold text-white mb-4 flex items-center gap-2">
+            <h2 className="text-lg font-sora font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
               <CheckCircle className="h-5 w-5 text-emerald-400" />
               优势特点
             </h2>
@@ -234,7 +234,7 @@ const ModelDetailPage = () => {
 
           {/* Use Cases */}
           <section>
-            <h2 className="text-lg font-sora font-semibold text-white mb-4 flex items-center gap-2">
+            <h2 className="text-lg font-sora font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
               <Bot className="h-5 w-5 text-cyan-400" />
               应用场景
             </h2>
@@ -253,7 +253,7 @@ const ModelDetailPage = () => {
           {/* Limitations */}
           {model.weaknesses.length > 0 && (
             <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
-              <h2 className="text-lg font-sora font-semibold text-white mb-4 flex items-center gap-2">
+              <h2 className="text-lg font-sora font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
                 <AlertTriangle className="h-5 w-5 text-amber-400" />
                 局限性
               </h2>
@@ -273,7 +273,7 @@ const ModelDetailPage = () => {
         <div className="lg:col-span-4 space-y-6">
           {/* Share */}
           <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
-            <h3 className="text-sm font-sora font-semibold text-white mb-4 flex items-center gap-2">
+            <h3 className="text-sm font-sora font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
               分享
             </h3>
             <ShareButtons
@@ -285,7 +285,7 @@ const ModelDetailPage = () => {
 
           {/* Quick Links */}
           <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
-            <h3 className="text-sm font-sora font-semibold text-white mb-4 flex items-center gap-2">
+            <h3 className="text-sm font-sora font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
               <ExternalLink className="h-4 w-4 text-cyan-400" />
               快速链接
             </h3>
@@ -317,7 +317,7 @@ const ModelDetailPage = () => {
 
           {/* Tags Cloud */}
           <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
-            <h3 className="text-sm font-sora font-semibold text-white mb-4 flex items-center gap-2">
+            <h3 className="text-sm font-sora font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
               <Tag className="h-4 w-4 text-purple-400" />
               标签
             </h3>
@@ -336,7 +336,7 @@ const ModelDetailPage = () => {
           {/* Related Models */}
           {relatedModels.length > 0 && (
             <section className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5">
-              <h3 className="text-sm font-sora font-semibold text-white mb-4 flex items-center gap-2">
+              <h3 className="text-sm font-sora font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
                 <Bot className="h-4 w-4 text-amber-400" />
                 相关模型
               </h3>

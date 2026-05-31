@@ -355,7 +355,7 @@ function TrackTabs({
                 <h3
                   className={cn(
                     'text-sm font-sora font-semibold truncate',
-                    isActive ? 'text-cyan-200' : 'text-[var(--color-text-primary)] group-hover:text-white',
+                    isActive ? 'text-cyan-200' : 'text-[var(--color-text-primary)] group-hover:text-cyan-300',
                   )}
                 >
                   {track.title}
@@ -476,7 +476,7 @@ function TimelineStep({
           <h4
             className={cn(
               'text-base font-sora font-semibold',
-              step.completed ? 'text-[var(--color-text-primary)]' : 'text-white',
+              step.completed ? 'text-[var(--color-text-primary)]' : 'text-[var(--color-text-primary)]',
             )}
           >
             {step.title}
@@ -542,7 +542,7 @@ function TimelineStep({
 
 const LearningPathPage = () => {
   useEffect(() => {
-    document.title = `AI 学习路径 | ${SITE_NAME}`
+    document.title = `学习路径 | ${SITE_NAME}`
   }, [])
 
   const [activeTrackId, setActiveTrackId] = useState<TrackId>('beginner')
@@ -556,7 +556,7 @@ const LearningPathPage = () => {
     <div className="space-y-8">
       {/* Page Header */}
       <div>
-        <h1 className="text-3xl font-sora font-bold text-white mb-2">
+        <h1 className="text-3xl font-sora font-bold text-[var(--color-text-primary)] mb-2">
           <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
             AI 学习路径
           </span>
@@ -591,7 +591,7 @@ const LearningPathPage = () => {
                 <activeTrack.icon className="h-7 w-7" />
               </div>
               <div>
-                <h2 className="text-xl font-sora font-bold text-white">{activeTrack.title}</h2>
+                <h2 className="text-xl font-sora font-bold text-[var(--color-text-primary)]">{activeTrack.title}</h2>
                 <p className="text-sm text-[var(--color-text-secondary)] mt-1 max-w-lg">{activeTrack.description}</p>
               </div>
             </div>
@@ -624,7 +624,7 @@ const LearningPathPage = () => {
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-base font-sora font-bold text-white leading-none">
+                  <span className="text-base font-sora font-bold text-[var(--color-text-primary)] leading-none">
                     {progressPct}%
                   </span>
                   <span className="text-[9px] text-[var(--color-text-muted)] font-jetbrains leading-tight mt-0.5">
@@ -634,7 +634,7 @@ const LearningPathPage = () => {
               </div>
 
               <div className="text-right">
-                <p className="text-2xl font-sora font-bold text-white tabular-nums">
+                <p className="text-2xl font-sora font-bold text-[var(--color-text-primary)] tabular-nums">
                   {completedCount}<span className="text-[var(--color-text-muted)] text-base">/{totalCount}</span>
                 </p>
                 <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-jetbrains">steps completed</p>
@@ -648,14 +648,14 @@ const LearningPathPage = () => {
               <Target className="h-4 w-4 text-cyan-400" />
               <div>
                 <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-jetbrains">总步骤</p>
-                <p className="text-sm font-sora font-semibold text-white">{totalCount} 步</p>
+                <p className="text-sm font-sora font-semibold text-[var(--color-text-primary)]">{totalCount} 步</p>
               </div>
             </div>
             <div className="flex items-center gap-2 p-3 rounded-xl bg-white/[0.04] border border-white/[0.06]">
               <Clock className="h-4 w-4 text-amber-400" />
               <div>
                 <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-jetbrains">预计总时长</p>
-                <p className="text-sm font-sora font-semibold text-white">
+                <p className="text-sm font-sora font-semibold text-[var(--color-text-primary)]">
                   ~{activeTrack.steps.reduce(
                     (acc, s) => {
                       const match = s.duration.match(/\d+/)
@@ -671,7 +671,7 @@ const LearningPathPage = () => {
               <GraduationCap className="h-4 w-4 text-purple-400" />
               <div>
                 <p className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] font-jetbrains">难度等级</p>
-                <p className="text-sm font-sora font-semibold text-white">
+                <p className="text-sm font-sora font-semibold text-[var(--color-text-primary)]">
                   {activeTrack.id === 'beginner' ? '入门' : activeTrack.id === 'intermediate' ? '进阶' : '高级'}
                 </p>
               </div>
@@ -684,7 +684,7 @@ const LearningPathPage = () => {
       <div className="relative">
         <div className="flex items-center gap-3 mb-6">
           <BookOpen className="h-4 w-4 text-cyan-400" />
-          <h3 className="text-lg font-sora font-semibold text-white">学习步骤</h3>
+          <h3 className="text-lg font-sora font-semibold text-[var(--color-text-primary)]">学习步骤</h3>
         </div>
 
         <div className="relative">
@@ -718,7 +718,7 @@ const LearningPathPage = () => {
                 'inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200',
                 track.id === activeTrackId
                   ? `bg-gradient-to-r ${track.gradient} text-white shadow-lg`
-                  : 'bg-white/[0.04] border border-white/[0.08] text-[var(--color-text-secondary)] hover:text-white hover:border-white/20',
+                  : 'bg-white/[0.04] border border-white/[0.08] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-white/20',
               )}
             >
               <track.icon className="h-4 w-4" />

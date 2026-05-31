@@ -26,6 +26,7 @@ import Breadcrumb from '@/components/ui/Breadcrumb'
 import Card from '@/components/ui/Card'
 import EmptyState from '@/components/ui/EmptyState'
 import ShareButtons from '@/components/community/ShareButtons'
+import AdBanner from '@/components/ads/AdBanner'
 
 // ---------------------------------------------------------------------------
 // Icon lookup – resolved dynamically from each domain's `.icon` string
@@ -467,6 +468,8 @@ export default function DomainDetailPage() {
           </div>
         </div>
       </div>
+
+      <div className="my-8 flex justify-center"><AdBanner /></div>
     </div>
   )
 }

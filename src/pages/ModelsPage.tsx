@@ -56,7 +56,7 @@ const ModelsPage = () => {
     <div className="space-y-8">
       {/* Page Header */}
       <div>
-        <h1 className="text-3xl font-sora font-bold text-white mb-2">AI大模型</h1>
+        <h1 className="text-3xl font-sora font-bold text-[var(--color-text-primary)] mb-2">AI大模型</h1>
         <p className="text-[var(--color-text-secondary)] max-w-2xl">
           收录全球主流AI大模型，涵盖大语言模型、多模态、图像生成、视频生成、音频处理等类别，帮助你全面了解AI模型生态。
         </p>

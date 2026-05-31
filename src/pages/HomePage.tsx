@@ -5,6 +5,7 @@ import FeatureGrid from '@/components/home/FeatureGrid'
 import StatsBar from '@/components/home/StatsBar'
 import LatestUpdates from '@/components/home/LatestUpdates'
 import SubscribeCard from '@/components/community/SubscribeCard'
+import AdBanner from '@/components/ads/AdBanner'
 
 export default function HomePage() {
   useEffect(() => {
@@ -15,6 +16,7 @@ export default function HomePage() {
     <div className="bg-[var(--color-bg-primary)]">
       <HeroSection />
       <StatsBar />
+      <div className="my-8 flex justify-center"><AdBanner /></div>
       <FeatureGrid />
       <LatestUpdates />
 

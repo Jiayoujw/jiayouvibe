@@ -487,7 +487,7 @@ function SkillCard({ skill }: { skill: SkillTool }) {
 
 const SkillsPage = () => {
   useEffect(() => {
-    document.title = `AI 技能工具 | ${SITE_NAME}`
+    document.title = `AI技能工具 | ${SITE_NAME}`
   }, [])
 
   // ── Filter & Sort state ──

@@ -223,7 +223,7 @@ function HorizontalSkillCard({ skill }: { skill: SkillEntry }) {
 
         {/* Name + Stars */}
         <div className="flex items-center gap-2 mb-2">
-          <h3 className="text-base font-sora font-semibold text-white group-hover:text-amber-100 transition-colors">
+          <h3 className="text-base font-sora font-semibold text-[var(--color-text-primary)] group-hover:text-amber-100 transition-colors">
             {skill.name}
           </h3>
           {skill.stars && (
@@ -307,7 +307,7 @@ function GridSkillCard({ skill }: { skill: SkillEntry }) {
 
         {/* Name + GitHub icon */}
         <div className="flex items-center gap-2 mb-1">
-          <h3 className="text-lg font-sora font-semibold text-white group-hover:text-amber-100 transition-colors">
+          <h3 className="text-lg font-sora font-semibold text-[var(--color-text-primary)] group-hover:text-amber-100 transition-colors">
             {skill.name}
           </h3>
         </div>
@@ -452,7 +452,7 @@ const ClaudeSkillsPage = () => {
                   <Wand2 className="h-4 w-4 text-amber-400" />
                 </div>
                 <div>
-                  <div className="text-lg font-sora font-bold text-white">50+</div>
+                  <div className="text-lg font-sora font-bold text-[var(--color-text-primary)]">50+</div>
                   <div className="text-[11px] text-[var(--color-text-muted)] font-jetbrains">官方 Skills</div>
                 </div>
               </div>
@@ -461,7 +461,7 @@ const ClaudeSkillsPage = () => {
                   <Sparkles className="h-4 w-4 text-amber-400" />
                 </div>
                 <div>
-                  <div className="text-lg font-sora font-bold text-white">200+</div>
+                  <div className="text-lg font-sora font-bold text-[var(--color-text-primary)]">200+</div>
                   <div className="text-[11px] text-[var(--color-text-muted)] font-jetbrains">社区 Skills</div>
                 </div>
               </div>
@@ -470,7 +470,7 @@ const ClaudeSkillsPage = () => {
                   <Star className="h-4 w-4 text-amber-400" />
                 </div>
                 <div>
-                  <div className="text-lg font-sora font-bold text-white">15k+</div>
+                  <div className="text-lg font-sora font-bold text-[var(--color-text-primary)]">15k+</div>
                   <div className="text-[11px] text-[var(--color-text-muted)] font-jetbrains">GitHub Stars</div>
                 </div>
               </div>
@@ -486,7 +486,7 @@ const ClaudeSkillsPage = () => {
         {/* Section header */}
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-sora font-bold text-white mb-1">
+            <h2 className="text-2xl sm:text-3xl font-sora font-bold text-[var(--color-text-primary)] mb-1">
               <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
                 官方推荐 Skills
               </span>
@@ -515,9 +515,9 @@ const ClaudeSkillsPage = () => {
         {/* Horizontal scrollable container */}
         <div className="relative">
           {/* Left fade gradient */}
-          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-slate-950 to-transparent" />
+          <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-[var(--color-bg-primary)] to-transparent" />
           {/* Right fade gradient */}
-          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-slate-950 to-transparent" />
+          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-[var(--color-bg-primary)] to-transparent" />
 
           <div
             ref={scrollRef}
@@ -561,7 +561,7 @@ const ClaudeSkillsPage = () => {
       <section>
         {/* Section header */}
         <div className="mb-6">
-          <h2 className="text-2xl sm:text-3xl font-sora font-bold text-white mb-1">
+          <h2 className="text-2xl sm:text-3xl font-sora font-bold text-[var(--color-text-primary)] mb-1">
             <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
               社区热门 Skills
             </span>
@@ -592,7 +592,7 @@ const ClaudeSkillsPage = () => {
               <Globe className="h-5 w-5 text-amber-400" />
             </div>
             <div>
-              <h3 className="text-sm font-sora font-semibold text-white">
+              <h3 className="text-sm font-sora font-semibold text-[var(--color-text-primary)]">
                 探索更多社区 Skills
               </h3>
               <p className="text-xs text-[var(--color-text-muted)] font-jetbrains">
@@ -626,7 +626,7 @@ const ClaudeSkillsPage = () => {
       <section>
         {/* Section header */}
         <div className="mb-8">
-          <h2 className="text-2xl sm:text-3xl font-sora font-bold text-white mb-1">
+          <h2 className="text-2xl sm:text-3xl font-sora font-bold text-[var(--color-text-primary)] mb-1">
             <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
               创建你的 Skill
             </span>
@@ -678,7 +678,7 @@ const ClaudeSkillsPage = () => {
                   <p className="text-[10px] font-jetbrains text-amber-400/60 uppercase tracking-wider mb-1">
                     {step.step}
                   </p>
-                  <h3 className="text-base font-sora font-semibold text-white mb-2">
+                  <h3 className="text-base font-sora font-semibold text-[var(--color-text-primary)] mb-2">
                     {step.title}
                   </h3>
                   <p className="text-sm text-[var(--color-text-secondary)]/80 leading-relaxed">
@@ -691,7 +691,7 @@ const ClaudeSkillsPage = () => {
             {/* Bottom CTA: external link to Anthropic docs */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-6 border-t border-white/[0.06]">
               <div>
-                <h3 className="text-base font-sora font-semibold text-white mb-1">
+                <h3 className="text-base font-sora font-semibold text-[var(--color-text-primary)] mb-1">
                   准备开始了吗？
                 </h3>
                 <p className="text-sm text-[var(--color-text-muted)] font-jetbrains">

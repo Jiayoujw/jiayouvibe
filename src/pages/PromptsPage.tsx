@@ -46,7 +46,7 @@ let toastId = 0
 
 export default function PromptsPage() {
   useEffect(() => {
-    document.title = `提示词模板库 | ${SITE_NAME}`
+    document.title = `提示词模板 | ${SITE_NAME}`
   }, [])
 
   const [activeCategory, setActiveCategory] = useState<PromptCategory | '全部'>('全部')
@@ -138,7 +138,7 @@ export default function PromptsPage() {
             placeholder="搜索提示词模板..."
             className={cn(
               'w-full pl-10 pr-4 py-2.5 rounded-xl text-sm',
-              'bg-slate-800/60 border border-[var(--color-border)]/60',
+              'bg-[var(--color-bg-tertiary)]/60 border border-[var(--color-border)]/60',
               'text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)]',
               'focus:outline-none focus:border-cyan-400/50 focus:ring-1 focus:ring-cyan-400/20',
               'transition-colors duration-200',
@@ -174,7 +174,7 @@ export default function PromptsPage() {
                       )
                     : cn(
                         config?.color,
-                        'border-[var(--color-border)]/60 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-slate-600',
+                        'border-[var(--color-border)]/60 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-border)]',
                       ),
                 )}
               >
@@ -206,7 +206,7 @@ export default function PromptsPage() {
               setActiveCategory('全部')
               setSearchQuery('')
             }}
-            className="px-4 py-2 rounded-lg text-sm font-medium bg-slate-800 border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-slate-700 transition-all active:scale-95"
+            className="px-4 py-2 rounded-lg text-sm font-medium bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)] transition-all active:scale-95"
           >
             清除所有筛选
           </button>
@@ -226,7 +226,7 @@ export default function PromptsPage() {
               key={prompt.id}
               className={cn(
                 'group rounded-2xl border transition-all duration-300',
-                'bg-slate-900/60 hover:bg-slate-900/80',
+                'bg-[var(--color-bg-secondary)]/60 hover:bg-[var(--color-bg-secondary)]/80',
                 isExpanded
                   ? 'border-cyan-400/30 shadow-lg shadow-cyan-400/5'
                   : 'border-[var(--color-border)]/80 hover:border-[var(--color-border)]/80',
@@ -271,7 +271,7 @@ export default function PromptsPage() {
                       'flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 active:scale-95',
                       isCopied
                         ? 'bg-emerald-400/15 text-emerald-300 border border-emerald-400/25'
-                        : 'bg-slate-800/60 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-slate-700/60 border border-[var(--color-border)]/40',
+                        : 'bg-[var(--color-bg-tertiary)]/60 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]/60 border border-[var(--color-border)]/40',
                     )}
                   >
                     {isCopied ? (
@@ -289,7 +289,7 @@ export default function PromptsPage() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-base font-semibold text-slate-100 mb-2 leading-snug">
+                <h3 className="text-base font-semibold text-[var(--color-text-primary)] mb-2 leading-snug">
                   {prompt.title}
                 </h3>
 
@@ -339,7 +339,7 @@ export default function PromptsPage() {
                 {prompt.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-0.5 rounded-md text-[11px] font-jetbrains text-[var(--color-text-muted)] bg-slate-800/50 border border-[var(--color-border)]/80"
+                    className="px-2 py-0.5 rounded-md text-[11px] font-jetbrains text-[var(--color-text-muted)] bg-[var(--color-bg-tertiary)]/50 border border-[var(--color-border)]/80"
                   >
                     {tag}
                   </span>
