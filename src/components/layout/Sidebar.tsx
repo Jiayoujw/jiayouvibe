@@ -25,6 +25,7 @@ import {
   Moon,
   ChevronLeft,
   ChevronRight,
+  ExternalLink,
 } from 'lucide-react'
 import { useTheme } from '@/contexts/ThemeContext'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -39,6 +40,7 @@ interface NavEntry {
   label: string
   path: string
   icon: React.ComponentType<{ className?: string }>
+  external?: boolean
 }
 
 interface NavGroup {
@@ -72,7 +74,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { label: '笔记系统', path: '/notes', icon: StickyNote },
       { label: '我的收藏', path: '/favorites', icon: Bookmark },
-      { label: 'GitHub热门', path: '/trending', icon: Flame },
+      { label: 'GitHub热门', path: 'https://gh.jiayouvibe.com', icon: Flame, external: true },
       { label: '其他AI领域', path: '/domains', icon: Layers },
       { label: 'AI技能工具', path: '/skills', icon: Zap },
       { label: '提示词模板', path: '/prompts', icon: FileText },
@@ -202,7 +204,36 @@ export default function Sidebar() {
                     const active = isActive(item.path)
                     const Icon = item.icon
 
-                    return (
+                    return item.external ? (
+                      <a
+                        key={item.path}
+                        href={item.path}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={collapsed ? item.label : undefined}
+                        className={cn(
+                          'flex items-center h-10 gap-3 rounded-lg transition-all duration-200 group',
+                          collapsed ? 'justify-center px-2' : 'px-3',
+                          'text-[var(--color-text-secondary)] hover:bg-white/5 hover:text-white',
+                          collapsed && 'border-l-[3px] border-transparent',
+                        )}
+                      >
+                        <Icon
+                          className={cn(
+                            'h-[18px] w-[18px] shrink-0 transition-colors duration-200',
+                            'text-[var(--color-text-muted)] group-hover:text-white',
+                          )}
+                        />
+                        {!collapsed && (
+                          <span className="text-sm font-medium truncate">
+                            {item.label}
+                          </span>
+                        )}
+                        {!collapsed && (
+                          <ExternalLink className="h-3 w-3 ml-auto text-[var(--color-text-muted)]" />
+                        )}
+                      </a>
+                    ) : (
                       <Link
                         key={item.path}
                         to={item.path}
