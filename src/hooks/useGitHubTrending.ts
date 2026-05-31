@@ -6,6 +6,9 @@ import { fetchTrendingRepos } from '@/services/github'
 interface UseGitHubTrendingOptions {
   language?: string
   since?: string
+  sort?: string
+  minStars?: number
+  topic?: string
 }
 
 interface UseGitHubTrendingReturn {
@@ -15,15 +18,33 @@ interface UseGitHubTrendingReturn {
   refetch: () => void
 }
 
-function getCacheKey(lang?: string, since?: string): string {
-  const suffix = [lang || 'all', since || 'all'].join('_')
+function getCacheKey(
+  lang?: string,
+  since?: string,
+  sort?: string,
+  minStars?: number,
+  topic?: string,
+): string {
+  const suffix = [
+    lang || 'all',
+    since || 'all',
+    sort || 'stars',
+    minStars ?? 0,
+    topic || 'all',
+  ].join('_')
   return `${GITHUB_CACHE_KEY}_${suffix}`
 }
 
 function useGitHubTrending(
-  options?: UseGitHubTrendingOptions
+  options?: UseGitHubTrendingOptions,
 ): UseGitHubTrendingReturn {
-  const cacheKey = getCacheKey(options?.language, options?.since)
+  const cacheKey = getCacheKey(
+    options?.language,
+    options?.since,
+    options?.sort,
+    options?.minStars,
+    options?.topic,
+  )
 
   const [repos, setRepos] = useState<GitHubRepo[]>(() => {
     try {
@@ -63,6 +84,9 @@ function useGitHubTrending(
         const result = await fetchTrendingRepos({
           language: options?.language,
           since: options?.since,
+          sort: options?.sort,
+          minStars: options?.minStars,
+          topic: options?.topic,
         })
 
         if (controller.signal.aborted) return
@@ -74,7 +98,7 @@ function useGitHubTrending(
         try {
           localStorage.setItem(
             cacheKey,
-            JSON.stringify({ data: result, timestamp: Date.now() })
+            JSON.stringify({ data: result, timestamp: Date.now() }),
           )
         } catch {
           // storage full
@@ -91,7 +115,7 @@ function useGitHubTrending(
         staleRef.current = false
       }
     },
-    [options?.language, options?.since]
+    [options?.language, options?.since, options?.sort, options?.minStars, options?.topic, cacheKey],
   )
 
   // Initial fetch + stale-while-revalidate
@@ -102,9 +126,9 @@ function useGitHubTrending(
     return () => {
       abortRef.current?.abort()
     }
-    // Only re-run when language/since actually change
+    // Only re-run when language/since/sort/minStars/topic actually change
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options?.language, options?.since])
+  }, [options?.language, options?.since, options?.sort, options?.minStars, options?.topic])
 
   const refetch = useCallback(() => {
     setLoading(true)

@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
 import { Globe } from 'lucide-react'
+import { cn } from '@/utils/cn'
 import { SITE_NAME } from '@/utils/constants'
 import useGitHubTrending from '@/hooks/useGitHubTrending'
 import { getFallbackRepos } from '@/services/github'
@@ -13,6 +14,17 @@ import AdBanner from '@/components/ads/AdBanner'
 import type { GitHubRepo } from '@/types'
 
 const PAGE_SIZE = 10
+
+const TOPIC_TABS = [
+  { label: '全部', value: '' },
+  { label: 'LLM', value: 'llm' },
+  { label: 'Agent', value: 'agent' },
+  { label: 'RAG', value: 'rag' },
+  { label: '推理', value: 'inference OR reasoning' },
+  { label: '多模态', value: 'multimodal OR vision' },
+  { label: '框架', value: 'framework' },
+  { label: '开源1000+', value: 'stars:>1000' },
+] as const
 
 function filterRepos(repos: GitHubRepo[], query: string): GitHubRepo[] {
   if (!query.trim()) return repos
@@ -36,9 +48,18 @@ const TrendingPage = () => {
   const [language, setLanguage] = useState('')
   const [since, setSince] = useState('daily')
   const [searchQuery, setSearchQuery] = useState('')
+  const [sort, setSort] = useState('stars')
+  const [minStars, setMinStars] = useState(0)
+  const [topic, setTopic] = useState('')
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
-  const { repos, loading, error } = useGitHubTrending({ language, since })
+  const { repos, loading, error } = useGitHubTrending({
+    language,
+    since,
+    sort,
+    minStars,
+    topic,
+  })
 
   const filteredRepos = useMemo(
     () => filterRepos(repos, searchQuery),
@@ -52,20 +73,35 @@ const TrendingPage = () => {
 
   const hasMore = visibleCount < filteredRepos.length
 
-  const handleLanguageChange = useCallback((lang: string) => {
-    setLanguage(lang)
+  const resetAndSet = useCallback(<T,>(setter: (val: T) => void, val: T) => {
+    setter(val)
     setVisibleCount(PAGE_SIZE)
   }, [])
 
-  const handleSinceChange = useCallback((s: string) => {
-    setSince(s)
-    setVisibleCount(PAGE_SIZE)
-  }, [])
-
-  const handleSearchChange = useCallback((q: string) => {
-    setSearchQuery(q)
-    setVisibleCount(PAGE_SIZE)
-  }, [])
+  const handleLanguageChange = useCallback(
+    (lang: string) => resetAndSet(setLanguage, lang),
+    [resetAndSet],
+  )
+  const handleSinceChange = useCallback(
+    (s: string) => resetAndSet(setSince, s),
+    [resetAndSet],
+  )
+  const handleSearchChange = useCallback(
+    (q: string) => resetAndSet(setSearchQuery, q),
+    [resetAndSet],
+  )
+  const handleSortChange = useCallback(
+    (s: string) => resetAndSet(setSort, s),
+    [resetAndSet],
+  )
+  const handleMinStarsChange = useCallback(
+    (ms: number) => resetAndSet(setMinStars, ms),
+    [resetAndSet],
+  )
+  const handleTopicChange = useCallback(
+    (t: string) => resetAndSet(setTopic, t),
+    [resetAndSet],
+  )
 
   const handleLoadMore = useCallback(() => {
     setVisibleCount((prev) => prev + PAGE_SIZE)
@@ -92,15 +128,47 @@ const TrendingPage = () => {
         </p>
       </div>
 
+      {/* Category topic tabs */}
+      <div className="mb-6">
+        <span className="block text-[10px] uppercase tracking-wider text-[var(--color-text-muted)] mb-2.5 font-jetbrains">
+          热门分类
+        </span>
+        <div
+          className={cn(
+            'flex flex-wrap gap-1.5 rounded-xl bg-[var(--glass-bg)] p-1.5 border border-[var(--glass-border)]',
+          )}
+        >
+          {TOPIC_TABS.map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => handleTopicChange(opt.value)}
+              className={cn(
+                'relative px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',
+                topic === opt.value
+                  ? 'bg-[var(--color-accent)]/10 text-[var(--color-accent)] shadow-sm'
+                  : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-white/[0.03]',
+              )}
+            >
+              {opt.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Filter bar */}
       <div className="mb-6">
         <RepoFilter
           language={language}
           since={since}
           searchQuery={searchQuery}
+          sort={sort}
+          minStars={minStars}
           onLanguageChange={handleLanguageChange}
           onSinceChange={handleSinceChange}
           onSearchChange={handleSearchChange}
+          onSortChange={handleSortChange}
+          onMinStarsChange={handleMinStarsChange}
         />
       </div>
 

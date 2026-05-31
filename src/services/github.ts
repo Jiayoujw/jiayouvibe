@@ -223,6 +223,9 @@ async function cachedFetch(
 export interface FetchTrendingOptions {
   language?: string
   since?: string
+  sort?: string
+  minStars?: number
+  topic?: string
   perPage?: number
 }
 
@@ -295,22 +298,37 @@ export function getFallbackRepos(language?: string, since?: string): GitHubRepo[
 export async function fetchTrendingRepos(
   options?: FetchTrendingOptions,
 ): Promise<GitHubRepo[]> {
-  const { language, since, perPage = 30 } = options ?? {}
+  const {
+    language,
+    since,
+    sort = 'stars',
+    minStars = 0,
+    topic = '',
+    perPage = 30,
+  } = options ?? {}
 
   // Core query: high-quality AI repos using valid GitHub syntax
-  // "stars:>100" filters for repos with more than 100 stars
+  // "stars:>N" filters for repos with more than N stars
   // "OR" between keywords means the repo should match at least one keyword term
   // GitHub limits to 5 AND/OR/NOT operators — keep within limit
+  const starsThreshold = minStars > 0 ? minStars : 50
   const parts: string[] = [
-    'stars:>50',
-    'ai OR llm OR agent OR rag',
+    `stars:>${starsThreshold}`,
   ]
+
+  // Topic filter: if a specific topic is selected, add it to the query
+  if (topic && topic !== '全部') {
+    parts.push(topic)
+  } else {
+    // Default AI topics when no specific topic is selected
+    parts.push('ai OR llm OR agent OR rag')
+  }
 
   if (language && language !== '全部') {
     parts.push(`language:${language}`)
   }
 
-  if (since) {
+  if (since && since !== 'yearly') {
     // Convert 'daily'/'weekly'/'monthly' to actual dates
     const now = new Date()
     const daysMap: Record<string, number> = { daily: 1, weekly: 7, monthly: 30 }
@@ -322,7 +340,7 @@ export async function fetchTrendingRepos(
 
   const params = new URLSearchParams({
     q: parts.join(' '),
-    sort: 'stars',
+    sort,
     order: 'desc',
     per_page: String(perPage),
   })
