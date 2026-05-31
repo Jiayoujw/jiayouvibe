@@ -2,17 +2,16 @@ import { useState, useRef, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Sun, Moon, Search, Menu, Globe } from 'lucide-react'
 import { useTheme } from '@/contexts/ThemeContext'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { NAV_ITEMS, SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
-import { getLang, setLang } from '@/i18n'
-import type { Lang } from '@/i18n'
 import MobileMenu from '@/components/layout/MobileMenu'
 import type { NavItem } from '@/types'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [dropdownOpen, setDropdownOpen] = useState(false)
-  const [lang, setLangState] = useState<Lang>(getLang)
+  const { lang, toggle: toggleLang } = useLanguage()
   const location = useLocation()
   const { isDark, toggle } = useTheme()
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -158,11 +157,7 @@ export default function Header() {
 
               {/* Language toggle */}
               <button
-                onClick={() => {
-                  const next: Lang = lang === 'zh' ? 'en' : 'zh'
-                  setLang(next)
-                  setLangState(next)
-                }}
+                onClick={toggleLang}
                 className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[44px] min-h-[44px] items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-all active:scale-95 hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60"
                 aria-label="切换语言"
                 title={lang === 'zh' ? 'Switch to English' : '切换到中文'}

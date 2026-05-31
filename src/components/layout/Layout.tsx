@@ -1,5 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import Sidebar from '@/components/layout/Sidebar'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -8,13 +9,27 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]">
-      <Header />
-      <main className="min-h-screen pt-16 sm:pt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+      {/* Sidebar — desktop only, fixed left */}
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
+
+      {/* Header — mobile only */}
+      <div className="md:hidden">
+        <Header />
+      </div>
+
+      {/* Main content — offset by sidebar on desktop */}
+      <main className="min-h-screen pt-16 md:pt-8 md:ml-[260px]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
           {children}
         </div>
       </main>
-      <Footer />
+
+      {/* Footer — offset by sidebar on desktop */}
+      <div className="md:ml-[260px]">
+        <Footer />
+      </div>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { HashRouter } from 'react-router-dom'
 import { ThemeProvider } from '@/contexts/ThemeContext'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 import { NotesProvider } from '@/contexts/NotesContext'
 import App from './App'
 import './index.css'
@@ -18,11 +19,13 @@ if ('serviceWorker' in navigator) {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
-      <NotesProvider>
-        <HashRouter>
-          <App />
-        </HashRouter>
-      </NotesProvider>
+      <LanguageProvider>
+        <NotesProvider>
+          <HashRouter>
+            <App />
+          </HashRouter>
+        </NotesProvider>
+      </LanguageProvider>
     </ThemeProvider>
   </StrictMode>,
 )
