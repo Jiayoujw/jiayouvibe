@@ -26,10 +26,9 @@ import {
   ChevronRight,
 } from 'lucide-react'
 import { useTheme } from '@/contexts/ThemeContext'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
-import { getLang, setLang } from '@/i18n'
-import type { Lang } from '@/i18n'
 
 /* -------------------------------------------------------------------------- */
 /*  Nav groups                                                                */
@@ -98,8 +97,8 @@ const SIDEBAR_WIDTH_VAR = '--sidebar-width'
 export default function Sidebar() {
   const location = useLocation()
   const { isDark, toggle: toggleTheme } = useTheme()
+  const { lang, toggle: toggleLang } = useLanguage()
   const [collapsed, setCollapsed] = useState(false)
-  const [lang, setLangState] = useState<Lang>(getLang)
   const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set())
 
   // ---- Set CSS variable so main content can read sidebar width ----
@@ -130,13 +129,6 @@ export default function Sidebar() {
       }
       return next
     })
-  }
-
-  // ---- Language toggle ----
-  const handleLangToggle = () => {
-    const next: Lang = lang === 'zh' ? 'en' : 'zh'
-    setLang(next)
-    setLangState(next)
   }
 
   /* ---------------------------------------------------------------------- */
@@ -271,7 +263,7 @@ export default function Sidebar() {
         {/* Language toggle */}
         <button
           type="button"
-          onClick={handleLangToggle}
+          onClick={toggleLang}
           title={lang === 'zh' ? 'Switch to English' : '切换到中文'}
           className={cn(
             'flex items-center justify-center rounded-lg transition-all duration-200 active:scale-95',

@@ -25,6 +25,7 @@ const ToolsPage = lazy(() => import('@/pages/ToolsPage'))
 const LearningPathPage = lazy(() => import('@/pages/LearningPathPage'))
 const ClaudeSkillsPage = lazy(() => import('@/pages/ClaudeSkillsPage'))
 const AgentRankingsPage = lazy(() => import('@/pages/AgentRankingsPage'))
+const DashboardPage = lazy(() => import('@/pages/DashboardPage'))
 const SkillsPage = lazy(() => import('@/pages/SkillsPage'))
 const PromptsPage = lazy(() => import('@/pages/PromptsPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
@@ -50,6 +51,7 @@ export default function App() {
             <Route path="/agents" element={<AgentsPage />} />
             <Route path="/agents/:slug" element={<AgentDetailPage />} />
             <Route path="/agent-rankings" element={<AgentRankingsPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/development" element={<DevelopmentPage />} />
             <Route path="/development/:slug" element={<DevelopmentArticlePage />} />
             <Route path="/terminology" element={<TerminologyPage />} />
