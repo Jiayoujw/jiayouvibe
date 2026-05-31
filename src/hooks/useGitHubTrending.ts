@@ -15,12 +15,19 @@ interface UseGitHubTrendingReturn {
   refetch: () => void
 }
 
+function getCacheKey(lang?: string, since?: string): string {
+  const suffix = [lang || 'all', since || 'all'].join('_')
+  return `${GITHUB_CACHE_KEY}_${suffix}`
+}
+
 function useGitHubTrending(
   options?: UseGitHubTrendingOptions
 ): UseGitHubTrendingReturn {
+  const cacheKey = getCacheKey(options?.language, options?.since)
+
   const [repos, setRepos] = useState<GitHubRepo[]>(() => {
     try {
-      const raw = localStorage.getItem(GITHUB_CACHE_KEY)
+      const raw = localStorage.getItem(cacheKey)
       if (raw) {
         const cached = JSON.parse(raw)
         if (Date.now() - cached.timestamp < GITHUB_CACHE_TTL) {
@@ -66,7 +73,7 @@ function useGitHubTrending(
         // Persist to localStorage for stale-while-revalidate
         try {
           localStorage.setItem(
-            GITHUB_CACHE_KEY,
+            cacheKey,
             JSON.stringify({ data: result, timestamp: Date.now() })
           )
         } catch {
