@@ -317,7 +317,7 @@ export async function fetchTrendingRepos(
     const days = daysMap[since] || 30
     const date = new Date(now.getTime() - days * 86400000)
     const dateStr = date.toISOString().split('T')[0] // YYYY-MM-DD
-    parts.push(`created:>=${dateStr}`)
+    parts.push(`pushed:>=${dateStr}`)
   }
 
   const params = new URLSearchParams({
