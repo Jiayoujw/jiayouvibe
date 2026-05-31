@@ -76,7 +76,7 @@ export default function NoteToolbar({ note, dispatch }: NoteToolbarProps) {
         title={note.pinned ? '取消置顶' : '置顶'}
         aria-pressed={note.pinned}
         className={cn(
-          'p-1.5 rounded-lg transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',
+          'inline-flex items-center justify-center p-1.5 min-w-[44px] min-h-[44px] rounded-lg transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',
           note.pinned
             ? 'text-cyan-400 bg-cyan-400/10 hover:bg-cyan-400/20'
             : 'text-slate-500 hover:text-slate-300 hover:bg-white/5',
@@ -90,7 +90,7 @@ export default function NoteToolbar({ note, dispatch }: NoteToolbarProps) {
         onClick={handleExport}
         aria-label="导出"
         title="导出为 Markdown"
-        className="p-1.5 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
+        className="inline-flex items-center justify-center p-1.5 min-w-[44px] min-h-[44px] rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50"
       >
         <Download className="w-4 h-4" />
       </button>
@@ -100,7 +100,7 @@ export default function NoteToolbar({ note, dispatch }: NoteToolbarProps) {
         onClick={handleDelete}
         aria-label="删除"
         title="删除笔记"
-        className="p-1.5 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-400/10 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400/50"
+        className="inline-flex items-center justify-center p-1.5 min-w-[44px] min-h-[44px] rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-400/10 transition-all duration-200 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400/50"
       >
         <Trash2 className="w-4 h-4" />
       </button>

@@ -150,7 +150,7 @@ export default function Header() {
             <div className="flex items-center gap-0.5 sm:gap-1">
               {/* Search */}
               <button
-                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[36px] min-h-[36px] items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-colors hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60"
+                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[44px] min-h-[44px] items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-all active:scale-95 hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60"
                 aria-label="搜索"
               >
                 <Search className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
@@ -163,7 +163,7 @@ export default function Header() {
                   setLang(next)
                   setLangState(next)
                 }}
-                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[36px] min-h-[36px] items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-colors hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60"
+                className="flex h-9 w-9 sm:h-9 sm:w-9 min-w-[44px] min-h-[44px] items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-all active:scale-95 hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60"
                 aria-label="切换语言"
                 title={lang === 'zh' ? 'Switch to English' : '切换到中文'}
               >
@@ -177,7 +177,7 @@ export default function Header() {
               <div className="relative group flex items-center justify-center">
                 <button
                   onClick={toggle}
-                  className="relative w-9 h-9 rounded-full flex items-center justify-center border border-white/[0.08] dark:border-white/10 backdrop-blur-3xl bg-white/[0.04] dark:bg-white/[0.04] transition-all duration-300 hover:shadow-[0_0_15px_rgba(251,191,36,0.3)] dark:hover:shadow-[0_0_15px_rgba(251,191,36,0.4)] hover:border-amber-400/40"
+                  className="relative w-9 h-9 min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center border border-white/[0.08] dark:border-white/10 backdrop-blur-3xl bg-white/[0.04] dark:bg-white/[0.04] transition-all duration-300 active:scale-95 hover:shadow-[0_0_15px_rgba(251,191,36,0.3)] dark:hover:shadow-[0_0_15px_rgba(251,191,36,0.4)] hover:border-amber-400/40"
                   aria-label={isDark ? '切换到亮色模式' : '切换到暗色模式'}
                 >
                   <span className="transition-transform duration-500 ease-out hover:rotate-180">
@@ -197,7 +197,7 @@ export default function Header() {
               {/* Mobile hamburger */}
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="flex md:hidden h-10 w-10 min-w-[44px] min-h-[44px] items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-colors hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60 active:bg-[var(--color-border)]/60 active:text-cyan-300"
+                className="flex md:hidden h-10 w-10 min-w-[44px] min-h-[44px] items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-all active:scale-95 hover:text-cyan-400 hover:bg-[var(--color-bg-tertiary)]/60 active:bg-[var(--color-border)]/60 active:text-cyan-300"
                 aria-label="打开菜单"
               >
                 <Menu className="h-5 w-5" />

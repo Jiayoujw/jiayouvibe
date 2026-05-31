@@ -52,7 +52,7 @@ export default function NotesPage() {
             <div className="md:hidden flex items-center gap-2 px-4 py-2 border-b border-white/5">
               <button
                 onClick={handleBackToList}
-                className="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+                className="inline-flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-all active:scale-95"
               >
                 <ArrowLeft className="w-4 h-4" />
                 返回列表

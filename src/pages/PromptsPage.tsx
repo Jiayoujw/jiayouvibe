@@ -148,7 +148,7 @@ export default function PromptsPage() {
             <button
               onClick={() => setSearchQuery('')}
               aria-label="清除搜索"
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center min-w-[44px] min-h-[44px] text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-all active:scale-95"
             >
               <X className="h-3.5 w-3.5" />
             </button>
@@ -167,7 +167,7 @@ export default function PromptsPage() {
                 aria-pressed={isActive}
                 className={cn(
                   'inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-medium',
-                  'border transition-all duration-200',
+                  'border transition-all duration-200 active:scale-95',
                   isActive
                     ? cn(
                         'border-cyan-400/40 bg-cyan-400/15 text-cyan-300 shadow-sm shadow-cyan-400/10',
@@ -206,7 +206,7 @@ export default function PromptsPage() {
               setActiveCategory('全部')
               setSearchQuery('')
             }}
-            className="px-4 py-2 rounded-lg text-sm font-medium bg-slate-800 border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-slate-700 transition-colors"
+            className="px-4 py-2 rounded-lg text-sm font-medium bg-slate-800 border border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-slate-700 transition-all active:scale-95"
           >
             清除所有筛选
           </button>
@@ -236,7 +236,7 @@ export default function PromptsPage() {
               <button
                 type="button"
                 onClick={() => setExpandedId(isExpanded ? null : prompt.id)}
-                className="w-full text-left p-5 pb-0"
+                className="w-full text-left p-5 pb-0 transition-transform active:scale-[0.99]"
               >
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2.5 min-w-0">
@@ -268,7 +268,7 @@ export default function PromptsPage() {
                       copyPrompt(prompt)
                     }}
                     className={cn(
-                      'flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200',
+                      'flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 active:scale-95',
                       isCopied
                         ? 'bg-emerald-400/15 text-emerald-300 border border-emerald-400/25'
                         : 'bg-slate-800/60 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-slate-700/60 border border-[var(--color-border)]/40',
@@ -362,7 +362,7 @@ export default function PromptsPage() {
                     <button
                       type="button"
                       onClick={() => openInChat(prompt, 'chatgpt')}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-400/10 text-emerald-300 border border-emerald-400/20 hover:bg-emerald-400/20 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-400/10 text-emerald-300 border border-emerald-400/20 hover:bg-emerald-400/20 transition-all active:scale-95"
                     >
                       <ExternalLink className="h-3 w-3" />
                       ChatGPT
@@ -370,7 +370,7 @@ export default function PromptsPage() {
                     <button
                       type="button"
                       onClick={() => openInChat(prompt, 'claude')}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-purple-400/10 text-purple-300 border border-purple-400/20 hover:bg-purple-400/20 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-purple-400/10 text-purple-300 border border-purple-400/20 hover:bg-purple-400/20 transition-all active:scale-95"
                     >
                       <ExternalLink className="h-3 w-3" />
                       Claude
