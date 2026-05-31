@@ -5,6 +5,7 @@ import { formatStars } from '@/utils/formatDate'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import { cn } from '@/utils/cn'
+import FavoriteButton from '@/components/ui/FavoriteButton'
 
 interface AgentCardProps {
   agent: AIAgent
@@ -39,6 +40,16 @@ export default function AgentCard({ agent }: AgentCardProps) {
           background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(6, 182, 212, 0.07), transparent 40%)`,
         }}
       />
+
+      {/* Favorite button */}
+      <div className="absolute top-3 right-3 z-10">
+        <FavoriteButton
+          id={agent.slug}
+          type="agent"
+          name={agent.name}
+          url={`/agents/${agent.slug}`}
+        />
+      </div>
 
       {/* Header: Name + Badge */}
       <div className="flex items-start justify-between gap-3 mb-3">

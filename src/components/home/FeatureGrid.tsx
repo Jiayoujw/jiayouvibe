@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Cpu, Bot, Code2, BookOpen, Globe, StickyNote } from 'lucide-react'
 import { cn } from '@/utils/cn'
+import PageTransition from '@/components/ui/PageTransition'
 
 // ── Types ────────────────────────────────────────────────────────────
 
@@ -87,16 +88,16 @@ export default function FeatureGrid() {
 
         {/* ── Feature cards grid ─────────────────────────────────────── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {features.map((feature) => {
+          {features.map((feature, index) => {
             const Icon = feature.icon
             return (
-              <Link
-                key={feature.path}
-                to={feature.path}
-                className={cn(
-                  'group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]',
-                )}
-              >
+              <PageTransition key={feature.path} delay={index * 60}>
+                <Link
+                  to={feature.path}
+                  className={cn(
+                    'group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg-primary)]',
+                  )}
+                >
                 {/* ── Shimmer-border wrapper ─────────────────────────── */}
                 <div
                   className={cn(
@@ -166,6 +167,7 @@ export default function FeatureGrid() {
                   />
                 </div>
               </Link>
+              </PageTransition>
             )
           })}
         </div>

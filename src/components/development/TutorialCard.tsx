@@ -4,6 +4,7 @@ import { cn } from '@/utils/cn'
 import { formatReadingTime } from '@/utils/formatDate'
 import { TUTORIAL_CATEGORIES, TUTORIAL_DIFFICULTIES } from '@/utils/constants'
 import type { Tutorial } from '@/types'
+import FavoriteButton from '@/components/ui/FavoriteButton'
 
 interface TutorialCardProps {
   tutorial: Tutorial
@@ -16,8 +17,17 @@ export default function TutorialCard({ tutorial }: TutorialCardProps) {
   return (
     <Link
       to={`/development/${tutorial.slug}`}
-      className="group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-2xl"
+      className="group block h-full relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50 rounded-2xl"
     >
+      {/* Favorite button */}
+      <div className="absolute top-3 right-3 z-10">
+        <FavoriteButton
+          id={tutorial.slug}
+          type="tutorial"
+          name={tutorial.title}
+          url={`/development/${tutorial.slug}`}
+        />
+      </div>
       <article
         className={cn(
           'glass-card p-6 h-full',

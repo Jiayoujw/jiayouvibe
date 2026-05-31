@@ -37,7 +37,7 @@ const RepoFilter = ({
     <div
       className={cn(
         'p-4 rounded-2xl',
-        'bg-white/5 backdrop-blur-xl border border-white/10',
+        'bg-[var(--glass-bg)] backdrop-blur-xl border border-[var(--glass-border)]',
       )}
     >
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
@@ -45,7 +45,7 @@ const RepoFilter = ({
         <div
           role="tablist"
           className={cn(
-            'flex gap-1 rounded-xl bg-white/5 p-1 border border-white/5',
+            'flex gap-1 rounded-xl bg-[var(--glass-bg)] p-1 border border-[var(--glass-border)]',
             'flex-shrink-0',
           )}
         >
@@ -59,8 +59,8 @@ const RepoFilter = ({
                 'relative px-4 py-2 text-xs font-medium rounded-lg transition-all duration-200',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50',
                 since === opt.value
-                  ? 'bg-white/10 text-white shadow-sm'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]',
+                  ? 'bg-[var(--glass-bg)] text-[var(--color-text-primary)] shadow-sm'
+                  : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-white/[0.03]',
               )}
             >
               {opt.label}
@@ -73,8 +73,8 @@ const RepoFilter = ({
           value={language}
           onChange={(e) => onLanguageChange(e.target.value)}
           className={cn(
-            'flex-shrink-0 rounded-xl px-4 py-2 text-xs text-slate-100',
-            'bg-white/5 backdrop-blur-sm border border-white/10',
+            'flex-shrink-0 rounded-xl px-4 py-2 text-xs text-[var(--color-text-primary)]',
+            'bg-[var(--glass-bg)] backdrop-blur-sm border border-[var(--glass-border)]',
             'appearance-none cursor-pointer',
             'transition-colors duration-200',
             'focus-visible:outline-none focus-visible:border-cyan-400/50 focus-visible:ring-2 focus-visible:ring-cyan-400/20',
@@ -88,7 +88,7 @@ const RepoFilter = ({
           }}
         >
           {LANGUAGES.map((opt) => (
-            <option key={opt.value} value={opt.value} className="bg-slate-800 text-slate-100">
+            <option key={opt.value} value={opt.value} className="bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]">
               {opt.label}
             </option>
           ))}
@@ -96,7 +96,7 @@ const RepoFilter = ({
 
         {/* Search input */}
         <div className="relative flex-1 w-full sm:w-auto min-w-[180px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-muted)] pointer-events-none" />
           <label htmlFor="repo-search-input" className="sr-only">搜索项目</label>
           <input
             id="repo-search-input"
@@ -105,8 +105,8 @@ const RepoFilter = ({
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="搜索项目..."
             className={cn(
-              'w-full rounded-xl pl-9 pr-4 py-2 text-xs text-slate-100 placeholder:text-slate-500',
-              'bg-white/5 backdrop-blur-sm border border-white/10',
+              'w-full rounded-xl pl-9 pr-4 py-2 text-xs text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)]',
+              'bg-[var(--glass-bg)] backdrop-blur-sm border border-[var(--glass-border)]',
               'transition-colors duration-200',
               'focus-visible:outline-none focus-visible:border-cyan-400/50 focus-visible:ring-2 focus-visible:ring-cyan-400/20',
             )}

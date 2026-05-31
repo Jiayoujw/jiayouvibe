@@ -4,6 +4,7 @@ import { HashRouter } from 'react-router-dom'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { NotesProvider } from '@/contexts/NotesContext'
+import { FavoritesProvider } from '@/contexts/FavoritesContext'
 import App from './App'
 import './index.css'
 
@@ -21,9 +22,11 @@ createRoot(document.getElementById('root')!).render(
     <ThemeProvider>
       <LanguageProvider>
         <NotesProvider>
-          <HashRouter>
-            <App />
-          </HashRouter>
+          <FavoritesProvider>
+            <HashRouter>
+              <App />
+            </HashRouter>
+          </FavoritesProvider>
         </NotesProvider>
       </LanguageProvider>
     </ThemeProvider>

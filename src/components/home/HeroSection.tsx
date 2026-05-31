@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { Sparkles, ArrowRight } from 'lucide-react'
 import { SITE_NAME } from '@/utils/constants'
+import HeroCanvas from './HeroCanvas'
 
 const TYPING_PHRASES = ['大型语言模型', '自主智能体', 'RAG 架构', '开源AI趋势', '知识图谱应用']
 const PARTICLE_COLORS = ['#22d3ee', '#c084fc', '#f472b6', '#818cf8', '#a78bfa']
@@ -65,6 +66,9 @@ export default function HeroSection() {
       onMouseMove={handleMouseMove}
       className="relative min-h-[92vh] flex items-center justify-center bg-[var(--color-bg-primary)] overflow-hidden"
     >
+      {/* 3D particle galaxy canvas */}
+      <HeroCanvas />
+
       {/* Grid pattern */}
       <div className="absolute inset-0 opacity-20 pointer-events-none bg-grid-pattern" />
 

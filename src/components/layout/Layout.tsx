@@ -2,6 +2,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Sidebar from '@/components/layout/Sidebar'
 import MobileTabBar from '@/components/layout/MobileTabBar'
+import AIChatWidget from '@/components/ai/AIChatWidget'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -34,6 +35,9 @@ export default function Layout({ children }: LayoutProps) {
       <div className="md:ml-[260px]">
         <Footer />
       </div>
+
+      {/* AI Chat floating widget — fixed bottom-right */}
+      <AIChatWidget />
     </div>
   )
 }

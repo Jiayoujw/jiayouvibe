@@ -45,7 +45,7 @@ const RepoCard = ({ repo }: RepoCardProps) => {
       rel="noopener noreferrer"
       className={cn(
         'block p-5 rounded-2xl',
-        'bg-white/5 backdrop-blur-xl border border-white/10',
+        'bg-[var(--glass-bg)] backdrop-blur-xl border border-[var(--glass-border)]',
         'transition-all duration-300',
         'hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10 hover:border-white/20 hover:bg-white/[0.07]',
         'group',
@@ -55,14 +55,14 @@ const RepoCard = ({ repo }: RepoCardProps) => {
       <div className="flex items-start justify-between gap-3 mb-3">
         {/* Left: owner avatar + name */}
         <div className="flex items-center gap-3 min-w-0">
-          <div className="flex-shrink-0 w-9 h-9 rounded-full bg-white/10 border border-white/10 flex items-center justify-center">
-            <Globe className="w-4 h-4 text-slate-400" />
+          <div className="flex-shrink-0 w-9 h-9 rounded-full bg-[var(--glass-bg)] border border-[var(--glass-border)] flex items-center justify-center">
+            <Globe className="w-4 h-4 text-[var(--color-text-secondary)]" />
           </div>
           <div className="min-w-0">
-            <p className="text-sm font-sora font-semibold text-slate-200 truncate group-hover:text-white transition-colors">
+            <p className="text-sm font-sora font-semibold text-[var(--color-text-primary)] truncate group-hover:text-white transition-colors">
               {repo.owner}
             </p>
-            <p className="text-xs text-slate-500 truncate font-jetbrains">
+            <p className="text-xs text-[var(--color-text-muted)] truncate font-jetbrains">
               {repo.name}
             </p>
           </div>
@@ -72,13 +72,13 @@ const RepoCard = ({ repo }: RepoCardProps) => {
         <div className="flex items-center gap-4 flex-shrink-0">
           <div className="flex items-center gap-1 text-amber-400">
             <Star className="w-3.5 h-3.5" fill="currentColor" />
-            <span className="text-xs font-jetbrains font-medium text-slate-300">
+            <span className="text-xs font-jetbrains font-medium text-[var(--color-text-primary)]">
               {formatStars(repo.stars)}
             </span>
           </div>
-          <div className="flex items-center gap-1 text-slate-400">
+          <div className="flex items-center gap-1 text-[var(--color-text-secondary)]">
             <GitFork className="w-3.5 h-3.5" />
-            <span className="text-xs font-jetbrains font-medium text-slate-400">
+            <span className="text-xs font-jetbrains font-medium text-[var(--color-text-secondary)]">
               {repo.forks}
             </span>
           </div>
@@ -87,7 +87,7 @@ const RepoCard = ({ repo }: RepoCardProps) => {
 
       {/* Description */}
       {repo.description && (
-        <p className="text-sm text-slate-400 line-clamp-2 mb-3 leading-relaxed">
+        <p className="text-sm text-[var(--color-text-secondary)] line-clamp-2 mb-3 leading-relaxed">
           {repo.description}
         </p>
       )}
@@ -96,7 +96,7 @@ const RepoCard = ({ repo }: RepoCardProps) => {
       <div className="flex items-center gap-2 flex-wrap">
         {/* Language dot + name */}
         {repo.language && (
-          <span className="inline-flex items-center gap-1.5 text-xs text-slate-400 font-jetbrains">
+          <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-text-secondary)] font-jetbrains">
             <span
               className="w-2.5 h-2.5 rounded-full flex-shrink-0"
               style={{ backgroundColor: LANGUAGE_COLORS[repo.language] ?? '#94a3b8' }}
@@ -111,7 +111,7 @@ const RepoCard = ({ repo }: RepoCardProps) => {
             key={topic}
             className={cn(
               'inline-flex items-center px-2 py-0.5 rounded-full text-[11px]',
-              'bg-white/5 border border-white/5 text-slate-500',
+              'bg-[var(--glass-bg)] border border-[var(--glass-border)] text-[var(--color-text-muted)]',
               'font-jetbrains',
             )}
           >
@@ -124,7 +124,7 @@ const RepoCard = ({ repo }: RepoCardProps) => {
 
         {/* Update time */}
         {repo.updatedAt && (
-          <span className="text-[11px] text-slate-600 font-jetbrains flex-shrink-0">
+          <span className="text-[11px] text-[var(--color-text-muted)] font-jetbrains flex-shrink-0">
             {getRelativeTime(repo.updatedAt)}更新
           </span>
         )}

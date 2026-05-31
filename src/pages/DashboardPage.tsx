@@ -20,19 +20,16 @@ import {
   Zap,
   Sparkles,
   Terminal,
+  PieChart,
+  Activity,
 } from 'lucide-react'
 import { SITE_NAME } from '@/utils/constants'
 import { cn } from '@/utils/cn'
 import { formatStars } from '@/utils/formatDate'
 import { useNotes } from '@/contexts/NotesContext'
+import { agents } from '@/data/agents'
 
 /* ── types ── */
-
-interface TrendingRepo {
-  name: string
-  stars: number
-  color: string
-}
 
 interface FeedItem {
   id: string
@@ -49,14 +46,6 @@ interface TagItem {
 }
 
 /* ── static data ── */
-
-const TRENDING_REPOS: TrendingRepo[] = [
-  { name: 'langchain', stars: 124500, color: 'from-cyan-400 to-emerald-400' },
-  { name: 'autogen', stars: 89200, color: 'from-purple-400 to-pink-400' },
-  { name: 'llama.cpp', stars: 76800, color: 'from-amber-400 to-orange-400' },
-  { name: 'transformers', stars: 112100, color: 'from-emerald-400 to-teal-400' },
-  { name: 'vllm', stars: 45300, color: 'from-blue-400 to-cyan-400' },
-]
 
 const FEED_ITEMS: FeedItem[] = [
   {
@@ -111,23 +100,55 @@ const TAGS: TagItem[] = [
   { label: 'Tool Use', size: 'sm', hue: 50 },
 ]
 
-/* ── helpers ── */
+/* ── Model category donut data ── */
 
-function useAnimatedBar(targetWidth: number, delay: number) {
-  const [width, setWidth] = useState(0)
+interface CategorySlice {
+  label: string
+  percentage: number
+  color: string
+}
+
+const MODEL_CATEGORIES: CategorySlice[] = [
+  { label: 'LLM', percentage: 40, color: '#06b6d4' },
+  { label: '多模态', percentage: 25, color: '#a855f7' },
+  { label: '代码', percentage: 10, color: '#10b981' },
+  { label: '图像', percentage: 15, color: '#f59e0b' },
+  { label: '视频', percentage: 5, color: '#f43f5e' },
+  { label: '其他', percentage: 5, color: '#64748b' },
+]
+
+/* ── Sparkline mock data ── */
+
+const MONTHLY_DATA = [45, 52, 61, 68, 75, 82, 89]
+const MONTH_LABELS = ['11月', '12月', '1月', '2月', '3月', '4月', '5月']
+
+/* ── hooks ── */
+
+function useInView(options?: IntersectionObserverInit) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [inView, setInView] = useState(false)
   const triggered = useRef(false)
 
   useEffect(() => {
-    if (triggered.current) return
-    triggered.current = true
-    const timer = setTimeout(() => {
-      const anim = requestAnimationFrame(() => setWidth(targetWidth))
-      return () => cancelAnimationFrame(anim)
-    }, delay)
-    return () => clearTimeout(timer)
-  }, [targetWidth, delay])
+    const el = ref.current
+    if (!el) return
 
-  return width
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !triggered.current) {
+          triggered.current = true
+          setInView(true)
+          observer.unobserve(el)
+        }
+      },
+      { threshold: 0.15, ...options },
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [options])
+
+  return { ref, inView }
 }
 
 function useCountUp(target: number, duration: number) {
@@ -302,12 +323,7 @@ function StatCard({
   suffix?: string
 }) {
   const count = useCountUp(value, 1600)
-  const formatted = useMemo(() => {
-    if (value >= 10000) {
-      return count.toLocaleString()
-    }
-    return count.toLocaleString()
-  }, [count, value])
+  const formatted = useMemo(() => count.toLocaleString(), [count])
 
   return (
     <div className="group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 transition-all duration-300 hover:border-cyan-500/30 hover:bg-[var(--color-bg-secondary)]/80 hover:shadow-[0_0_30px_rgba(6,182,212,0.08)]">
@@ -329,44 +345,6 @@ function StatCard({
           {suffix ?? ''}
         </span>
       </div>
-    </div>
-  )
-}
-
-function TrendingBars() {
-  const maxStars = Math.max(...TRENDING_REPOS.map((r) => r.stars))
-
-  return (
-    <div className="space-y-3">
-      {TRENDING_REPOS.map((repo, i) => {
-        const targetPct = Math.round((repo.stars / maxStars) * 100)
-        const width = useAnimatedBar(targetPct, i * 120)
-
-        return (
-          <div key={repo.name} className="group">
-            <div className="flex items-center justify-between mb-1.5 text-xs">
-              <span className="font-mono text-[var(--color-text-primary)] font-medium tracking-wide">
-                {repo.name}
-              </span>
-              <span className="font-mono tabular-nums text-[var(--color-text-muted)]">
-                <Star className="h-3 w-3 inline fill-amber-400 text-amber-400" /> {formatStars(repo.stars)}
-              </span>
-            </div>
-            <div className="relative h-3 w-full rounded-full bg-white/[0.03] overflow-hidden">
-              <div
-                className={cn(
-                  'absolute left-0 top-0 h-full rounded-full bg-gradient-to-r transition-[width] duration-[800ms] ease-out',
-                  repo.color,
-                )}
-                style={{ width: `${width}%` }}
-              >
-                {/* Shine overlay */}
-                <div className="absolute inset-0 rounded-full bg-[linear-gradient(90deg,transparent_30%,rgba(255,255,255,0.15)_50%,transparent_70%)] bg-[length:200%_100%] animate-shimmer" />
-              </div>
-            </div>
-          </div>
-        )
-      })}
     </div>
   )
 }
@@ -461,66 +439,291 @@ function TagCloud() {
   )
 }
 
-function ProgressRing({ percent = 75 }: { percent?: number }) {
-  const [offset, setOffset] = useState(0)
-  const radius = 54
-  const circumference = 2 * Math.PI * radius
-  const targetOffset = circumference - (percent / 100) * circumference
-  const triggered = useRef(false)
+/* ── chart: Model Category Donut ── */
 
-  useEffect(() => {
-    if (triggered.current) return
-    triggered.current = true
-    const timer = setTimeout(() => {
-      setOffset(targetOffset)
-    }, 300)
-    return () => clearTimeout(timer)
-  }, [targetOffset])
+function DonutChart() {
+  const { ref, inView } = useInView({ threshold: 0.2 })
+  const radius = 80
+  const circumference = 2 * Math.PI * radius
+  const total = MODEL_CATEGORIES.reduce((s, c) => s + c.percentage, 0)
+  let cumulative = 0
+
+  const segments = MODEL_CATEGORIES.map((cat) => {
+    const segLen = (cat.percentage / total) * circumference
+    const offset = -(cumulative / total) * circumference
+    cumulative += cat.percentage
+    return { ...cat, segLen, offset }
+  })
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div ref={ref} className="flex flex-col items-center gap-4">
+      {/* Ring */}
       <div className="relative inline-flex items-center justify-center">
-        <svg width="140" height="140" viewBox="0 0 140 140" className="-rotate-90">
-          {/* Background track */}
-          <circle
-            cx="70"
-            cy="70"
-            r={radius}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="6"
-            className="text-white/[0.04]"
-          />
-          {/* Progress arc */}
-          <circle
-            cx="70"
-            cy="70"
-            r={radius}
-            fill="none"
-            stroke="url(#progressGradient)"
-            strokeWidth="6"
-            strokeLinecap="round"
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-            className="transition-[stroke-dashoffset] duration-[1400ms] ease-out"
-          />
-          <defs>
-            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#06b6d4" />
-              <stop offset="100%" stopColor="#a855f7" />
-            </linearGradient>
-          </defs>
+        <svg
+          width="200"
+          height="200"
+          viewBox="0 0 200 200"
+          className="-rotate-90 drop-shadow-[0_0_30px_rgba(6,182,212,0.08)]"
+        >
+          {segments.map((seg, i) => (
+            <circle
+              key={seg.label}
+              cx="100"
+              cy="100"
+              r={radius}
+              fill="none"
+              stroke={seg.color}
+              strokeWidth="20"
+              strokeDasharray={`${seg.segLen} ${circumference}`}
+              strokeDashoffset={inView ? seg.offset : 0}
+              strokeLinecap="butt"
+              className="transition-[stroke-dashoffset] duration-[1200ms] ease-out"
+              style={{
+                transitionDelay: `${i * 150}ms`,
+                opacity: inView ? 1 : 0.3,
+                transitionProperty: 'stroke-dashoffset, opacity',
+                transitionDuration: '1200ms, 400ms',
+              }}
+            />
+          ))}
+          {/* Inner white circle to make it a donut */}
+          <circle cx="100" cy="100" r={radius - 22} fill="var(--color-bg-secondary)" stroke="none" />
         </svg>
 
         {/* Center text */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-3xl font-bold font-mono bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            75%
+        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+          <span className="text-3xl font-bold font-mono text-[var(--color-text-primary)]">
+            {MODEL_CATEGORIES.length}
           </span>
           <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--color-text-muted)] mt-0.5">
-            Complete
+            类别
           </span>
         </div>
+      </div>
+
+      {/* Legend */}
+      <div className="grid grid-cols-2 gap-x-4 gap-y-2 w-full max-w-[220px]">
+        {MODEL_CATEGORIES.map((cat) => (
+          <div key={cat.label} className="flex items-center gap-2">
+            <span
+              className="h-2.5 w-2.5 rounded-sm shrink-0"
+              style={{ backgroundColor: cat.color }}
+            />
+            <span className="text-xs text-[var(--color-text-secondary)] whitespace-nowrap">
+              {cat.label}
+            </span>
+            <span className="text-xs text-[var(--color-text-muted)] font-mono ml-auto">
+              {cat.percentage}%
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* ── chart: Agent Stars Leaderboard ── */
+
+function AgentStarsBar() {
+  const { ref, inView } = useInView({ threshold: 0.15 })
+
+  const topAgents = useMemo(() => {
+    return agents
+      .filter((a) => typeof a.githubStars === 'number' && a.githubStars > 0)
+      .sort((a, b) => (b.githubStars ?? 0) - (a.githubStars ?? 0))
+      .slice(0, 5)
+  }, [])
+
+  const maxStars = topAgents[0]?.githubStars ?? 1
+
+  return (
+    <div ref={ref} className="space-y-4">
+      {topAgents.map((agent, i) => {
+        const targetPct = Math.round(((agent.githubStars ?? 0) / maxStars) * 100)
+        return (
+          <div key={agent.slug} className="group">
+            <div className="flex items-center gap-3">
+              {/* Name */}
+              <span className="w-28 shrink-0 text-xs font-mono font-medium text-[var(--color-text-primary)] truncate">
+                {agent.name}
+              </span>
+
+              {/* Bar track */}
+              <div className="flex-1 h-6 rounded-full bg-white/[0.03] overflow-hidden border border-white/[0.03]">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-cyan-400 transition-[width] duration-[1000ms] ease-out relative overflow-hidden"
+                  style={{
+                    width: inView ? `${targetPct}%` : '0%',
+                    transitionDelay: `${i * 120}ms`,
+                  }}
+                >
+                  {/* Shimmer overlay */}
+                  <div className="absolute inset-0 rounded-full bg-[linear-gradient(90deg,transparent_30%,rgba(255,255,255,0.18)_50%,transparent_70%)] bg-[length:200%_100%] animate-shimmer" />
+                </div>
+              </div>
+
+              {/* Stars count */}
+              <span className="w-20 shrink-0 text-right text-xs font-mono tabular-nums text-[var(--color-text-muted)]">
+                <Star className="h-3 w-3 inline fill-amber-400 text-amber-400 mr-0.5" />
+                {formatStars(agent.githubStars ?? 0)}
+              </span>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+/* ── chart: Monthly Trending Sparkline ── */
+
+function SparklineChart() {
+  const { ref, inView } = useInView({ threshold: 0.2 })
+
+  // SVG dimensions
+  const svgWidth = 600
+  const svgHeight = 200
+  const padding = { top: 20, right: 30, bottom: 30, left: 10 }
+  const chartW = svgWidth - padding.left - padding.right
+  const chartH = svgHeight - padding.top - padding.bottom
+
+  const minVal = Math.min(...MONTHLY_DATA) - 5
+  const maxVal = Math.max(...MONTHLY_DATA) + 5
+  const range = maxVal - minVal
+
+  const points = MONTHLY_DATA.map((val, i) => {
+    const x = padding.left + (i / (MONTHLY_DATA.length - 1)) * chartW
+    const y = padding.top + chartH - ((val - minVal) / range) * chartH
+    return { x, y, val }
+  })
+
+  const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x},${p.y}`).join(' ')
+  const areaPath = `${linePath} L${points[points.length - 1].x},${padding.top + chartH} L${points[0].x},${padding.top + chartH} Z`
+
+  // Dash animation
+  const pathLength = useMemo(() => {
+    // approximate
+    let len = 0
+    for (let i = 1; i < points.length; i++) {
+      const dx = points[i].x - points[i - 1].x
+      const dy = points[i].y - points[i - 1].y
+      len += Math.sqrt(dx * dx + dy * dy)
+    }
+    return len
+  }, [])
+
+  return (
+    <div ref={ref} className="relative">
+      <svg
+        viewBox={`0 0 ${svgWidth} ${svgHeight}`}
+        className="w-full h-auto"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <defs>
+          <linearGradient id="sparklineGradFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.25" />
+            <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.0" />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        {/* Horizontal grid lines */}
+        {[0, 0.25, 0.5, 0.75, 1].map((frac) => {
+          const y = padding.top + chartH - frac * chartH
+          const val = Math.round(minVal + frac * range)
+          return (
+            <g key={frac}>
+              <line
+                x1={padding.left}
+                y1={y}
+                x2={svgWidth - padding.right}
+                y2={y}
+                stroke="currentColor"
+                strokeOpacity="0.04"
+                strokeWidth="1"
+              />
+              <text
+                x={svgWidth - padding.right + 4}
+                y={y + 4}
+                className="text-[9px] fill-[var(--color-text-muted)] font-mono"
+                textAnchor="start"
+              >
+                {val}
+              </text>
+            </g>
+          )
+        })}
+
+        {/* Month labels */}
+        {MONTH_LABELS.map((label, i) => {
+          const x = padding.left + (i / (MONTH_LABELS.length - 1)) * chartW
+          return (
+            <text
+              key={label}
+              x={x}
+              y={svgHeight - 6}
+              className="text-[9px] fill-[var(--color-text-muted)] font-mono"
+              textAnchor="middle"
+            >
+              {label}
+            </text>
+          )
+        })}
+
+        {/* Area fill */}
+        <path
+          d={areaPath}
+          fill="url(#sparklineGradFill)"
+          opacity={inView ? 1 : 0}
+          className="transition-opacity duration-700"
+        />
+
+        {/* Line */}
+        <path
+          d={linePath}
+          fill="none"
+          stroke="#06b6d4"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          filter="url(#glow)"
+          strokeDasharray={pathLength}
+          strokeDashoffset={inView ? 0 : pathLength}
+          className="transition-[stroke-dashoffset] duration-[1500ms] ease-out"
+        />
+
+        {/* Data dots */}
+        {points.map((p, i) => (
+          <circle
+            key={i}
+            cx={p.x}
+            cy={p.y}
+            r="4"
+            fill="var(--color-bg-primary)"
+            stroke="#06b6d4"
+            strokeWidth="2"
+            opacity={inView ? 1 : 0}
+            className="transition-opacity duration-300"
+            style={{ transitionDelay: `${1200 + i * 100}ms` }}
+          />
+        ))}
+      </svg>
+
+      {/* Tooltip-style latest value */}
+      <div className="absolute top-0 right-0 flex items-center gap-1.5 bg-[var(--color-bg-secondary)]/90 backdrop-blur-sm border border-white/[0.06] rounded-lg px-2.5 py-1">
+        <Activity className="h-3 w-3 text-cyan-400" />
+        <span className="text-xs font-mono font-bold text-cyan-400">
+          {MONTHLY_DATA[MONTHLY_DATA.length - 1]}
+        </span>
+        <span className="text-[9px] text-[var(--color-text-muted)]">
+          活跃度指数
+        </span>
       </div>
     </div>
   )
@@ -573,18 +776,40 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
             {/* Left 70% */}
             <div className="lg:col-span-8 space-y-5">
-              {/* GitHub 趋势 */}
+              {/* Agent Stars Leaderboard */}
               <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
                 <div className="flex items-center gap-2.5 mb-5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-slate-700 to-slate-800">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/10">
                     <BarChart3 className="h-4 w-4 text-cyan-400" />
                   </div>
                   <div>
-                    <h2 className="text-sm font-semibold text-white">GitHub 趋势</h2>
-                    <p className="text-[11px] text-[var(--color-text-muted)] font-mono">Top AI repositories</p>
+                    <h2 className="text-sm font-semibold text-white">
+                      Agent Stars 排行榜
+                    </h2>
+                    <p className="text-[11px] text-[var(--color-text-muted)] font-mono">
+                      Top 5 agents by GitHub stars
+                    </p>
                   </div>
                 </div>
-                <TrendingBars />
+                <AgentStarsBar />
+              </section>
+
+              {/* Monthly Trending Sparkline */}
+              <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
+                <div className="flex items-center gap-2.5 mb-5">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/10">
+                    <Activity className="h-4 w-4 text-cyan-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-sm font-semibold text-white">
+                      月度趋势
+                    </h2>
+                    <p className="text-[11px] text-[var(--color-text-muted)] font-mono">
+                      近6个月 AI 生态活跃度变化
+                    </p>
+                  </div>
+                </div>
+                <SparklineChart />
               </section>
 
               {/* 最近更新 */}
@@ -604,6 +829,24 @@ export default function DashboardPage() {
 
             {/* Right 30% */}
             <div className="lg:col-span-4 space-y-5">
+              {/* Model Category Donut */}
+              <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
+                <div className="flex items-center gap-2.5 mb-5">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-500/10">
+                    <PieChart className="h-4 w-4 text-purple-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-sm font-semibold text-white">
+                      模型类别分布
+                    </h2>
+                    <p className="text-[11px] text-[var(--color-text-muted)] font-mono">
+                      AI model categories
+                    </p>
+                  </div>
+                </div>
+                <DonutChart />
+              </section>
+
               {/* 快速操作 */}
               <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
                 <h2 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
@@ -620,15 +863,6 @@ export default function DashboardPage() {
                   热门标签
                 </h2>
                 <TagCloud />
-              </section>
-
-              {/* 学习进度 */}
-              <section className="rounded-2xl border border-white/[0.06] bg-[var(--color-bg-secondary)]/60 backdrop-blur-xl p-5 sm:p-6">
-                <h2 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
-                  <TrendingUp className="h-4 w-4 text-emerald-400" />
-                  学习进度
-                </h2>
-                <ProgressRing percent={75} />
               </section>
             </div>
           </div>

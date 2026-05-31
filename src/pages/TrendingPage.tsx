@@ -6,6 +6,7 @@ import { getFallbackRepos } from '@/services/github'
 import RepoCard from '@/components/trending/RepoCard'
 import RepoFilter from '@/components/trending/RepoFilter'
 import Spinner from '@/components/ui/Spinner'
+import { ListSkeleton } from '@/components/ui/Skeleton'
 import EmptyState from '@/components/ui/EmptyState'
 import Button from '@/components/ui/Button'
 import AdBanner from '@/components/ads/AdBanner'
@@ -74,9 +75,7 @@ const TrendingPage = () => {
   if (loading && repos.length === 0) {
     return (
       <div className="max-w-5xl mx-auto px-4 py-12">
-        <div className="flex items-center justify-center min-h-[50vh]">
-          <Spinner size="lg" label="加载热门项目中..." />
-        </div>
+        <ListSkeleton count={4} />
       </div>
     )
   }
@@ -85,7 +84,7 @@ const TrendingPage = () => {
     <div className="max-w-5xl mx-auto px-4 py-8 sm:py-12">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl sm:text-4xl font-sora font-bold text-white mb-2">
+        <h1 className="text-3xl sm:text-4xl font-sora font-bold text-[var(--color-text-primary)] mb-2">
           GitHub热门项目
         </h1>
         <p className="text-[var(--color-text-secondary)] text-sm font-jetbrains">

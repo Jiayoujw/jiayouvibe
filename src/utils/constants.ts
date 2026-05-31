@@ -4,6 +4,7 @@ export const SITE_NAME = 'jiayouvibe'
 export const SITE_DESCRIPTION = '探索AI的无限可能 - 汇聚大模型、智能体、开发教程、专业术语与开源项目的一站式AI知识平台'
 export const GITHUB_CACHE_KEY = 'jiayouvibe_github_cache'
 export const NOTES_STORAGE_KEY = 'jiayouvibe_notes'
+export const FAVORITES_STORAGE_KEY = 'jiayouvibe_favorites'
 export const THEME_STORAGE_KEY = 'jiayouvibe_theme'
 export const GITHUB_CACHE_TTL = 3600000 // 1 hour
 export const GITHUB_API_URL = 'https://api.github.com/search/repositories'

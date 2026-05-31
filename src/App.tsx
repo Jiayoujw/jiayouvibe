@@ -32,11 +32,12 @@ const AgentRankingsPage = lazy(() => import('@/pages/AgentRankingsPage'))
 const DashboardPage = lazy(() => import('@/pages/DashboardPage'))
 const SkillsPage = lazy(() => import('@/pages/SkillsPage'))
 const PromptsPage = lazy(() => import('@/pages/PromptsPage'))
+const FavoritesPage = lazy(() => import('@/pages/FavoritesPage'))
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage'))
 
 function PageFallback() {
   return (
-    <div className="min-h-[60vh] pt-8">
+    <div className="min-h-[60vh] pt-8 animate-scale-in">
       <ListSkeleton count={3} />
     </div>
   )
@@ -74,6 +75,7 @@ function AppKeyboardHost() {
             <Route path="/claude-skills" element={<ClaudeSkillsPage />} />
             <Route path="/skills" element={<SkillsPage />} />
             <Route path="/prompts" element={<PromptsPage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>

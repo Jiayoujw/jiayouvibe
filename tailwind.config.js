@@ -48,7 +48,9 @@ export default {
         'shimmer': 'shimmer 2s linear infinite',
         'shimmer-border': 'shimmer-border 3s linear infinite',
         'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
-        'slide-up': 'slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'slide-up': 'slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'slide-down': 'slideDownFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) both',
+        'scale-in': 'scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both',
         'gradient-flow': 'gradient-flow 6s ease infinite',
         'shine': 'shine 4s linear infinite',
         'grid-drift': 'grid-drift 20s linear infinite',
@@ -87,10 +89,6 @@ export default {
             boxShadow: '0 0 28px rgba(6, 182, 212, 0.6), 0 0 60px rgba(139, 92, 246, 0.3), 0 0 90px rgba(6, 182, 212, 0.15)',
             borderColor: 'rgba(6, 182, 212, 0.7)',
           },
-        },
-        'slide-up': {
-          '0%': { opacity: '0', transform: 'translateY(24px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         'gradient-flow': {
           '0%': { backgroundPosition: '0% 50%' },

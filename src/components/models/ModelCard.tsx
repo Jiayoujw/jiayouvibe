@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Database, Cpu, DollarSign, Cloud, Tag } from 'lucide-react'
 import type { AIModel } from '@/types'
 import { cn } from '@/utils/cn'
+import FavoriteButton from '@/components/ui/FavoriteButton'
 
 interface ModelCardProps {
   model: AIModel
@@ -107,7 +108,16 @@ function StatItem({
 
 const ModelCard = ({ model }: ModelCardProps) => {
   return (
-    <Link to={`/models/${model.slug}`} className="block group">
+    <Link to={`/models/${model.slug}`} className="block group relative">
+      {/* Favorite button */}
+      <div className="absolute top-3 right-3 z-10">
+        <FavoriteButton
+          id={model.slug}
+          type="model"
+          name={model.name}
+          url={`/models/${model.slug}`}
+        />
+      </div>
       <div
         className={cn(
           'h-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-5',

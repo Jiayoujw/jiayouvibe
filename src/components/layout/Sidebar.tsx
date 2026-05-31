@@ -20,6 +20,7 @@ import {
   BarChart3,
   Wand2,
   Info,
+  Bookmark,
   Sun,
   Moon,
   ChevronLeft,
@@ -70,6 +71,7 @@ const NAV_GROUPS: NavGroup[] = [
     title: '个人与更多',
     items: [
       { label: '笔记系统', path: '/notes', icon: StickyNote },
+      { label: '我的收藏', path: '/favorites', icon: Bookmark },
       { label: 'GitHub热门', path: '/trending', icon: Flame },
       { label: '其他AI领域', path: '/domains', icon: Layers },
       { label: 'AI技能工具', path: '/skills', icon: Zap },
