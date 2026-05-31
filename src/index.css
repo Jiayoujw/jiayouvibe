@@ -12,13 +12,13 @@
     --color-text-muted: #707881;
     --color-border: #bfc7d2;
     --color-accent: #006194;
-    --color-accent-glow: rgba(0, 97, 148, 0.15);
-    --glass-bg: rgba(255, 255, 255, 0.8);
-    --glass-border: rgba(112, 120, 129, 0.1);
-    --glass-highlight: rgba(255, 255, 255, 0.5);
-    --nav-bg: rgba(247, 249, 251, 0.85);
-    --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.02);
-    --card-shadow-hover: 0 8px 32px rgba(0, 97, 148, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+    --color-accent-glow: rgba(0, 97, 148, 0.12);
+    --glass-bg: rgba(255, 255, 255, 0.72);
+    --glass-border: rgba(0, 0, 0, 0.12);
+    --glass-highlight: rgba(255, 255, 255, 0.9);
+    --nav-bg: rgba(247, 249, 251, 0.75);
+    --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.06);
+    --card-shadow-hover: 0 4px 20px rgba(0, 97, 148, 0.1), 0 2px 8px rgba(0, 0, 0, 0.08);
     --theme-transition-duration: 300ms;
   }
 
@@ -127,6 +127,18 @@
     border-radius: 1rem;
     box-shadow: var(--card-shadow);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Inner top highlight for glass realism */
+    position: relative;
+    overflow: hidden;
+  }
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-highlight), transparent);
+    opacity: 0.6;
+    pointer-events: none;
   }
   .glass-card:hover {
     box-shadow: var(--card-shadow-hover);
@@ -139,8 +151,8 @@
     background: var(--nav-bg);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset;
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 1px 0 0 var(--glass-highlight) inset;
   }
 
   /* Featured variant with cyan accent */
@@ -151,6 +163,17 @@
     border: 1px solid rgba(6, 182, 212, 0.2);
     border-radius: 1rem;
     box-shadow: var(--card-shadow), 0 0 30px rgba(6, 182, 212, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .glass-card-featured::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), transparent);
+    opacity: 0.8;
+    pointer-events: none;
   }
 
   /* Gradient text utility */
