@@ -666,7 +666,7 @@ export default function ComparisonPage() {
     document.title = `模型对比 | ${SITE_NAME}`
   }, [])
 
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : 'https://jiayouvibe.com/#/compare'
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : 'https://jiayouvibe.com/compare'
 
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>([])
   const [chipSearch, setChipSearch] = useState('')

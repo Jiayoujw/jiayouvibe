@@ -39,7 +39,7 @@ export default function AgentsPage() {
       <Breadcrumb
         className="mb-6"
         items={[
-          { label: '首页', href: '/#/' },
+          { label: '首页', href: '/' },
           { label: 'AI智能体' },
         ]}
       />

@@ -109,7 +109,7 @@ const ModelDetailPage = () => {
   }
 
   const providerStyle = providerStyles[model.provider] ?? defaultProviderStyle
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/#/models/${model.slug}`
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/models/${model.slug}`
 
   return (
     <>

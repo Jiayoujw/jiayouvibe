@@ -1,161 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Home -->
-  <url>
-    <loc>https://jiayouvibe.com/</loc>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://jiayouvibe.com/</loc><changefreq>daily</changefreq><priority>1.0</priority></url>
 
-  <!-- Models -->
-  <url>
-    <loc>https://jiayouvibe.com/models</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/models/gpt-5</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/models/claude-opus-4-5</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Core Pages -->
+  <url><loc>https://jiayouvibe.com/models</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://jiayouvibe.com/models/gpt-5</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jiayouvibe.com/models/claude-opus-4-5</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
-  <!-- Agents -->
-  <url>
-    <loc>https://jiayouvibe.com/agents</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/agents/langchain</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <url><loc>https://jiayouvibe.com/agents</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://jiayouvibe.com/agents/langchain</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
-  <!-- Development -->
-  <url>
-    <loc>https://jiayouvibe.com/development</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
+  <url><loc>https://jiayouvibe.com/development</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://jiayouvibe.com/terminology</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://jiayouvibe.com/directory</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
-  <!-- Terminology -->
-  <url>
-    <loc>https://jiayouvibe.com/terminology</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Tools & Data -->
+  <url><loc>https://jiayouvibe.com/news</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
+  <url><loc>https://jiayouvibe.com/tools</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jiayouvibe.com/agent-rankings</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jiayouvibe.com/compare</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
-  <!-- Directory -->
-  <url>
-    <loc>https://jiayouvibe.com/directory</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+  <!-- Personal -->
+  <url><loc>https://jiayouvibe.com/notes</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/favorites</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/learn</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/dashboard</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
 
-  <!-- Notes -->
-  <url>
-    <loc>https://jiayouvibe.com/notes</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Trending -->
-  <url>
-    <loc>https://jiayouvibe.com/trending</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- News -->
-  <url>
-    <loc>https://jiayouvibe.com/news</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Compare -->
-  <url>
-    <loc>https://jiayouvibe.com/compare</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- About -->
-  <url>
-    <loc>https://jiayouvibe.com/about</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Domains -->
-  <url>
-    <loc>https://jiayouvibe.com/domains</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-painting</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-coding</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-video</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-music</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-healthcare</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-education</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-finance</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-security</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-gaming</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-robotics</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-agriculture</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://jiayouvibe.com/domains/ai-science</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
+  <!-- Explore -->
+  <url><loc>https://jiayouvibe.com/domains</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jiayouvibe.com/skills</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jiayouvibe.com/prompts</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://jiayouvibe.com/claude-skills</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
 </urlset>

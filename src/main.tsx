@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from '@/contexts/ThemeContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
 import { NotesProvider } from '@/contexts/NotesContext'
@@ -23,9 +23,9 @@ createRoot(document.getElementById('root')!).render(
       <LanguageProvider>
         <NotesProvider>
           <FavoritesProvider>
-            <HashRouter>
+            <BrowserRouter>
               <App />
-            </HashRouter>
+            </BrowserRouter>
           </FavoritesProvider>
         </NotesProvider>
       </LanguageProvider>

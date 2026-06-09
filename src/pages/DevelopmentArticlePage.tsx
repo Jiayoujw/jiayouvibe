@@ -174,7 +174,7 @@ export default function DevelopmentArticlePage() {
   const categoryLabel = TUTORIAL_CATEGORIES[tutorial.category] ?? tutorial.category
   const diff = TUTORIAL_DIFFICULTIES[tutorial.difficulty]
 
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/#/development/${tutorial.slug}`
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/development/${tutorial.slug}`
 
   return (
     <>

@@ -44,8 +44,8 @@ export default function AgentDetailPage() {
         <Breadcrumb
           className="mb-8"
           items={[
-            { label: '首页', href: '/#/' },
-            { label: 'AI智能体', href: '/#/agents' },
+            { label: '首页', href: '/' },
+            { label: 'AI智能体', href: '/agents' },
             { label: '未找到' },
           ]}
         />
@@ -64,7 +64,7 @@ export default function AgentDetailPage() {
   }
 
   const badgeColor = typeColorMap[agent.type] || 'cyan'
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/#/agents/${agent.slug}`
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/agents/${agent.slug}`
 
   return (
     <>
@@ -74,8 +74,8 @@ export default function AgentDetailPage() {
       <Breadcrumb
         className="mb-8"
         items={[
-          { label: '首页', href: '/#/' },
-          { label: 'AI智能体', href: '/#/agents' },
+          { label: '首页', href: '/' },
+          { label: 'AI智能体', href: '/agents' },
           { label: agent.name },
         ]}
       />

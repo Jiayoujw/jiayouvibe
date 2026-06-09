@@ -245,7 +245,7 @@ export default function DomainDetailPage() {
     }
   }, [domain])
 
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/#/domains/${slug}`
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : `https://jiayouvibe.com/domains/${slug}`
 
   // ── Not found ───────────────────────────────────────────────────────────
   if (!domain) {
@@ -254,8 +254,8 @@ export default function DomainDetailPage() {
         <Breadcrumb
           className="mb-8"
           items={[
-            { label: '首页', href: '/#/' },
-            { label: '更多AI领域', href: '/#/domains' },
+            { label: '首页', href: '/' },
+            { label: '更多AI领域', href: '/domains' },
             { label: '未找到' },
           ]}
         />
@@ -280,8 +280,8 @@ export default function DomainDetailPage() {
       <Breadcrumb
         className="mb-8"
         items={[
-          { label: '首页', href: '/#/' },
-          { label: '更多AI领域', href: '/#/domains' },
+          { label: '首页', href: '/' },
+          { label: '更多AI领域', href: '/domains' },
           { label: domain.name },
         ]}
       />
