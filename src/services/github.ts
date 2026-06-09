@@ -5,6 +5,23 @@ import {
   GITHUB_CACHE_TTL,
 } from '@/utils/constants'
 
+// Static live data (auto-updated by GitHub Actions every 30min)
+let liveData: GitHubRepo[] | null = null
+async function loadLiveData(): Promise<GitHubRepo[]> {
+  if (liveData) return liveData
+  try {
+    const mod = await import('@/data/trending-live.json')
+    const raw = (mod as { default?: { data?: GitHubRepo[]; timestamp?: number } }).default || mod
+    if (raw && Array.isArray(raw.data) && raw.data.length > 0) {
+      liveData = raw.data
+      return liveData
+    }
+  } catch {
+    // File doesn't exist yet (first deploy or not generated)
+  }
+  return []
+}
+
 // ── Helpers ──────────────────────────────────────────────────────
 
 function loadCache(): GitHubCache | null {
@@ -235,6 +252,28 @@ export interface FetchTrendingOptions {
  *
  * Accepts optional filters to return different repos for different UI states.
  */
+export async function getLiveOrFallbackRepos(language?: string, since?: string): Promise<GitHubRepo[]> {
+  const live = await loadLiveData()
+  if (live.length > 0) {
+    let filtered = live
+    if (language && language !== '全部') {
+      const langLower = language.toLowerCase()
+      filtered = filtered.filter((r) => r.language.toLowerCase() === langLower)
+      if (filtered.length < 3) filtered = live
+    }
+    if (since) {
+      const now = new Date()
+      const daysMap: Record<string, number> = { daily: 1, weekly: 7, monthly: 30 }
+      const days = daysMap[since] || 30
+      const cutoff = new Date(now.getTime() - days * 86400000)
+      const timeFiltered = filtered.filter((r) => new Date(r.updatedAt) >= cutoff)
+      if (timeFiltered.length >= 3) filtered = timeFiltered
+    }
+    return filtered.slice(0, 30)
+  }
+  return getFallbackRepos(language, since)
+}
+
 export function getFallbackRepos(language?: string, since?: string): GitHubRepo[] {
   const all: GitHubRepo[] = [
     { id: 1, name: 'langchain', fullName: 'langchain-ai/langchain', owner: 'langchain-ai', ownerAvatar: '', description: 'Build context-aware reasoning applications with LLMs', url: 'https://github.com/langchain-ai/langchain', stars: 102000, forks: 16500, language: 'Python', topics: ['llm', 'framework', 'agent'], updatedAt: '2025-05-30' },
