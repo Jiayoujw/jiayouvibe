@@ -19,7 +19,7 @@ const DevelopmentArticlePage = lazy(() => import('@/pages/DevelopmentArticlePage
 const TerminologyPage = lazy(() => import('@/pages/TerminologyPage'))
 const DirectoryPage = lazy(() => import('@/pages/DirectoryPage'))
 const NotesPage = lazy(() => import('@/pages/NotesPage'))
-const TrendingPage = lazy(() => import('@/pages/TrendingPage'))
+
 const DomainsPage = lazy(() => import('@/pages/DomainsPage'))
 const DomainDetailPage = lazy(() => import('@/pages/DomainDetailPage'))
 const NewsPage = lazy(() => import('@/pages/NewsPage'))
@@ -64,7 +64,7 @@ function AppKeyboardHost() {
             <Route path="/terminology" element={<TerminologyPage />} />
             <Route path="/directory" element={<DirectoryPage />} />
             <Route path="/notes" element={<NotesPage />} />
-            <Route path="/trending" element={<TrendingPage />} />
+
             <Route path="/domains" element={<DomainsPage />} />
             <Route path="/domains/:slug" element={<DomainDetailPage />} />
             <Route path="/news" element={<NewsPage />} />

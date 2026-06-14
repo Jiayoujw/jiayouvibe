@@ -298,7 +298,7 @@ const tracks: Track[] = [
         resources: [
           { label: 'Papers With Code', url: 'https://paperswithcode.com' },
           { label: 'arXiv AI 板块', url: 'https://arxiv.org/list/cs.AI/recent' },
-          { label: 'jiayouvibe GitHub Trending', url: '#/trending' },
+          { label: 'jiayouvibe GitHub Trending', url: 'https://gh.jiayouvibe.com' },
         ],
         completed: false,
       },

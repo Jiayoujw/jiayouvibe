@@ -33,4 +33,18 @@
   <url><loc>https://jiayouvibe.com/prompts</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://jiayouvibe.com/claude-skills</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://jiayouvibe.com/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+
+  <!-- Domain Detail Pages -->
+  <url><loc>https://jiayouvibe.com/domains/ai-painting</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-coding</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-video</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-music</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-healthcare</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-education</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-finance</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-security</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-gaming</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-robotics</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-agriculture</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jiayouvibe.com/domains/ai-science</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
 </urlset>
