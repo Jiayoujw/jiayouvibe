@@ -8,8 +8,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/252820863?v=4",
       "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞 ",
       "url": "https://github.com/openclaw/openclaw",
-      "stars": 383715,
-      "forks": 80630,
+      "stars": 383721,
+      "forks": 80632,
       "language": "TypeScript",
       "topics": [
         "ai",
@@ -20,7 +20,7 @@
         "own-your-data",
         "personal"
       ],
-      "updatedAt": "2026-07-21T21:50:57Z"
+      "updatedAt": "2026-07-21T22:33:55Z"
     },
     {
       "id": 1073224795,
@@ -30,8 +30,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/45416?v=4",
       "description": "An agentic skills framework & software development methodology that works.",
       "url": "https://github.com/obra/superpowers",
-      "stars": 258740,
-      "forks": 23062,
+      "stars": 258749,
+      "forks": 23064,
       "language": "Shell",
       "topics": [
         "ai",
@@ -43,7 +43,7 @@
         "subagent-driven-development",
         "superpowers"
       ],
-      "updatedAt": "2026-07-21T21:50:06Z"
+      "updatedAt": "2026-07-21T22:43:30Z"
     },
     {
       "id": 1136590548,
@@ -53,8 +53,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/124439313?v=4",
       "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
       "url": "https://github.com/affaan-m/ECC",
-      "stars": 231874,
-      "forks": 35377,
+      "stars": 231884,
+      "forks": 35376,
       "language": "JavaScript",
       "topics": [
         "ai-agents",
@@ -66,7 +66,7 @@
         "mcp",
         "productivity"
       ],
-      "updatedAt": "2026-07-21T21:50:07Z"
+      "updatedAt": "2026-07-21T22:41:58Z"
     },
     {
       "id": 1024554267,
@@ -76,8 +76,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/134168893?v=4",
       "description": "The agent that grows with you",
       "url": "https://github.com/NousResearch/hermes-agent",
-      "stars": 218356,
-      "forks": 41287,
+      "stars": 218371,
+      "forks": 41292,
       "language": "Python",
       "topics": [
         "ai",
@@ -97,7 +97,7 @@
         "openai",
         "openclaw"
       ],
-      "updatedAt": "2026-07-21T21:46:58Z"
+      "updatedAt": "2026-07-21T22:43:24Z"
     },
     {
       "id": 193215554,
@@ -107,7 +107,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/45487711?v=4",
       "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
       "url": "https://github.com/n8n-io/n8n",
-      "stars": 197368,
+      "stars": 197373,
       "forks": 59520,
       "language": "TypeScript",
       "topics": [
@@ -132,7 +132,7 @@
         "workflow",
         "workflow-automation"
       ],
-      "updatedAt": "2026-07-21T21:52:57Z"
+      "updatedAt": "2026-07-21T22:31:26Z"
     },
     {
       "id": 1142983825,
@@ -142,11 +142,11 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/254743058?v=4",
       "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
       "url": "https://github.com/multica-ai/andrej-karpathy-skills",
-      "stars": 195065,
+      "stars": 195073,
       "forks": 20088,
       "language": "",
       "topics": [],
-      "updatedAt": "2026-07-21T21:53:52Z"
+      "updatedAt": "2026-07-21T22:41:36Z"
     },
     {
       "id": 1197021090,
@@ -160,7 +160,7 @@
       "forks": 109568,
       "language": "Rust",
       "topics": [],
-      "updatedAt": "2026-07-21T21:49:51Z"
+      "updatedAt": "2026-07-21T22:36:44Z"
     },
     {
       "id": 975734319,
@@ -170,11 +170,11 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/66570915?v=4",
       "description": "The open source coding agent.",
       "url": "https://github.com/anomalyco/opencode",
-      "stars": 188306,
-      "forks": 23712,
+      "stars": 188313,
+      "forks": 23711,
       "language": "TypeScript",
       "topics": [],
-      "updatedAt": "2026-07-21T21:50:05Z"
+      "updatedAt": "2026-07-21T22:39:47Z"
     },
     {
       "id": 614765452,
@@ -184,7 +184,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/130738209?v=4",
       "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
       "url": "https://github.com/Significant-Gravitas/AutoGPT",
-      "stars": 185642,
+      "stars": 185640,
       "forks": 46066,
       "language": "Python",
       "topics": [
@@ -200,7 +200,7 @@
         "openai",
         "python"
       ],
-      "updatedAt": "2026-07-21T21:33:19Z"
+      "updatedAt": "2026-07-21T22:00:26Z"
     },
     {
       "id": 1148788086,
@@ -210,11 +210,11 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/28293365?v=4",
       "description": "Skills for Real Engineers. Straight from my .agents directory.",
       "url": "https://github.com/mattpocock/skills",
-      "stars": 180342,
-      "forks": 15413,
+      "stars": 180363,
+      "forks": 15416,
       "language": "Shell",
       "topics": [],
-      "updatedAt": "2026-07-21T21:52:49Z"
+      "updatedAt": "2026-07-21T22:43:30Z"
     },
     {
       "id": 658928958,
@@ -224,7 +224,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/151674099?v=4",
       "description": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
       "url": "https://github.com/ollama/ollama",
-      "stars": 176595,
+      "stars": 176597,
       "forks": 17054,
       "language": "Go",
       "topics": [
@@ -244,7 +244,7 @@
         "ollama",
         "qwen"
       ],
-      "updatedAt": "2026-07-21T21:46:22Z"
+      "updatedAt": "2026-07-21T22:43:56Z"
     },
     {
       "id": 574523116,
@@ -254,8 +254,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/196477?v=4",
       "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
       "url": "https://github.com/f/prompts.chat",
-      "stars": 166152,
-      "forks": 21473,
+      "stars": 166154,
+      "forks": 21474,
       "language": "HTML",
       "topics": [
         "ai",
@@ -277,7 +277,7 @@
         "prompts-chat",
         "typescript"
       ],
-      "updatedAt": "2026-07-21T21:23:24Z"
+      "updatedAt": "2026-07-21T22:30:46Z"
     },
     {
       "id": 527591471,
@@ -318,13 +318,13 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/76263028?v=4",
       "description": "Public repository for Agent Skills",
       "url": "https://github.com/anthropics/skills",
-      "stars": 163181,
-      "forks": 19355,
+      "stars": 163185,
+      "forks": 19354,
       "language": "Python",
       "topics": [
         "agent-skills"
       ],
-      "updatedAt": "2026-07-21T21:52:47Z"
+      "updatedAt": "2026-07-21T22:18:05Z"
     },
     {
       "id": 155220641,
@@ -396,7 +396,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/135057108?v=4",
       "description": "The API to search, scrape, and interact with the web at scale. 🔥",
       "url": "https://github.com/firecrawl/firecrawl",
-      "stars": 154017,
+      "stars": 154024,
       "forks": 8786,
       "language": "TypeScript",
       "topics": [
@@ -420,7 +420,7 @@
         "web-search",
         "webscraping"
       ],
-      "updatedAt": "2026-07-21T21:53:26Z"
+      "updatedAt": "2026-07-21T22:40:08Z"
     },
     {
       "id": 599320067,
@@ -430,7 +430,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/85702467?v=4",
       "description": "Langflow is a powerful tool for building and deploying AI-powered agents and workflows.",
       "url": "https://github.com/langflow-ai/langflow",
-      "stars": 152169,
+      "stars": 152170,
       "forks": 9619,
       "language": "Python",
       "topics": [
@@ -441,7 +441,7 @@
         "multiagent",
         "react-flow"
       ],
-      "updatedAt": "2026-07-21T21:22:47Z"
+      "updatedAt": "2026-07-21T22:11:33Z"
     },
     {
       "id": 626805178,
@@ -451,8 +451,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/127165244?v=4",
       "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
       "url": "https://github.com/langgenius/dify",
-      "stars": 149661,
-      "forks": 23583,
+      "stars": 149662,
+      "forks": 23584,
       "language": "TypeScript",
       "topics": [
         "agent",
@@ -476,7 +476,7 @@
         "skills",
         "workflow"
       ],
-      "updatedAt": "2026-07-21T21:43:13Z"
+      "updatedAt": "2026-07-21T22:20:12Z"
     },
     {
       "id": 701547123,
@@ -486,7 +486,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/158137808?v=4",
       "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
       "url": "https://github.com/open-webui/open-webui",
-      "stars": 146239,
+      "stars": 146243,
       "forks": 21214,
       "language": "Python",
       "topics": [
@@ -506,7 +506,7 @@
         "ui",
         "webui"
       ],
-      "updatedAt": "2026-07-21T21:50:49Z"
+      "updatedAt": "2026-07-21T22:33:05Z"
     },
     {
       "id": 552661142,
@@ -516,8 +516,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/126733545?v=4",
       "description": "The agent engineering platform.",
       "url": "https://github.com/langchain-ai/langchain",
-      "stars": 142266,
-      "forks": 23662,
+      "stars": 142268,
+      "forks": 23665,
       "language": "Python",
       "topics": [
         "agents",
@@ -541,7 +541,7 @@
         "rag",
         "typescript"
       ],
-      "updatedAt": "2026-07-21T21:20:26Z"
+      "updatedAt": "2026-07-21T22:31:00Z"
     },
     {
       "id": 943398999,
@@ -551,7 +551,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/185671340?v=4",
       "description": "FULL Augment Code, Claude Code, Cluely, CodeBuddy, Comet, Cursor, Devin AI, Junie, Kiro, Leap.new, Lovable, Manus, NotionAI, Orchids.app, Perplexity, Poke, Qoder, Replit, Same.dev, Trae, Traycer AI, VSCode Agent, Warp.dev, Windsurf, Xcode, Z.ai Code, Dia & v0. (And other Open Sourced) System Prompts, Internal Tools & AI Models",
       "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools",
-      "stars": 142147,
+      "stars": 142146,
       "forks": 34818,
       "language": "",
       "topics": [
@@ -576,7 +576,7 @@
         "windsurf",
         "windsurf-ai"
       ],
-      "updatedAt": "2026-07-21T21:36:33Z"
+      "updatedAt": "2026-07-21T21:55:46Z"
     },
     {
       "id": 937253475,
@@ -586,11 +586,11 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/76263028?v=4",
       "description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
       "url": "https://github.com/anthropics/claude-code",
-      "stars": 138586,
-      "forks": 22241,
+      "stars": 138590,
+      "forks": 22240,
       "language": "Python",
       "topics": [],
-      "updatedAt": "2026-07-21T21:41:23Z"
+      "updatedAt": "2026-07-21T22:23:05Z"
     },
     {
       "id": 1075372545,
@@ -600,11 +600,11 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/1972242?v=4",
       "description": "A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables.",
       "url": "https://github.com/msitarzewski/agency-agents",
-      "stars": 135372,
-      "forks": 22046,
+      "stars": 135379,
+      "forks": 22048,
       "language": "Shell",
       "topics": [],
-      "updatedAt": "2026-07-21T21:46:20Z"
+      "updatedAt": "2026-07-21T22:40:52Z"
     },
     {
       "id": 793375104,
@@ -614,7 +614,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/31396011?v=4",
       "description": "100+ AI Agent & RAG apps you can actually run — clone, customize, ship.",
       "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
-      "stars": 125730,
+      "stars": 125739,
       "forks": 18550,
       "language": "Python",
       "topics": [
@@ -623,7 +623,7 @@
         "python",
         "rag"
       ],
-      "updatedAt": "2026-07-21T21:52:39Z"
+      "updatedAt": "2026-07-21T22:34:09Z"
     },
     {
       "id": 1042367133,
@@ -633,7 +633,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/9919?v=4",
       "description": "💫 Toolkit to help you get started with Spec-Driven Development",
       "url": "https://github.com/github/spec-kit",
-      "stars": 123096,
+      "stars": 123102,
       "forks": 10977,
       "language": "Python",
       "topics": [
@@ -645,7 +645,7 @@
         "spec",
         "spec-driven"
       ],
-      "updatedAt": "2026-07-21T21:50:06Z"
+      "updatedAt": "2026-07-21T22:41:18Z"
     },
     {
       "id": 589831718,
@@ -655,8 +655,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/166579949?v=4",
       "description": "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.",
       "url": "https://github.com/Comfy-Org/ComfyUI",
-      "stars": 121701,
-      "forks": 14344,
+      "stars": 121704,
+      "forks": 14343,
       "language": "Python",
       "topics": [
         "ai",
@@ -666,7 +666,7 @@
         "pytorch",
         "stable-diffusion"
       ],
-      "updatedAt": "2026-07-21T21:38:47Z"
+      "updatedAt": "2026-07-21T22:19:32Z"
     },
     {
       "id": 612354784,
@@ -676,13 +676,13 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/134263123?v=4",
       "description": "LLM inference in C/C++",
       "url": "https://github.com/ggml-org/llama.cpp",
-      "stars": 121198,
-      "forks": 20853,
+      "stars": 121199,
+      "forks": 20856,
       "language": "C++",
       "topics": [
         "ggml"
       ],
-      "updatedAt": "2026-07-21T21:44:31Z"
+      "updatedAt": "2026-07-21T22:42:44Z"
     },
     {
       "id": 1031912724,
@@ -692,8 +692,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/44939412?v=4",
       "description": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode, OpenClaw, Gemini CLI & Hermes Agent. Only official website: ccswitch.io",
       "url": "https://github.com/farion1231/cc-switch",
-      "stars": 119750,
-      "forks": 8038,
+      "stars": 119751,
+      "forks": 8039,
       "language": "Rust",
       "topics": [
         "ai-tools",
@@ -717,7 +717,7 @@
         "typescript",
         "wsl-support"
       ],
-      "updatedAt": "2026-07-21T21:34:33Z"
+      "updatedAt": "2026-07-21T22:15:18Z"
     },
     {
       "id": 655806940,
@@ -756,8 +756,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/246974152?v=4",
       "description": "An AI SKILL that provide design intelligence for building professional UI/UX multiple platforms",
       "url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
-      "stars": 108529,
-      "forks": 11547,
+      "stars": 108537,
+      "forks": 11548,
       "language": "Python",
       "topics": [
         "ai-skills",
@@ -780,7 +780,7 @@
         "uikit",
         "windsurf-ai"
       ],
-      "updatedAt": "2026-07-21T21:50:07Z"
+      "updatedAt": "2026-07-21T22:41:48Z"
     },
     {
       "id": 214587193,
@@ -790,7 +790,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/54469796?v=4",
       "description": "The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.",
       "url": "https://github.com/supabase/supabase",
-      "stars": 106736,
+      "stars": 106739,
       "forks": 13214,
       "language": "TypeScript",
       "topics": [
@@ -814,7 +814,7 @@
         "vectors",
         "websockets"
       ],
-      "updatedAt": "2026-07-21T21:43:38Z"
+      "updatedAt": "2026-07-21T22:40:21Z"
     },
     {
       "id": 968197216,
@@ -824,7 +824,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/161781182?v=4",
       "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
       "url": "https://github.com/google-gemini/gemini-cli",
-      "stars": 106111,
+      "stars": 106110,
       "forks": 14292,
       "language": "TypeScript",
       "topics": [
@@ -836,7 +836,7 @@
         "mcp-client",
         "mcp-server"
       ],
-      "updatedAt": "2026-07-21T21:50:05Z"
+      "updatedAt": "2026-07-21T22:11:31Z"
     },
     {
       "id": 881458615,
@@ -846,7 +846,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/192012301?v=4",
       "description": "🌐 Make websites accessible for AI agents. Automate tasks online with ease.",
       "url": "https://github.com/browser-use/browser-use",
-      "stars": 105930,
+      "stars": 105933,
       "forks": 11661,
       "language": "Python",
       "topics": [
@@ -858,7 +858,7 @@
         "playwright",
         "python"
       ],
-      "updatedAt": "2026-07-21T21:44:09Z"
+      "updatedAt": "2026-07-21T22:11:52Z"
     },
     {
       "id": 1197515131,
@@ -868,8 +868,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/201282378?v=4",
       "description": "A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
       "url": "https://github.com/VoltAgent/awesome-design-md",
-      "stars": 103613,
-      "forks": 11895,
+      "stars": 103617,
+      "forks": 11894,
       "language": "",
       "topics": [
         "awesome-list",
@@ -883,7 +883,7 @@
         "vibe-design",
         "vibecoding"
       ],
-      "updatedAt": "2026-07-21T21:50:09Z"
+      "updatedAt": "2026-07-21T22:35:50Z"
     },
     {
       "id": 965415649,
@@ -893,11 +893,11 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/14957082?v=4",
       "description": "Lightweight coding agent that runs in your terminal",
       "url": "https://github.com/openai/codex",
-      "stars": 100382,
-      "forks": 15017,
+      "stars": 100386,
+      "forks": 15018,
       "language": "Rust",
       "topics": [],
-      "updatedAt": "2026-07-21T21:47:46Z"
+      "updatedAt": "2026-07-21T22:42:34Z"
     },
     {
       "id": 669879380,
@@ -941,7 +941,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/4928832?v=4",
       "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
       "url": "https://github.com/harry0703/MoneyPrinterTurbo",
-      "stars": 98491,
+      "stars": 98492,
       "forks": 14560,
       "language": "Python",
       "topics": [
@@ -960,7 +960,7 @@
         "workflow-automation",
         "youtube-shorts"
       ],
-      "updatedAt": "2026-07-21T21:31:51Z"
+      "updatedAt": "2026-07-21T21:54:59Z"
     },
     {
       "id": 695864515,
@@ -970,7 +970,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/1267200?v=4",
       "description": "real time face swap and one-click video deepfake with only a single image",
       "url": "https://github.com/hacksider/Deep-Live-Cam",
-      "stars": 95039,
+      "stars": 95038,
       "forks": 13842,
       "language": "Python",
       "topics": [
@@ -993,7 +993,7 @@
         "webcam",
         "webcamera"
       ],
-      "updatedAt": "2026-07-21T21:40:51Z"
+      "updatedAt": "2026-07-21T21:55:37Z"
     },
     {
       "id": 909213664,
@@ -1003,7 +1003,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/192884433?v=4",
       "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
       "url": "https://github.com/TauricResearch/TradingAgents",
-      "stars": 93969,
+      "stars": 93970,
       "forks": 18158,
       "language": "Python",
       "topics": [
@@ -1013,7 +1013,7 @@
         "multiagent",
         "trading"
       ],
-      "updatedAt": "2026-07-21T21:21:46Z"
+      "updatedAt": "2026-07-21T22:37:51Z"
     },
     {
       "id": 1200597263,
@@ -1023,7 +1023,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/297659074?v=4",
       "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
       "url": "https://github.com/Graphify-Labs/graphify",
-      "stars": 93070,
+      "stars": 93097,
       "forks": 9038,
       "language": "Python",
       "topics": [
@@ -1047,21 +1047,7 @@
         "skills",
         "tree-sitter"
       ],
-      "updatedAt": "2026-07-21T21:53:37Z"
-    },
-    {
-      "id": 1174820787,
-      "name": "autoresearch",
-      "fullName": "karpathy/autoresearch",
-      "owner": "karpathy",
-      "ownerAvatar": "https://avatars.githubusercontent.com/u/241138?v=4",
-      "description": "AI agents running research on single-GPU nanochat training automatically",
-      "url": "https://github.com/karpathy/autoresearch",
-      "stars": 91731,
-      "forks": 13133,
-      "language": "Python",
-      "topics": [],
-      "updatedAt": "2026-07-21T21:35:51Z"
+      "updatedAt": "2026-07-21T22:41:42Z"
     },
     {
       "id": 1201173969,
@@ -1071,8 +1057,8 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/104168679?v=4",
       "description": "🪨 why use many token when few token do trick — Claude Code skill that cuts 65% of tokens by talking like caveman",
       "url": "https://github.com/JuliusBrussee/caveman",
-      "stars": 91730,
-      "forks": 5204,
+      "stars": 91737,
+      "forks": 5205,
       "language": "JavaScript",
       "topics": [
         "ai",
@@ -1086,7 +1072,21 @@
         "skill",
         "tokens"
       ],
-      "updatedAt": "2026-07-21T21:51:24Z"
+      "updatedAt": "2026-07-21T22:38:41Z"
+    },
+    {
+      "id": 1174820787,
+      "name": "autoresearch",
+      "fullName": "karpathy/autoresearch",
+      "owner": "karpathy",
+      "ownerAvatar": "https://avatars.githubusercontent.com/u/241138?v=4",
+      "description": "AI agents running research on single-GPU nanochat training automatically",
+      "url": "https://github.com/karpathy/autoresearch",
+      "stars": 91734,
+      "forks": 13135,
+      "language": "Python",
+      "topics": [],
+      "updatedAt": "2026-07-21T22:21:24Z"
     },
     {
       "id": 896335270,
@@ -1097,7 +1097,7 @@
       "description": "A collection of MCP servers.",
       "url": "https://github.com/punkpeye/awesome-mcp-servers",
       "stars": 91052,
-      "forks": 13360,
+      "forks": 13365,
       "language": "",
       "topics": [
         "ai",
@@ -1114,7 +1114,7 @@
       "description": "✨ Light and Fast AI Assistant. Support: Web | iOS | MacOS | Android |  Linux | Windows",
       "url": "https://github.com/ChatGPTNextWeb/NextChat",
       "stars": 88527,
-      "forks": 59383,
+      "forks": 59384,
       "language": "TypeScript",
       "topics": [
         "calclaude",
@@ -1147,7 +1147,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/683968?v=4",
       "description": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
       "url": "https://github.com/thedotmack/claude-mem",
-      "stars": 88138,
+      "stars": 88145,
       "forks": 7652,
       "language": "JavaScript",
       "topics": [
@@ -1172,7 +1172,7 @@
         "sqlite",
         "supermemory"
       ],
-      "updatedAt": "2026-07-21T20:55:53Z"
+      "updatedAt": "2026-07-21T22:41:21Z"
     },
     {
       "id": 1266797999,
@@ -1182,7 +1182,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/137048761?v=4",
       "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
       "url": "https://github.com/DietrichGebert/ponytail",
-      "stars": 87251,
+      "stars": 87265,
       "forks": 4768,
       "language": "JavaScript",
       "topics": [
@@ -1197,7 +1197,7 @@
         "prompt-engineering",
         "yagni"
       ],
-      "updatedAt": "2026-07-21T21:53:35Z"
+      "updatedAt": "2026-07-21T22:38:31Z"
     },
     {
       "id": 599547518,
@@ -1207,7 +1207,7 @@
       "ownerAvatar": "https://avatars.githubusercontent.com/u/136984999?v=4",
       "description": "A high-throughput and memory-efficient inference and serving engine for LLMs",
       "url": "https://github.com/vllm-project/vllm",
-      "stars": 86816,
+      "stars": 86818,
       "forks": 19680,
       "language": "Python",
       "topics": [
@@ -1232,7 +1232,7 @@
         "tpu",
         "transformer"
       ],
-      "updatedAt": "2026-07-21T21:42:59Z"
+      "updatedAt": "2026-07-21T22:20:39Z"
     },
     {
       "id": 262296122,
@@ -1292,5 +1292,5 @@
       "updatedAt": "2026-07-21T21:46:49Z"
     }
   ],
-  "timestamp": 1784670839117
+  "timestamp": 1784673847388
 }
